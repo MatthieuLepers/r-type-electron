@@ -4,7 +4,13 @@
 
 ## Installation
 
-Download and isntall [the last release](https://github.com/MatthieuLepers/r-type-web/releases/download/v1.0.0/R-Type.v1.0.0.exe).
+Make sure you have nodejs installed /!\
+Clone the project and run `npm i`
+Then run `npm run dev`
+
+## Main class & entity testing/spawning
+
+Go to the class `src/renderer/js/Game.js` and uncomment the entity import and creation in `start` method then run the project
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. **Use develop branch for pull requests.**
