@@ -1,0 +1,68 @@
+@import '../../assets/scss/utilities.scss';
+
+@keyframes hoverAnim {
+  33% {border-color: color(third);}
+  66% {border-color: color(secondary);}
+  100% {border-color: color(f);}
+ }
+
+$gap-len: 8px;
+$sizeList: (
+  xs : 25,
+  sm : 33.3333,
+  md : 50,
+  lg : 66.6666,
+  xl : 75,
+  xxl: 100,
+);
+
+.ScreenMenuButton {
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid color(f);
+  color: color(f);
+  text-align: center;
+  margin: 0;
+  padding: 0 16px;
+  line-height: 32px;
+  letter-spacing: 1px;
+  font-size: 14px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 18px;
+  z-index: 1;
+  transition: border-color 1s ease, letter-spacing 1s linear;
+
+  @each $size, $value in $sizeList {
+    &--#{$size} {
+      width: #{1% * $value};
+
+      &-gap {
+        width: calc(#{1% * $value} - #{$gap-len});
+        margin: 0 #{$gap-len / 2};
+      }
+
+      &.ScreenMenuButton--end,
+      &-gap.ScreenMenuButton--end {
+        position: relative;
+        left: #{100% - (1% * $value)}
+      }
+    }
+  }
+
+  &--tiny {
+    width: 80px;
+
+    &.ScreenMenuButton--end {
+      left: calc(100% - 80px);
+    }
+  }
+  
+  &:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
+  
+  &:hover, &.active {
+    animation: hoverAnim 3s infinite;
+  }
+}

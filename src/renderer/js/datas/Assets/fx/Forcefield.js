@@ -1,0 +1,30 @@
+export default {
+  bank: 'particles/fx/forcefield_particle',
+  spritesheetPath: 'static/img/spritesheets/particles/forcefield_particle.png',
+  animationData: {
+    totalFrames: 15,
+    animations: [
+      { name: 'idle', frames: [{ index: 14 }] },
+      {
+        name: 'load',
+        frames: [
+          { index: 0 },
+          { index: 1 },
+          { index: 2 },
+          { index: 3 },
+          { index: 4 },
+          { index: 5 },
+          { index: 6 },
+          { index: 7 },
+          { index: 8 },
+          { index: 9 },
+          { index: 10 },
+          { index: 11 },
+          { index: 12 },
+          { index: 13 },
+          { index: 14 },
+        ],
+      },
+    ],
+  },
+};

@@ -1,0 +1,13 @@
+$colors: (
+  0          : #000,    // Tenebrae black
+  f          : #fff,    // Auram white
+  primary    : #111,    // Theme primary
+  secondary  : #00edff, // Theme secondary
+  third      : #00f,    // Theme third
+  border     : #c4c4c4, // Border
+  ctrlBg     : #2b2b2b, // Control background
+);
+
+@function color($colorName) {
+  @return map-get($colors, $colorName);
+}

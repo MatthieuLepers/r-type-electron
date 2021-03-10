@@ -1,0 +1,59 @@
+@import '../../assets/scss/utilities.scss';
+
+.MenuModsScreen {
+  .ScreenContent {
+    display: flex;
+  }
+
+  &Navigation {
+    display: flex;
+    flex-wrap: wrap;
+    width: 25%;
+    overflow: hidden;
+    height: fit-content;
+
+    &Button {
+      @include font-family('Open Sans', 700);
+      width: calc(100% - 10px);
+      background-color: color(f);
+      text-align: auto;
+      color: color(0);
+      text-transform: uppercase;
+      line-height: 48px;
+      border-radius: 25px;
+      transition: opacity .1s ease-in-out;
+      opacity: .75;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+
+      div {
+        width: 144px;
+        text-align: left;
+      }
+
+      &--selected {
+        width: 100%;
+        opacity: 1;
+        padding-right: 26px;
+        border-radius: 25px 0 0 25px;
+      }
+
+      &:hover {
+        animation: none;
+      }
+    }
+  }
+
+  &Container {
+    width: 75%;
+    padding: 16px;
+    background-color: color(f);
+    color: color(primary);
+  }
+}

@@ -1,0 +1,44 @@
+@import '../../../assets/scss/utilities.scss';
+
+.FormToggleButton {
+  input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+
+    &+label {
+      display: block;
+      width: 32px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: color(ctrlBg);
+      position: relative;
+      cursor: pointer;
+      margin: 4px;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        width: 18px;
+        height: 18px;
+        border: 4px solid color(f);
+        background-color: color(ctrlBg);
+        box-shadow: 0 0 4px 0 color(ctrlBg);
+        border-radius: 50%;
+        transition: border-color .2s, left .4s;
+        box-sizing: border-box;
+      }
+    }
+
+    &:checked+label:before {
+      border-color: color(secondary);
+      left: calc(100% - 16px);
+    }
+
+    &:focus+label, &:hover+label {
+      box-shadow: 0 0 10px 0 color(primary);
+    }
+  }
+}
