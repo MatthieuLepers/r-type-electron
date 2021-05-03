@@ -129,7 +129,9 @@ let webConfig = {
   resolve: {
     alias: {
       '@': path.join(__dirname, '../src/renderer'),
-      'vue$': 'vue/dist/vue.esm.js'
+      'fonts': path.join(__dirname, '../static/fonts'),
+      'scss': path.join(__dirname, '../src/renderer/assets/scss'),
+      'vue$': 'vue/dist/vue.esm.js',
     },
     extensions: ['.js', '.vue', '.json', '.css']
   },

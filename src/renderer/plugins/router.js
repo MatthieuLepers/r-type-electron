@@ -1,3 +1,5 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 import MenuScreen from '@/views/Menu/index';
 import PlayScreen from '@/views/Play/index';
 import MenuSettingsScreen from '@/views/Menu/Settings/index';
@@ -7,7 +9,8 @@ import MenuSettingsAudioScreen from '@/views/Menu/Settings/Audio';
 import MenuModsScreen from '@/views/Menu/Mods';
 import MenuToolsScreen from '@/views/Menu/Tools';
 
-export default {
+Vue.use(VueRouter);
+export default new VueRouter({
   routes: [
     { path: '/', name: 'Menu', component: MenuScreen },
     { path: '/play', name: 'Play', component: PlayScreen },
@@ -24,4 +27,4 @@ export default {
     { path: '/mods', name: 'MenuMods', component: MenuModsScreen },
     { path: '/tools', name: 'MenuTools', component: MenuToolsScreen },
   ],
-};
+});

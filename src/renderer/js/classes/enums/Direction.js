@@ -1,8 +1,10 @@
+import Enum from './Enum';
+
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
-export default class Direction {
+export default class Direction extends Enum {
   /**
    * @return {String}
    */

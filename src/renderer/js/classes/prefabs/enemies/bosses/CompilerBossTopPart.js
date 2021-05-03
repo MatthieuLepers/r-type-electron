@@ -33,7 +33,7 @@ export default class CompilerTopPart extends Enemy {
     this.setTransform(this.owner.components.transform.position.x, this.owner.components.transform.position.y - 32);
 
     // AttachedEntities
-    this.attachEntity(CompilerBossTurret.new(this, 'top', new Point(3, 24)), 'compilerboss_turrettop');
+    this.attachEntity(CompilerBossTurret.new(this, 'top', new Point(-3, 24)), 'compilerboss_turrettop');
     this.attachEntity(CompilerBossCannon.new(this, 'left', new Point(48, 8)), 'compilerboss_cannonleft');
     this.attachEntity(CompilerBossCannon.new(this, 'right', new Point(80, 8)), 'compilerboss_cannonright');
 

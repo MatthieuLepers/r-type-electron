@@ -11,6 +11,14 @@ export default {
       english: 'English',
     },
   },
+  Views: {
+    Menu: {
+      play: 'Play',
+      settings: 'Settings',
+      mods: 'Mods',
+      tools: 'Tools',
+    },
+  },
   Electron: {
     OpenFileDialog: {
       title: 'Open...',

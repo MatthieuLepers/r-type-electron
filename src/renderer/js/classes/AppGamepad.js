@@ -29,7 +29,7 @@ export default class AppGamepad extends Class {
    * @return {Boolean}
    */
   isConnected() {
-    return this.gamepad.connected || 0;
+    return this.gamepad.connected || false;
   }
 
   /**

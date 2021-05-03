@@ -11,20 +11,20 @@
     <Screen v-else>
       <template v-slot:content>
         <ScreenMenuButton :to="{ name: 'Play' }" class="MenuScreenPlayButton">
-          Play
+          {{ $t('Views.Menu.play') }}
           <span class="AnimatedBorder AnimatedBorder--fst"></span>
           <span class="AnimatedBorder AnimatedBorder--snd"></span>
           <span class="AnimatedBorder AnimatedBorder--trd"></span>
         </ScreenMenuButton>
         <div class="MenuScreenButtonContainer">
           <ScreenMenuButton :to="{ name: 'MenuSettingsGameplay' }">
-            Settings
+            {{ $t('Views.Menu.settings') }}
           </ScreenMenuButton>
           <ScreenMenuButton :to="{ name: 'MenuMods' }">
-            Mods
+            {{ $t('Views.Menu.mods') }}
           </ScreenMenuButton>
           <ScreenMenuButton :to="{ name: 'MenuTools' }">
-            Tools
+            {{ $t('Views.Menu.tools') }}
           </ScreenMenuButton>
         </div>
       </template>

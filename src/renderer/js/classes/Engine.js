@@ -134,6 +134,7 @@ export default class Engine extends Class {
    */
   pause() {
     this.paused = true;
+    this.emit('paused');
     return this;
   }
 
@@ -142,6 +143,7 @@ export default class Engine extends Class {
    */
   resume() {
     this.paused = false;
+    this.emit('resumed');
     return this;
   }
 

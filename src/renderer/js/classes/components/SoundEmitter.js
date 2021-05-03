@@ -25,7 +25,6 @@ export default class SoundEmitter extends Component {
         this.components.soundemitter.currentSound[soundPath] = Global.Sounds.play(soundPath);
         this.components.soundemitter.startCooldown();
       }
-      console.log(this.components.soundemitter.currentSound);
       return this.components.soundemitter.currentSound[soundPath];
     });
 
