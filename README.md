@@ -2,25 +2,25 @@
 
 ## Installation
 
-Make sure you have nodejs installed /!\
+Make sure you have nodejs installed /!\\
 Clone the project and run `npm i`
 Then run `npm run dev`
 
 ## Controls
-Z : Move up
-Q : Move left
-S : Move down
-D : Move right
-Space : Call/Release module
-L : Shoot, hold for constant shooting
-M : Hold for charge a powerful shot, release to shoot the charged shot
-Ecape : Pause/Unpause
+- Z : Move up
+- Q : Move left
+- S : Move down
+- D : Move right
+- Space : Call/Release module
+- L : Shoot, hold for constant shooting
+- M : Hold for charge a powerful shot, release to shoot the charged shot
+- Ecape : Pause/Unpause
 
 ## Debug controls
-NUMPAD1 : Show entities hitboxes
-NUMPAD2 : Show Quadtree collision detection areas
-NUMPAD3 : Show entities paths
-NUMPAD4 : Show entities health bar
+- NUMPAD1 : Show entities hitboxes
+- NUMPAD2 : Show Quadtree collision detection areas
+- NUMPAD3 : Show entities paths
+- NUMPAD4 : Show entities health bar
 
 ## Main class & entity testing/spawning
 
