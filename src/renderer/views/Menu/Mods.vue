@@ -3,7 +3,7 @@
     <Screen title="Mods">
       <template v-slot:content>
         <div class="MenuModsScreenNavigation" @mousewheel="handleMouseWheel">
-          <button v-for="(mod, i) in Object.values(modList)" :key="i" :class="`MenuModsScreenNavigationButton ${selected === mod ? 'MenuModsScreenNavigationButton--selected' : ''}`">
+          <button v-for="(mod, i) in Object.values(modList)" :key="i" :class="GenerateModifiers('MenuModsScreenNavigationButton', { Selected: selected === mod})">
             <img :src="getModIcon(mod)" :alt="mod.name" />
             <div>
               {{ mod.name }}
@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import Global from '@/js/stores/AppStore';
+import Global from '@/assets/js/stores/AppStore';
+
 import Screen from '@/components/Screen/index';
 import ScreenMenuButton from '@/components/Screen/MenuButton';
 

@@ -1,0 +1,175 @@
+@import '~scss/utilities.scss';
+
+.FormSelectMultiple {
+  display: flex;
+  flex-direction: column;
+
+  &--Open .FormSelectMultipleDropdown {
+    display: flex;
+  }
+
+  &Label {
+    @include font-size(12);
+    margin-bottom: 4px;
+
+    strong {
+      color: color(danger);
+    }
+  }
+
+  select {
+    display: none;
+  }
+
+  &Container {
+    position: relative;
+  }
+
+  &Outer {
+    position: relative;
+
+    &Arrow {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background-color: lighten(color(primary), 20.76);
+      border-radius: 50%;
+      cursor: pointer;
+
+      &::after,
+      &::before {
+        content: '';
+        position: absolute;
+        top: calc(50% + 2px);
+        background-color: color(f);
+        width: 8px;
+        height: 2px;
+        border-radius: 2px;
+      }
+  
+      &::before {
+        transform: rotate(45deg);
+        transform-origin: calc(100% - 1px) 50%;
+        right: calc(50% - 1px);
+      }
+      
+      &::after {
+        transform: rotate(-45deg);
+        transform-origin: 1px 50%;
+        left: calc(50% - 1px);
+      }
+    }
+  }
+  
+  &Dropdown {
+    @include font-size(12);
+    display: none;
+    flex-wrap: wrap;
+    position: absolute;
+    background-color: lighten(color(primary), 10.76);
+    width: 100%;
+    color: color(text);
+    border-radius: 16px;
+    min-height: 32px;
+    max-height: 160px;
+    overflow: hidden;
+    overflow-y: visible;
+    box-shadow: 0 0 8px rgba(color(0), .5);
+
+    &--Overflowing {
+      border-radius: 16px 0 0 16px;
+    }
+
+    &--Bottom {
+      top: calc(100% + 4px);
+    }
+
+    &--Top {
+      top: 0;
+      transform: translateY(calc(-100% - 4px));
+    }
+
+    &Group {
+      width: 100%;
+      min-height: 64px;
+    }
+
+    &Item {
+      width: 100%;
+      min-height: 32px;
+      padding-left: 8px;
+      padding-right: 8px;
+      display: flex;
+      align-items: center;
+      text-align: left;
+      cursor: pointer;
+
+      &--Focused,
+      &:focus,
+      &:hover {
+        background-color: lighten(color(primary), 20.76);
+      }
+
+      &--Selected {
+        position: relative;
+        padding-right: 40px;
+        background-color: color(secondary);
+
+        &.FormSelectMultipleDropdownItem--Focused,
+        &:focus,
+        &:hover {
+          background-color: lighten(color(secondary), 10.76);
+        }
+
+        .FormSelectMultipleDropdownItemIcon {
+          display: block;
+        }
+      }
+
+      &--Empty {
+        @include font-family('Open Sans', 400, false, true);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0;
+
+        &:hover {
+          background: none;
+        }
+      }
+
+      &Icon {
+        display: none;
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background-color: color(danger);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          top: calc(50% - 1px);
+          left: calc(50% - 6px);
+          width: 12px;
+          height: 2px;
+          background-color: color(f);
+        }
+        
+        &::before {
+          transform: rotate(-45deg);
+        }
+        
+        &::after {
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+}

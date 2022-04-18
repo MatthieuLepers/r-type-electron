@@ -3,16 +3,17 @@
     <ContextMenuItem
       v-for="([lang, iso], i) in Object.entries(langList)"
       :key="i"
-      :label="$t(`TitleBarMenu.langMenu.${lang}`)"
-      :icon="iso === value ? 'check' : ''"
+      :label="$t(`App.TitleBarMenu.langMenu.${lang}`)"
+      :icon="iso === value ? 'icon-check' : ''"
       @click="handleSetLocale(iso)"
     />
   </ContextMenu>
 </template>
 
 <script>
-import ContextMenu from '@/components/UI/ContextMenu/index';
-import ContextMenuItem from '@/components/UI/ContextMenu/Item';
+import { ipcRenderer } from 'electron';
+import ContextMenu from '@/components/Materials/ContextMenu/index';
+import ContextMenuItem from '@/components/Materials/ContextMenu/Item';
 
 export default {
   name: 'AppTitleBarLangMenu',
@@ -31,7 +32,7 @@ export default {
   },
   methods: {
     handleSetLocale(iso) {
-      this.$root.$i18n.locale = iso;
+      ipcRenderer.invoke('locale-change', iso);
       this.$emit('input', iso);
       this.$emit('close');
     },

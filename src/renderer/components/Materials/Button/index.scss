@@ -1,0 +1,124 @@
+@import '~scss/utilities.scss';
+
+.Button {
+  min-height: 32px;
+  border-radius: 16px;
+  padding: 0 8px;
+  text-align: center;
+  background-color: lighten(color(primary), 10.76);
+  color: color(text);
+
+  &:focus,
+  &:hover {
+    background-color: lighten(color(primary), 20.76);
+  }
+
+  &--Iconed {
+    position: relative;
+  
+    .ButtonIcon {
+      @include font-size(12);
+      position: absolute;
+      top: 4px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: lighten(color(primary), 20.76);
+      border-radius: 50%;
+    }
+
+    &:focus .ButtonIcon,
+    &:hover .ButtonIcon {
+      background-color: lighten(color(primary), 30.76);
+    }
+
+    &.Button--Iconed-Left {
+      padding-left: 32px;
+  
+      .ButtonIcon {
+        left: 4px;
+      }
+    }
+
+    &.Button--Iconed-Right {
+      padding-right: 32px;
+
+      .ButtonIcon {
+        right: 4px;
+      }
+    }
+  }
+
+  &--Secondary {
+    background-color: color(secondary);
+
+    .ButtonIcon {
+      background-color: lighten(color(secondary), 10.76);
+    }
+
+    &:focus,
+    &:hover {
+      background-color: lighten(color(secondary), 10.76);
+
+      .ButtonIcon {
+        background-color: lighten(color(secondary), 20.76);
+      }
+    }
+
+    &.Button--Iconed:focus .ButtonIcon,
+    &.Button--Iconed:hover .ButtonIcon {
+      background-color: lighten(color(secondary), 30.76);
+    }
+  }
+
+  &--Danger {
+    background-color: color(danger);
+
+    .ButtonIcon {
+      background-color: lighten(color(danger), 10.76);
+    }
+
+    &:focus,
+    &:hover {
+      background-color: lighten(color(danger), 10.76);
+
+      .ButtonIcon {
+        background-color: lighten(color(danger), 20.76);
+      }
+    }
+
+    &.Button--Iconed:focus .ButtonIcon,
+    &.Button--Iconed:hover .ButtonIcon {
+      background-color: lighten(color(secondary), 30.76);
+    }
+  }
+
+  &--Cancel {
+    background-color: color(cancel);
+
+    .ButtonIcon {
+      background-color: lighten(color(cancel), 10.76);
+    }
+
+    &:focus,
+    &:hover {
+      background-color: lighten(color(cancel), 10.76);
+
+      .ButtonIcon {
+        background-color: lighten(color(cancel), 20.76);
+      }
+    }
+
+    &.Button--Iconed:focus .ButtonIcon,
+    &.Button--Iconed:hover .ButtonIcon {
+      background-color: lighten(color(cancel), 30.76);
+    }
+  }
+
+  &--Disabled,
+  &--Disabled:hover {
+    background-color: color(cancel);
+  }
+}

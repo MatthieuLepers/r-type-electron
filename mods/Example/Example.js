@@ -1,4 +1,4 @@
-import Mod from '@/js/classes/ressources/Mod';
+import Mod from '@/assets/js/classes/ressources/Mod';
 import Config from './Config';
 
 /**

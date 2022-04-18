@@ -14,15 +14,17 @@
 </template>
 
 <script>
-import TitleBar from '@/components/UI/TitleBar/index';
-import TitleBarMenu from '@/components/UI/TitleBar/Menu';
+import TitleBar from '@/components/Materials/TitleBar/index';
+import TitleBarMenu from '@/components/Materials/TitleBar/Menu';
 
 import AppTitleBarFileMenu from './FileMenu';
 import AppTitleBarLangMenu from './LangMenu';
 
 export default {
   name: 'AppTitleBar',
-  components: { TitleBar, TitleBarMenu, AppTitleBarFileMenu, AppTitleBarLangMenu },
+  components: {
+    TitleBar, TitleBarMenu, AppTitleBarFileMenu, AppTitleBarLangMenu,
+  },
   data() {
     return {
       currentLocale: 'fr-FR',

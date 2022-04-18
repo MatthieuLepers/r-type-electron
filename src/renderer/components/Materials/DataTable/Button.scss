@@ -1,0 +1,208 @@
+@import '~scss/utilities.scss';
+
+.DataTableButton {
+  cursor: pointer;
+
+  &:not(:last-of-type) {
+    margin-right: 8px;
+  }
+
+  &Content {
+    text-align: center;
+  }
+
+  &--Round {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: lighten(color(primary), 10.76);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.DataTableButton--Focused,
+    &:focus,
+    &:hover {
+      background-color: lighten(color(primary), 20.76);
+    }
+  }
+
+  &--LongRound {
+    height: 32px;
+    position: relative;
+    border-radius: 16px;
+    background-color: lighten(color(primary), 10.76);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px 5px 5px;
+
+    .DataTableButtonIcon {
+      @include font-size(12);
+      background-color: lighten(color(primary), 20.76);
+      padding: 5px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    .DataTableButtonContent {
+      text-align: left;
+    }
+
+    &.DataTableButton--Focused,
+    &:focus,
+    &:hover {
+      background-color: lighten(color(primary), 20.76);
+
+      .DataTableButtonIcon {
+        background-color: lighten(color(primary), 30.76);
+      }
+    }
+  }
+
+  &--Sort {
+    position: relative;
+    padding-left: 12px;
+
+    &Asc,
+    &Desc {
+      position: relative;
+      padding-left: 12px;
+    }
+
+    &::after,
+    &::before,
+    &Asc::after,
+    &Asc::before,
+    &Desc::after,
+    &Desc::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 0;
+      height: 0;
+      display: block;
+    }
+
+    &::before,
+    &Asc::before {
+      border-bottom: 4px solid color(f);
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      top: 2px;
+    }
+
+    &::after,
+    &Desc::after {
+      border-top: 4px solid color(f);
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      bottom: 2px;
+    }
+
+    &Asc::after,
+    &Desc::before {
+      content: none;
+    }
+  }
+
+  &--Shadowed {
+    box-shadow: 0 0 8px rgba(color(0), 0.5);
+
+    &.DataTableButton--Focused,
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 8px lighten(rgba(color(0), 0.5), 10.76);
+    }
+  }
+
+  &--More {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::before,
+    &::after {
+      content: '';
+    }
+
+    span,
+    &::before,
+    &::after {
+      display: block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: color(f);
+    }
+
+    span {
+      margin: 0 4px;
+    }
+  }
+
+  &--Less {
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: calc(50% - 1.5px);
+      left: calc(50% - 9px);
+      transform-origin: 50% 50%;
+      background-color: color(f);
+      width: 18px;
+      height: 3px;
+      border-radius: 2px;
+    }
+
+    &::before {
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      transform: rotate(45deg);
+    }
+  }
+
+  &--Danger {
+    background-color: color(danger);
+    color: color(text);
+
+    &.DataTableButton--Shadowed {
+      box-shadow: 0 0 8px rgba(color(danger), 0.5);
+    }
+
+    &.DataTableButton--Focused,
+    &:focus,
+    &:hover {
+      background-color: lighten(color(danger), 10.76);
+
+      &.DataTableButton--Shadowed {
+        box-shadow: 0 0 8px lighten(rgba(color(danger), 0.5), 10.76);
+      }
+    }
+  }
+
+  &--Secondary {
+    background-color: color(secondary);
+    color: color(text);
+
+    &.DataTableButton--Shadowed {
+      box-shadow: 0 0 8px rgba(color(secondary), 0.5);
+    }
+
+    &.DataTableButton--Focused,
+    &:focus,
+    &:hover {
+      background-color: lighten(color(secondary), 10.76);
+
+      &.DataTableButton--Shadowed {
+        box-shadow: 0 0 8px lighten(rgba(color(secondary), 0.5), 10.76);
+      }
+    }
+  }
+}

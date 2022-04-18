@@ -4,21 +4,21 @@
     <Screen title="Paused!" v-show="paused">
       <template v-slot:content>
         <button class="ScreenMenuButton ScreenMenuButton--xxl ScreenMenuButton--auto" @click="handleClickResume">Resume</button>
-        <ScreenMenuButton :to="{ name: 'Menu' }">Exit to menu</ScreenMenuButton>
+        <button class="ScreenMenuButton ScreenMenuButton--xxl ScreenMenuButton--auto" @click="handleClickExitToMenu">Exit to menu</button>
       </template>
     </Screen>
   </div>
 </template>
 
 <script>
-import Global from '@/js/stores/AppStore';
-import Game from '@/js/Game';
+import Global from '@/assets/js/stores/AppStore';
+import Game from '@/assets/js/Game';
+
 import Screen from '@/components/Screen/index';
-import ScreenMenuButton from '@/components/Screen/MenuButton';
 
 export default {
   name: 'PlayScreen',
-  components: { Screen, ScreenMenuButton },
+  components: { Screen },
   data() {
     return {
       paused: false,
@@ -27,6 +27,10 @@ export default {
   methods: {
     handleClickResume() {
       Global.Engine.resume();
+    },
+    handleClickExitToMenu() {
+      Global.Game.reset();
+      this.$router.push({ name: 'Menu' });
     },
   },
   mounted() {

@@ -1,13 +1,23 @@
-@import '../../assets/scss/utilities.scss';
+@import '~scss/utilities.scss';
 
 @keyframes rotate {
-	to {transform: rotate(0deg);}
-	from {transform: rotate(360deg);}
+	to {
+    transform: rotate(0deg);
+  }
+
+	from {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes rotateInvert {
-	to {transform: rotate(360deg);}
-	from {transform: rotate(0deg);}
+	to {
+    transform: rotate(360deg);
+  }
+
+	from {
+    transform: rotate(0deg);
+  }
 }
 
 .MenuScreen {

@@ -1,6 +1,6 @@
 <template>
   <router-link :to="to" v-slot="{ navigate }" custom>
-    <button :class="`ScreenMenuButton ScreenMenuButton--${variant} ScreenMenuButton--${align} ${isActive ? 'ScreenMenuButton--active' : ''}`" @click="navigate">
+    <button :class="GenerateModifiers('ScreenMenuButton', { [variant]: true, [align]: true, Active: $route.name === to.name })" @click="navigate">
       <slot />
     </button>
   </router-link>
@@ -13,11 +13,6 @@ export default {
     to: { type: [String, Object], required: true },
     variant: { type: String, default: 'xxl' },
     align: { type: String, default: 'auto' },
-  },
-  computed: {
-    isActive() {
-      return this.$route.name === this.to.name;
-    },
   },
 };
 </script>

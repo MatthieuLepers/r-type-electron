@@ -1,9 +1,17 @@
-@import '../../assets/scss/utilities.scss';
+@import '~scss/utilities.scss';
 
 @keyframes hoverAnim {
-  33% {border-color: color(third);}
-  66% {border-color: color(secondary);}
-  100% {border-color: color(f);}
+  33% {
+    border-color: color(third);
+  }
+
+  66% {
+    border-color: color(secondary);
+  }
+
+  100% {
+    border-color: color(f);
+  }
  }
 
 $gap-len: 8px;
@@ -62,7 +70,8 @@ $sizeList: (
     margin-bottom: 10px;
   }
   
-  &:hover, &.active {
+  &:hover,
+  &--Active {
     animation: hoverAnim 3s infinite;
   }
 }

@@ -1,14 +1,45 @@
 export default {
-  TitleBarMenu: {
-    fileMenu: {
-      label: 'File',
-      selectProfil: 'Select profil...',
-      exit: 'Exit',
+  App: {
+    TitleBarMenu: {
+      fileMenu: {
+        label: 'File',
+        exit: 'Exit',
+      },
+      langMenu: {
+        label: 'Language',
+        french: 'French',
+        english: 'English',
+      },
     },
-    langMenu: {
-      label: 'Language',
-      french: 'French',
-      english: 'English',
+  },
+  Electron: {
+    Dialog: {
+      openFile: {
+        title: 'Open...',
+        buttonLabel: 'Open',
+      },
+      saveFile: {
+        title: 'Save as...',
+        buttonLabel: 'Save',
+      },
+      filters: {
+        '*': 'All files',
+        txt: 'Text file',
+        json: 'JSON file',
+      },
+    },
+  },
+  Date: {
+    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    daySuffix: ['st', 'nd', 'rd'],
+    defaultSuffix: 'th',
+  },
+  Materials: {
+    Form: {
+      DropArea: {
+        areaLabel: 'Drag\'n\'drop files to upload them',
+      },
     },
   },
   Views: {
@@ -17,22 +48,6 @@ export default {
       settings: 'Settings',
       mods: 'Mods',
       tools: 'Tools',
-    },
-  },
-  Electron: {
-    OpenFileDialog: {
-      title: 'Open...',
-      buttonLabel: 'Open',
-      filters: {
-        json: 'JSON file',
-      },
-    },
-    SaveFileDialog: {
-      title: 'Save as...',
-      buttonLabel: 'Save',
-      filters: {
-        json: 'JSON file',
-      },
     },
   },
 };

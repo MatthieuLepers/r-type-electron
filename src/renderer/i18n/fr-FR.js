@@ -1,14 +1,45 @@
 export default {
-  TitleBarMenu: {
-    fileMenu: {
-      label: 'Fichier',
-      selectProfil: 'Sélection du profil...',
-      exit: 'Quitter',
+  App: {
+    TitleBarMenu: {
+      fileMenu: {
+        label: 'Fichier',
+        exit: 'Quitter',
+      },
+      langMenu: {
+        label: 'Langage',
+        french: 'Français',
+        english: 'Anglais',
+      },
     },
-    langMenu: {
-      label: 'Langage',
-      french: 'Français',
-      english: 'Anglais',
+  },
+  Electron: {
+    Dialog: {
+      openFile: {
+        title: 'Ouvrir...',
+        buttonLabel: 'Ouvrir',
+      },
+      saveFile: {
+        title: 'Enregistrer sous...',
+        buttonLabel: 'Enregistrer',
+      },
+      filters: {
+        '*': 'Tous les fichiers',
+        txt: 'Fichier texte',
+        json: 'Fichier JSON',
+      },
+    },
+  },
+  Date: {
+    days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+    daySuffix: [],
+    defaultSuffix: '',
+  },
+  Materials: {
+    Form: {
+      DropArea: {
+        areaLabel: 'Glisser-déposer des fichiers pour les téléverser',
+      },
     },
   },
   Views: {
@@ -17,22 +48,6 @@ export default {
       settings: 'Paramètres',
       mods: 'Mods',
       tools: 'Outils',
-    },
-  },
-  Electron: {
-    OpenFileDialog: {
-      title: 'Ouvrir...',
-      buttonLabel: 'Ouvrir',
-      filters: {
-        json: 'Fichier JSON',
-      },
-    },
-    SaveFileDialog: {
-      title: 'Enregistrer sous...',
-      buttonLabel: 'Enregistrer',
-      filters: {
-        json: 'Fichier JSON',
-      },
     },
   },
 };

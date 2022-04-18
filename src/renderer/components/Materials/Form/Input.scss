@@ -1,0 +1,111 @@
+@import '~scss/utilities.scss';
+
+.FormInput {
+  flex-direction: column-reverse;
+  display: flex;
+  position: relative;
+
+  input {
+    @include font-size(12);
+    background-color: lighten(color(primary), 10.76);
+    height: 32px;
+    width: 100%;
+    border-radius: 16px;
+    border: solid 1px lighten(color(primary), 10.76);
+    color: color(text);
+    padding: 0 8px;
+
+    @include placeholder {
+      color: color(text);
+      opacity: .5;
+    }
+  }
+
+  &Message {
+    margin: 4px 0 0;
+
+    &--Help {
+      width: 100%;
+      display: block;
+
+      &::before {
+        @include icon('help-round');
+        @include font-size(14);
+        margin-right: 8px;
+        display: inline-block;
+        color: color(secondary);
+      }
+    }
+
+    &--Error {
+      color: color(danger);
+
+      &::before {
+        content: none;
+      }
+    }
+  }
+
+  &Label {
+    @include font-size(12);
+    margin-bottom: 4px;
+  }
+
+  &Adornment {
+    @include font-size(12);
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    background-color: lighten(color(primary), 20.76);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--Clickable {
+      cursor: pointer;
+    }
+
+    &:not(.FormInputAdornment--Clickable) {
+      pointer-events: none;
+    }
+
+    &:focus,
+    &:hover {
+      background-color: lighten(color(primary), 30.76);
+    }
+  }
+
+  &--Valid input {
+    border-color: color(success);
+  }
+
+  &--Invalid input {
+    border-color: color(danger);
+
+    &+.FormInputLabel {
+      color: color(danger);
+    }
+  }
+
+  &--Focus input,
+  &:hover input,
+  input:focus {
+    box-shadow: 0 0 8px rgba(color(0), .5);
+  }
+
+  &--Adornment input {
+    padding: 0 40px 0 8px;
+  }
+
+  &--Required .FormInputLabel::after {
+    content: '*';
+    color: color(danger);
+  }
+  
+  &--Disabled input:disabled {
+    color: color(cancel);
+  }
+}

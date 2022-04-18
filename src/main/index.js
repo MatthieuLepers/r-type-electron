@@ -1,5 +1,8 @@
-import { app, BrowserWindow, ipcMain } from 'electron' // eslint-disable-line
-import fs from 'fs';
+import { app } from 'electron'; // eslint-disable-line
+import path from 'path';
+import Window from './modules/Window/Window';
+import ModuleManager from './modules/Manager';
+import ElectronFSModule from './modules/ElectronFS';
 
 /**
  * Set `__static` path to static files in production
@@ -10,35 +13,16 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 let mainWindow;
-const winURL = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:9080'
-  : `file://${__dirname}/index.html`;
-
-function createWindow() {
-  /**
-   * Initial window options
-   */
-  mainWindow = new BrowserWindow({
-    height: 563,
-    useContentSize: true,
+function createMainWindow() {
+  mainWindow = new Window('main', {
     width: 1000,
-    frame: false,
-    webPreferences: {
-      nodeIntegration: true,
-      nodeIntegrationInWorker: false,
-      enableRemoteModule: true,
-    },
+    height: 563,
     resizable: false,
-  });
-
-  mainWindow.loadURL(winURL);
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
+    icon: path.join(__static, 'icons/icon16x.png'),
+  }).create();
 }
 
-app.on('ready', createWindow);
+app.on('ready', createMainWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -48,28 +32,11 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
   if (mainWindow === null) {
-    createWindow();
+    createMainWindow();
   }
 });
 
-ipcMain.on('write-file-sync', (e, filePath, data) => {
-  e.returnValue = fs.writeFileSync(filePath, data);
-});
-
-ipcMain.on('read-file-sync', (e, file) => {
-  e.returnValue = `${fs.readFileSync(file)}`;
-});
-
-ipcMain.on('read-dir-sync', (e, { path, onlyFiles, onlyDirectories }) => {
-  const dirContent = fs.readdirSync(path);
-  e.returnValue = dirContent.filter((file) => {
-    if (onlyFiles || onlyDirectories) {
-      const stats = fs.lstatSync(`${path}/${file}`);
-      return (onlyFiles && stats.isFile()) || (onlyDirectories && stats.isDirectory());
-    }
-    return true;
-  });
-});
+ModuleManager.registerModule(ElectronFSModule);
 
 /**
  * Auto Updater

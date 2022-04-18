@@ -1,0 +1,135 @@
+@import '~scss/utilities.scss';
+
+.ModalBackDrop {
+  @include transition(opacity .2s);
+  position: fixed;
+  top: 30px;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(color(0), .8);
+  z-index: 98;
+  opacity: 0;
+
+  &--Open {
+    width: 100vw;
+    height: calc(100vh - 30px);
+    opacity: 1;
+  }
+
+  .Modal {
+    position: relative;
+    background-color: color(primary);
+    color: color(f);
+    border: 2px solid color(f);
+    width: calc(75% - 30px);
+
+    &Title {
+      @include font-family('Open Sans', 700);
+      @include font-size(18);
+      padding: 16px 54px 16px 16px;
+    }
+
+    &Content {
+      @include font-size(16);
+      padding: 0 16px 16px;
+
+      &>p:first-of-type {
+        margin-top: 0;
+      }
+
+      &>p:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    &Actions {
+      padding: 16px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+
+      .btn:not(:last-of-type) {
+        margin-right: 15px;
+      }
+
+      .btn {
+        @include font-family('Open Sans', 700);
+        min-width: 100px;
+        height: 42px;
+        border-radius: 21px;
+        padding: 0 12px;
+        background-color: lighten(color(primary), 10.76);
+
+        &:hover,
+        &:focus {
+          background-color: lighten(color(primary), 20.76);
+        }
+
+        &:disabled,
+        &:disabled:hover,
+        &:disabled:focus {
+          background-color: color(cancel);
+        }
+      }
+
+      .btn-accept {
+        background-color: color(secondary);
+
+        &:hover,
+        &:focus {
+          background-color: lighten(color(secondary), 10.76);
+        }
+      }
+
+      .btn-refuse {
+        background-color: rgba(color(danger), .5);
+
+        &:hover,
+        &:focus {
+          background-color: lighten(color(danger), 10.76);
+        }
+      }
+    }
+
+    &CloseBtn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: none;
+
+      &::after,
+      &::before {
+        content: "";
+        display: block;
+        background-color: color(f);
+        width: 16px;
+        height: 3px;
+        position: absolute;
+        top: calc(50% - 1.5px);
+        left: calc(50% - 8px);
+        transform-origin: 50% 50%;
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &:hover,
+      &:focus {
+        box-shadow: 0 0 5px rgba(color(0), .5);
+      }
+    }
+  }
+}

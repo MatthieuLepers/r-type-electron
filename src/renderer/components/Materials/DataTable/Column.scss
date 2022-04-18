@@ -1,0 +1,25 @@
+@import '~scss/utilities.scss';
+
+.DataTableColumn {
+  flex: 1;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+
+  &--Inner {
+    padding: 0;
+
+    .DataTableColumn {
+      padding: 8px 8px 8px 0;
+    }
+  }
+
+  &--NoActionRow .DataTableColumn {
+    padding: 8px;
+  }
+
+  &--Action {
+    flex: none;
+    min-width: 48px;
+  }
+}

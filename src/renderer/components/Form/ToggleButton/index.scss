@@ -1,4 +1,4 @@
-@import '../../../assets/scss/utilities.scss';
+@import '~scss/utilities.scss';
 
 .FormToggleButton {
   input[type="checkbox"] {
@@ -15,7 +15,7 @@
       cursor: pointer;
       margin: 4px;
 
-      &:before {
+      &::before {
         content: '';
         display: block;
         position: absolute;
@@ -32,12 +32,13 @@
       }
     }
 
-    &:checked+label:before {
+    &:checked+label::before {
       border-color: color(secondary);
       left: calc(100% - 16px);
     }
 
-    &:focus+label, &:hover+label {
+    &:focus+label,
+    &:hover+label {
       box-shadow: 0 0 10px 0 color(primary);
     }
   }

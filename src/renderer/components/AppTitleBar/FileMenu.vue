@@ -2,7 +2,7 @@
   <ContextMenu :visible="visible">
     <ContextMenuSeparator />
     <ContextMenuItem
-      :label="$t('TitleBarMenu.fileMenu.exit')"
+      :label="$t('App.TitleBarMenu.fileMenu.exit')"
       shortcut="Alt+F4"
       @click="closeApp"
     />
@@ -12,9 +12,9 @@
 <script>
 import { remote } from 'electron';
 
-import ContextMenu from '@/components/UI/ContextMenu/index';
-import ContextMenuItem from '@/components/UI/ContextMenu/Item';
-import ContextMenuSeparator from '@/components/UI/ContextMenu/Separator';
+import ContextMenu from '@/components/Materials/ContextMenu/index';
+import ContextMenuItem from '@/components/Materials/ContextMenu/Item';
+import ContextMenuSeparator from '@/components/Materials/ContextMenu/Separator';
 
 export default {
   name: 'AppTitleBarFileMenu',

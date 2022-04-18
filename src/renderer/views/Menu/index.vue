@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import Global from '@/js/stores/AppStore';
-import RessourceLoader from '@/js/stores/RessourceLoader';
+import Global from '@/assets/js/stores/AppStore';
+import RessourceLoader from '@/assets/js/stores/RessourceLoader';
 
 import Screen from '@/components/Screen/index';
 import ScreenMenuButton from '@/components/Screen/MenuButton';

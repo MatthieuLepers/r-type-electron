@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import App from '@/js/App';
-import ModManager from '@/js/classes/ModManager';
-import Global from '@/js/stores/AppStore';
+import App from '@/assets/js/App';
+import ModManager from '@/assets/js/classes/ModManager';
+import Global from '@/assets/js/stores/AppStore';
 
 import AppTitleBar from '@/components/AppTitleBar/index';
 
