@@ -6,7 +6,8 @@ module.exports = {
   },
   env: {
     browser: true,
-    node: true
+    node: true,
+    jest: true
   },
   // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
   // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
@@ -51,7 +52,7 @@ module.exports = {
     'no-multi-assign': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'linebreak-style': ['error', 'windows'],
+    'linebreak-style': ['error', 'unix'],
     'max-len': [
       'error',
       {

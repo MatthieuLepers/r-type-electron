@@ -1,3 +1,4 @@
+import Global from '../../../stores/AppStore';
 import Upgrade from './Upgrade';
 
 /**
