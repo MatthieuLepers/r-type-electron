@@ -34,8 +34,7 @@ export default class AttachedEntities extends Component {
      * @return {this}
      */
     AddClassMethod(this.clazz, 'attachEntity', function (entity, entityId = null) {
-      this.components.attachedentities.entities[entityId || entity.getId()] = entity;
-      entity.attached = true;
+      this.components.attachedentities.entities[entityId ?? entity.getId()] = entity;
       entity.attachedTo = this;
       entity.addTag('attached');
       if (this.hasComponent('EventEmitter')) {
@@ -53,9 +52,8 @@ export default class AttachedEntities extends Component {
      * @return {this}
      */
     AddClassMethod(this.clazz, 'detachEntity', function (entity, entityId = null) {
-      if (this.components.attachedentities.entities[entityId || entity.getId()]) {
-        delete this.components.attachedentities.entities[entityId || entity.getId()];
-        delete entity.attached;
+      if (this.components.attachedentities.entities[entityId ?? entity.getId()]) {
+        delete this.components.attachedentities.entities[entityId ?? entity.getId()];
         delete entity.attachedTo;
         entity.removeTag('attached');
         if (this.hasComponent('EventEmitter')) {

@@ -52,11 +52,11 @@ export default class ChargedShooter extends Component {
      * @param {Number}
      */
     AddClassMethod(this.clazz, 'shootCharged', function (percent) {
-      const p = percent || 100;
+      const p = percent ?? 100;
       if (!this.hasTag('isDead') && !Global.Engine.paused && this.isVisible() && p >= 15) {
-        const projectile = new this.components.chargedshooter.projectile(this, this.components.chargedshooter.target || null, p);
+        const projectile = new this.components.chargedshooter.projectile(this, this.components.chargedshooter.target ?? null, p);
         if (typeof this.components.chargedshooter.initProjectileFn === 'function') {
-          this.components.chargedshooter.initProjectileFn(projectile, this.components.shooter.target || null);
+          this.components.chargedshooter.initProjectileFn(projectile, this.components.shooter.target ?? null);
         }
         if (this.hasComponent('EventEmitter')) {
           this.emit('shootCharged', { projectile });
@@ -73,7 +73,7 @@ export default class ChargedShooter extends Component {
     if ((!this.$target || (this.$target && this.$target.hasTag('isDead'))) && typeof this.retargetFn === 'function') {
       this.$target = this.retargetFn();
     }
-    return this.$target || null;
+    return this.$target ?? null;
   }
 
   /**

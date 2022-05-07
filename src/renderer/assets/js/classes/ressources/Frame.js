@@ -21,8 +21,8 @@ export default class Frame {
     Object.assign(this.data, data);
 
     this.data.width = (data.width !== undefined ? data.width : (image.naturalWidth / frameAmount));
-    this.data.height = data.height || image.naturalHeight;
-    this.data.origin = new Point(data.x || (this.index * this.width), data.y || 0);
+    this.data.height = data.height ?? image.naturalHeight;
+    this.data.origin = new Point(data.x ?? (this.index * this.width), data.y ?? 0);
   }
 
   /**

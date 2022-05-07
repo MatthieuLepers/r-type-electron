@@ -14,10 +14,10 @@ import Transform from '../../../components/Transform';
  */
 export default class CompilerBossTurret extends EntityScript {
   /**
+   * @constructor
    * @param {EntityScript} parent
    * @param {String} slot
    * @param {Point} deltaPos
-   * @constructor
    */
   constructor(parent, slot, deltaPos) {
     super();

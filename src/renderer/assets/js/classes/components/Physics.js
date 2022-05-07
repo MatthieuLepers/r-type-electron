@@ -15,7 +15,7 @@ export default class Physics extends Component {
 
     this.gravity = 1;
     this.collideTags = [];
-    this.collideTagsExcluded = [];
+    this.collideTagsExcluded = ['invincible'];
     this.collideFn = null;
 
     /**
@@ -62,7 +62,7 @@ export default class Physics extends Component {
    * @param {EntityScript} entity
    */
   checkCollidingWith(entity) {
-    if (!entity || entity.hasTag('dead')) {
+    if (!entity || entity.hasTag('isDead')) {
       return;
     }
 
@@ -71,8 +71,14 @@ export default class Physics extends Component {
       return;
     }
 
-    const checkTags = this.collideTags.map((tag) => entity.hasTag(tag)).reduce((acc, val) => acc && val, true);
-    const checkExcludeTags = this.collideTagsExcluded.map((tag) => !entity.hasTag(tag)).reduce((acc, val) => acc && val, true);
+    const checkTags = this.collideTags
+      .map((tag) => entity.hasTag(tag))
+      .reduce((acc, val) => acc && val, true)
+    ;
+    const checkExcludeTags = this.collideTagsExcluded
+      .map((tag) => !entity.hasTag(tag))
+      .reduce((acc, val) => acc && val, true)
+    ;
 
     if (checkTags && checkExcludeTags) {
       this.checkCollision(entity);
@@ -85,7 +91,7 @@ export default class Physics extends Component {
   checkCollision(entity) {
     const instHitbox = new HitboxCollection(...this.inst.getHitbox());
     const entityHitbox = new HitboxCollection(...entity.getHitbox());
-    if (entity.getId() !== this.inst.getId() && !this.inst.hasTag('invincible') && !entity.hasTag('invincible') && instHitbox.isColliding(entityHitbox)) {
+    if (entity.getId() !== this.inst.getId() && instHitbox.isColliding(entityHitbox)) {
       if (entity.hasComponent('EventEmitter')) {
         entity.emit('collide', { collider: this.inst, collisionData: entityHitbox });
       }

@@ -15,10 +15,10 @@ import ComplexePath from '../../../paths/ComplexePath';
  */
 export default class CompilerBossCannon extends EntityScript {
   /**
+   * @constructor
    * @param {EntityScript} owner
    * @param {String} slot
    * @param {Point} deltaPos
-   * @constructor
    */
   constructor(owner, slot, deltaPos) {
     super();

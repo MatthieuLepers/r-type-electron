@@ -11,8 +11,8 @@ import CompilerBossTurret from './CompilerBossTurret';
  */
 export default class CompilerBottomPart extends Enemy {
   /**
-   * @param {CompilerBoss} owner
    * @constructor
+   * @param {CompilerBoss} owner
    */
   constructor(owner) {
     super();

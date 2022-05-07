@@ -44,7 +44,7 @@ export default class Bug extends Enemy {
     this.components.shooter.shootProbalility = 0.002;
     this.components.shooter.requireTarget = true;
     this.components.shooter.target = this.getNearestPlayer();
-    this.components.shooter.retargetFn = this.getNearestPlayer.bind(this);
+    this.components.shooter.retargetFn = () => this.getNearestPlayer();
 
     this.on('dead', () => {
       this.playSound('entity/explosion');

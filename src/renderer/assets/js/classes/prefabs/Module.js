@@ -21,10 +21,32 @@ export default class Module extends PhysicEntityScript {
     this.tier = 0;
     this.owner = null;
     this.weapon = null;
-    this.releasable = true;
     this.target = null;
     this.side = null;
     this.damages = 1;
+
+    this.callback = {
+      trackPlayer: this.trackPlayer.bind(this),
+      retargetFn: () => {
+        const target = this.getNearestPlayer();
+
+        return target && target.isEntityAttached('module')
+          ? Global.Game.getPlayerList().filter((player) => !player.isEntityAttached('module')).shift()
+          : target
+        ;
+      },
+      oncollide: (e) => {
+        const ent = e.details.collider;
+        if (ent.hasTag('player', '!isDead', '!projectile', '!module', '!attached', '!attachCooldown') && !ent.isEntityAttached('module')) {
+          this.attach(ent);
+        } else if (ent.hasTag('absorbable')) {
+          this.emit('absorb', { entity: ent });
+          if (ent.hasComponent('EventEmitter')) {
+            ent.emit('absorbed', { absorber: this });
+          }
+        }
+      },
+    };
 
     this.addComponent(AttachedEntities, Module);
     this.addComponent(Shooter, Module);
@@ -34,6 +56,7 @@ export default class Module extends PhysicEntityScript {
     this.components.locomotor.speedX = 150;
     this.bindPath(ComplexePath.fromSvgString(`M -32 ${Global.Game.canvas.height / 2 - 16} L ${Global.Game.canvas.width / 5} ${Global.Game.canvas.height / 2 - 16}`), false);
     this.components.locomotor.canMove = true;
+    this.components.locomotor.retargetFn = this.callback.retargetFn;
 
     // Sprite
     this.components.sprite.init({
@@ -47,35 +70,19 @@ export default class Module extends PhysicEntityScript {
     this.attachEntity(ModuleEjectFx.new(this));
 
     // Physics
-    this.components.physics.collideFn = (ent) => ((ent.hasTag('player') && !ent.hasTag('projectile') && !ent.hasTag('module')) || (ent.hasTag('enemy') && ent.hasTag('projectile') && !ent.hasTag('piercing')) || (ent.hasTag('enemy') && !ent.hasTag('projectile')) || ent.hasTag('neutral'));
+    this.components.physics.collideFn = (ent) => ent.hasTag('player', '!projectile', '!module') || ent.hasTag('enemy', 'projectile', '!piercing') || ent.hasTag('enemy', '!projectile') || ent.hasTag('neutral');
     this.addCollisionTag('!projectile', '!isDead', '!item');
+    this.removeCollisionTag('!invinsible');
 
     // Shooter
     this.components.shooter.shootFn = this.shootFn.bind(this);
     this.components.shooter.automatic = false;
     this.components.shooter.setCooldown(90);
 
-    this.callback = {
-      trackPlayer: this.trackPlayer.bind(this),
-      oncollide: (e) => {
-        const ent = e.details.collider;
-        if (ent.hasTag('player') && !ent.hasTag('projectile') && !ent.hasTag('module') && !ent.isEntityAttached('module') && !this.attached && !this.hasTag('attachCooldown')) {
-          this.attach(ent);
-        } else if (ent.hasTag('arborbable')) {
-          this.emit('absorb', { entity: ent });
-          if (ent.hasComponent('EventEmitter')) {
-            ent.emit('absorbed', { absorber: this });
-          }
-        }
-      },
-    };
-
     this.on('pathEnd', this.callback.trackPlayer);
     this.on('collide', this.callback.oncollide);
-    this.on('move', () => {
-      if (this.target && this.target.isEntityAttached('module')) {
-        this.target = Global.Game.getPlayerList().filter((player) => !player.isEntityAttached('module')).shift();
-      }
+    this.on('trackerAquireNewTarget', (e) => {
+      this.target = e.details.target;
     });
   }
 
@@ -106,10 +113,8 @@ export default class Module extends PhysicEntityScript {
   }
 
   trackPlayer() {
-    const playerToTrack = this.owner || this.target || this.getNearestPlayer() || null;
-
-    this.target = playerToTrack;
-    if (this.target && !this.target.hasTag('isDead')) {
+    this.target = this.callback.retargetFn();
+    if (this.target) {
       this.components.locomotor.speedX = 115;
       this.components.locomotor.track(this.target);
     }
@@ -119,8 +124,9 @@ export default class Module extends PhysicEntityScript {
    * @param {PlayerShip} ship
    */
   attach(ship) {
-    if (ship && !ship.isEntityAttached('module') && !this.attached) {
-      this.releasable = true;
+    if (ship && !ship.isEntityAttached('module') && !this.hasTag('attached')) {
+      this.addTag('attached', 'releasable');
+      this.removeTag('tracking');
       this.owner = ship;
       this.owner.releasedModule = null;
       this.owner.attachEntity(this, 'module');
@@ -130,7 +136,6 @@ export default class Module extends PhysicEntityScript {
       this.update();
       this.components.physics.collideFn = null;
       this.addCollisionTag('enemy', '!piercing');
-      this.addTag('linked');
     }
   }
 
@@ -139,8 +144,7 @@ export default class Module extends PhysicEntityScript {
   }
 
   release() {
-    if (this.owner && this.owner.isEntityAttached('module') && this.attached && this.releasable) {
-      this.releasable = false;
+    if (this.owner && this.owner.isEntityAttached('module') && this.hasTag('attached', 'releasable')) {
       this.getAttachedEntity(`${this.getId()}_eject`).update();
       this.owner.detachEntity(this, 'module');
       this.owner.releasedModule = this;
@@ -152,17 +156,18 @@ export default class Module extends PhysicEntityScript {
         this.bindPath(ComplexePath.fromSvgString(`M ${this.components.transform.position.x - 5} ${this.components.transform.position.y} L 0 ${this.components.transform.position.y}`), false);
       }
       this.components.locomotor.trackedEntity = null;
-      this.components.physics.collideFn = (ent) => ((ent.hasTag('player') && !ent.hasTag('projectile') && !ent.hasTag('module')) || (ent.hasTag('enemy') && ent.hasTag('projectile') && !ent.hasTag('piercing')) || (ent.hasTag('enemy') && !ent.hasTag('projectile')) || ent.hasTag('neutral'));
+      this.components.physics.collideFn = (ent) => ent.hasTag('player', '!projectile', '!module') || ent.hasTag('enemy', 'projectile', '!piercing') || ent.hasTag('enemy', '!projectile') || ent.hasTag('neutral');
       this.removeCollisionTag('enemy', '!piercing');
       this.components.locomotor.speedX = 300;
       this.on('pathEnd', this.callback.trackPlayer);
       this.addTag('attachCooldown');
       window.setTimeout(() => this.removeTag('attachCooldown'), 100);
+      this.removeTag('attached', 'releasable');
     }
   }
 
   callOrRelease() {
-    if (this.owner && this.owner.isEntityAttached('module') && this.attached) {
+    if (this.owner && this.owner.isEntityAttached('module') && this.hasTag('attached', 'releasable')) {
       this.release();
     } else {
       this.call();
@@ -188,7 +193,7 @@ export default class Module extends PhysicEntityScript {
       });
     }
 
-    if (this.attached) {
+    if (this.hasTag('attached')) {
       const owner = this.owner || this.target;
       this.setTransform(
         owner.components.transform.position.x + (this.side === Module.SIDE_FRONT ? owner.getSprite().width : -this.getSprite().width),

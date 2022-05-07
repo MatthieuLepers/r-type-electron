@@ -46,7 +46,6 @@ export default class Looker extends Component {
       const minMaxAngle = Math.min(maxNormalizedAngle, Math.max(minNormalizedAngle, normalizedAngle));
       const yMinMaxAngle = minMaxAngle === maxNormalizedAngle && signY >= 0 ? minNormalizedAngle : minMaxAngle;
       const xMinMaxAngle = signX >= 0 ? Math.min(maxNormalizedAngle, Math.max(minNormalizedAngle, (360 - maxNormalizedAngle) - normalizedAngle)) : yMinMaxAngle;
-
       this.inst.components.sprite.options.rotation = (xMinMaxAngle - this.minAngle) % 360;
     }
   }

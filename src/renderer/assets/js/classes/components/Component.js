@@ -11,37 +11,23 @@ export default class Component extends Class {
    * @constructor
    * @param {Class} inst
    * @param {Class} clazz
-   * @param {Number} updatePriority
+   * @param {Number} priority
    */
-  constructor(inst, clazz, updatePriority = Component.PRIORITY_NORMAL) {
+  constructor(inst, clazz, priority = Component.PRIORITY_NORMAL) {
     super();
     if (this.constructor.name === 'Component') {
       throw new AbstractClassError(this);
     }
     this.inst = inst;
     this.clazz = clazz;
-    this.updatePriority = updatePriority;
+    this.priority = priority;
 
     /**
      * @return {Component[]}
      */
     AddClassMethod(this.clazz, 'getComponentByPriority', function () {
-      return Object.values(this.components).sort((a, b) => a.updatePriority - b.updatePriority);
+      return Object.values(this.components).sort((a, b) => a.priority - b.priority);
     });
-  }
-
-  /**
-   * @return {Number}
-   */
-  get priority() {
-    return this.updatePriority;
-  }
-
-  /**
-   * @param {Number} priority
-   */
-  set priority(priority) {
-    this.updatePriority = priority || Component.PRIORITY_NORMAL;
   }
 
   /**
@@ -63,5 +49,12 @@ export default class Component extends Class {
    */
   static get PRIORITY_HIGH() {
     return -1;
+  }
+
+  /**
+   * @param {ModManager} ModKnowledge
+   */
+  applyModsBundle(ModKnowledge) {
+    ModKnowledge.applyComponentBundle(this.constructor.name, this);
   }
 }

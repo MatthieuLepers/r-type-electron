@@ -33,6 +33,6 @@ export default class ModuleEjectFx extends Fx {
       this.parent.getSprite().centerOrigin.x - (this.parent.side === 'back' ? 8 : 19),
       this.parent.getSprite().centerOrigin.y - 8,
     );
-    this.playAnimation(this.parent.side || 'front');
+    this.playAnimation(this.parent.side ?? 'front');
   }
 }

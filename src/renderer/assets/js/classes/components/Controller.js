@@ -17,17 +17,8 @@ export default class Controller extends Component {
     this.controllerType = null;
     this.controls = {};
 
-    this.init();
-  }
-
-  init() {
-    Object.entries(ControlsData).forEach((entry) => {
-      const [key, value] = entry;
-      this.controls[key.toUpperCase()] = new Control(key.toUpperCase(), this.inst, {
-        key: value.key,
-        button: value.button,
-        axis: value.axis || null,
-      });
+    Object.entries(ControlsData).forEach(([key, value]) => {
+      this.controls[key.toUpperCase()] = new Control(key.toUpperCase(), this.inst, value);
     });
   }
 

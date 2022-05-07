@@ -13,20 +13,24 @@ export default class QuadTree {
    */
   constructor(level, bounds) {
     this.level = level;
-    this.objectList = [];
     this.bounds = bounds;
+    this.objectList = [];
     this.nodes = [];
   }
 
   /**
    * @return {Number}
    */
-  get MAX_OBJECTS() { return 10; }
+  get MAX_OBJECTS() {
+    return 10;
+  }
 
   /**
    * @return {Number}
    */
-  get MAX_LEVELS() { return 5; }
+  get MAX_LEVELS() {
+    return 5;
+  }
 
   /**
    * Clear quadtree recursively

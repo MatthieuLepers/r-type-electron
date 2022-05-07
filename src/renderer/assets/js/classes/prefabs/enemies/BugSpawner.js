@@ -15,7 +15,7 @@ export default class BugSpawner extends Spawner {
    */
   constructor(amount) {
     super();
-    this.addEntity(Bug, amount || 10, 15, this.onSpawn.bind(this));
+    this.addEntity(Bug, amount ?? 10, 15, this.onSpawn.bind(this));
     this.path = ComplexePath.fromSvgString('M 700 300 C 400 500 400 100 100 300').moveTo(new Point(Global.Game.canvas.width, Global.Random.rnd(0, Global.Game.canvas.height - 32)));
   }
 

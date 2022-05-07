@@ -1,4 +1,5 @@
 import { AddClassMethod } from '../../Utils';
+import Global from '../../stores/AppStore';
 import Component from './Component';
 import Point from '../geometry/Point';
 
@@ -45,6 +46,15 @@ export default class Transform extends Component {
      */
     AddClassMethod(this.clazz, 'getAngleTo', function (entity) {
       return this.components.transform.getPosition().getAngleTo(entity.components.transform.getPosition());
+    });
+
+    /**
+     * @param {Point} fromPosition
+     * @return {PlayerShip}
+     */
+    AddClassMethod(this.clazz, 'getNearestPlayer', function () {
+      const playerProximity = Global.Game.getPlayerList().map((player) => this.getDistanceTo(player));
+      return Global.Game.getPlayerList()[playerProximity.indexOf(Math.min(...playerProximity))];
     });
 
     /**

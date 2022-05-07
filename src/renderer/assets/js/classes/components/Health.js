@@ -26,7 +26,7 @@ export default class Health extends Component {
      * @param {Entity} attacker
      */
     AddClassMethod(this.clazz, 'getAttacked', function (attacker) {
-      const damages = (attacker.damages ? attacker.damages : 99999);
+      const damages = attacker?.damages ?? Infinity;
       if (!this.components.health.cooldownActive() && !this.hasTag('invincible') && !this.hasTag('isDead') && damages > 0) {
         this.components.health.$absorbtion -= damages;
         if (this.components.health.$absorbtion < 0) {

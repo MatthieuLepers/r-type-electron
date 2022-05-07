@@ -20,7 +20,7 @@ export default class Class {
    * @param {String} clazz
    */
   addComponent(component, clazz) {
-    this.addComponentAt(component.name, component, clazz || this.constructor);
+    this.addComponentAt(component.name, component, clazz ?? this.constructor);
   }
 
   /**

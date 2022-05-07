@@ -18,11 +18,11 @@ export default class Sound extends AbstractRessource {
   }
 
   init() {
-    const { volume, muted, autoplay, loop } = this.options || {};
-    this.audio.volume = volume || 1;
-    this.audio.muted = muted || false;
-    this.audio.autoplay = autoplay || false;
-    this.audio.loop = loop || false;
+    const { volume, muted, autoplay, loop } = this.options ?? {};
+    this.audio.volume = volume ?? 1;
+    this.audio.muted = muted ?? false;
+    this.audio.autoplay = autoplay ?? false;
+    this.audio.loop = loop ?? false;
   }
 
   /**

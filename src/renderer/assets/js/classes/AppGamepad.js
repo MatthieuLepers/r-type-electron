@@ -22,35 +22,35 @@ export default class AppGamepad extends Class {
    * @return {String}
    */
   get id() {
-    return this.gamepad.id || '';
+    return this.gamepad.id ?? '';
   }
 
   /**
    * @return {Boolean}
    */
   isConnected() {
-    return this.gamepad.connected || false;
+    return this.gamepad.connected ?? false;
   }
 
   /**
    * @return {GamepadButton[]}
    */
   get buttons() {
-    return this.gamepad.buttons || [];
+    return this.gamepad.buttons ?? [];
   }
 
   /**
    * @return {Object[]}
    */
   get axes() {
-    return this.gamepad.axes || [];
+    return this.gamepad.axes ?? [];
   }
 
   /**
    * @return {Gamepad|Object}
    */
   get gamepad() {
-    return navigator.getGamepads()[this.index] || {};
+    return navigator.getGamepads()[this.index] ?? {};
   }
 
   update() {

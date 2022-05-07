@@ -112,18 +112,17 @@ export default class Entity extends Class {
   }
 
   /**
-   * @return {PlayerShip}
-   */
-  getNearestPlayer() {
-    const playerProximity = Global.Game.getPlayerList().map((player) => this.getDistanceTo(player));
-    return Global.Game.getPlayerList()[playerProximity.indexOf(Math.min(...playerProximity))];
-  }
-
-  /**
    * @param  {...any} args
    * @return {EntityScript}
    */
   static new(...args) {
     return Global.ModKnowledge.applyPrefabBundle(this.name, new this(...args));
+  }
+
+  /**
+   * @param {ModManager} ModKnowledge
+   */
+  applyModsBundle(ModKnowledge) {
+    ModKnowledge.applyPrefabBundle(this.constructor.name, this);
   }
 }

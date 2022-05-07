@@ -26,6 +26,7 @@ export default class Locomotor extends Component {
     this.$loopCount = 0;
     this.followSlope = false;
     this.trackedEntity = null;
+    this.retargetFn = () => null;
 
     this.speed = new Vector(0, 0); // px/s => (1/60) px/frame
 
@@ -188,6 +189,7 @@ export default class Locomotor extends Component {
    */
   track(entity) {
     this.trackedEntity = entity;
+    this.inst.addTag('tracking');
   }
 
   task() {
@@ -195,18 +197,17 @@ export default class Locomotor extends Component {
     if (Global.Settings.debug.drawHitbox && this.inst.hasComponent('Physics')) {
       this.inst.getHitbox().forEach((hitbox) => { hitbox.render(Global.Game.ctx, this.inst.getId()); });
     }
-    if (!this.inst.attached) {
+    if (!this.inst.hasTag('attached')) {
+      if ((this.trackedEntity && this.trackedEntity.hasTag('isDead')) || (this.inst.hasTag('tracking') && !this.trackedEntity)) {
+        this.trackedEntity = this.retargetFn();
+        if (this.trackedEntity && this.inst.hasComponent('EventEmitter')) {
+          this.inst.emit('trackerAquireNewTarget', { target: this.trackedEntity });
+        }
+      }
       if (this.trackedEntity) {
-        if (this.trackedEntity.hasTag('isDead') && this.hasComponent('EventEmitter')) {
-          this.emit('trackerLostTarget', { oldTarget: this.trackedEntity });
-          this.trackedEntity = null;
-        }
         this.inst.bindPath(ComplexePath.fromSvgString(`M ${this.inst.components.transform.position.x} ${this.inst.components.transform.position.y} L ${this.trackedEntity.components.transform.position.x + (this.trackedEntity.getSprite().width / 2) - (this.inst.getSprite().width / 2)} ${this.trackedEntity.components.transform.position.y + (this.trackedEntity.getSprite().height / 2) - (this.inst.getSprite().height / 2)}`), false);
-        this.inst.move();
-        if (Global.Settings.debug.drawPath) {
-          this.path.debugDraw(Global.Game.ctx);
-        }
-      } else if (this.path) {
+      }
+      if (this.path) {
         this.inst.move();
         if (Global.Settings.debug.drawPath) {
           this.path.debugDraw(Global.Game.ctx);

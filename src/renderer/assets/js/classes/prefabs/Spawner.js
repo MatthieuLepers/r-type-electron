@@ -71,7 +71,7 @@ export default class Spawner extends EntityScript {
    */
   getNextDelay() {
     const [data] = this.entities;
-    return (data || {}).delay || 0;
+    return data?.delay ?? 0;
   }
 
   /**

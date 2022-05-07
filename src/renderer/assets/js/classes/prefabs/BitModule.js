@@ -47,7 +47,7 @@ export default class BitModule extends PhysicEntityScript {
 
     // Shooter
     this.components.shooter.shootFn = () => {
-      const module = this.owner.getAttachedEntity('module') || null;
+      const module = this.owner.getAttachedEntity('module') ?? null;
       if (module && module.tier >= 1 && module.gun && module.gun.type === 'DNA') {
         module.gun.secondaryShoot(module);
       }

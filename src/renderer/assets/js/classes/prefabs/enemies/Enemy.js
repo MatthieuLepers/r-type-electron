@@ -23,7 +23,7 @@ export default class Enemy extends PhysicEntityScript {
     this.addComponent(AttachedEntities, Enemy);
     this.addComponent(Health, Enemy);
 
-    this.on('collide', function (e) {
+    this.on('collide', (e) => {
       if (!e.details.collisionData.isCollidingHull()) {
         this.getAttacked(e.details.collider, e.details.collisionData);
       }

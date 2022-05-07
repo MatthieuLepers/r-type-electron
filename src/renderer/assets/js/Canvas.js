@@ -74,7 +74,7 @@ export default class Canvas extends Class {
    * @return {this}
    */
   clear(x, y, width, height) {
-    this.ctx.clearRect(x || 0, y || 0, width || this.options.width, height || this.options.height);
+    this.ctx.clearRect(x ?? 0, y ?? 0, width ?? this.options.width, height ?? this.options.height);
     return this;
   }
 
@@ -83,7 +83,11 @@ export default class Canvas extends Class {
    */
   render() {
     this.clear();
-    Object.values(this.drawables).sort((a, b) => a.priority - b.priority).forEach((drawable) => { drawable.render(); });
+    Object
+      .values(this.drawables)
+      .sort((a, b) => a.priority - b.priority)
+      .forEach((drawable) => { drawable.render(); })
+    ;
     return this;
   }
 
@@ -94,9 +98,9 @@ export default class Canvas extends Class {
    * @param {Object} styles
    */
   fillText(txt, x, y, styles = {}) {
-    this.ctx.font = `${styles.fontSize || 16}px ${styles.fontFamily || 'Calibri'}`;
-    this.ctx.fillStyle = styles.color || '#000';
-    this.ctx.textAlign = styles.align || 'center';
+    this.ctx.font = `${styles.fontSize ?? 16}px ${styles.fontFamily ?? 'Calibri'}`;
+    this.ctx.fillStyle = styles.color ?? '#000';
+    this.ctx.textAlign = styles.align ?? 'center';
     this.ctx.fillText(txt, x, y);
   }
 }

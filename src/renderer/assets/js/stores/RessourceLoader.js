@@ -28,42 +28,53 @@ class RessourceLoader extends Class {
     this.emit('loadStart');
     const { Assets, Sounds } = this.$ressourcesData;
     this.$total = Object.keys(Assets || {}).length + Object.keys(Sounds || {}).length;
-    Object.values(Assets || {}).forEach(this.loadAsset.bind(this));
-    Object.values(Sounds || {}).forEach(this.loadSound.bind(this));
+    Promise.allSettled([
+      ...Object.values(Assets || {}).map(this.loadAsset.bind(this)),
+      ...Object.values(Sounds || {}).map(this.loadSound.bind(this)),
+    ]).then(() => {
+      this.emit('loadEnd');
+    });
   }
 
   /**
    * @param {Object} assetData
    */
   loadAsset(assetData) {
-    const img = new Image();
-    img.onload = () => {
-      const asset = new Asset(img, assetData);
-      this.$loaded += 1;
-      this.emit('ressourceLoad', { ressource: asset, percent: (this.$loaded * 100) / this.$total });
-      this.assets.setAt(assetData.bank, asset);
-      if (this.$loaded === this.$total) {
-        this.emit('loadEnd');
-      }
-    };
-    img.src = assetData.spritesheetPath;
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        const asset = new Asset(img, assetData);
+        this.$loaded += 1;
+        this.emit('ressourceLoad', { ressource: asset, percent: (this.$loaded * 100) / this.$total });
+        this.assets.setAt(assetData.bank, asset);
+        resolve(asset);
+      };
+      img.onerror = reject;
+      img.src = assetData.spritesheetPath;
+    });
   }
 
   /**
    * @param {Object} soundData
    */
   loadSound(soundData) {
-    const audio = new Audio(soundData.soundPath);
-    audio.addEventListener('canplay', () => {
-      const sound = new Sound(audio, soundData);
-      this.$loaded += 1;
-      this.emit('ressourceLoad', { ressource: sound, percent: (this.$loaded * 100) / this.$total });
-      this.sounds.setAt(soundData.bank, sound);
-      if (this.$loaded === this.$total) {
-        this.emit('loadEnd');
-      }
+    return new Promise((resolve, reject) => {
+      const audio = new Audio(soundData.soundPath);
+      ['canplay', 'suspend'].forEach((event) => {
+        audio.addEventListener(event, () => {
+          const sound = new Sound(audio, soundData);
+          this.$loaded += 1;
+          this.emit('ressourceLoad', { ressource: sound, percent: (this.$loaded * 100) / this.$total });
+          this.sounds.setAt(soundData.bank, sound);
+          resolve(sound);
+        });
+      });
+
+      ['error', 'stalled'].forEach((event) => {
+        audio.addEventListener(event, reject);
+      });
+      audio.load();
     });
-    audio.load();
   }
 }
 

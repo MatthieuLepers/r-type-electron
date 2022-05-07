@@ -19,7 +19,7 @@ export default class AbstractRessource {
     Object.keys(this.$data).forEach((key) => {
       Object.defineProperty(this, key, {
         get: () => this.$data[key],
-        set(val) { this.$data[key] = val; },
+        set: (val) => { this.$data[key] = val; },
       });
     });
   }

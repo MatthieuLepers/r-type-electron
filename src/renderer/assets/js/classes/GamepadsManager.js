@@ -22,7 +22,7 @@ export default class GamepadManager extends Class {
    * @param {Number} index
    */
   get(index) {
-    return this.gamepads[index] || null;
+    return this.gamepads[index] ?? null;
   }
 
   init() {

@@ -67,7 +67,9 @@ export default class Game extends EntityScript {
    * @return {EntityScript[]}
    */
   findEntities(position, radius, ...tags) {
-    return this.findEntitiesByTags(...tags).filter((entity) => Math.sqrt((entity.components.transform.position.x - position.x) ** 2 + (entity.components.transform.position.y - position.y) ** 2) < radius);
+    return this.findEntitiesByTags(...tags)
+      .filter((entity) => Math.sqrt((entity.components.transform.position.x - position.x) ** 2 + (entity.components.transform.position.y - position.y) ** 2) < radius)
+    ;
   }
 
   /**
@@ -75,7 +77,10 @@ export default class Game extends EntityScript {
    * @return {EntityScript[]}
    */
   findEntitiesByTags(...tags) {
-    return Object.values(this.entities).filter((entity) => entity.hasTag(...tags));
+    return Object
+      .values(this.entities)
+      .filter((entity) => entity.hasTag(...tags))
+    ;
   }
 
   /**
@@ -84,7 +89,7 @@ export default class Game extends EntityScript {
    */
   findFirstEntityByTags(...tags) {
     const [first] = this.findEntitiesByTags(...tags);
-    return first || null;
+    return first ?? null;
   }
 
   /**

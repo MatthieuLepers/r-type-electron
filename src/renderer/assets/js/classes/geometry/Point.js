@@ -66,7 +66,7 @@ export default class Point {
   getAngleTo(point) {
     const signX = this.x - point.x >= 0 ? -1 : 1;
     const signY = this.y - point.y >= 0 ? -1 : 1;
-    const angle = Math.atan2(this.getVerticaleDistanceTo(point), (this.getHorizontaleDistanceTo(point)) * 180) / Math.PI;
+    const angle = (Math.atan2(this.getVerticaleDistanceTo(point), this.getHorizontaleDistanceTo(point)) * 180) / Math.PI;
     return (signX >= 0 ? 180 + signY * angle : 360 - signY * angle) % 360;
   }
 

@@ -85,7 +85,7 @@ export default class DnaBeam extends Projectile {
   beamLoop() {
     const sign = (this.side === Module.SIDE_FRONT ? 1 : -1);
     // Locomotor
-    if (this.attached) {
+    if (this.hasTag('attached')) {
       this.setTransform(
         this.shooter.components.transform.position.x + (sign > 0 ? this.shooter.getSprite().width : -120) + sign * (this.$offset === 0 ? 64 : ((this.$offset + 1) * 64)),
         this.shooter.getSprite().centerOrigin.y - 16,

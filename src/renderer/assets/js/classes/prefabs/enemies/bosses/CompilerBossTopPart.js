@@ -15,8 +15,8 @@ import RedLaser from '../../projectiles/RedLaser';
  */
 export default class CompilerTopPart extends Enemy {
   /**
-   * @param {CompilerBoss} owner
    * @constructor
+   * @param {CompilerBoss} owner
    */
   constructor(owner) {
     super();

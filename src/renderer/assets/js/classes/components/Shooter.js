@@ -40,19 +40,19 @@ export default class Shooter extends Component {
 
       if (!this.components.shooter.cooldownActive() && !this.hasTag('isDead') && chargedshooterCond && spriteCond) {
         if (typeof this.components.shooter.shootFn === 'function') {
-          this.components.shooter.shootFn(this.components.shooter.target || null);
+          this.components.shooter.shootFn(this.components.shooter.target ?? null);
           this.components.shooter.startCooldown();
           return;
         }
 
-        const projectile = new this.components.shooter.projectile(this, this.components.shooter.target || null);
+        const projectile = this.components.shooter.projectile.new(this, this.components.shooter.target ?? null);
         if (this.components.shooter.useSpread) {
           projectile.getSprite().options.rotation = this.components.shooter.spread.currentAngle;
           projectile.components.locomotor.path.rotate(this.components.shooter.spread.currentAngle, projectile.components.locomotor.path.startPoint);
           this.components.shooter.updateSpread();
         }
         if (typeof this.components.shooter.initProjectileFn === 'function') {
-          this.components.shooter.initProjectileFn(projectile, this.components.shooter.target || null);
+          this.components.shooter.initProjectileFn(projectile, this.components.shooter.target ?? null);
         }
         if (this.hasComponent('EventEmitter')) {
           this.emit('shoot', { projectile });
@@ -106,7 +106,7 @@ export default class Shooter extends Component {
     if ((!this.$target || (this.$target && this.$target.hasTag('isDead'))) && typeof this.retargetFn === 'function') {
       this.$target = this.retargetFn();
     }
-    return this.$target || null;
+    return this.$target ?? null;
   }
 
   /**

@@ -74,7 +74,7 @@ export default class Engine extends Class {
    * @return {Runnable}
    */
   addRunnable(runnable) {
-    if (runnable && runnable.getClass && runnable.isExtending('Runnable')) {
+    if (runnable?.getClass && runnable.isExtending('Runnable')) {
       this.runnableList[runnable.name] = runnable;
     }
     return runnable;

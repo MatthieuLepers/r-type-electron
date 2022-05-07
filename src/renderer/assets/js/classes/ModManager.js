@@ -170,7 +170,7 @@ export default class ModManager extends Class {
       .filter(this.isModEnabled.bind(this))
       .map((modName) => this.$bundleList[modName])
       .forEach((modData) => {
-        if (modData.components && modData.components[bundleName]) {
+        if (modData.components && modData?.components[bundleName]) {
           modData.components[bundleName].forEach((fn) => { fn(component); });
         }
       })
