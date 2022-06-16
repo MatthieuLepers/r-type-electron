@@ -3,8 +3,8 @@
     <canvas ref="canvas"></canvas>
     <Screen title="Paused!" v-show="paused">
       <template v-slot:content>
-        <button class="ScreenMenuButton ScreenMenuButton--xxl ScreenMenuButton--auto" @click="handleClickResume">Resume</button>
-        <button class="ScreenMenuButton ScreenMenuButton--xxl ScreenMenuButton--auto" @click="handleClickExitToMenu">Exit to menu</button>
+        <button :class="GenerateModifiers('ScreenMenuButton', { xxl: true, auto: true })" @click="handleClickResume">Resume</button>
+        <button :class="GenerateModifiers('ScreenMenuButton', { xxl: true, auto: true })" @click="handleClickExitToMenu">Exit to menu</button>
       </template>
     </Screen>
   </div>
