@@ -65,7 +65,7 @@ export default class Entity extends Class {
    * @return {Boolean}
    */
   hasTag(...tags) {
-    return tags.filter((tag) => (tag.startsWith('!') ? !this.tags.includes(tag) : this.tags.includes(tag))).length === tags.length;
+    return tags.reduce((acc, tag) => acc && (tag.startsWith('!') ? !this.tags.includes(tag.substring(1)) : this.tags.includes(tag)), true);
   }
 
   /**
@@ -91,7 +91,7 @@ export default class Entity extends Class {
       Global.Engine.addRunnable(this.runnable);
     }
     window.setTimeout(() => this.removeTag('staySpawned'), 1000);
-    this.emit('spawn');
+    this.emit('spawn', { entity: this });
     return this;
   }
 

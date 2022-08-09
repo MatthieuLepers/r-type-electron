@@ -13,8 +13,7 @@ export default class ShipChargedBullet extends Projectile {
    */
   constructor(shooter, target, percent) {
     super(shooter, target);
-    this.addTag('player');
-    this.addTag('piercing');
+    this.addTag('player', 'piercing');
     this.data = this.getData(percent);
     this.asset = Global.Assets.get(`entities/projectiles/chargedbullet_${ShipChargedBullet.parsePercent(percent)}`);
     this.damages = this.data.damages;
@@ -40,7 +39,7 @@ export default class ShipChargedBullet extends Projectile {
 
     // Physics
     this.components.physics.hitboxType = RectangleHitbox;
-    this.addCollisionTag('enemy', '!isDead', '!projectile');
+    this.addCollisionTag('enemy', '!projectile');
 
     this.on('dead', () => this.despawn());
   }

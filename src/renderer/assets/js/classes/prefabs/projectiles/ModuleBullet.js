@@ -37,7 +37,7 @@ export default class ModuleBullet extends Projectile {
 
     // Physics
     this.components.physics.hitboxType = RectangleHitbox;
-    this.addCollisionTag('enemy', '!isDead', '!projectile');
+    this.addCollisionTag('enemy', '!projectile');
 
     this.on('dead', () => this.despawn());
   }

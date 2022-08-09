@@ -19,7 +19,7 @@ export default class BlueLaser extends Projectile {
    */
   constructor(shooter, target, angle = 0) {
     super(shooter, target);
-    this.addTag('player', 'laser');
+    this.addTag('player', 'laser', 'staySpawned');
     this.angle = angle;
     this.damages = 2;
 
@@ -42,7 +42,7 @@ export default class BlueLaser extends Projectile {
 
     // Physics
     this.components.physics.hitboxType = RectangleHitbox;
-    this.addCollisionTag('enemy', '!isDead', '!projectile');
+    this.addCollisionTag('enemy', '!projectile');
 
     this.on('dead', () => {
       this.playAnimation(`absorb_t${this.getModuleTier()}`);

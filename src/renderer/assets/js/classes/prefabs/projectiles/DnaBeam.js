@@ -70,7 +70,7 @@ export default class DnaBeam extends Projectile {
         };
       }
     };
-    this.addCollisionTag('enemy', '!isDead', '!projectile');
+    this.addCollisionTag('enemy', '!projectile');
 
     this.on('animOver', () => this.beamLoop());
     this.on('outOfScreen', () => {

@@ -15,13 +15,18 @@ export default class Engine extends Class {
     this.physicRunnable = null;
     this.$running = false;
     this.paused = false;
-    this.$frame = null;
+    this.fps = 60;
 
-    this.$fps = 60;
-    this.$fpsCounter = 0;
-    this.$timer = window.setInterval(() => {
-      this.$fps = this.$fpsCounter;
-      this.$fpsCounter = 0;
+    this.$frame = null;
+    this.$fpsInterval = 1000 / this.fps;
+    this.$then = Date.now();
+    this.$startTime = this.$then;
+    this.$frameCount = 0;
+    this.$currentFps = this.fps;
+
+    window.setInterval(() => {
+      this.$currentFps = this.$frameCount;
+      this.$frameCount = 0;
     }, 1000);
 
     this.addComponent(EventEmitter, Engine);
@@ -40,17 +45,17 @@ export default class Engine extends Class {
    * @return {Number}
    */
   get FPS() {
-    return this.$fps;
+    return this.$currentFps;
   }
 
   /**
    * @return {String}
    */
   get FPS_COLOR() {
-    if (this.FPS >= 55) {
+    if (this.FPS >= this.fps * (5 / 6)) {
       return '#0f0';
     }
-    if (this.FPS < 30) {
+    if (this.FPS < this.fps / 2) {
       return '#f00';
     }
     return '#ff7c00';
@@ -60,7 +65,7 @@ export default class Engine extends Class {
    * @return {String}
    */
   get elapsedTime() {
-    const seconds = Math.floor(this.FRAME / 60);
+    const seconds = Math.floor(this.$frameCount / 60);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
     const padHours = String(hours).padStart(2, '0');
@@ -100,11 +105,16 @@ export default class Engine extends Class {
   }
 
   task() {
-    if (!this.paused) {
-      this.step();
-      this.$fpsCounter += 1;
-    }
     this.$frame = window.requestAnimationFrame(this.task.bind(this));
+
+    const now = Date.now();
+    const elapsed = now - this.$then;
+
+    if (!this.paused && elapsed > this.$fpsInterval) {
+      this.$then = now - (elapsed % this.$fpsInterval);
+      this.$frameCount += 1;
+      this.step();
+    }
   }
 
   step() {
@@ -123,8 +133,11 @@ export default class Engine extends Class {
    */
   start() {
     if (!this.$running) {
+      this.$fpsInterval = 1000 / this.fps;
+      this.$then = Date.now();
+      this.$startTime = this.$then;
       this.$running = true;
-      this.$frame = window.requestAnimationFrame(this.task.bind(this));
+      this.task();
     }
     return this;
   }

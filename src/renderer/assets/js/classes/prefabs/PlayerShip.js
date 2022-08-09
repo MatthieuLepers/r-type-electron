@@ -137,6 +137,7 @@ export default class PlayerShip extends PhysicEntityScript {
     const player = PlayerShip.new(this.getId()).spawn();
     player.playAnimation('invincible', true);
     player.addTag('invincible');
+    this.emit('respawn', { player });
 
     window.setTimeout(() => {
       player.removeTag('invincible');

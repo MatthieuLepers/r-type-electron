@@ -20,7 +20,7 @@ import Module from './classes/prefabs/Module';
 // import PowerArmor from './classes/prefabs/enemies/PowerArmor';
 
 import WaveGenerator from './classes/components/WaveGenerator';
-import CompilerBoss from './classes/prefabs/enemies/bosses/CompilerBoss';
+// import CompilerBoss from './classes/prefabs/enemies/bosses/CompilerBoss';
 
 /**
  * @author Matthieu LEPERS
@@ -119,7 +119,7 @@ export default class Game extends EntityScript {
     PlayerShip.new('player1').spawn();
     Module.new().spawn();
 
-    // setTimeout(() => this.components.wavegenerator.generateNextWave(), 2000);
+    setTimeout(() => this.components.wavegenerator.generateNextWave(), 2000);
     // PataPata.new().spawn();
     // BugSpawner.new().spawn();
     // Mid.new().spawn();
@@ -127,7 +127,7 @@ export default class Game extends EntityScript {
     // Cytron.new().spawn();
     // PowerArmor.new().spawn();
     // setTimeout(() => PowerArmor.new().spawn(), 1000);
-    CompilerBoss.new().spawn();
+    // CompilerBoss.new().spawn();
   }
 
   reset() {

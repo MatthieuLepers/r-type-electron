@@ -36,6 +36,8 @@ export default class RedLaser extends Projectile {
 
     // Physics
     this.components.physics.hitboxType = RectangleHitbox;
-    this.addCollisionTag('player', '!module', '!isDead', '!projectile', '!invincible');
+    this.addCollisionTag('player', '!module', '!projectile');
+
+    this.on('dead', () => this.despawn());
   }
 }

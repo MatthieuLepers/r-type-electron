@@ -15,7 +15,7 @@ export default class Canvas extends Class {
     super();
     this.options = {
       width: window.innerWidth,
-      height: window.innerHeight - 30,
+      height: window.innerHeight - 80,
     };
     this.canvas = canvas;
     this.ctx = null;

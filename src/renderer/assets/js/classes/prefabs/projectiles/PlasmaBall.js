@@ -37,7 +37,7 @@ export default class PlasmaBall extends Projectile {
 
     // Physics
     this.components.physics.hitboxType = RectangleHitbox;
-    this.addCollisionTag('player', '!isDead', '!projectile', '!invincible');
+    this.addCollisionTag('player', '!projectile');
 
     this.on('dead', () => Explosion.EXPLOSION_TINY(this).spawn());
   }

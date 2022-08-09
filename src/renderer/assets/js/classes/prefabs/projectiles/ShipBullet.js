@@ -38,7 +38,7 @@ export default class ShipBullet extends Projectile {
 
     // sics
     this.components.physics.hitboxType = RectangleHitbox;
-    this.addCollisionTag('enemy', '!isDead', '!projectile');
+    this.addCollisionTag('enemy', '!projectile');
 
     this.on('dead', () => this.despawn());
   }

@@ -17,6 +17,7 @@ export default class Cheetah extends Enemy {
    */
   constructor() {
     super();
+    this.damages = 1;
 
     this.addComponent(Shooter, Cheetah);
 

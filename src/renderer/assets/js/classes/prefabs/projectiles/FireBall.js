@@ -42,7 +42,7 @@ export default class FireBall extends Projectile {
 
     // Physics
     this.components.physics.hitboxType = RectangleHitbox;
-    this.addCollisionTag('enemy', '!isDead', '!projectile');
+    this.addCollisionTag('enemy', '!projectile');
 
     this.on('dead', () => Explosion.EXPLOSION_FIREBALL(this).spawn());
   }

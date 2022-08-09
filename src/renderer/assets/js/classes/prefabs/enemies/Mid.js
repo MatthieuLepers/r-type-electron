@@ -17,6 +17,7 @@ export default class Mid extends Enemy {
    */
   constructor() {
     super();
+    this.damages = 1;
 
     this.addComponent(Shooter, Mid);
 

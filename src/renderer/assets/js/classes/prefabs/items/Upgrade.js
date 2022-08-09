@@ -21,6 +21,7 @@ export default class Upgrade extends Item {
 
     // Physics
     this.addCollisionTag('player', '!module', '!projectile');
+    this.removeCollisionTag('!invinsible');
 
     // Locomotor
     this.components.locomotor.speedX = 75;

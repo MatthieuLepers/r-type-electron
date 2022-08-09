@@ -7,6 +7,7 @@
         <button :class="GenerateModifiers('ScreenMenuButton', { xxl: true, auto: true })" @click="handleClickExitToMenu">Exit to menu</button>
       </template>
     </Screen>
+    <GameHUD v-if="game" />
   </div>
 </template>
 
@@ -15,12 +16,14 @@ import Global from '@/assets/js/stores/AppStore';
 import Game from '@/assets/js/Game';
 
 import Screen from '@/components/Screen/index';
+import GameHUD from '@/components/GameHUD/index';
 
 export default {
   name: 'PlayScreen',
-  components: { Screen },
+  components: { Screen, GameHUD },
   data() {
     return {
+      game: null,
       paused: false,
     };
   },
@@ -34,8 +37,8 @@ export default {
     },
   },
   mounted() {
-    const game = new Game(this.$refs.canvas);
-    game.start();
+    this.game = new Game(this.$refs.canvas);
+    this.game.start();
 
     Global.Engine.on('paused', () => { this.paused = true; });
     Global.Engine.on('resumed', () => { this.paused = false; });
