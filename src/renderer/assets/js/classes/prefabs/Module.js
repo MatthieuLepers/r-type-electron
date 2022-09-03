@@ -224,7 +224,7 @@ export default class Module extends PhysicEntityScript {
    * @param {Number} angle
    */
   spawnBullet(angle) {
-    const bullet = ModuleBullet.new(this, null, angle);
+    const bullet = ModuleBullet.new(this.owner ?? this, null, angle);
     bullet.spawn();
     this.emit('shoot', { projectile: bullet });
   }

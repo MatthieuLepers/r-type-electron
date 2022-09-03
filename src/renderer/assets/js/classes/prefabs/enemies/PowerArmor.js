@@ -7,7 +7,7 @@ import DnaUpgrade from '../items/DnaUpgrade';
 // import FireUpgrade from '../items/FireUpgrade';
 // import RocketUpgrade from '../items/RocketUpgrade';
 // import ForcefieldUpgrade from '../items/ForcefieldUpgrade';
-// import BitModuleUpgrade from '../items/BitModuleUpgrade';
+import BitModuleUpgrade from '../items/BitModuleUpgrade';
 // import SpeedUpgrade from '../items/SpeedUpgrade';
 import Point from '../../geometry/Point';
 import ComplexePath from '../../paths/ComplexePath';
@@ -23,7 +23,7 @@ export default class PowerArmor extends Enemy {
    */
   constructor() {
     super();
-    this.addTag('staySpawned');
+    // this.addTag('staySpawned');
     this.damages = 1;
 
     this.addComponent(LootDropper, PowerArmor);
@@ -55,7 +55,7 @@ export default class PowerArmor extends Enemy {
     // this.components.lootdropper.addLoot(FireUpgrade, 0.2);
     // this.components.lootdropper.addLoot(RocketUpgrade, 0.1);
     // this.components.lootdropper.addLoot(ForcefieldUpgrade, 0.1);
-    // this.components.lootdropper.addLoot(BitModuleUpgrade, 0.1);
+    this.components.lootdropper.addLoot(BitModuleUpgrade, 0.1);
     // this.components.lootdropper.addLoot(SpeedUpgrade, 0.1);
 
     this.on('dead', () => {

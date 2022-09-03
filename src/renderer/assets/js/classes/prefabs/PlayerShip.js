@@ -6,6 +6,7 @@ import Controller from '../components/Controller';
 import Health from '../components/Health';
 import Shooter from '../components/Shooter';
 import ChargedShooter from '../components/ChargedShooter';
+import ScoreBoard from '../components/ScoreBoard';
 import ShipBoosterFx from './fx/ShipBoosterFx';
 import ShipBulletEmitFx from './fx/ShipBulletEmitFx';
 import ShipBulletChargeFx from './fx/ShipBulletChargeFx';
@@ -35,6 +36,7 @@ export default class PlayerShip extends PhysicEntityScript {
     this.addComponent(Health, PlayerShip);
     this.addComponent(Shooter, PlayerShip);
     this.addComponent(ChargedShooter, PlayerShip);
+    this.addComponent(ScoreBoard, PlayerShip);
 
     // Transform
     this.setTransform(100, (Global.Game.canvas.height / 2) - 7.5);

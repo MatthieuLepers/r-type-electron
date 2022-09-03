@@ -2,6 +2,7 @@ import Global from '../../stores/AppStore';
 import PhysicEntityScript from './PhysicEntityScript';
 import Shooter from '../components/Shooter';
 import RectangleHitbox from '../hitboxes/RectangleHitbox';
+import DnaBullet from './projectiles/DnaBullet';
 
 /**
  * @author Matthieu LEPERS
@@ -48,12 +49,12 @@ export default class BitModule extends PhysicEntityScript {
     // Shooter
     this.components.shooter.shootFn = () => {
       const module = this.owner.getAttachedEntity('module') ?? null;
-      if (module && module.tier >= 1 && module.gun && module.gun.type === 'DNA') {
-        module.gun.secondaryShoot(module);
+      if (module?.tier >= 1 && module?.weapon.type === 'DNA') {
+        DnaBullet.new(this, null, (this.slot === BitModule.SLOT_TOP ? DnaBullet.COLOR_RED : DnaBullet.COLOR_BLUE)).spawn();
       }
     };
     this.components.shooter.automatic = false;
-    this.components.shooter.setCooldown(90);
+    this.components.shooter.setCooldown(180);
   }
 
   /**

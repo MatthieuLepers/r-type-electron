@@ -70,7 +70,7 @@ export default class ChargedShooter extends Component {
    * @return {EntityScript|null}
    */
   get target() {
-    if ((!this.$target || (this.$target && this.$target.hasTag('isDead'))) && typeof this.retargetFn === 'function') {
+    if ((!this.$target || (this.$target?.hasTag('isDead'))) && typeof this.retargetFn === 'function') {
       this.$target = this.retargetFn();
     }
     return this.$target ?? null;

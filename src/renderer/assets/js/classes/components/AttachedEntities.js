@@ -22,10 +22,10 @@ export default class AttachedEntities extends Component {
 
     /**
      * @param {String} entityId
-     * @return {EntityScript}
+     * @return {EntityScript|null}
      */
     AddClassMethod(this.clazz, 'getAttachedEntity', function (entityId) {
-      return this.components.attachedentities.entities[entityId];
+      return this.components.attachedentities.entities[entityId] ?? null;
     });
 
     /**

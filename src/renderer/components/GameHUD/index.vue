@@ -15,11 +15,10 @@ export default {
   data() {
     return {
       beamPercent: 0,
-      player: Global.Game.entities.player1,
     };
   },
   mounted() {
-    this.setupEvents(this.player);
+    this.setupEvents(Global.Game.entities.player1);
   },
   methods: {
     setupEvents(player) {

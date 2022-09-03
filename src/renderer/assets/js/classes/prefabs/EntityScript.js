@@ -45,7 +45,11 @@ export default class Entity extends Class {
    * @return {this}
    */
   addTag(...tags) {
-    tags.forEach((tag) => { this.tags.push(tag); });
+    tags.forEach((tag) => {
+      if (!this.tags.includes(tag)) {
+        this.tags.push(tag);
+      }
+    });
     return this;
   }
 

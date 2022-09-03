@@ -72,12 +72,10 @@ export default class Physics extends Component {
     }
 
     const checkTags = this.collideTags
-      .map((tag) => entity.hasTag(tag))
-      .reduce((acc, val) => acc && val, true)
+      .reduce((acc, tag) => acc && entity.hasTag(tag), true)
     ;
     const checkExcludeTags = this.collideTagsExcluded
-      .map((tag) => !entity.hasTag(tag))
-      .reduce((acc, val) => acc && val, true)
+      .reduce((acc, tag) => acc && !entity.hasTag(tag), true)
     ;
 
     if (checkTags && checkExcludeTags) {

@@ -68,7 +68,7 @@ export default class Health extends Component {
    * @param {Number} health
    */
   setHealth(health) {
-    this.$health = (Math.abs(health) > this.maxHealth ? this.maxHealth : Math.abs(health));
+    this.$health = Math.min(Math.abs(health), this.maxHealth);
   }
 
   /**
@@ -98,7 +98,7 @@ export default class Health extends Component {
    * @return {this}
    */
   setPercent(percent = 1.0) {
-    this.$health = Math.floor(this.$maxHealth * percent);
+    this.setHealth(this.$maxHealth * percent);
     return this;
   }
 

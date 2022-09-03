@@ -29,7 +29,19 @@ export default class Enemy extends PhysicEntityScript {
       }
     });
     this.on('dead', (e) => {
-      console.log(`Killed by ${e.details.killer.getId()}`);
+      console.log(`Killed by ${e.details.killer.getId()}, owner : ${e.details.killer.owner?.getId() ?? e.details.killer.shooter?.getId()}`);
+
+      // If is a projectile (player/module/bitmodule)
+      // TODO : set owner correctly when player shoot projectile using bitmodule or module
+      if (e.details.killer.hasTag('player', 'projectile') && e.details.killer.shooter.hasComponent('ScoreBoard')) {
+        e.details.killer.shooter.addScore(this);
+      }
+      // If is module hull (detached)
+      // if (e.details.killer.hasTag('module', '!bitModule', '!attached')) {}
+      // If is module hull (attached)
+      // if (e.details.killer.hasTag('module', '!bitModule', 'attached')) {}
+      // If is bit module hull
+      // if (e.details.killer.hasTag('module', 'bitModule', 'attached')) {}
     });
   }
 

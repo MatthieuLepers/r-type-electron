@@ -26,18 +26,9 @@ export default class DnaWeapon extends Weapon {
    * @param {Module} module
    */
   secondaryShoot(module) {
-    if (module && module.tier >= 1) {
-      const bitModuleTop = module.owner.getAttachedEntity('bitmodule_top') || null;
-      const bitModuleBottom = module.owner.getAttachedEntity('bitmodule_bottom') || null;
-
-      if (bitModuleTop) {
-        const dnaRed = DnaBullet.new(bitModuleTop, null, DnaBullet.COLOR_RED);
-        dnaRed.spawn();
-      }
-      if (bitModuleBottom) {
-        const dnaBlue = DnaBullet.new(bitModuleBottom, null, DnaBullet.COLOR_BLUE);
-        dnaBlue.spawn();
-      }
+    if (module?.tier >= 1) {
+      module.owner.getAttachedEntity('bitmodule_top')?.shoot();
+      module.owner.getAttachedEntity('bitmodule_bottom')?.shoot();
     }
   }
 
@@ -46,10 +37,8 @@ export default class DnaWeapon extends Weapon {
    */
   shootTier1(module) {
     if (!module.cooldownActive()) {
-      const dnaRed = DnaBullet.new(module.owner, null, DnaBullet.COLOR_RED);
-      const dnaBlue = DnaBullet.new(module.owner, null, DnaBullet.COLOR_BLUE);
-      dnaRed.spawn();
-      dnaBlue.spawn();
+      DnaBullet.new(module.owner, null, DnaBullet.COLOR_RED).spawn();
+      DnaBullet.new(module.owner, null, DnaBullet.COLOR_BLUE).spawn();
 
       module.setCooldown(140);
       module.startCooldown();
@@ -60,8 +49,7 @@ export default class DnaWeapon extends Weapon {
    * @param {Module} module
    */
   shootTier2(module) {
-    const dnaBeam = DnaBeam.new(module.owner);
-    dnaBeam.spawn();
+    DnaBeam.new(module.owner).spawn();
 
     module.setCooldown(90);
     module.owner.setSoundCooldown(140);

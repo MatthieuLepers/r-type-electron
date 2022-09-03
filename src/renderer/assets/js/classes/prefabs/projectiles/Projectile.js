@@ -26,6 +26,7 @@ export default class Projectile extends PhysicEntityScript {
     this.addComponent(AttachedEntities, Projectile);
     this.addComponent(Health, Projectile);
 
+    // Sprite
     this.components.sprite.priority = Component.PRIORITY_HIGH;
 
     this.on('collide', (e) => {

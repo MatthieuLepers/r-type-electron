@@ -198,7 +198,7 @@ export default class Locomotor extends Component {
       this.inst.getHitbox().forEach((hitbox) => { hitbox.render(Global.Game.ctx, this.inst.getId()); });
     }
     if (!this.inst.hasTag('attached')) {
-      if ((this.trackedEntity && this.trackedEntity.hasTag('isDead')) || (this.inst.hasTag('tracking') && !this.trackedEntity)) {
+      if (this.trackedEntity?.hasTag('isDead') || (this.inst.hasTag('tracking') && !this.trackedEntity)) {
         this.trackedEntity = this.retargetFn();
         if (this.trackedEntity && this.inst.hasComponent('EventEmitter')) {
           this.inst.emit('trackerAquireNewTarget', { target: this.trackedEntity });
