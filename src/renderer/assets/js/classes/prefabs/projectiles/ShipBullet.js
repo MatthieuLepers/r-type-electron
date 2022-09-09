@@ -36,7 +36,7 @@ export default class ShipBullet extends Projectile {
     // Health
     this.components.health.setMaxHealth(1);
 
-    // sics
+    // Physics
     this.components.physics.hitboxType = RectangleHitbox;
     this.addCollisionTag('enemy', '!projectile');
 

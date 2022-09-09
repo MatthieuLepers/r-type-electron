@@ -25,7 +25,7 @@ export default class Physics extends Component {
     AddClassMethod(this.clazz, 'addCollisionTag', function (...tags) {
       tags.forEach((tag) => {
         if (tag.startsWith('!')) {
-          this.components.physics.collideTagsExcluded.push(tag.substr(1));
+          this.components.physics.collideTagsExcluded.push(tag.substring(1));
         } else {
           this.components.physics.collideTags.push(tag);
         }
@@ -40,9 +40,9 @@ export default class Physics extends Component {
     AddClassMethod(this.clazz, 'removeCollisionTag', function (...tags) {
       tags.forEach((tag) => {
         if (tag.startsWith('!')) {
-          this.components.physics.collideTagsExcluded.splice(this.components.physics.collideTagsExcluded.indexOf(tag.substr(1)), 1);
+          this.components.physics.collideTagsExcluded = this.components.physics.collideTagsExcluded.filter((t) => t !== tag.substring(1));
         } else {
-          this.components.physics.collideTags.splice(this.components.physics.collideTags.indexOf(tag), 1);
+          this.components.physics.collideTags = this.components.physics.collideTags.filter((t) => t !== tag);
         }
       });
       return this;

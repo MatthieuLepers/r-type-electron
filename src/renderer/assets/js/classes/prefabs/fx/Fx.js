@@ -18,8 +18,6 @@ export default class Fx extends EntityScript {
     this.addComponent(Transform, Fx);
     this.addComponent(Sprite, Fx);
     this.addComponent(Locomotor, Fx);
-
-    this.on('animOver', () => { this.hide(); });
   }
 
   update() {

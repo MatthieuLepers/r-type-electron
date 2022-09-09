@@ -2,12 +2,12 @@ import Global from '../../../stores/AppStore';
 import Enemy from './Enemy';
 import Explosion from '../Explosion';
 import LootDropper from '../../components/LootDropper';
-import DnaUpgrade from '../items/DnaUpgrade';
+// import DnaUpgrade from '../items/DnaUpgrade';
 // import LaserUpgrade from '../items/LaserUpgrade';
 // import FireUpgrade from '../items/FireUpgrade';
 // import RocketUpgrade from '../items/RocketUpgrade';
-// import ForcefieldUpgrade from '../items/ForcefieldUpgrade';
-import BitModuleUpgrade from '../items/BitModuleUpgrade';
+import ForcefieldUpgrade from '../items/ForcefieldUpgrade';
+// import BitModuleUpgrade from '../items/BitModuleUpgrade';
 // import SpeedUpgrade from '../items/SpeedUpgrade';
 import Point from '../../geometry/Point';
 import ComplexePath from '../../paths/ComplexePath';
@@ -23,7 +23,6 @@ export default class PowerArmor extends Enemy {
    */
   constructor() {
     super();
-    // this.addTag('staySpawned');
     this.damages = 1;
 
     this.addComponent(LootDropper, PowerArmor);
@@ -50,12 +49,12 @@ export default class PowerArmor extends Enemy {
     this.addCollisionTag('player', '!isDead');
 
     // LootDropper
-    this.components.lootdropper.addLoot(DnaUpgrade, 0.2);
+    // this.components.lootdropper.addLoot(DnaUpgrade, 0.2);
     // this.components.lootdropper.addLoot(LaserUpgrade, 0.2);
     // this.components.lootdropper.addLoot(FireUpgrade, 0.2);
     // this.components.lootdropper.addLoot(RocketUpgrade, 0.1);
-    // this.components.lootdropper.addLoot(ForcefieldUpgrade, 0.1);
-    this.components.lootdropper.addLoot(BitModuleUpgrade, 0.1);
+    this.components.lootdropper.addLoot(ForcefieldUpgrade, 0.1);
+    // this.components.lootdropper.addLoot(BitModuleUpgrade, 0.1);
     // this.components.lootdropper.addLoot(SpeedUpgrade, 0.1);
 
     this.on('dead', () => {

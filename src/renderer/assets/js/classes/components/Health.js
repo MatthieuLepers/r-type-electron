@@ -76,14 +76,14 @@ export default class Health extends Component {
    */
   setInvincible(invincible = true) {
     this.$invincible = invincible;
-    this.inst[this.$invincible ? 'removeTag' : 'addTag']('invincible');
+    this.inst[invincible ? 'removeTag' : 'addTag']('invincible');
   }
 
   /**
    * @param {Number} absorbtion
    */
-  setAbsorbtion(absorbtion) {
-    this.$absorbtion = Math.abs(absorbtion);
+  addAbsorbtion(absorbtion) {
+    this.$absorbtion += Math.abs(absorbtion);
   }
 
   /**

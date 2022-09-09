@@ -25,7 +25,7 @@ export default class FireUpgrade extends Upgrade {
    */
   onPicked(picker) {
     let newModule = null;
-    const moduleList = Global.Game.findEntitiesByTags('module', '!bitModule');
+    const moduleList = Global.Game.findEntitiesByTags('module', '!bitModule', '!projectile');
     if (moduleList.length < Global.Game.getPlayerList().length) {
       newModule = Module.new();
       newModule.spawn();

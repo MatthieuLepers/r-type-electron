@@ -54,13 +54,11 @@ export default class Entity extends Class {
   }
 
   /**
-   * @param {String[]} tag
+   * @param {String[]} tags
    * @return {this}
    */
-  removeTag(tag) {
-    if (this.hasTag(tag)) {
-      this.tags.splice(this.tags.indexOf(tag), 1);
-    }
+  removeTag(...tags) {
+    this.tags = this.tags.filter((tag) => !tags.includes(tag));
     return this;
   }
 

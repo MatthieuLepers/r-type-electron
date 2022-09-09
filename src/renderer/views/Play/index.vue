@@ -8,6 +8,7 @@
       </template>
     </Screen>
     <GameHUD v-if="game" />
+    <Console v-show="consoleOpen" />
   </div>
 </template>
 
@@ -17,13 +18,15 @@ import Game from '@/assets/js/Game';
 
 import Screen from '@/components/Screen/index';
 import GameHUD from '@/components/GameHUD/index';
+import Console from '@/components/Console/index';
 
 export default {
   name: 'PlayScreen',
-  components: { Screen, GameHUD },
+  components: { Screen, GameHUD, Console },
   data() {
     return {
       game: null,
+      consoleOpen: false,
       paused: false,
     };
   },
@@ -42,6 +45,10 @@ export default {
 
     Global.Engine.on('paused', () => { this.paused = true; });
     Global.Engine.on('resumed', () => { this.paused = false; });
+    Global.Game.on('devConsole', () => {
+      this.consoleOpen = !this.consoleOpen;
+      Global.Engine.paused = this.consoleOpen;
+    });
   },
 };
 </script>

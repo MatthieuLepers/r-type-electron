@@ -11,8 +11,10 @@ import ShipBoosterFx from './fx/ShipBoosterFx';
 import ShipBulletEmitFx from './fx/ShipBulletEmitFx';
 import ShipBulletChargeFx from './fx/ShipBulletChargeFx';
 import ShipBulletChargeShootFx from './fx/ShipBulletChargeShootFx';
+import ForceFieldFx from './fx/ForceFieldFx';
 import ShipChargedBullet from './projectiles/ShipChargedBullet';
 import ShipBullet from './projectiles/ShipBullet';
+import Rocket from './projectiles/Rocket';
 
 /**
  * @author Matthieu LEPERS
@@ -96,6 +98,11 @@ export default class PlayerShip extends PhysicEntityScript {
       .bindControl('DEBUG_TOGGLE_DRAW_HEALTH_BARS', {
         onPress: () => { Global.Settings.debug.drawHealthBars = !Global.Settings.debug.drawHealthBars; },
       })
+      .bindControl('DEV_CONSOLE', {
+        onPress: () => {
+          Global.Game.emit('devConsole');
+        },
+      })
     ;
     this.components.controller.setType(Controller.TYPE_KEYBOARD).bind();
     // this.components.controller.setType(Controller.TYPE_GAMEPAD).bind();
@@ -105,6 +112,7 @@ export default class PlayerShip extends PhysicEntityScript {
     this.attachEntity(ShipBulletEmitFx.new(this));
     this.attachEntity(ShipBulletChargeFx.new(this));
     this.attachEntity(ShipBulletChargeShootFx.new(this));
+    this.attachEntity(ForceFieldFx.new(this));
 
     // Health
     this.components.health.setMaxHealth(1);
@@ -133,6 +141,13 @@ export default class PlayerShip extends PhysicEntityScript {
     this.on('chargeStart', this.onChargeStart.bind(this));
     this.on('chargeStop', this.onChargeStop.bind(this));
     this.on('despawn', () => { this.components.controller.unbind(); });
+
+    window.setInterval(() => {
+      if (!Global.Engine.paused) {
+        Rocket.new(this, 'top').spawn();
+        Rocket.new(this, 'bottom').spawn();
+      }
+    }, 2000);
   }
 
   respawn() {

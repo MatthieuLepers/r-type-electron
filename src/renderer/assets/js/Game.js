@@ -128,7 +128,9 @@ export default class Game extends EntityScript {
     // Cheetah.new().spawn();
     // Cytron.new().spawn();
     // PowerArmor.new().spawn();
-    setInterval(() => PowerArmor.new().spawn(), 1000);
+    setInterval(() => {
+      if (!Global.Engine.paused) PowerArmor.new().spawn();
+    }, 2000);
     // CompilerBoss.new().spawn();
   }
 

@@ -35,6 +35,9 @@ export default {
     key: 'Escape',
     button: 3,
   },
+  DEV_CONSOLE: {
+    key: '²',
+  },
   DEBUG_TOGGLE_DRAW_HITBOXES: {
     key: '1',
     button: 0,

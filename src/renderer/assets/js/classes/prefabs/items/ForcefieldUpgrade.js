@@ -20,4 +20,15 @@ export default class ForcefieldUpgrade extends Upgrade {
       loop: true,
     });
   }
+
+  /**
+   * @param {EntityScript} picker
+   */
+  onPicked(picker) {
+    const forcefield = picker.getAttachedEntity(`${picker.getId()}_forcefield`);
+    picker.components.health.addAbsorbtion(2);
+    if (!forcefield.enabled) {
+      forcefield.enable();
+    }
+  }
 }

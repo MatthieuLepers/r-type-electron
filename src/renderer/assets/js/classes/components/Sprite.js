@@ -46,9 +46,9 @@ export default class Sprite extends Component {
      */
     AddClassMethod(this.clazz, 'playAnimation', function (animName, loop = false) {
       this.components.sprite.options.animation = animName;
+      this.components.sprite.options.loop = loop;
       this.components.sprite.$currentFrameIndex = 0;
       this.components.sprite.$currentTick = 0;
-      this.components.sprite.options.loop = loop;
       if (this.hasComponent('EventEmitter')) {
         this.emit('animStart', { anim: animName });
       }
@@ -180,17 +180,20 @@ export default class Sprite extends Component {
       this.$currentTick = 0;
       if (this.$currentFrameIndex < this.animation.frames.length - 1) {
         this.$currentFrameIndex += 1;
-        this.inst.emit('animProgress', { frame: this.$currentFrameIndex });
+        this.inst.emit('animProgress', {
+          anim: this.animation.name,
+          frame: this.$currentFrameIndex,
+        });
       } else if (this.options.loop) {
         if (this.inst.hasComponent('EventEmitter')) {
-          this.inst.emit('animLoop');
+          this.inst.emit('animLoop', { anim: this.animation.name });
         }
         this.$currentFrameIndex = 0;
       }
     }
 
     if (this.$currentFrameIndex >= this.animation.frames.length - 1 && !this.options.loop && this.inst.hasComponent('EventEmitter')) {
-      this.inst.emit('animOver');
+      this.inst.emit('animOver', { anim: this.animation.name });
     }
   }
 
