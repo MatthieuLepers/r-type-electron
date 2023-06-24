@@ -22,7 +22,7 @@ export default class QuadraticBezierCurvePath extends Path {
    * @return {String}
    */
   toSvgPath() {
-    return `${super.toSvgPath()} Q${this.ctrlPoint.x},${this.ctrlPoint.y},${this.endPoint.x},${this.endPoint.y}`;
+    return `${super.toSvgPath()}Q${this.ctrlPoint.x},${this.ctrlPoint.y},${this.endPoint.x},${this.endPoint.y}`;
   }
 
   /**
@@ -42,7 +42,10 @@ export default class QuadraticBezierCurvePath extends Path {
    * @return {QuadraticBezierCurvePath}
    */
   static fromSvgString(d, startPoint = null) {
-    const regex = /Q\s*(-?[0-9.]+),?\s*(-?[0-9.]+),?\s*(-?[0-9.]+),?\s*(-?[0-9.]+)/;
+    const regex = /^Q ?(-?[0-9.]+) [, ]?(-?[0-9.]+) [, ]?(-?[0-9.]+) [, ]?(-?[0-9.]+)$/;
+    if (!regex.test(d)) {
+      throw new Error(`Unable to parse SVG path from string '${d}'`);
+    }
     const [x1, y1, dx, dy] = d.replace(regex, '$1,$2,$3,$4').split(',').map((t) => parseFloat(t));
     return new QuadraticBezierCurvePath(startPoint, new Point(x1, y1), new Point(dx, dy));
   }

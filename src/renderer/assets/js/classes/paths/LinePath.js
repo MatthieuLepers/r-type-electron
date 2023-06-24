@@ -20,7 +20,7 @@ export default class LinePath extends Path {
    * @return {String}
    */
   toSvgPath() {
-    return `${super.toSvgPath()} L${this.endPoint.x},${this.endPoint.y}`;
+    return `${super.toSvgPath()}L${this.endPoint.x},${this.endPoint.y}`;
   }
 
   /**
@@ -39,7 +39,10 @@ export default class LinePath extends Path {
    * @return {LinePath}
    */
   static fromSvgString(d, startPoint = null) {
-    const regex = /L\s*(-?[0-9.]+),?\s*(-?[0-9.]+)/;
+    const regex = /^L ?(-?[0-9.]+)[, ]?(-?[0-9.]+)$/;
+    if (!regex.test(d)) {
+      throw new Error(`Unable to parse SVG path from string '${d}'`);
+    }
     const [dx, dy] = d.replace(regex, '$1,$2').split(',').map((t) => parseFloat(t));
     return new LinePath(startPoint, new Point(dx, dy));
   }

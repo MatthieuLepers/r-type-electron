@@ -24,7 +24,7 @@ export default class BezierCurvePath extends Path {
    * @return {String}
    */
   toSvgPath() {
-    return `${super.toSvgPath()} C${this.firstCtrlPoint.x},${this.firstCtrlPoint.y},${this.secondCtrlPoint.x},${this.secondCtrlPoint.y},${this.endPoint.x},${this.endPoint.y}`;
+    return `${super.toSvgPath()}C${this.firstCtrlPoint.x},${this.firstCtrlPoint.y},${this.secondCtrlPoint.x},${this.secondCtrlPoint.y},${this.endPoint.x},${this.endPoint.y}`;
   }
 
   /**
@@ -45,7 +45,10 @@ export default class BezierCurvePath extends Path {
    * @return {BezierCurvePath}
    */
   static fromSvgString(d, startPoint = null) {
-    const regex = /C\s*(-?[0-9.]+),?\s*(-?[0-9.]+),?\s*(-?[0-9.]+),?\s*(-?[0-9.]+),?\s*(-?[0-9.]+),?\s*(-?[0-9.]+)/;
+    const regex = /^C ?(-?[0-9.]+)[, ]?(-?[0-9.]+)[, ]?(-?[0-9.]+)[, ]?(-?[0-9.]+)[, ]?(-?[0-9.]+)[, ]?(-?[0-9.]+)$/;
+    if (!regex.test(d)) {
+      throw new Error(`Unable to parse SVG path from string '${d}'`);
+    }
     const [x1, y1, x2, y2, dx, dy] = d.replace(regex, '$1,$2,$3,$4,$5,$6').split(',').map((t) => parseFloat(t));
     return new BezierCurvePath(startPoint, new Point(x1, y1), new Point(x2, y2), new Point(dx, dy));
   }

@@ -30,7 +30,7 @@ export default class ArcPath extends Path {
    * @return {String}
    */
   toSvgPath() {
-    return `${super.toSvgPath()} A${this.radiusX},${this.radiusY},${this.rotation},${+this.largeArc},${+this.sweepFlag},${this.endPoint.x},${this.endPoint.y}`;
+    return `${super.toSvgPath()}A${this.radiusX},${this.radiusY},${this.rotation},${+this.largeArc},${+this.sweepFlag},${this.endPoint.x},${this.endPoint.y}`;
   }
 
   /**
@@ -49,7 +49,10 @@ export default class ArcPath extends Path {
    * @return {ArcPath}
    */
   static fromSvgString(d, startPoint = null) {
-    const regex = /A\s*([0-9.]+),?\s*([0-9.]+),?\s*([0-9.]+),?\s*([0-9.]+),?\s*([0-9.]+),?\s*(-?[0-9.]+),?\s*(-?[0-9.]+)/;
+    const regex = /^A ?([0-9.]+)[, ]?([0-9.]+)[, ]?([0-9.]+)[, ]?([0-9.]+)[, ]?([0-9.]+)[, ]?(-?[0-9.]+)[, ]?(-?[0-9.]+)$/;
+    if (!regex.test(d)) {
+      throw new Error(`Unable to parse SVG path from string '${d}'`);
+    }
     const [radiusX, radiusY, rotation, largeArc, sweepFlag, dx, dy] = d.replace(regex, '$1,$2,$3,$4,$5,$6,$7').split(',').map((t) => parseFloat(t));
     return new ArcPath(startPoint, radiusX, radiusY, rotation, largeArc === 1, sweepFlag === 1, new Point(dx, dy));
   }

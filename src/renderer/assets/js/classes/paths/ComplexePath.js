@@ -60,15 +60,15 @@ export default class ComplexePath extends Path {
 
   /**
    * @param {String} d
-   * @return {ComplexePath|false}
+   * @return {ComplexePath}
    */
   static fromSvgString(d) {
     let toParse = d;
-    const regexPath = /(^M\s*-?[0-9.]+,?\s*-?[0-9.]+)\s*(.*)/;
-    const regexLinePath = /(^L\s*-?[0-9.]+,?\s*-?[0-9.]+)\s*(.*)/;
-    const regexArcPath = /(^A\s*[0-9.]+,?\s*[0-9.]+,?\s*[0-9.]+,?\s*[0-9.]+,?\s*[0-9.]+,?\s*-?[0-9.]+,?\s*-?[0-9.]+)\s*(.*)/;
-    const regexBezierCurvePath = /(^C\s*-?[0-9.]+,?\s*-?[0-9.]+,?\s*-?[0-9.]+,?\s*-?[0-9.]+,?\s*-?[0-9.]+,?\s*-?[0-9.]+)\s*(.*)/;
-    const regexQuadraticBezierCurvePath = /(^Q\s*-?[0-9.]+,?\s*-?[0-9.]+,?\s*-?[0-9.]+,?\s*-?[0-9.]+)\s*(.*)/;
+    const regexPath = /(^M ?-?[0-9.]+[, ]?-?[0-9.]+) ?(.*)/;
+    const regexLinePath = /(^L ?-?[0-9.]+[, ]?-?[0-9.]+) ?(.*)/;
+    const regexArcPath = /(^A ?[0-9.]+[, ]?[0-9.]+[, ]?[0-9.]+[, ]?[0-9.]+[, ]?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+) ?(.*)/;
+    const regexBezierCurvePath = /(^C ?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+) ?(.*)/;
+    const regexQuadraticBezierCurvePath = /(^Q ?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+) ?(.*)/;
     const complexePath = new ComplexePath(null);
 
     while (toParse.length) {
@@ -95,7 +95,7 @@ export default class ComplexePath extends Path {
         toParse = toParse.replace(regexQuadraticBezierCurvePath, '$2');
         complexePath.addPath(QuadraticBezierCurvePath.fromSvgString(dataPath));
       } else { // error
-        return false;
+        throw new Error(`Unable to parse SVG path from string '${toParse}'`);
       }
     }
 

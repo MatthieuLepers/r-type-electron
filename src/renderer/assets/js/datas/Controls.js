@@ -36,22 +36,18 @@ export default {
     button: 3,
   },
   DEV_CONSOLE: {
-    key: '²',
+    key: 'F11',
   },
   DEBUG_TOGGLE_DRAW_HITBOXES: {
-    key: '1',
-    button: 0,
+    key: 'F1',
   },
   DEBUG_TOGGLE_DRAW_QUADTREE: {
-    key: '2',
-    button: 0,
+    key: 'F2',
   },
   DEBUG_TOGGLE_DRAW_PATHLINES: {
-    key: '3',
-    button: 0,
+    key: 'F3',
   },
   DEBUG_TOGGLE_DRAW_HEALTH_BARS: {
-    key: '4',
-    button: 0,
+    key: 'F4',
   },
 };

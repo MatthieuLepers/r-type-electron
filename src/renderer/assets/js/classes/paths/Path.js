@@ -11,7 +11,6 @@ export default class Path {
    */
   constructor(startPoint) {
     this.startPoint = startPoint;
-    this.rotation = 0;
   }
 
   /**
@@ -46,7 +45,10 @@ export default class Path {
    * @return {String}
    */
   static fromSvgString(d) {
-    const regex = /M\s*(-?[0-9.]+),?\s*(-?[0-9.]+)/;
+    const regex = /^M ?(-?[0-9.]+)[, ]?(-?[0-9.]+)$/;
+    if (!regex.test(d)) {
+      throw new Error(`Unable to parse SVG path from string '${d}'`);
+    }
     const [dx, dy] = d.replace(regex, '$1,$2').split(',').map((t) => parseFloat(t));
     return new Path(new Point(dx, dy));
   }

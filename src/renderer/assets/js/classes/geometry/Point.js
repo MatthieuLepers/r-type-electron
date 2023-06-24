@@ -93,8 +93,8 @@ export default class Point {
    */
   rotate(angle, pivot) {
     const angleRad = (angle * Math.PI) / 180;
-    const newX = (Math.cos(angleRad) * (this.x - pivot.x)) - (Math.sin(angleRad) * (this.y - pivot.y)) + pivot.x;
-    const newY = (Math.sin(angleRad) * (this.x - pivot.x)) + (Math.cos(angleRad) * (this.y - pivot.y)) + pivot.y;
+    const newX = parseFloat(((Math.cos(angleRad) * (this.x - pivot.x)) - (Math.sin(angleRad) * (this.y - pivot.y)) + pivot.x).toFixed(3));
+    const newY = parseFloat(((Math.sin(angleRad) * (this.x - pivot.x)) + (Math.cos(angleRad) * (this.y - pivot.y)) + pivot.y).toFixed(3));
 
     this.x = newX;
     this.y = newY;

@@ -19,6 +19,7 @@ export default class KeyboardController {
    * @param {Event} e
    */
   onKeyDown(e) {
+    console.log(e);
     Object.values(this.controls).forEach((control) => {
       if ((e.key === control.key || control.active) && typeof control.options.onPress === 'function') {
         control.start();
