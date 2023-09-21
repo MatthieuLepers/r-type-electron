@@ -2,7 +2,7 @@
 
 ## Installation
 
-Make sure you have nodejs installed /!\\
+Make sure you have nodejs V14 installed /!\\
 Clone the project and run `npm i`
 Then run `npm run dev`
 
