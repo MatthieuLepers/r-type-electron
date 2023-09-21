@@ -3,7 +3,11 @@
 ## Installation
 
 Make sure you have nodejs V14 installed /!\\
+
+Make sur to use the develop branch
+
 Clone the project and run `npm i`
+
 Then run `npm run dev`
 
 ## Controls
