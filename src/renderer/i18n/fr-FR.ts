@@ -1,0 +1,48 @@
+export default {
+  App: {
+    TitleBarMenu: {
+      fileMenu: {
+        label: 'Fichier',
+        exit: 'Quitter',
+      },
+      langMenu: {
+        label: 'Langage',
+        'fr-FR': 'Français',
+        'en-EN': 'Anglais',
+      },
+    },
+  },
+  Electron: {
+    dialogs: {
+      filters: {
+        '*': 'Tous les fichiers',
+        json: 'Fichier JSON',
+        txt: 'Fichier texte',
+      },
+      openFile: {
+        title: 'Ouvrir...',
+        button: 'Ouvrir',
+      },
+      saveFile: {
+        title: 'Enregistrer sous...',
+        button: 'Enregistrer',
+      },
+    },
+  },
+  Date: {
+    days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+    daySuffix: ['er'],
+    defaultDaySuffix: '',
+  },
+  Materials: {
+    Tabs: {
+      newTab: 'Nouvel onglet',
+    },
+    Form: {
+      Select: {
+        emptyResult: 'Aucun résultat pour « {0} »',
+      },
+    },
+  },
+};
