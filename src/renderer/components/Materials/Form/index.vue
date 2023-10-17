@@ -10,7 +10,7 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const emit = defineEmits('submit');
+const emit = defineEmits(['submit']);
 </script>
 
 <style lang="scss" src="./index.scss">

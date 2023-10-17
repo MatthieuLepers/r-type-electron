@@ -8,7 +8,7 @@
     ></span>
     <div class="m-datatable-button__content">
       <slot>
-        <span v-if="modifiers.more"></span>
+        <span v-if="props.modifiers.more"></span>
         <span v-else>{{ props.label }}</span>
       </slot>
     </div>

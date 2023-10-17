@@ -8,7 +8,7 @@
     })"
   >
     <div
-      :id="name"
+      :id="props.name"
       :class="GenerateModifiers('m-modal', {
         ...props.modifiers,
         noFooter: !props.showFooter,
