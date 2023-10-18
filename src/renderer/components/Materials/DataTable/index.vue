@@ -50,6 +50,7 @@
               </template>
               <template
                 v-for="(columnName, i) in Object.keys(props.columns)"
+                :key="i"
                 v-slot:[columnName]="{ obj, value, column }"
               >
                 <slot
@@ -57,7 +58,6 @@
                   :obj="obj"
                   :value="value"
                   :column="column"
-                  :key="i"
                 >
                   {{ value }}
                 </slot>

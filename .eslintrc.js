@@ -8,12 +8,12 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:vue/vue3-recommended',
-    '@electron-toolkit',
-    '@electron-toolkit/eslint-config-ts/eslint-recommended',
-    '@vue/eslint-config-typescript/recommended',
-    'plugin:import/recommanded',
+    'plugin:import/recommended',
     'plugin:import/typescript',
+    'plugin:vue/vue3-essential',
+    // '@electron-toolkit',
+    // '@electron-toolkit/eslint-config-ts/eslint-recommended',
+    // '@vue/eslint-config-typescript/recommended',
     'airbnb-base',
     'airbnb-typescript/base',
   ],
@@ -21,7 +21,7 @@ module.exports = {
   parserOptions: {
     parser: "@typescript-eslint/parser",
     ecmaVersion: 'latest',
-    project: ['./tsconfig.json'],
+    project: ['./tsconfig.json', './tsconfig.eslint.json'],
     extraFileExtensions: ['.vue'],
   },
   plugins: [
@@ -33,15 +33,14 @@ module.exports = {
     api: true,
   },
   settings: {
-    'import/extensions': ['.js', '.jsx', '.ts', '.tsx', '.json'],
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      typescript: {
+        alwaysTryTypes: true,
+        project: ['./tsconfig.json', './tsconfig.node.json'],
       },
-      typescript: true,
     },
   },
   rules: {
@@ -65,6 +64,7 @@ module.exports = {
         'app', // For Vue plugin definition
         'el', // For custom directives
         'vnode', // For custom directives
+        'e', // For e.returnValue
       ],
     }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',

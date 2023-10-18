@@ -42,6 +42,7 @@ app
     await populateDb();
 
     if (is.dev) {
+      // eslint-disable-next-line import/no-extraneous-dependencies
       const installExtension = require('electron-devtools-installer');
       await installExtension.default(installExtension.VUEJS_DEVTOOLS, { loadExtensionOptions: { allowFileAccess: true } })
         .then((name: string) => console.log(`Added Extension: ${name}`))

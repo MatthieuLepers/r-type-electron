@@ -40,7 +40,7 @@ const useSettingsStore = () => {
     },
     async load() {
       state.settings = await Setting.findAll();
-    }
+    },
   };
 
   return {

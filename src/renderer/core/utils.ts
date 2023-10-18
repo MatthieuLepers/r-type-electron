@@ -10,16 +10,16 @@ export function toCamelCase(str: string): string {
 
 export function debounce(callback: Function, delay: number) {
   let timer: number;
-  return function() {
+  return function () {
     window.clearTimeout(timer);
     timer = window.setTimeout(callback, delay);
   };
 }
 
-export function shuffleArray<T>(a: Array<T>): Array<T> {
-  for (let i = a.length - 1; i > 0; i -= 1) {
+export function shuffleArray<T>(e: Array<T>): Array<T> {
+  for (let i = e.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+    [e[i], e[j]] = [e[j], e[i]];
   }
-  return a;
+  return e;
 }

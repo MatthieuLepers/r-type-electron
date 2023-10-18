@@ -22,7 +22,7 @@ export default class Account extends AbstractEntity<IAccount> {
   declare readonly updatedAt: Date;
 
   constructor(data: IAccount) {
-    super(data, ['password', 'accountTabs', 'tabs', 'keywords', 'children', 'attachments']);
+    super(data, ['password']);
   }
 
   get password(): string {

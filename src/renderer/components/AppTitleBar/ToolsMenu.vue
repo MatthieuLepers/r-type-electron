@@ -1,5 +1,5 @@
 <template>
-  <ContextMenu :visible="visible">
+  <ContextMenu :visible="props.visible">
     <ContextMenuItem
       :label="t('App.TitleBarMenu.toolsMenu.passwordGenerator')"
       @click="actions.handleClickOpenPasswordGenerator"

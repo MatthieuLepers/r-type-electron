@@ -1,1 +1,1 @@
-declare const api: typeof import('../main/api').default;
+declare const api: typeof import('@/main/api').default;

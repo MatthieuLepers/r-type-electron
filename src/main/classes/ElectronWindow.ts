@@ -1,4 +1,9 @@
-import { BrowserWindow, shell, ipcMain, type BrowserWindowConstructorOptions } from 'electron';
+import {
+  BrowserWindow,
+  shell,
+  ipcMain,
+  type BrowserWindowConstructorOptions,
+} from 'electron';
 import { join } from 'path';
 import { is } from '@electron-toolkit/utils';
 
@@ -78,7 +83,7 @@ export default class ElectronWindow extends BrowserWindow {
     this.on('ready-to-show', () => {
       this.show();
     });
-  
+
     this.webContents.setWindowOpenHandler((details) => {
       shell.openExternal(details.url);
       return { action: 'deny' };

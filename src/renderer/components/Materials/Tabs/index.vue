@@ -59,7 +59,7 @@ const tabsNav = ref(null);
 
 const props = defineProps({
   modelValue: { type: String },
-  tabs: { type: Array, default: () => ({}) },
+  tabs: { type: Array, default: () => [] },
   modifiers: { type: Object, default: () => ({}) },
   allowAdd: { type: Boolean, default: false },
   allowMoveFn: { type: Function, default: () => true },
@@ -77,13 +77,13 @@ const State = computed(() => ({
       tab.$key = tabKey;
       return tab;
     })
-    .slice(state.index)
+    .slice(state.index),
 }));
 
 const actions = {
   handleMouseWheel(e) {
     const delta = e.deltaY > 0 ? 1 : -1;
-    state.index = Math.max(0, Math.min(Object.keys(props.tabs).length - 1, state.index + delta))
+    state.index = Math.max(0, Math.min(Object.keys(props.tabs).length - 1, state.index + delta));
   },
   handleTabMoved(e) {
     const { newIndex, oldIndex } = e.moved;

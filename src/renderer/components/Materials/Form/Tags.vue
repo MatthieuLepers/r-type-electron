@@ -41,7 +41,6 @@
       </li>
     </ul>
   </div>
-  
 </template>
 
 <script setup>
@@ -75,7 +74,7 @@ const State = computed(() => ({
 
 const actions = {
   handleAddTag() {
-    if (!!state.label.length) {
+    if (state.label.length) {
       const newModelValue = [...props.modelValue, state.label]
         .filter((tag, i, arr) => props.allowDuplicate || arr.indexOf(tag) === i)
       ;

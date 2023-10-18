@@ -1,10 +1,9 @@
 {
-  "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
   "include": [
-    "src/renderer/*.d.ts",
-    "src/renderer/**/*",
-    "src/renderer/**/*.vue",
-    "src/preload/*.d.ts"
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.vue",
+    "src/**/*.json"
   ],
   "compilerOptions": {
     "composite": true,
@@ -15,7 +14,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "typeRoots": [
       "node_modules/@types"
     ],

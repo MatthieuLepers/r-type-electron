@@ -1,3 +1,5 @@
+import '@renderer/index.d';
+
 export default abstract class AbstractEntity<T extends Record<string, any>> {
   constructor(public data: T, ignoreMapping = [] as string[]) {
     Object.keys(data).forEach((key) => {

@@ -126,7 +126,7 @@ const actions = {
     if (!state.options.find((o) => o.label === text)) {
       state.options.push({ value: text, label: text });
       state.modelValue = state.multiple
-        ? (state.modelValue === null ? [text] : [...state.modelValue, text])
+        ? ((state.modelValue === null && [text]) || [...state.modelValue, text])
         : text
       ;
     }
@@ -136,7 +136,7 @@ const actions = {
 
 watch(() => state.multiple, (newVal) => {
   state.modelValue = newVal
-    ? (state.modelValue === null ? [] : [state.modelValue])
+    ? ((state.modelValue === null && []) || [state.modelValue])
     : state.modelValue
   ;
 });

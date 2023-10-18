@@ -177,23 +177,21 @@ const state = reactive({
   required: false,
 });
 
-const State = computed(() => {
-  return {
-    tabs: {
-      select: { id: 1, label: 'Form select' },
-      list: { id: 2, label: 'Object list' },
-      apple: { id: 3, label: 'Pomme' },
-    },
-    options: [
-      { value: 'default', label: 'Défault' },
-      { value: 'box', label: 'Boite' },
-    ],
-    columns: {
-      column1: { label: 'Première colonne' },
-      column2: { label: 'Seconde colonne'},
-    },
-  };
-});
+const State = computed(() => ({
+  tabs: {
+    select: { id: 1, label: 'Form select' },
+    list: { id: 2, label: 'Object list' },
+    apple: { id: 3, label: 'Pomme' },
+  },
+  options: [
+    { value: 'default', label: 'Défault' },
+    { value: 'box', label: 'Boite' },
+  ],
+  columns: {
+    column1: { label: 'Première colonne' },
+    column2: { label: 'Seconde colonne' },
+  },
+}));
 
 const actions = {
   notify(type) {

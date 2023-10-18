@@ -1,6 +1,4 @@
-import {
-  Setting,
-} from '@/main/database/models';
+import { Setting } from '@/main/database/models';
 
 export default async function populate() {
   try {
