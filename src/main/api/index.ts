@@ -17,7 +17,7 @@ export default {
     return ipcRenderer.sendSync(channel, ...args);
   },
   on(channel: string, func: Function) {
-    ipcRenderer.on(channel, (e, ...args) => func(...args));
+    ipcRenderer.on(channel, (_e, ...args) => func(...args));
   },
   CipherUtils,
   homedir: HOME_DIR,
