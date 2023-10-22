@@ -8,13 +8,9 @@
   ],
   "compilerOptions": {
     "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
+    "allowJs": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "allowJs": true,
     "typeRoots": [
       "node_modules/@types"
     ],

@@ -33,13 +33,15 @@ api.on('runShortcut', (shortcut) => {
   }
 });
 
-onBeforeMount(async () => {
-  await settingsStore.actions.load();
+onBeforeMount(() => {
+  api.on('database-ready', async () => {
+    await settingsStore.actions.load();
 
-  await api.invoke('localeChange', settingsStore.actions.getString('locale'));
-  locale.value = settingsStore.actions.getString('locale');
+    await api.invoke('localeChange', settingsStore.actions.getString('locale'));
+    locale.value = settingsStore.actions.getString('locale');
 
-  state.loading = false;
+    state.loading = false;
+  });
 });
 </script>
 

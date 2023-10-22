@@ -30,6 +30,17 @@ class AppModule {
     WinstonInstance.error(error);
   }
 
+  @IpcOn
+  static databaseReady() {
+    const win = WindowStore.getFocusedWindow();
+    if (win) {
+      win.sendData('database-ready');
+      win.webContents.addListener('did-finish-load', () => {
+        win.sendData('database-ready');
+      });
+    }
+  }
+
   @GlobalShortcut('Alt+F4')
   static closeAppNonDarwin() {
     const win = WindowStore.get('main');

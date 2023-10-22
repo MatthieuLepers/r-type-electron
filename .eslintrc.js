@@ -31,6 +31,9 @@ module.exports = {
     api: true,
   },
   settings: {
+    'import/core-modules': [
+      'electron',
+    ],
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },

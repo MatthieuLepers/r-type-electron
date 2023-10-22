@@ -8,18 +8,12 @@
   ],
   "compilerOptions": {
     "composite": true,
-    "target": "ESNext",
-    "module": "ESNext",
     "allowJs": true,
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "lib": ["ESNext", "DOM"],
     "typeRoots": [
       "node_modules/@types"
     ],
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@renderer/*": ["./src/renderer/*"],

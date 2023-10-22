@@ -1,10 +1,10 @@
 import { resolve } from 'path';
-import { defineConfig, externalizeDepsPlugin, bytecodePlugin } from 'electron-vite';
+import { defineConfig, externalizeDepsPlugin, bytecodePlugin, swcPlugin } from 'electron-vite';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin(), bytecodePlugin()],
+    plugins: [externalizeDepsPlugin(), bytecodePlugin(), swcPlugin()],
     resolve: {
       alias: {
         '@': resolve(__dirname, './src'),
