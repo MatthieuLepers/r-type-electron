@@ -44,3 +44,10 @@ export function generatePermutations<T>(input: Array<T>, length: number): Array<
 export function image(path: string): string {
   return api.isDev ? `/${path}` : path;
 }
+
+export const AddClassMethod = (clazz: Function, methodName: string, methodFn: Function): void => {
+  // eslint-disable-next-line no-param-reassign
+  clazz.prototype[methodName] = methodFn;
+};
+
+export const ClassMethodExists = (clazz: Function, methodName: string) => clazz.prototype[methodName] !== null;

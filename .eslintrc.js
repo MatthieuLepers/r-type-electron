@@ -58,16 +58,7 @@ module.exports = {
     'object-curly-newline': ['error', {
       ImportDeclaration: { multiline: true, minProperties: 4 },
     }],
-    'no-param-reassign': ['error', {
-      props: true,
-      ignorePropertyModificationsFor: [
-        'acc', // For reduce accumulator
-        'app', // For Vue plugin definition
-        'el', // For custom directives
-        'vnode', // For custom directives
-        'e', // For e.returnValue
-      ],
-    }],
+    'no-param-reassign': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'linebreak-style': ['error', 'unix'],
@@ -81,5 +72,6 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'vue/no-multiple-template-root': 'off',
     'vue/require-default-prop': 'off',
+    'new-cap': 'off',
   },
 };

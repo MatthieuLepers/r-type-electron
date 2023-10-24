@@ -9,8 +9,8 @@ import { APP_PLATEFORM } from '@/main/utils/Constants';
 
 function createWindow() {
   const mainWindow = new ElectronWindow('main', {
-    width: 700,
-    height: 450,
+    width: 1000,
+    height: 563,
     resizable: false,
     frame: false,
     webPreferences: {

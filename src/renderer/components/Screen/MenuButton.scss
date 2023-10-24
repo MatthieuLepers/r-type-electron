@@ -1,0 +1,77 @@
+@use 'sass:math';
+@import '~styles/utilities.scss';
+
+@keyframes hoverAnim {
+  33% {
+    border-color: color(secondary300);
+  }
+
+  66% {
+    border-color: color(secondary100);
+  }
+
+  100% {
+    border-color: color(grey000);
+  }
+}
+
+$gap-len: 8px;
+$sizeList: (
+  xs : 25,
+  s  : 33.3333,
+  m  : 50,
+  l  : 66.6666,
+  xl : 75,
+  xxl: 100,
+);
+
+.screen-menu-button {
+  @include set-font-scale('s', 'xl');
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid color(grey000);
+  color: color(grey000);
+  text-align: center;
+  margin: 0;
+  padding: 0 rem(16px);
+  letter-spacing: 1px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 18px;
+  z-index: 1;
+  transition: border-color 1s ease, letter-spacing 1s linear;
+
+  @each $size, $value in $sizeList {
+    &--#{$size} {
+      width: #{1% * $value};
+
+      &-gap {
+        width: calc(#{1% * $value} - #{$gap-len});
+        margin: 0 #{math.div($gap-len, 2)};
+      }
+
+      &.screen-menu-button--end,
+      &-gap.screen-menu-button--end {
+        position: relative;
+        left: #{100% - (1% * $value)}
+      }
+    }
+  }
+
+  &--tiny {
+    width: 80px;
+
+    &.screen-menu-button--end {
+      left: calc(100% - 80px);
+    }
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
+
+  &:hover,
+  &--active {
+    animation: hoverAnim 3s infinite;
+  }
+}
