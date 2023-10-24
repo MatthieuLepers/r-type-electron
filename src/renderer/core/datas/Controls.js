@@ -36,18 +36,18 @@ export default {
     button: 3,
   },
   DEV_CONSOLE: {
-    key: 'F11',
+    key: api.plateform !== 'darwin' ? '²' : '@',
   },
   DEBUG_TOGGLE_DRAW_HITBOXES: {
-    key: 'F1',
+    key: '&',
   },
   DEBUG_TOGGLE_DRAW_QUADTREE: {
-    key: 'F2',
+    key: 'é',
   },
   DEBUG_TOGGLE_DRAW_PATHLINES: {
-    key: 'F3',
+    key: '"',
   },
   DEBUG_TOGGLE_DRAW_HEALTH_BARS: {
-    key: 'F4',
+    key: '\'',
   },
 };
