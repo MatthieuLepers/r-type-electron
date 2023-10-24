@@ -1,7 +1,7 @@
 {
   "name": "electron-vite-vue-typescript-boilerplate",
   "version": "1.0.0",
-  "description": "An Electron application with Vue and TypeScript",
+  "description": "R-Type Electron",
   "main": "./out/main/index.js",
   "author": "Matthieu LEPERS",
   "scripts": {

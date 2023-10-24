@@ -64,3 +64,10 @@ export function download(fileName: string, fileContent: string) {
 
   document.body.removeChild(element);
 }
+
+export const AddClassMethod = (clazz: Function, methodName: string, methodFn: Function): void => {
+  // eslint-disable-next-line no-param-reassign
+  clazz.prototype[methodName] = methodFn;
+};
+
+export const ClassMethodExists = (clazz: Function, methodName: string) => clazz.prototype[methodName] !== null;

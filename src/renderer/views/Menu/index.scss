@@ -1,0 +1,113 @@
+@import '~styles/utilities.scss';
+
+@keyframes rotate {
+	to {
+    transform: rotate(0deg);
+  }
+
+	from {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateInvert {
+	to {
+    transform: rotate(360deg);
+  }
+
+	from {
+    transform: rotate(0deg);
+  }
+}
+
+.menu-screen {
+  .screen__content {
+    display: flex;
+    align-items: center;
+    width: 490px;
+
+    .menu-screen__play-button {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      font-size: rem(40px);
+      color: color(grey000);
+      margin: 0;
+      padding: 0;
+      background: none;
+      width: 150px;
+      height: 150px;
+      border: none;
+      margin-right: rem(20px);
+
+      &:hover .animated-border {
+        opacity: 1;
+      }
+
+      .animated-border {
+        transform-origin: 50% 50%;
+        border-width: 5px;
+        border-style: solid;
+        border-radius: 50%;
+        display: block;
+        opacity: .6;
+        position: absolute;
+
+        &--fst {
+          border-color: color(secondary300) color(secondary300) color(secondary300) transparent;
+          width: 150px;
+          height: 150px;
+          top: 0;
+          left: 0;
+          animation: rotate 8s infinite linear;
+          transition: opacity 4s;
+        }
+
+        &--snd {
+          border-color: transparent color(secondary100) color(secondary100) transparent;
+          width: 140px;
+          height: 140px;
+          top: 5px;
+          left: 5px;
+          animation: rotate 6.75s infinite linear;
+          animation-direction: reverse;
+          transition: opacity 2s;
+        }
+
+        &--trd {
+          border-color: transparent transparent transparent color(grey000);
+          width: 130px;
+          height: 130px;
+          top: 10px;
+          left: 10px;
+          animation: rotate 5s infinite linear;
+          transition: opacity 1s;
+        }
+      }
+    }
+
+    .menu-screen__button-container {
+      margin-left: rem(20px);
+      width: calc(100% - 190px);
+    }
+  }
+
+  &__progressbar {
+    width: 80%;
+    margin: 0 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    progress {
+      width: 100%;
+      height: 24px;
+
+      &::-webkit-progress-value {
+        background-color: color(grey900);
+      }
+    }
+  }
+}

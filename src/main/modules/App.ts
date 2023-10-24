@@ -1,4 +1,5 @@
 // import { autoUpdater } from 'electron-updater';
+import fs from 'fs';
 
 import { IpcHandle, IpcOn, GlobalShortcut } from '@/main/decorators';
 import { Setting } from '@/main/database/models';
@@ -40,6 +41,18 @@ class AppModule {
   // static quitAndInstallUpdate() {
   //   autoUpdater.quitAndInstall();
   // }
+
+  @IpcOn
+  static readDirSync({ path, onlyFiles, onlyDirectories }) {
+    const dirContent = fs.readdirSync(path);
+    return dirContent.filter((file) => {
+      if (onlyFiles || onlyDirectories) {
+        const stats = fs.lstatSync(`${path}/${file}`);
+        return (onlyFiles && stats.isFile()) || (onlyDirectories && stats.isDirectory());
+      }
+      return true;
+    });
+  }
 
   @GlobalShortcut('Alt+F4')
   static closeAppNonDarwin() {

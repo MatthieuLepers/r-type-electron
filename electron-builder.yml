@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: electron-app
+appId: vite.electron.r.type
+productName: r-type-electron
 directories:
   buildResources: build
 files:
@@ -12,7 +12,7 @@ files:
 asarUnpack:
   - public/**
 win:
-  executableName: electron-app
+  executableName: r-type-electron
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

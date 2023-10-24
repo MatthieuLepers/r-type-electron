@@ -1,0 +1,45 @@
+export default {
+  bank: 'entities/projectiles/dna_beam_part1',
+  spritesheetPath: '/assets/img/spritesheets/projectiles/dna_beam_part1.png',
+  animationData: {
+    totalFrames: 13,
+    animations: [
+      {
+        name: 'launch_front',
+        frames: [
+          { index: 0, width: 12, height: 56, x: 0 },
+          { index: 1, width: 18, height: 56, x: 12 },
+          { index: 2, width: 27, height: 56, x: 30 },
+          { index: 3, width: 55, height: 56, x: 57 },
+          { index: 4, width: 61, height: 56, x: 112 },
+          { index: 5, width: 64, height: 56, x: 173 },
+          { index: 6, width: 70, height: 56, x: 237 },
+          { index: 7, width: 80, height: 56, x: 307 },
+          { index: 8, width: 87, height: 56, x: 387 },
+          { index: 9, width: 92, height: 56, x: 474 },
+          { index: 10, width: 98, height: 56, x: 566 },
+          { index: 11, width: 101, height: 56, x: 664 },
+          { index: 12, width: 120, height: 56, x: 765 },
+        ],
+      },
+      {
+        name: 'launch_back',
+        frames: [
+          { index: 0, width: 12, height: 56, x: 0, y: 56 },
+          { index: 1, width: 18, height: 56, x: 12, y: 56 },
+          { index: 2, width: 27, height: 56, x: 30, y: 56 },
+          { index: 3, width: 55, height: 56, x: 57, y: 56 },
+          { index: 4, width: 61, height: 56, x: 112, y: 56 },
+          { index: 5, width: 64, height: 56, x: 173, y: 56 },
+          { index: 6, width: 70, height: 56, x: 237, y: 56 },
+          { index: 7, width: 80, height: 56, x: 307, y: 56 },
+          { index: 8, width: 87, height: 56, x: 387, y: 56 },
+          { index: 9, width: 92, height: 56, x: 474, y: 56 },
+          { index: 10, width: 98, height: 56, x: 566, y: 56 },
+          { index: 11, width: 101, height: 56, x: 664, y: 56 },
+          { index: 12, width: 120, height: 56, x: 765, y: 56 },
+        ],
+      },
+    ],
+  },
+};

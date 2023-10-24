@@ -1,0 +1,45 @@
+@import '~styles/utilities.scss';
+
+.menu-settings-screen {
+  .screen__content {
+    display: flex;
+
+    .menu-settings-screen__navigation {
+      display: flex;
+      flex-wrap: wrap;
+      width: 25%;
+      overflow: hidden;
+      height: fit-content;
+
+      .screen-menu-button {
+        @include font-family('Open Sans', 700);
+        width: calc(100% - 10px);
+        background-color: color(grey000);
+        text-align: auto;
+        color: color(grey999);
+        text-transform: uppercase;
+        line-height: 48px;
+        border-radius: 25px;
+        transition: opacity .1s ease-in-out;
+        opacity: .75;
+
+        &--active {
+          width: 100%;
+          opacity: 1;
+          padding-right: rem(24px);
+          border-radius: 25px 0 0 25px;
+        }
+
+        &:hover {
+          animation: none;
+        }
+      }
+    }
+
+    .menu-settings-screen__view {
+      width: 75%;
+      padding-left: rem(16px);
+      background-color: color(grey000);
+    }
+  }
+}

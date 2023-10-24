@@ -1,9 +1,29 @@
 import { createWebHashHistory, createRouter } from 'vue-router';
 
-import MainView from '@renderer/views/Main/index.vue';
+import MenuScreen from '@renderer/views/Menu/index.vue';
+import PlayScreen from '@renderer/views/Play/index.vue';
+import MenuSettingsScreen from '@renderer/views/Menu/Settings/index.vue';
+import MenuSettingsGameplayScreen from '@renderer/views/Menu/Settings/Gameplay.vue';
+import MenuSettingsKeyboardScreen from '@renderer/views/Menu/Settings/Keyboard.vue';
+import MenuSettingsAudioScreen from '@renderer/views/Menu/Settings/Audio.vue';
+import MenuModsScreen from '@renderer/views/Menu/Mods.vue';
+import MenuToolsScreen from '@renderer/views/Menu/Tools.vue';
 
 const routes = [
-  { path: '/', name: 'Home', component: MainView },
+  { path: '/', name: 'Menu', component: MenuScreen },
+  { path: '/play', name: 'Play', component: PlayScreen },
+  {
+    path: '/settings',
+    name: 'MenuSettings',
+    component: MenuSettingsScreen,
+    children: [
+      { path: '/gameplay', name: 'MenuSettingsGameplay', component: MenuSettingsGameplayScreen },
+      { path: '/keyboard', name: 'MenuSettingsKeyboard', component: MenuSettingsKeyboardScreen },
+      { path: '/audio', name: 'MenuSettingsAudio', component: MenuSettingsAudioScreen },
+    ],
+  },
+  { path: '/mods', name: 'MenuMods', component: MenuModsScreen },
+  { path: '/tools', name: 'MenuTools', component: MenuToolsScreen },
 ];
 
 const router = createRouter({
