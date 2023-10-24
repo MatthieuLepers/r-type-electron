@@ -5,6 +5,15 @@ import router from '@renderer/plugins/router';
 import i18n from '@renderer/plugins/i18n';
 import GenerateModifiers from '@renderer/plugins/GenerateModifiers';
 import DateFormat from '@renderer/plugins/DateFormat';
+import Global from '@renderer/core/stores/AppStore';
+
+router.beforeEach((to, _from, next) => {
+  if (to.name !== 'Menu' && !Global.loaded) {
+    next({ name: 'Menu' });
+  } else {
+    next();
+  }
+});
 
 const app = createApp(App);
 

@@ -1,9 +1,9 @@
 // import { autoUpdater } from 'electron-updater';
+import fs from 'fs';
 
 import { IpcHandle, IpcOn, GlobalShortcut } from '@/main/decorators';
 import { Setting } from '@/main/database/models';
 import WindowStore from '@/main/stores/WindowStore';
-import { getFaviconBase64 } from '@/main/utils/AppUtils';
 import WinstonInstance from '@/main/utils/WinstonInstance';
 
 class AppModule {
@@ -15,11 +15,6 @@ class AppModule {
     if (localeSetting) {
       await localeSetting.update({ value: iso });
     }
-  }
-
-  @IpcHandle
-  static async getFavicon(domain: string): Promise<string> {
-    return getFaviconBase64(domain);
   }
 
   @IpcHandle
@@ -46,6 +41,18 @@ class AppModule {
   // static quitAndInstallUpdate() {
   //   autoUpdater.quitAndInstall();
   // }
+
+  @IpcOn
+  static readDirSync({ path, onlyFiles, onlyDirectories }) {
+    const dirContent = fs.readdirSync(path);
+    return dirContent.filter((file) => {
+      if (onlyFiles || onlyDirectories) {
+        const stats = fs.lstatSync(`${path}/${file}`);
+        return (onlyFiles && stats.isFile()) || (onlyDirectories && stats.isDirectory());
+      }
+      return true;
+    });
+  }
 
   @GlobalShortcut('Alt+F4')
   static closeAppNonDarwin() {

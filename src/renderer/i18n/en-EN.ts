@@ -55,4 +55,12 @@ export default {
       },
     },
   },
+  Views: {
+    Menu: {
+      play: 'Play',
+      settings: 'Settings',
+      mods: 'Mods',
+      tools: 'Tools',
+    },
+  },
 };

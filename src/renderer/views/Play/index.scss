@@ -1,0 +1,19 @@
+@import '~styles/utilities.scss';
+
+.play-screen {
+  .screen {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 30px);
+
+    &__content {
+      width: 40%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}
