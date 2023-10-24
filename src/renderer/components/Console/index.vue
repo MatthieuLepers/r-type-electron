@@ -90,10 +90,10 @@ const actions = {
   handlePressTab(e) {
     e.preventDefault();
     if (state.suggestions.available.length) {
-      state.command = state.currentSuggestion;
+      state.command = State.value.currentSuggestion;
 
-      const nextCommandSuggestion = new CommandParser(`${state.currentSuggestion}.`).getCommandSuggestions();
-      const nextArgSuggestion = new CommandParser(`${state.currentSuggestion} `).getArgumentSuggestions();
+      const nextCommandSuggestion = new CommandParser(`${State.value.currentSuggestion}.`).getCommandSuggestions();
+      const nextArgSuggestion = new CommandParser(`${State.value.currentSuggestion} `).getArgumentSuggestions();
 
       if (nextCommandSuggestion.length) {
         state.command += '.';
