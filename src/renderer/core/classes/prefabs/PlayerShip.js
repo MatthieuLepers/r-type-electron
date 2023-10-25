@@ -6,6 +6,7 @@ import Controller from '@renderer/core/classes/components/Controller';
 import Health from '@renderer/core/classes/components/Health';
 import Shooter from '@renderer/core/classes/components/Shooter';
 import ChargedShooter from '@renderer/core/classes/components/ChargedShooter';
+import RocketLauncher from '@renderer/core/classes/components/RocketLauncher';
 import ScoreBoard from '@renderer/core/classes/components/ScoreBoard';
 import ShipBoosterFx from '@renderer/core/classes/prefabs/fx/ShipBoosterFx';
 import ShipBulletEmitFx from '@renderer/core/classes/prefabs/fx/ShipBulletEmitFx';
@@ -14,7 +15,6 @@ import ShipBulletChargeShootFx from '@renderer/core/classes/prefabs/fx/ShipBulle
 import ForceFieldFx from '@renderer/core/classes/prefabs/fx/ForceFieldFx';
 import ShipChargedBullet from '@renderer/core/classes/prefabs/projectiles/ShipChargedBullet';
 import ShipBullet from '@renderer/core/classes/prefabs/projectiles/ShipBullet';
-import Rocket from '@renderer/core/classes/prefabs/projectiles/Rocket';
 
 /**
  * @author Matthieu LEPERS
@@ -38,6 +38,7 @@ export default class PlayerShip extends PhysicEntityScript {
     this.addComponent(Health, PlayerShip);
     this.addComponent(Shooter, PlayerShip);
     this.addComponent(ChargedShooter, PlayerShip);
+    this.addComponent(RocketLauncher, PlayerShip);
     this.addComponent(ScoreBoard, PlayerShip);
 
     // Transform
@@ -73,7 +74,11 @@ export default class PlayerShip extends PhysicEntityScript {
         onRelease: () => { this.components.locomotor.speedX = 0; },
       })
       .bindControl('PAUSE', {
-        onPress: () => { Global.Engine.togglePause(); },
+        onPress: () => {
+          if (!Global.consoleOpen) {
+            Global.Engine.togglePause();
+          }
+        },
       })
       .bindControl('SHOOT', {
         onPress: () => { this.shoot(); },
@@ -141,13 +146,6 @@ export default class PlayerShip extends PhysicEntityScript {
     this.on('chargeStart', this.onChargeStart.bind(this));
     this.on('chargeStop', this.onChargeStop.bind(this));
     this.on('despawn', () => { this.components.controller.unbind(); });
-
-    window.setInterval(() => {
-      if (!Global.Engine.paused) {
-        Rocket.new(this, 'top').spawn();
-        Rocket.new(this, 'bottom').spawn();
-      }
-    }, 2000);
   }
 
   respawn() {

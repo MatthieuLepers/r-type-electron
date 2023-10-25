@@ -18,7 +18,7 @@ export default class Sound extends AbstractRessource {
   }
 
   init() {
-    const { volume, muted, autoplay, loop } = this.options ?? {};
+    const { volume, muted, autoplay, loop } = this.$data ?? {};
     this.audio.volume = volume ?? 1;
     this.audio.muted = muted ?? false;
     this.audio.autoplay = autoplay ?? false;

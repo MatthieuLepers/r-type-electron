@@ -1,5 +1,5 @@
 <template>
-  <main class="menu-tools-screen">
+  <MainLayout class="menu-tools-screen">
     <Screen title="Tools">
       <template v-slot:footer>
         <ScreenMenuButton
@@ -10,10 +10,11 @@
         </ScreenMenuButton>
       </template>
     </Screen>
-  </main>
+  </MainLayout>
 </template>
 
 <script setup>
+import MainLayout from '@renderer/views/MainLayout.vue';
 import Screen from '@renderer/components/Screen/index.vue';
 import ScreenMenuButton from '@renderer/components/Screen/MenuButton.vue';
 

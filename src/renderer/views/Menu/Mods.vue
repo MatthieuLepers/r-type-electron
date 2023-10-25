@@ -1,5 +1,5 @@
 <template>
-  <main class="menu-mods-screen">
+  <MainLayout class="menu-mods-screen">
     <Screen title="Mods">
       <template v-slot:content>
         <div
@@ -36,12 +36,13 @@
         </ScreenMenuButton>
       </template>
     </Screen>
-  </main>
+  </MainLayout>
 </template>
 
 <script setup>
 import { reactive, computed, onBeforeMount } from 'vue';
 
+import MainLayout from '@renderer/views/MainLayout.vue';
 import Screen from '@renderer/components/Screen/index.vue';
 import ScreenMenuButton from '@renderer/components/Screen/MenuButton.vue';
 

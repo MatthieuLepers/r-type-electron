@@ -166,4 +166,21 @@ export default class Explosion extends EntityScript {
     explosion.on('animOver', () => explosion.despawn());
     return explosion;
   }
+
+  static EXPLOSION_ROCKET(entity) {
+    const explosion = Explosion.new(entity);
+
+    // Transform
+    explosion.setTransform(
+      entity.getSprite().centerOrigin.x - 16,
+      entity.getSprite().centerOrigin.y - 16,
+    );
+
+    // Sprite
+    explosion.components.sprite.init({ asset: Global.Assets.get('particles/explosion_rocket') });
+
+    entity.despawn();
+    explosion.on('animOver', () => explosion.despawn());
+    return explosion;
+  }
 }
