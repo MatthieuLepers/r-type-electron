@@ -1,5 +1,6 @@
 import Global from '@renderer/core/stores/AppStore';
 import Projectile from '@renderer/core/classes/prefabs/projectiles/Projectile';
+import Explosion from '@renderer/core/classes/prefabs/Explosion';
 import Point from '@renderer/core/classes/geometry/Point';
 import RectangleHitbox from '@renderer/core/classes/hitboxes/RectangleHitbox';
 import ComplexePath from '@renderer/core/classes/paths/ComplexePath';
@@ -49,7 +50,10 @@ export default class Rocket extends Projectile {
     this.addCollisionTag('enemy', '!projectile');
 
     this.on('move', this.findTarget.bind(this));
-    this.on('dead', () => this.despawn());
+    this.on('dead', () => {
+      this.playSound('entity/explosion');
+      Explosion.EXPLOSION_ROCKET(this).spawn();
+    });
   }
 
   findTarget() {

@@ -1,5 +1,5 @@
 <template>
-  <main class="menu-screen">
+  <MainLayout class="menu-screen">
     <Screen v-if="!State.isLoaded" title="Loading ressources">
       <template v-slot:content>
         <div class="menu-screen__progressbar">
@@ -29,7 +29,7 @@
         </div>
       </template>
     </Screen>
-  </main>
+  </MainLayout>
 </template>
 
 <script setup>
@@ -40,6 +40,7 @@ import {
   onMounted,
 } from 'vue';
 
+import MainLayout from '@renderer/views/MainLayout.vue';
 import Screen from '@renderer/components/Screen/index.vue';
 import ScreenMenuButton from '@renderer/components/Screen/MenuButton.vue';
 

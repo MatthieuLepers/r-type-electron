@@ -31,7 +31,7 @@ export default class Locomotor extends Component {
     this.speed = new Vector(0, 0); // px/s => (1/60) px/frame
 
     AddClassMethod(this.clazz, 'move', function () {
-      if (!this.hasTag('isDead') && !Global.Game.paused && this.components.locomotor.canMove) {
+      if (!this.hasTag('isDead', 'debug') && !Global.Game.paused && this.components.locomotor.canMove) {
         const nextPosition = this.components.locomotor.calcNextPosition();
         const delta = this.components.transform.position.delta(nextPosition);
         if (this.components.locomotor.followSlope && this.hasComponent('Sprite')) {
