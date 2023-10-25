@@ -1,5 +1,5 @@
 <template>
-  <main class="play-screen">
+  <MainLayout class="play-screen">
     <canvas ref="canvas" />
     <Screen
       title="Paused!"
@@ -22,13 +22,14 @@
     </Screen>
     <GameHUD v-if="state.game" />
     <Console v-show="state.consoleOpen" />
-  </main>
+  </MainLayout>
 </template>
 
 <script setup>
 import { reactive, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
+import MainLayout from '@renderer/views/MainLayout.vue';
 import Screen from '@renderer/components/Screen/index.vue';
 import GameHUD from '@renderer/components/GameHUD/index.vue';
 import Console from '@renderer/components/Console/index.vue';
@@ -62,10 +63,17 @@ onMounted(() => {
   state.game = new Game(canvas.value);
   state.game.start();
 
-  Global.Engine.on('paused', () => { state.paused = true; });
-  Global.Engine.on('resumed', () => { state.paused = false; });
+  Global.Engine.on('paused', () => {
+    if (!state.consoleOpen) {
+      state.paused = true;
+    }
+  });
+  Global.Engine.on('resumed', () => {
+    state.paused = false;
+  });
   Global.Game.on('devConsole', () => {
     state.consoleOpen = !state.consoleOpen;
+    Global.consoleOpen = state.consoleOpen;
     Global.Engine.paused = state.consoleOpen;
   });
 });

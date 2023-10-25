@@ -1,5 +1,4 @@
 <template>
-  <AppTitleBar name="main" />
   <router-view v-if="!state.loading" />
   <MaterialLoaderIcon
     v-else
@@ -20,7 +19,6 @@
 import { reactive, onBeforeMount } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import AppTitleBar from '@renderer/components/App/TitleBar/index.vue';
 import MaterialLoaderIcon from '@renderer/components/Materials/Loader/Icon.vue';
 import MaterialProgressBar from '@renderer/components/Materials/ProgressBar/index.vue';
 import MaterialNotificationList from '@renderer/components/Materials/Notification/List.vue';
