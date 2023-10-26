@@ -1,0 +1,15 @@
+@import '~styles/utilities.scss';
+
+.devtools {
+  position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 30px);
+  background-color: rgba(color(grey900), .8);
+  z-index: 1;
+
+  &__tabs {
+    height: 100%;
+  }
+}

@@ -75,7 +75,7 @@ export default class PlayerShip extends PhysicEntityScript {
       })
       .bindControl('PAUSE', {
         onPress: () => {
-          if (!Global.consoleOpen) {
+          if (!Global.devToolsOpen) {
             Global.Engine.togglePause();
           }
         },
@@ -103,9 +103,9 @@ export default class PlayerShip extends PhysicEntityScript {
       .bindControl('DEBUG_TOGGLE_DRAW_HEALTH_BARS', {
         onPress: () => { Global.Settings.debug.drawHealthBars = !Global.Settings.debug.drawHealthBars; },
       })
-      .bindControl('DEV_CONSOLE', {
+      .bindControl('DEV_TOOLS', {
         onPress: () => {
-          Global.Game.emit('devConsole');
+          Global.Game.emit('devTools');
         },
       })
     ;
