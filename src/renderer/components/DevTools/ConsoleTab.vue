@@ -1,6 +1,6 @@
 <template>
-  <aside class="console">
-    <ul class="console__history" ref="history">
+  <div class="devtools-console">
+    <ul class="devtools-console__history" ref="history">
       <li
         v-for="(entry, i) in state.history"
         :key="i"
@@ -10,18 +10,18 @@
     </ul>
     <input
       v-model="state.command"
-      class="console__input"
+      class="devtools-console__input"
       type="text"
       spellcheck="false"
       @keydown="actions.handleKeyPress"
     />
     <span
-      class="console__command-suggestion"
+      class="devtools-console__command-suggestion"
       aria-hidden="true"
     >
       {{ State.currentSuggestion }}
     </span>
-  </aside>
+  </div>
 </template>
 
 <script setup>
@@ -34,7 +34,7 @@ import {
 } from 'vue';
 import CommandParser from '@renderer/core/utils/CommandParser';
 
-defineOptions({ name: 'Console' });
+defineOptions({ name: 'DevToolsConsole' });
 
 const history = ref(null);
 
@@ -114,5 +114,5 @@ const actions = {
 };
 </script>
 
-<style lang="scss" src="./index.scss">
+<style lang="scss" src="./ConsoleTab.scss">
 </style>

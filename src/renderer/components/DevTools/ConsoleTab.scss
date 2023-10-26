@@ -1,14 +1,9 @@
 @import '~styles/utilities.scss';
 
-.console {
-  position: fixed;
-  top: 30px;
-  left: 0;
-  width: 100vw;
-  height: calc(100vh - 30px);
-  z-index: 1;
-  background-color: rgba(color(grey900), .8);
+.devtools-console {
+  position: relative;
   padding-top: rem(16px);
+  height: 100%;
 
   &::before {
     content: ">";
