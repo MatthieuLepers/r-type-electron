@@ -35,7 +35,7 @@ export default {
     key: 'Escape',
     button: 3,
   },
-  DEV_CONSOLE: {
+  DEV_TOOLS: {
     key: api.plateform !== 'darwin' ? '²' : '@',
   },
   DEBUG_TOGGLE_DRAW_HITBOXES: {

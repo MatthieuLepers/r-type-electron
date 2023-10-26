@@ -21,7 +21,7 @@
       </template>
     </Screen>
     <GameHUD v-if="state.game" />
-    <Console v-show="state.consoleOpen" />
+    <DevTools v-show="state.devToolsOpen" />
   </MainLayout>
 </template>
 
@@ -32,7 +32,7 @@ import { useRouter } from 'vue-router';
 import MainLayout from '@renderer/views/MainLayout.vue';
 import Screen from '@renderer/components/Screen/index.vue';
 import GameHUD from '@renderer/components/GameHUD/index.vue';
-import Console from '@renderer/components/Console/index.vue';
+import DevTools from '@renderer/components/DevTools/index.vue';
 
 import Global from '@renderer/core/stores/AppStore';
 import Game from '@renderer/core/Game';
@@ -45,7 +45,7 @@ const router = useRouter();
 
 const state = reactive({
   game: null,
-  consoleOpen: false,
+  devToolsOpen: false,
   paused: false,
 });
 
@@ -64,17 +64,17 @@ onMounted(() => {
   state.game.start();
 
   Global.Engine.on('paused', () => {
-    if (!state.consoleOpen) {
+    if (!state.devToolsOpen) {
       state.paused = true;
     }
   });
   Global.Engine.on('resumed', () => {
     state.paused = false;
   });
-  Global.Game.on('devConsole', () => {
-    state.consoleOpen = !state.consoleOpen;
-    Global.consoleOpen = state.consoleOpen;
-    Global.Engine.paused = state.consoleOpen;
+  Global.Game.on('devTools', () => {
+    state.devToolsOpen = !state.devToolsOpen;
+    Global.devToolsOpen = state.devToolsOpen;
+    Global.Engine.paused = state.devToolsOpen;
   });
 });
 </script>

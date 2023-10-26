@@ -20,7 +20,7 @@ class AppStore {
     this.Settings = Settings;
     this.ModKnowledge = null;
     this.Game = null;
-    this.consoleOpen = false;
+    this.devToolsOpen = false;
   }
 }
 
