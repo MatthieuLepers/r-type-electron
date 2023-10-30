@@ -71,10 +71,10 @@ onMounted(() => {
   Global.Engine.on('resumed', () => {
     state.paused = false;
   });
-  Global.Game.on('devTools', () => {
-    state.devToolsOpen = !state.devToolsOpen;
+  Global.Game.on('devTools', (e) => {
+    state.devToolsOpen = e.details.enabled;
     Global.devToolsOpen = state.devToolsOpen;
-    Global.Engine.paused = state.devToolsOpen;
+    Global.Engine.debug = state.devToolsOpen;
   });
 });
 </script>

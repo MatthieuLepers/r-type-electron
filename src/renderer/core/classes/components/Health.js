@@ -1,13 +1,13 @@
 import Global from '@renderer/core/stores/AppStore';
 import { AddClassMethod } from '@renderer/core/utils';
-import Component from '@renderer/core/classes/components/Component';
+import DrawableComponent from '@renderer/core/classes/components/DrawableComponent';
 import Cooldown from '@renderer/core/classes/components/Cooldown';
 
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
-export default class Health extends Component {
+export default class Health extends DrawableComponent {
   /**
    * @inheritdoc
    */
@@ -115,8 +115,8 @@ export default class Health extends Component {
     return '#f00';
   }
 
-  task() {
-    if (this.healthBarVisible && Global.Settings.debug.drawHealthBars && this.inst.hasComponent('Sprite')) {
+  render() {
+    if (Global.Settings.debug.drawHealthBars && this.healthBarVisible && this.inst.hasComponent('Sprite')) {
       const { width } = this.inst.components.sprite;
       const { position } = this.inst.components.transform;
       if (position) {

@@ -1,3 +1,5 @@
+import { reactive } from 'vue';
+
 import Global from '@renderer/core/stores/AppStore';
 import Canvas from '@renderer/core/Canvas';
 import ScoreBoard from '@renderer/core/ScoreBoard';
@@ -37,7 +39,7 @@ export default class Game extends EntityScript {
     this.canvasObj = new Canvas(canvas);
     this.random = new Random();
     this.scoreboard = new ScoreBoard();
-    this.entities = {};
+    this.entities = reactive({});
     this.quadTree = new QuadTree(0, this.canvasObj.getBounds());
     this.quadTree.clear();
 
@@ -105,18 +107,18 @@ export default class Game extends EntityScript {
    * @return {PlayerShip}
    */
   getPlayerList() {
-    return Object.values(this.entities).filter((entity) => entity.hasTag('player')
-      && !entity.hasTag('isDead')
-      && entity.hasComponent('Controller'))
+    return Object
+      .values(this.entities)
+      .filter((entity) => entity.hasTag('player') && !entity.hasTag('isDead') && entity.hasComponent('Controller'))
     ;
   }
 
   start() {
     Global.Engine.resume();
-    Global.Engine.addRunnable(new Runnable('rendering', () => this.canvasObj.render(this.canvasObj)));
+    Global.Engine.addRunnable(new Runnable('rendering', () => this.canvasObj.render(this.canvasObj), true));
     Global.Engine.addRunnable(new Runnable('fps', () => {
       this.canvasObj.fillText(Global.Engine.FPS, this.canvas.width - 30, 30, { fontSize: 20, fontFamily: 'Roboto', color: Global.Engine.FPS_COLOR });
-    }));
+    }), true);
 
     PlayerShip.new('player1').spawn();
     Module.new().spawn();
@@ -129,7 +131,7 @@ export default class Game extends EntityScript {
     // Cytron.new().spawn();
     // PowerArmor.new().spawn();
     setInterval(() => {
-      if (!Global.Engine.paused) PowerArmor.new().spawn();
+      if (!Global.Engine.paused && !Global.devToolsOpen) PowerArmor.new().spawn();
     }, 2000);
     // CompilerBoss.new().spawn();
   }
@@ -138,6 +140,7 @@ export default class Game extends EntityScript {
     Object.values(this.entities).forEach((entity) => { entity.despawn(); });
     Global.Engine.removeRunnableByName('rendering');
     Global.Engine.removeRunnableByName('fps');
+    Global.Engine.removeRunnableByName('debug');
     Global.Engine.physicRunnable = null;
     Global.Game = null;
   }
