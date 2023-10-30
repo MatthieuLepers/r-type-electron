@@ -1,7 +1,10 @@
 @import '~styles/utilities.scss';
 
-.devtools-entities {
-  height: 100%;
+.devtools-entities-attachedentities {
+  margin: 0;
+  padding: 0 0 0 rem(16px);
+  list-style: none;
+  display: none;
 
   &__button {
     position: relative;
@@ -27,15 +30,7 @@
     }
   }
 
-  &__list {
-    margin: 0;
-    padding: 0 0 0 rem(16px);
-    list-style: none;
-
-    &--open {
-      .devtools-entities__sub {
-        display: block;
-      }
-    }
+  &--open {
+    display: block;
   }
 }

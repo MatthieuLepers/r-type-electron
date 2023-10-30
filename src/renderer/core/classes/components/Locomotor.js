@@ -1,6 +1,7 @@
 import Global from '@renderer/core/stores/AppStore';
 import { AddClassMethod } from '@renderer/core/utils';
 import Component from '@renderer/core/classes/components/Component';
+import DrawableComponent from '@renderer/core/classes/components/DrawableComponent';
 import Direction from '@renderer/core/classes/enums/Direction';
 import Vector from '@renderer/core/classes/geometry/Vector';
 import Point from '@renderer/core/classes/geometry/Point';
@@ -10,7 +11,7 @@ import ComplexePath from '@renderer/core/classes/paths/ComplexePath';
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
-export default class Locomotor extends Component {
+export default class Locomotor extends DrawableComponent {
   /**
    * @inheritdoc
    */
@@ -193,10 +194,6 @@ export default class Locomotor extends Component {
   }
 
   task() {
-    // Render Hitbox
-    if (Global.Settings.debug.drawHitbox && this.inst.hasComponent('Physics')) {
-      this.inst.getHitbox().forEach((hitbox) => { hitbox.render(Global.Game.ctx, this.inst.getId()); });
-    }
     if (!this.inst.hasTag('attached')) {
       if (this.trackedEntity?.hasTag('isDead') || (this.inst.hasTag('tracking') && !this.trackedEntity)) {
         this.trackedEntity = this.retargetFn();
@@ -209,10 +206,18 @@ export default class Locomotor extends Component {
       }
       if (this.path) {
         this.inst.move();
-        if (Global.Settings.debug.drawPath) {
-          this.path.debugDraw(Global.Game.ctx);
-        }
       }
+    }
+  }
+
+  render() {
+    if (Global.Settings.debug.drawHitbox && this.inst.hasComponent('Physics')) {
+      this.inst.getHitbox().forEach((hitbox) => {
+        hitbox.render(Global.Game.ctx, this.inst.getId());
+      });
+    }
+    if (Global.Settings.debug.drawPath && !this.inst.hasTag('attached') && this.path) {
+      this.path.debugDraw(Global.Game.ctx);
     }
   }
 }

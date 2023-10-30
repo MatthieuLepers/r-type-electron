@@ -105,7 +105,7 @@ export default class PlayerShip extends PhysicEntityScript {
       })
       .bindControl('DEV_TOOLS', {
         onPress: () => {
-          Global.Game.emit('devTools');
+          Global.Game.emit('devTools', { enabled: !Global.devToolsOpen });
         },
       })
     ;

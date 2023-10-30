@@ -9,11 +9,13 @@ export default class Runnable extends Class {
    * @constructor
    * @param {String} name
    * @param {Function} callback
+   * @param {Boolean} canRunInDebugMode
    */
-  constructor(name, callback = null) {
+  constructor(name, callback = null, canRunInDebugMode = false) {
     super();
     this.name = name;
     this.callback = callback;
+    this.canRunInDebugMode = canRunInDebugMode;
   }
 
   /**

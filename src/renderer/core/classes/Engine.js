@@ -16,6 +16,7 @@ export default class Engine extends Class {
     this.$running = false;
     this.paused = false;
     this.fps = 60;
+    this.debug = false;
 
     this.$frame = null;
     this.$fpsInterval = 1000 / this.fps;
@@ -120,6 +121,7 @@ export default class Engine extends Class {
   step() {
     Object
       .values(this.runnableList)
+      .filter((runnable) => !this.debug || (this.debug && runnable.canRunInDebugMode))
       .forEach((runnable) => { runnable.step(this.$frame); })
     ;
     if (this.physicRunnable) {
