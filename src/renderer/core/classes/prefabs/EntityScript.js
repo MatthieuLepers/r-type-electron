@@ -9,22 +9,22 @@ import Runnable from '@renderer/core/classes/runnable/Runnable';
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
-export default class Entity extends Class {
+export default class EntityScript extends Class {
   /**
    * @constructor
    * @param {Function} initCallback
    */
   constructor(initCallback = null) {
     super();
-    if (this.constructor.name === 'Entity') {
+    if (this.constructor.name === 'EntityScript') {
       throw new AbstractClassError(this);
     }
     this.tags = [];
     this.initCallback = initCallback;
     this.runnable = null;
 
-    this.addComponent(EventEmitter, Entity);
-    this.addComponent(SoundEmitter, Entity);
+    this.addComponent(EventEmitter, EntityScript);
+    this.addComponent(SoundEmitter, EntityScript);
 
     if (typeof initCallback === 'function') {
       this.initCallback.call(this);
@@ -77,7 +77,6 @@ export default class Entity extends Class {
     this.addTag('staySpawned');
     if (this.hasComponent('Sprite')) {
       Global.Game.entities[this.getId()] = this;
-      Global.Game.canvasObj.addDrawable(this.getSprite());
     }
     if (this.hasComponent('AttachedEntities')) {
       Object.values(this.getAttachedEntities()).forEach((entity) => { entity.spawn(); });
@@ -86,9 +85,14 @@ export default class Entity extends Class {
       Global.Game.quadTree.insert(this);
     }
 
-    const componentWithTaskList = this.getComponentByPriority().filter((c) => typeof c.task === 'function');
+    const componentWithTaskList = this
+      .getComponentByPriority()
+      .filter((c) => typeof c.task === 'function')
+    ;
     if (componentWithTaskList.length) {
-      this.runnable = new Runnable(`runnable${this.getId()}`, (frame) => componentWithTaskList.map((c) => c.task(frame)));
+      this.runnable = new Runnable(`runnable${this.getId()}`, (frame) => {
+        componentWithTaskList.forEach((c) => { c.task(frame); });
+      });
 
       Global.Engine.addRunnable(this.runnable);
     }
@@ -108,7 +112,7 @@ export default class Entity extends Class {
       if (Global.Game.entities[this.getId()]) {
         delete Global.Game.entities[this.getId()];
       }
-      Global.Game.canvasObj.removeDrawable(this.getId());
+      Global.Game.canvasObj.removeDrawables(this);
     }
     this.emit('despawn');
   }

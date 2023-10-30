@@ -19,7 +19,7 @@ export default class Canvas extends Class {
     };
     this.canvas = canvas;
     this.ctx = null;
-    this.drawables = {};
+    this.drawables = new Map();
 
     Object.assign(this.options, options);
     this.init();
@@ -40,21 +40,35 @@ export default class Canvas extends Class {
   }
 
   /**
-   * @param {Drawable} drawable
+   * @param {DrawableComponent} drawableComponent
    * @return {this}
    */
   addDrawable(drawable) {
-    this.drawables[drawable.id] = drawable;
+    if (!this.drawables.get(drawable.inst)) {
+      this.drawables.set(drawable.inst, []);
+    }
+    this.drawables.get(drawable.inst).push(drawable);
     return this;
   }
 
   /**
-   * @param {String} drawableId
+   * @param {EntityScript} entity
    * @return {this}
    */
-  removeDrawable(drawableId) {
-    if (this.drawables[drawableId]) {
-      delete this.drawables[drawableId];
+  removeDrawables(entity) {
+    if (this.drawables.has(entity)) {
+      this.drawables.delete(entity);
+    }
+    return this;
+  }
+
+  /**
+   * @param {DrawableComponent} entity
+   * @return {this}
+   */
+  removeDrawable(drawable) {
+    if (this.drawables.has(drawable.inst)) {
+      this.drawables.set(drawable.inst, this.drawables.get(drawable.inst).filter((d) => d !== drawable));
     }
     return this;
   }
@@ -83,8 +97,8 @@ export default class Canvas extends Class {
    */
   render() {
     this.clear();
-    Object
-      .values(this.drawables)
+    [...this.drawables.values()]
+      .reduce((acc, val) => [...acc, ...val], [])
       .sort((a, b) => a.priority - b.priority)
       .forEach((drawable) => { drawable.render(); })
     ;

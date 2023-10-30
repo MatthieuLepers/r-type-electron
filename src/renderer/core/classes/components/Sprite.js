@@ -1,13 +1,13 @@
 import Global from '@renderer/core/stores/AppStore';
 import { AddClassMethod } from '@renderer/core/utils';
-import Component from '@renderer/core/classes/components/Component';
+import DrawableComponent from '@renderer/core/classes/components/DrawableComponent';
 import Point from '@renderer/core/classes/geometry/Point';
 
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
-export default class Sprite extends Component {
+export default class Sprite extends DrawableComponent {
   /**
    * @inheritdoc
    */
@@ -232,7 +232,7 @@ export default class Sprite extends Component {
   }
 
   task() {
-    if (!this.inst.isVisible()) {
+    if (!this.visible) {
       if (this.inst.hasComponent('EventEmitter')) {
         this.inst.emit('outOfScreen');
       }

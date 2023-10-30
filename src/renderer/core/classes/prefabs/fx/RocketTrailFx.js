@@ -26,7 +26,7 @@ export default class RocketTrailFx extends Fx {
     // Sprite
     this.components.sprite.priority = Component.PRIORITY_HIGH;
     this.components.sprite.init({
-      id: `${this.getId()}_trail`,
+      id: `${this.parent.getId()}_trail`,
       asset: Global.Assets.get('particles/fx/rocket_trail'),
       animation: 'loop',
       loop: true,

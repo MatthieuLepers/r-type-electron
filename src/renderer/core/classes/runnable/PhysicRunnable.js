@@ -10,7 +10,7 @@ export default class PhysicRunnable extends Runnable {
    * @constructor
    */
   constructor() {
-    super('physicEngine');
+    super('physicEngine', null, false);
   }
 
   step() {
