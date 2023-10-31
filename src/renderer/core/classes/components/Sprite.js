@@ -232,7 +232,7 @@ export default class Sprite extends DrawableComponent {
   }
 
   task() {
-    if (!this.visible) {
+    if (!this.inst.isVisible()) {
       if (this.inst.hasComponent('EventEmitter')) {
         this.inst.emit('outOfScreen');
       }
