@@ -30,7 +30,7 @@ const actions = {
       state.beamPercent = 0;
     });
     player.on('respawn', (e) => {
-      state.setupEvents(e.details.player);
+      actions.setupEvents(e.details.player);
     });
   },
 };
