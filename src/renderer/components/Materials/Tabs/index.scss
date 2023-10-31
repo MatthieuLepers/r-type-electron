@@ -75,6 +75,7 @@
 
   &__container {
     flex: 1;
+    overflow: hidden;
     overflow-y: auto;
     padding: rem(8px);
   }

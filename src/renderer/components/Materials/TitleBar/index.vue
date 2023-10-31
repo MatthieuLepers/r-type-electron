@@ -12,7 +12,7 @@
         class="m-title-bar__button"
         @click="emit('help')"
       >
-        <span class="icon-help"></span>
+        <span v-icon:help />
       </button>
       <button
         v-if="props.minimizable"
@@ -20,21 +20,21 @@
         class="m-title-bar__button"
         @click="actions.minimize"
       >
-        <span class="icon-minimize"></span>
+        <span v-icon:minimize />
       </button>
       <button
         v-if="props.maximizable || props.minimizable"
         :disabled="!props.maximizable"
         class="m-title-bar__button"
         @click="actions.maximize">
-        <span class="icon-maximize"></span>
+        <span v-icon:maximize />
       </button>
       <button
         v-if="props.closable"
         :class="GenerateModifiers('m-title-bar__button', { close: true })"
         @click="actions.close"
       >
-        <span class="icon-close"></span>
+        <span v-icon:close />
       </button>
     </div>
   </nav>

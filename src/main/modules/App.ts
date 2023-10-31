@@ -32,13 +32,12 @@ class AppModule {
 
   @IpcOn
   static databaseReady() {
-    const win = WindowStore.getFocusedWindow();
-    if (win) {
+    WindowStore.getVisibleWindows().forEach((win) => {
       win.sendData('database-ready');
       win.webContents.addListener('did-finish-load', () => {
         win.sendData('database-ready');
       });
-    }
+    });
   }
 
   @GlobalShortcut('Alt+F4')

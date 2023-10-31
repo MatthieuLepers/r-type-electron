@@ -47,6 +47,10 @@ class WindowStore {
   getFocusedWindow(): ElectronWindow | null {
     return [...this.windowMap.values()].find((win) => win.isFocused()) ?? null;
   }
+
+  getVisibleWindows(): Array<ElectronWindow> {
+    return [...this.windowMap.values()].filter((win) => win.isVisible());
+  }
 }
 
 export default new WindowStore();

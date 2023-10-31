@@ -59,7 +59,7 @@ const tabsNav = ref(null);
 
 const props = defineProps({
   modelValue: { type: String },
-  tabs: { type: Array, default: () => [] },
+  tabs: { type: Object, default: () => ({}) },
   modifiers: { type: Object, default: () => ({}) },
   allowAdd: { type: Boolean, default: false },
   allowMoveFn: { type: Function, default: () => true },
