@@ -62,10 +62,10 @@ export default class CompilerTopPart extends Enemy {
     this.addCollisionTag('player', '!isDead');
 
     this.on('dead', () => {
-      this.playSound('entity/explosion_big');
+      this.playSound('fx/entity/explosion_big');
       Explosion.EXPLOSION_BIG(this).spawn();
     });
-    this.on('damaged', () => this.playSound('entity/hull_hit'));
+    this.on('damaged', () => this.playSound('fx/entity/hull_hit'));
   }
 
   /**

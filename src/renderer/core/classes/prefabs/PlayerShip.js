@@ -213,7 +213,7 @@ export default class PlayerShip extends PhysicEntityScript {
     }
 
     // Play explosion & respawn
-    this.playSound('entity/explosion_player');
+    this.playSound('fx/entity/explosion_player');
     Explosion.EXPLOSION_PLAYER(this).spawn().on('animOver', () => {
       this.respawn();
     });
@@ -231,7 +231,7 @@ export default class PlayerShip extends PhysicEntityScript {
     this.setSoundCooldown(0);
     this.getAttachedEntity(`${this.getId()}_charging`).update();
     this.getAttachedEntity(`${this.getId()}_charging`).playAnimation('loop', true);
-    this.playSound('player/charge');
+    this.playSound('fx/player/charge');
   }
 
   onChargeStop() {
@@ -240,7 +240,7 @@ export default class PlayerShip extends PhysicEntityScript {
     this.getAttachedEntity(`${this.getId()}_chargeshoot`).update();
     this.getAttachedEntity(`${this.getId()}_chargeshoot`).playAnimation('shoot');
     this.stopCurrentSound('player/charge');
-    this.playSound('player/shoot_charged');
+    this.playSound('fx/player/shoot_charged');
   }
 
   /**
@@ -253,7 +253,7 @@ export default class PlayerShip extends PhysicEntityScript {
     if (module && module.weapon && !module.cooldownActive()) {
       module.weapon.shoot(module);
 
-      sound = `weapon/${module.weapon.type.toLowerCase()}`;
+      sound = `fx/weapon/${module.weapon.type.toLowerCase()}`;
     }
 
     if (!module || !module.weapon) {
@@ -261,7 +261,7 @@ export default class PlayerShip extends PhysicEntityScript {
       const bullet = ShipBullet.new(this, target);
       bullet.spawn();
       this.emit('shoot', { projectile: bullet });
-      sound = 'player/shoot';
+      sound = 'fx/player/shoot';
     }
 
     if (Global.Sounds.exists(sound)) {

@@ -46,7 +46,7 @@ export default class Mid extends Enemy {
     this.components.shooter.setProjectile(RedLaser);
 
     this.on('dead', () => {
-      this.playSound('entity/explosion');
+      this.playSound('fx/entity/explosion');
       Explosion.EXPLOSION_NORMAL(this).spawn();
     });
   }

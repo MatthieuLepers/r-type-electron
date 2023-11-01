@@ -131,7 +131,7 @@ export default class Module extends PhysicEntityScript {
       this.owner.releasedModule = null;
       this.owner.attachEntity(this, 'module');
       this.side = (this.getSprite().centerOrigin.x > this.owner.getSprite().centerOrigin.x ? Module.SIDE_FRONT : Module.SIDE_BACK);
-      this.playSound('module/module_attach');
+      this.playSound('fx/module/module_attach');
       this.unBindPath();
       this.update();
       this.components.physics.collideFn = null;
@@ -149,7 +149,7 @@ export default class Module extends PhysicEntityScript {
       this.owner.detachEntity(this, 'module');
       this.owner.releasedModule = this;
       this.owner = null;
-      this.playSound('module/module_release');
+      this.playSound('fx/module/module_release');
       if (this.side === Module.SIDE_FRONT) {
         this.bindPath(ComplexePath.fromSvgString(`M ${this.components.transform.position.x + 5} ${this.components.transform.position.y} L ${Global.Game.canvas.width - this.getSprite().width} ${this.components.transform.position.y}`), false);
       } else {

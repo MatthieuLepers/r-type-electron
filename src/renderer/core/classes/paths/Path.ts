@@ -5,34 +5,18 @@ import Point from '@renderer/core/classes/geometry/Point';
  * @version 1.0.0
  */
 export default class Path {
-  /**
-   * @constructor
-   * @param {Point} startPoint
-   */
-  constructor(startPoint) {
-    this.startPoint = startPoint;
+  constructor(public startPoint: Point | undefined) {}
+
+  toSvgPath(): string {
+    return `M${this.startPoint?.x},${this.startPoint?.y}`;
   }
 
-  /**
-   * @return {String}
-   */
-  toSvgPath() {
-    return `M${this.startPoint.x},${this.startPoint.y}`;
-  }
-
-  /**
-   * @param {Number} angle
-   * @param {Point} pivot
-   */
-  rotate(angle, pivot) {
-    this.startPoint.rotate(angle, pivot);
+  rotate(angle: number, pivot: Point): Path {
+    this.startPoint?.rotate(angle, pivot);
     return this;
   }
 
-  /**
-   * @return {SVGElement}
-   */
-  get path() {
+  get path(): SVGGeometryElement {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttributeNS(null, 'd', this.toSvgPath());
@@ -40,11 +24,7 @@ export default class Path {
     return path;
   }
 
-  /**
-   * @param {String} d
-   * @return {String}
-   */
-  static fromSvgString(d) {
+  static fromSvgString(d: string): Path {
     const regex = /^M ?(-?[0-9.]+)[, ]?(-?[0-9.]+)$/;
     if (!regex.test(d)) {
       throw new Error(`Unable to parse SVG path from string '${d}'`);
@@ -53,27 +33,17 @@ export default class Path {
     return new Path(new Point(dx, dy));
   }
 
-  /**
-   * @param {Float} percent - [0-1]
-   * @return {Point}
-   */
-  getPointAtPercent(percent) {
+  getPointAtPercent(percent: number): Point {
     const p = (percent > 1.0 ? 1.0 : percent);
     const { x, y } = this.path.getPointAtLength(this.path.getTotalLength() * p);
     return new Point(x, y);
   }
 
-  /**
-   * @return {Float}
-   */
-  getTotalLength() {
+  getTotalLength(): number {
     return this.path.getTotalLength();
   }
 
-  /**
-   * @param {CanvasRenderingContext2D} ctx
-   */
-  debugDraw(ctx) {
+  debugDraw(ctx: CanvasRenderingContext2D) {
     ctx.strokeStyle = '#f00';
     ctx.stroke(new Path2D(this.toSvgPath()));
   }

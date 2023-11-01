@@ -3,12 +3,12 @@ import Enemy from '@renderer/core/classes/prefabs/enemies/Enemy';
 import Explosion from '@renderer/core/classes/prefabs/Explosion';
 import LootDropper from '@renderer/core/classes/components/LootDropper';
 import DnaUpgrade from '@renderer/core/classes/prefabs/items/DnaUpgrade';
-import LaserUpgrade from '@renderer/core/classes/prefabs/items/LaserUpgrade';
-import FireUpgrade from '@renderer/core/classes/prefabs/items/FireUpgrade';
-import RocketUpgrade from '@renderer/core/classes/prefabs/items/RocketUpgrade';
-import ForcefieldUpgrade from '@renderer/core/classes/prefabs/items/ForcefieldUpgrade';
+// import LaserUpgrade from '@renderer/core/classes/prefabs/items/LaserUpgrade';
+// import FireUpgrade from '@renderer/core/classes/prefabs/items/FireUpgrade';
+// import RocketUpgrade from '@renderer/core/classes/prefabs/items/RocketUpgrade';
+// import ForcefieldUpgrade from '@renderer/core/classes/prefabs/items/ForcefieldUpgrade';
 import BitModuleUpgrade from '@renderer/core/classes/prefabs/items/BitModuleUpgrade';
-import SpeedUpgrade from '@renderer/core/classes/prefabs/items/SpeedUpgrade';
+// import SpeedUpgrade from '@renderer/core/classes/prefabs/items/SpeedUpgrade';
 import Point from '@renderer/core/classes/geometry/Point';
 import ComplexePath from '@renderer/core/classes/paths/ComplexePath';
 import RectangleHitbox from '@renderer/core/classes/hitboxes/RectangleHitbox';
@@ -50,15 +50,15 @@ export default class PowerArmor extends Enemy {
 
     // LootDropper
     this.components.lootdropper.addLoot(DnaUpgrade, 0.2);
-    this.components.lootdropper.addLoot(LaserUpgrade, 0.2);
-    this.components.lootdropper.addLoot(FireUpgrade, 0.2);
-    this.components.lootdropper.addLoot(RocketUpgrade, 0.1);
-    this.components.lootdropper.addLoot(ForcefieldUpgrade, 0.1);
+    // this.components.lootdropper.addLoot(LaserUpgrade, 0.2);
+    // this.components.lootdropper.addLoot(FireUpgrade, 0.2);
+    // this.components.lootdropper.addLoot(RocketUpgrade, 0.1);
+    // this.components.lootdropper.addLoot(ForcefieldUpgrade, 0.1);
     this.components.lootdropper.addLoot(BitModuleUpgrade, 0.1);
-    this.components.lootdropper.addLoot(SpeedUpgrade, 0.1);
+    // this.components.lootdropper.addLoot(SpeedUpgrade, 0.1);
 
     this.on('dead', () => {
-      this.playSound('entity/explosion');
+      this.playSound('fx/entity/explosion');
       Explosion.EXPLOSION_NORMAL(this).spawn();
       this.dropLoots();
     });

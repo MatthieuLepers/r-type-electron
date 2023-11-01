@@ -18,6 +18,16 @@
         >
           Exit to menu
         </button>
+        <MaterialFormInput
+          v-model="state.fxVolume"
+          type="range"
+          :label="`Fx volume ${state.fxVolume}%`"
+        />
+        <MaterialFormInput
+          v-model="state.ambientVolume"
+          type="range"
+          :label="`Ambient volume ${state.ambientVolume}%`"
+        />
       </template>
     </Screen>
     <GameHUD v-if="state.game" />
@@ -26,13 +36,19 @@
 </template>
 
 <script setup>
-import { reactive, ref, onMounted } from 'vue';
+import {
+  reactive,
+  ref,
+  watch,
+  onMounted,
+} from 'vue';
 import { useRouter } from 'vue-router';
 
 import MainLayout from '@renderer/views/MainLayout.vue';
 import Screen from '@renderer/components/Screen/index.vue';
 import GameHUD from '@renderer/components/GameHUD/index.vue';
 import DevTools from '@renderer/components/DevTools/index.vue';
+import MaterialFormInput from '@renderer/components/Materials/Form/Input.vue';
 
 import Global from '@renderer/core/stores/AppStore';
 import Game from '@renderer/core/Game';
@@ -47,6 +63,8 @@ const state = reactive({
   game: null,
   devToolsOpen: false,
   paused: false,
+  ambientVolume: Global.Settings.audio.ambientVolume,
+  fxVolume: Global.Settings.audio.fxVolume,
 });
 
 const actions = {
@@ -58,6 +76,14 @@ const actions = {
     router.push({ name: 'Menu' });
   },
 };
+
+watch(() => state.fxVolume, (newVal) => {
+  Global.Settings.audio.fxVolume = newVal;
+});
+
+watch(() => state.ambientVolume, (newVal) => {
+  Global.Settings.audio.ambientVolume = newVal;
+});
 
 onMounted(() => {
   state.game = new Game(canvas.value);

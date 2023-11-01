@@ -27,7 +27,7 @@ class RessourceLoader extends Class {
   load() {
     this.emit('loadStart');
     const { Assets, Sounds } = this.$ressourcesData;
-    this.$total = Object.keys(Assets || {}).length + Object.keys(Sounds || {}).length;
+    this.$total = Object.keys(Assets ?? {}).length + Object.keys(Sounds ?? {}).length;
 
     Promise.allSettled([
       ...Object.values(Assets || {}).map(this.loadAsset.bind(this)),

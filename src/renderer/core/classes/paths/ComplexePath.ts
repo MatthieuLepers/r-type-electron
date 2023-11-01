@@ -3,57 +3,39 @@ import LinePath from '@renderer/core/classes/paths/LinePath';
 import ArcPath from '@renderer/core/classes/paths/ArcPath';
 import BezierCurvePath from '@renderer/core/classes/paths/BezierCurvePath';
 import QuadraticBezierCurvePath from '@renderer/core/classes/paths/QuadraticBezierCurvePath';
+import type Point from '@renderer/core/classes/geometry/Point';
 
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
 export default class ComplexePath extends Path {
-  /**
-   * @constructor
-   * @param {Point} startPoint
-   */
-  constructor(startPoint) {
-    super(startPoint);
-    this.pathCollection = [];
-  }
+  public pathCollection: Array<LinePath | ArcPath | BezierCurvePath | QuadraticBezierCurvePath> = [];
 
-  /**
-   * @param {Path} path
-   * @return {this}
-   */
-  addPath(path) {
+  addPath(path: LinePath | ArcPath | BezierCurvePath | QuadraticBezierCurvePath): ComplexePath {
     path.startPoint = this.endPoint;
     this.pathCollection.push(path);
     return this;
   }
 
-  /**
-   * @return {Point}
-   */
-  get endPoint() {
+  get endPoint(): Point | undefined {
     let lastPoint = this.startPoint;
     if (this.pathCollection.length) {
       const [p] = this.pathCollection.slice(-1);
       lastPoint = p.endPoint;
     }
-    return lastPoint.clone();
+    return lastPoint?.clone();
   }
 
-  /**
-   * @return {String}
-   */
-  toSvgPath() {
+  toSvgPath(): string {
     const strTab = [super.toSvgPath()];
-    this.pathCollection.forEach((path) => { strTab.push(path.toSvgPath().split(' ').slice(-1)); });
+    this.pathCollection.forEach((path) => {
+      strTab.push(...path.toSvgPath().split(' ').slice(-1));
+    });
     return strTab.join(' ');
   }
 
-  /**
-   * @param {Number} angle
-   * @param {Point} pivot
-   */
-  rotate(angle, pivot) {
+  rotate(angle: number, pivot: Point): ComplexePath {
     this.pathCollection.forEach((path) => { path.rotate(angle, pivot); });
     return this;
   }
@@ -62,14 +44,14 @@ export default class ComplexePath extends Path {
    * @param {String} d
    * @return {ComplexePath}
    */
-  static fromSvgString(d) {
+  static fromSvgString(d: string): ComplexePath {
     let toParse = d;
     const regexPath = /(^M ?-?[0-9.]+[, ]?-?[0-9.]+) ?(.*)/;
     const regexLinePath = /(^L ?-?[0-9.]+[, ]?-?[0-9.]+) ?(.*)/;
     const regexArcPath = /(^A ?[0-9.]+[, ]?[0-9.]+[, ]?[0-9.]+[, ]?[0-9.]+[, ]?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+) ?(.*)/;
     const regexBezierCurvePath = /(^C ?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+) ?(.*)/;
     const regexQuadraticBezierCurvePath = /(^Q ?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+[, ]?-?[0-9.]+) ?(.*)/;
-    const complexePath = new ComplexePath(null);
+    const complexePath = new ComplexePath(undefined);
 
     while (toParse.length) {
       if (regexPath.test(toParse)) { // M dx dy
@@ -102,62 +84,52 @@ export default class ComplexePath extends Path {
     return complexePath;
   }
 
-  /**
-   * @param {Point} endPoint
-   * @return {this}
-   */
-  addLinePath(endPoint) {
-    this.addPath(new LinePath(null, endPoint));
+  addLinePath(endPoint: Point): ComplexePath {
+    this.addPath(new LinePath(undefined, endPoint));
     return this;
   }
 
-  /**
-   * @param {Number} radiusX
-   * @param {Number} radiusY
-   * @param {Number} rotation - degree
-   * @param {Boolean} largeArc
-   * @param {Boolean} sweepFlag
-   * @param {Point} endPoint
-   */
-  addArcPath(radiusX, radiusY, rotation, largeArc, sweepFlag, endPoint) {
-    this.addPath(new ArcPath(null, radiusX, radiusY, rotation, largeArc, sweepFlag, endPoint));
+  addArcPath(
+    radiusX: number,
+    radiusY: number,
+    rotation: number, // degree
+    largeArc: boolean,
+    sweepFlag: boolean,
+    endPoint: Point,
+  ): ComplexePath {
+    this.addPath(new ArcPath(undefined, radiusX, radiusY, rotation, largeArc, sweepFlag, endPoint));
     return this;
   }
 
-  /**
-   * @param {Point} firstCtrlPoint
-   * @param {Point} secondCtrlPoint
-   * @param {Point} endPoint
-   */
-  addBezierCurvePath(firstCtrlPoint, secondCtrlPoint, endPoint) {
-    this.addPath(new BezierCurvePath(null, firstCtrlPoint, secondCtrlPoint, endPoint));
+  addBezierCurvePath(
+    firstCtrlPoint: Point,
+    secondCtrlPoint: Point,
+    endPoint: Point,
+  ): ComplexePath {
+    this.addPath(new BezierCurvePath(undefined, firstCtrlPoint, secondCtrlPoint, endPoint));
     return this;
   }
 
-  /**
-   * @param {Point} ctrlPoint
-   * @param {Point} endPoint
-   */
-  addQuadraticBezierCurvePath(ctrlPoint, endPoint) {
-    this.addPath(new QuadraticBezierCurvePath(null, ctrlPoint, endPoint));
+  addQuadraticBezierCurvePath(
+    ctrlPoint: Point,
+    endPoint: Point,
+  ): ComplexePath {
+    this.addPath(new QuadraticBezierCurvePath(undefined, ctrlPoint, endPoint));
     return this;
   }
 
-  /**
-   * @return {ComplexePath}
-   */
-  makeNextLoop() {
-    return this.moveTo(this.endPoint);
+  makeNextLoop(): ComplexePath {
+    return this.moveTo(this.endPoint!);
   }
 
-  /**
-   * @param {Point} startPoint
-   * @return {ComplexePath}
-   */
-  moveTo(startPoint) {
+  moveTo(startPoint: Point): ComplexePath {
     const movedPath = new ComplexePath(startPoint);
-    const deltaPoint = this.startPoint.delta(startPoint);
-    this.pathCollection.forEach((path) => { movedPath.addPath(path.moveTo(deltaPoint)); });
+    const deltaPoint = this.startPoint?.delta(startPoint);
+    if (deltaPoint) {
+      this.pathCollection.forEach((path) => {
+        movedPath.addPath(path.moveTo(deltaPoint));
+      });
+    }
     return movedPath;
   }
 }
