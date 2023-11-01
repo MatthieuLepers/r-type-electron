@@ -1,4 +1,4 @@
 export default {
-  bank: 'weapon/dna',
+  bank: 'fx/weapon/dna',
   soundPath: '/assets/sounds/sound_dna.ogg',
 };

@@ -1,4 +1,4 @@
 export default {
-  bank: 'weapon/laser',
+  bank: 'fx/weapon/laser',
   soundPath: '/assets/sounds/sound_laser.ogg',
 };

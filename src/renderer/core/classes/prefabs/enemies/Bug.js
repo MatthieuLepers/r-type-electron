@@ -47,7 +47,7 @@ export default class Bug extends Enemy {
     this.components.shooter.retargetFn = () => this.getNearestPlayer();
 
     this.on('dead', () => {
-      this.playSound('entity/explosion');
+      this.playSound('fx/entity/explosion');
       Explosion.EXPLOSION_NORMAL(this).spawn();
     });
   }

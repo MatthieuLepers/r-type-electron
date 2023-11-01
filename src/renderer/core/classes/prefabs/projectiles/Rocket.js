@@ -51,7 +51,7 @@ export default class Rocket extends Projectile {
 
     this.on('move', this.findTarget.bind(this));
     this.on('dead', () => {
-      this.playSound('entity/explosion');
+      this.playSound('fx/entity/explosion');
       Explosion.EXPLOSION_ROCKET(this).spawn();
     });
   }

@@ -1,18 +1,16 @@
-import Class from '@renderer/core/classes/Class';
 import Rectangle from '@renderer/core/classes/geometry/Rectangle';
 
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
-export default class Canvas extends Class {
+export default class Canvas {
   /**
    * @constructor
    * @param {HTMLCanvasElement} canvas
    * @param {Object} options
    */
   constructor(canvas, options) {
-    super();
     this.options = {
       width: window.innerWidth,
       height: window.innerHeight - 80,

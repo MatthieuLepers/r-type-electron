@@ -24,7 +24,7 @@ export default class Item extends PhysicEntityScript {
     this.addCollisionTag('!isDead');
 
     this.on('picked', () => {
-      this.playSound('player/pick_upgrade');
+      this.playSound('fx/player/pick_upgrade');
     });
     this.on('collide', this.pick.bind(this));
   }

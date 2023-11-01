@@ -9,8 +9,8 @@ export interface IDebugSettings {
 }
 
 export interface IAudioSettings {
-  fxEnabled: boolean,
-  ambientEnabled: boolean,
+  fxVolume: number;
+  ambientVolume: number;
 }
 
 class Settings extends Class {
@@ -22,8 +22,8 @@ class Settings extends Class {
   };
 
   public audio: IAudioSettings = {
-    fxEnabled: true,
-    ambientEnabled: true,
+    fxVolume: 100,
+    ambientVolume: 100,
   };
 
   public controls: typeof Controls = Controls;
