@@ -6,42 +6,26 @@ import Point from '@renderer/core/classes/geometry/Point';
  * @version 1.0.0
  */
 export default class QuadraticBezierCurvePath extends Path {
-  /**
-   * @constructor
-   * @param {Point} startPoint
-   * @param {Point} ctrlPoint
-   * @param {Point} endPoint
-   */
-  constructor(startPoint, ctrlPoint, endPoint) {
+  constructor(
+    startPoint: Point | undefined,
+    public ctrlPoint: Point,
+    public endPoint: Point,
+  ) {
     super(startPoint);
-    this.endPoint = endPoint;
-    this.ctrlPoint = ctrlPoint;
   }
 
-  /**
-   * @return {String}
-   */
-  toSvgPath() {
+  toSvgPath(): string {
     return `${super.toSvgPath()}Q${this.ctrlPoint.x},${this.ctrlPoint.y},${this.endPoint.x},${this.endPoint.y}`;
   }
 
-  /**
-   * @param {Number} angle
-   * @param {Point} pivot
-   */
-  rotate(angle, pivot) {
+  rotate(angle: number, pivot: Point): QuadraticBezierCurvePath {
     super.rotate(angle, pivot);
     this.ctrlPoint.rotate(angle, pivot);
     this.endPoint.rotate(angle, pivot);
     return this;
   }
 
-  /**
-   * @param {String} d
-   * @param {Point} startPoint
-   * @return {QuadraticBezierCurvePath}
-   */
-  static fromSvgString(d, startPoint = null) {
+  static fromSvgString(d: string, startPoint?: Point): QuadraticBezierCurvePath {
     const regex = /^Q ?(-?[0-9.]+) [, ]?(-?[0-9.]+) [, ]?(-?[0-9.]+) [, ]?(-?[0-9.]+)$/;
     if (!regex.test(d)) {
       throw new Error(`Unable to parse SVG path from string '${d}'`);
@@ -50,13 +34,9 @@ export default class QuadraticBezierCurvePath extends Path {
     return new QuadraticBezierCurvePath(startPoint, new Point(x1, y1), new Point(dx, dy));
   }
 
-  /**
-   * @param {Point} deltaPoint
-   * @return {QuadraticBezierCurvePath}
-   */
-  moveTo(deltaPoint) {
+  moveTo(deltaPoint: Point): QuadraticBezierCurvePath {
     return new QuadraticBezierCurvePath(
-      this.startPoint.clone().add(deltaPoint.x, deltaPoint.y),
+      this.startPoint?.clone()?.add(deltaPoint.x, deltaPoint.y),
       this.ctrlPoint.clone().add(deltaPoint.x, deltaPoint.y),
       this.endPoint.clone().add(deltaPoint.x, deltaPoint.y),
     );

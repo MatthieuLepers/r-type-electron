@@ -2,56 +2,57 @@ import Point from '@renderer/core/classes/geometry/Point';
 import AbstractClassError from '@renderer/core/classes/errors/AbstractClassError';
 import Rectangle from '@renderer/core/classes/geometry/Rectangle';
 
+export interface IHitboxOptions {
+  hull: boolean;
+  weak: boolean;
+}
+
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
-export default class Hitbox {
-  /**
-   * @constructor
-   * @param {Object} bounds
-   * @param {Object} options
-   */
-  constructor(bounds, options = {}) {
+export default abstract class Hitbox {
+  public bounds: Rectangle = new Rectangle(0, 0, 0, 0, 0);
+
+  public colliding: boolean = false;
+
+  public collidingWith: Array<Hitbox> = [];
+
+  public options: IHitboxOptions = {
+    hull: false,
+    weak: false,
+  };
+
+  constructor(
+    bounds: Rectangle,
+    options = {},
+  ) {
     if (this.constructor.name === 'Hitbox') {
       throw new AbstractClassError(this);
     }
-    this.bounds = { x: 0, y: 0, width: 0, height: 0, rotation: 0 };
-    this.colliding = false;
-    this.collidingWith = [];
-    this.options = {
-      hull: false,
-      weak: false,
-    };
+    this.bounds = bounds;
 
-    Object.assign(this.bounds, bounds);
     Object.assign(this.options, options);
   }
 
-  /**
-   * @return {Point}
-   */
-  get centroid() {
+  get centroid(): Point {
     return this.polygon
       .reduce((acc, point) => acc.add(point.x, point.y), new Point(0, 0))
       .scale(1 / this.polygon.length, 1 / this.polygon.length)
     ;
   }
 
-  /**
-   * @return {SVGPathElement}
-   */
-  getSvg() {
+  abstract get polygon(): Array<Point>;
+
+  abstract toSvgPath(): string;
+
+  getSvg(): SVGPathElement {
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttributeNS(null, 'd', this.toSvgPath());
     return path;
   }
 
-  /**
-   * @param {Hitbox} hitbox
-   * @return {Boolean}
-   */
-  isColliding(hitbox) {
+  isColliding(hitbox: Hitbox): boolean {
     const maxLeft = Math.max(this.bounds.x, hitbox.bounds.x);
     const minRight = Math.min(this.bounds.x + this.bounds.width, hitbox.bounds.x + hitbox.bounds.width);
     const maxBottom = Math.max(this.bounds.y, hitbox.bounds.y);
@@ -67,25 +68,15 @@ export default class Hitbox {
     return hasCollision;
   }
 
-  /**
-   * @return {Boolean}
-   */
-  isHull() {
+  isHull(): boolean {
     return this.options.hull;
   }
 
-  /**
-   * @return {Boolean}
-   */
-  isWeak() {
+  isWeak(): boolean {
     return this.options.weak;
   }
 
-  /**
-   * @param {Hitbox} hitbox
-   * @return {Rectangle}
-   */
-  getCollisionArea(hitbox) {
+  getCollisionArea(hitbox: Hitbox): Rectangle {
     const maxLeft = Math.max(this.bounds.x, hitbox.bounds.x);
     const minRight = Math.min(this.bounds.x + this.bounds.width, hitbox.bounds.x + hitbox.bounds.width);
     const maxBottom = Math.max(this.bounds.y, hitbox.bounds.y);
@@ -98,7 +89,7 @@ export default class Hitbox {
    * @param {CanvasRenderingContext2D} ctx
    * @param {String} id
    */
-  render(ctx, id) {
+  render(ctx: CanvasRenderingContext2D, id: string) {
     ctx.font = '10px Arial';
     ctx.fillStyle = '#f00';
     ctx.textAlign = 'left';

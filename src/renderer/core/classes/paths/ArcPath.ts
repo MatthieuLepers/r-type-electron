@@ -6,49 +6,29 @@ import Point from '@renderer/core/classes/geometry/Point';
  * @version 1.0.0
  */
 export default class ArcPath extends Path {
-  /**
-   * @constructor
-   * @param {Point} startPoint
-   * @param {Number} radiusX
-   * @param {Number} radiusY
-   * @param {Number} rotation - degree
-   * @param {Boolean} largeArc
-   * @param {Boolean} sweepFlag
-   * @param {Point} endPoint
-   */
-  constructor(startPoint, radiusX, radiusY, rotation, largeArc, sweepFlag, endPoint) {
+  constructor(
+    startPoint: Point | undefined,
+    public radiusX: number,
+    public radiusY: number,
+    public rotation: number, // degree
+    public largeArc: boolean,
+    public sweepFlag: boolean,
+    public endPoint: Point,
+  ) {
     super(startPoint);
-    this.endPoint = endPoint;
-    this.radiusX = radiusX;
-    this.radiusY = radiusY;
-    this.rotation = rotation;
-    this.largeArc = largeArc;
-    this.sweepFlag = sweepFlag;
   }
 
-  /**
-   * @return {String}
-   */
-  toSvgPath() {
+  toSvgPath(): string {
     return `${super.toSvgPath()}A${this.radiusX},${this.radiusY},${this.rotation},${+this.largeArc},${+this.sweepFlag},${this.endPoint.x},${this.endPoint.y}`;
   }
 
-  /**
-   * @param {Number} angle
-   * @param {Point} pivot
-   */
-  rotate(angle, pivot) {
+  rotate(angle: number, pivot: Point): ArcPath {
     super.rotate(angle, pivot);
     this.endPoint.rotate(angle, pivot);
     return this;
   }
 
-  /**
-   * @param {String} d
-   * @param {Point} startPoint
-   * @return {ArcPath}
-   */
-  static fromSvgString(d, startPoint = null) {
+  static fromSvgString(d: string, startPoint?: Point): ArcPath {
     const regex = /^A ?([0-9.]+)[, ]?([0-9.]+)[, ]?([0-9.]+)[, ]?([0-9.]+)[, ]?([0-9.]+)[, ]?(-?[0-9.]+)[, ]?(-?[0-9.]+)$/;
     if (!regex.test(d)) {
       throw new Error(`Unable to parse SVG path from string '${d}'`);
@@ -57,13 +37,9 @@ export default class ArcPath extends Path {
     return new ArcPath(startPoint, radiusX, radiusY, rotation, largeArc === 1, sweepFlag === 1, new Point(dx, dy));
   }
 
-  /**
-   * @param {Point} deltaPoint
-   * @return {ArcPath}
-   */
-  moveTo(deltaPoint) {
+  moveTo(deltaPoint: Point): ArcPath {
     return new ArcPath(
-      this.startPoint.clone().add(deltaPoint.x, deltaPoint.y),
+      this.startPoint?.clone()?.add(deltaPoint.x, deltaPoint.y),
       this.radiusX,
       this.radiusY,
       this.rotation,

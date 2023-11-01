@@ -27,9 +27,9 @@ export default class DnaBullet extends Projectile {
     this.components.locomotor.speedX = 800;
     this.bindPath(this.getPath());
     this.components.locomotor.canMove = true;
-    if (this.shooter.hasTag('module', 'bitModule')) {
-      this.shooter = this.shooter.owner;
-    }
+    // if (this.shooter.hasTag('module', 'bitModule')) {
+    //   this.shooter = this.shooter.owner;
+    // }
 
     // Sprite
     this.components.sprite.init({

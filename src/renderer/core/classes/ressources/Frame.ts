@@ -1,23 +1,36 @@
 import Point from '@renderer/core/classes/geometry/Point';
 
+export interface IFrameData {
+  index: number;
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+  origin: Point;
+}
+
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
 export default class Frame {
+  public data: IFrameData = {
+    index: 0,
+    width: 0,
+    height: 0,
+    origin: new Point(0, 0),
+  };
+
   /**
    * @param {HTMLImageElement} image
    * @param {Object} data
    * @param {Number} frameAmount
    */
-  constructor(image, data, frameAmount) {
-    this.data = {
-      index: 0,
-      width: 0,
-      height: 0,
-      origin: new Point(0, 0),
-    };
-
+  constructor(
+    public image: HTMLImageElement,
+    data: IFrameData,
+    public frameAmount: number,
+  ) {
     Object.assign(this.data, data);
 
     this.data.width = (data.width !== undefined ? data.width : (image.naturalWidth / frameAmount));
@@ -25,31 +38,19 @@ export default class Frame {
     this.data.origin = new Point(data.x ?? (this.index * this.width), data.y ?? 0);
   }
 
-  /**
-   * @return {Number}
-   */
-  get index() {
+  get index(): number {
     return this.data.index;
   }
 
-  /**
-   * @return {Number}
-   */
-  get width() {
-    return this.data.width;
+  get width(): number {
+    return this.data?.width ?? (this.image.naturalWidth / this.frameAmount);
   }
 
-  /**
-   * @return {Number}
-   */
-  get height() {
-    return this.data.height;
+  get height(): number {
+    return this.data?.height ?? this.image.naturalHeight;
   }
 
-  /**
-   * @return {Point}
-   */
-  get origin() {
+  get origin(): Point {
     return this.data.origin;
   }
 }

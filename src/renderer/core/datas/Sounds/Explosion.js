@@ -1,4 +1,4 @@
 export default {
-  bank: 'entity/explosion',
+  bank: 'fx/entity/explosion',
   soundPath: '/assets/sounds/sound_explosion.ogg',
 };

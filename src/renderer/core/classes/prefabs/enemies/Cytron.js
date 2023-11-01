@@ -40,10 +40,10 @@ export default class Cytron extends Enemy {
     this.addCollisionTag('player', '!isDead');
 
     this.on('dead', () => {
-      this.playSound('entity/explosion');
+      this.playSound('fx/entity/explosion');
       Explosion.EXPLOSION_NORMAL(this).spawn();
     });
-    this.on('damaged', () => this.playSound('entity/forcefield_hit'));
+    this.on('damaged', () => this.playSound('fx/entity/forcefield_hit'));
     this.on('move', () => this.buildCellularWall());
   }
 

@@ -1,25 +1,18 @@
 import AbstractRessourceStore from '@renderer/core/stores/AbstractRessourceStore';
+import type Sound from '@renderer/core/classes/ressources/Sound';
 
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
-class SoundStore extends AbstractRessourceStore {
-  /**
-   * @param {String} soundPath
-   * @return {Sound}
-   */
-  play(soundPath) {
+class SoundStore extends AbstractRessourceStore<Sound> {
+  play(soundPath: string): Sound | null {
     const sound = this.get(soundPath);
-    sound.play();
+    sound?.play();
     return sound;
   }
 
-  /**
-   * @param {String} soundPath
-   * @return {Boolean}
-   */
-  exists(soundPath) {
+  exists(soundPath: string): boolean {
     return this.get(soundPath) !== null;
   }
 }

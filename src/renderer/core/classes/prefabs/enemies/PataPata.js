@@ -48,7 +48,7 @@ export default class PataPata extends Enemy {
     this.components.shooter.target = this.getNearestPlayer();
 
     this.on('dead', () => {
-      this.playSound('entity/explosion');
+      this.playSound('fx/entity/explosion');
       Explosion.EXPLOSION_NORMAL(this).spawn();
     });
   }
