@@ -72,12 +72,12 @@ export default class DnaBullet extends Projectile {
     if (this.shooter.hasTag('module', 'bitModule')) {
       return ComplexePath.fromSvgString(`M ${pathMX} 0 L ${pathLX} 0`).moveTo(new Point(
         this.shooter.components.transform.position.x + (this.getModuleSide() === Module.SIDE_FRONT ? 14 : -32),
-        this.shooter.components.transform.position.y + (this.shooter.getSprite().height / 2) - 2,
+        this.shooter.components.transform.position.y + (this.shooter.components.sprite.height / 2) - 2,
       ));
     }
     // Shooter is a Player
     return ComplexePath.fromSvgString(`M ${pathMX} 0 L ${pathLX} 0`).moveTo(new Point(
-      this.shooter.components.transform.position.x + (this.getModuleSide() === Module.SIDE_FRONT ? this.shooter.getSprite().width + 5 : -this.shooter.getSprite().width),
+      this.shooter.components.transform.position.x + (this.getModuleSide() === Module.SIDE_FRONT ? this.shooter.components.sprite.width + 5 : -this.shooter.components.sprite.width),
       this.shooter.components.transform.position.y + (this.color === DnaBullet.COLOR_BLUE ? 16 : -1),
     ));
   }

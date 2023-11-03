@@ -100,7 +100,7 @@ export default class CompilerBossRightPart extends Enemy {
     const playerIsOnRight = target.components.transform.position.x - this.components.transform.position.x >= 0;
     if (playerIsOnRight) {
       const projectile = RedLaser.new(this, target);
-      projectile.bindPath(ComplexePath.fromSvgString('M 0 0 L 100 0').moveTo(new Point(this.components.transform.position.x + this.getSprite().width - 48, this.components.transform.position.y + 18 + Global.Random.rnd(40))));
+      projectile.bindPath(ComplexePath.fromSvgString('M 0 0 L 100 0').moveTo(new Point(this.components.transform.position.x + this.components.sprite.width - 48, this.components.transform.position.y + 18 + Global.Random.rnd(40))));
       projectile.spawn();
       this.emit('shoot', { projectile });
     }

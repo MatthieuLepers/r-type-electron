@@ -37,18 +37,18 @@ export default class Locomotor extends DrawableComponent {
         const delta = this.components.transform.position.delta(nextPosition);
         if (this.components.locomotor.followSlope && this.hasComponent('Sprite')) {
           const angle = this.components.locomotor.calcAngleAtPosition(nextPosition);
-          this.getSprite().options.rotation = angle;
+          this.components.sprite.options.rotation = angle;
         }
 
         if (this.hasComponent('Sprite')) {
           if (this.hasTag('alwaysVisible')) {
-            if (nextPosition.x > 0 && nextPosition.x < (Global.Game.canvas.width - this.getSprite().width)) {
+            if (nextPosition.x > 0 && nextPosition.x < (Global.Game.canvas.width - this.components.sprite.width)) {
               this.components.transform.add(delta.x, 0);
               if (this.hasComponent('EventEmitter')) {
                 this.emit('move', { position: this.components.transform.position, speed: this.components.locomotor.speed });
               }
             }
-            if (nextPosition.y > 0 && nextPosition.y < (Global.Game.canvas.height - this.getSprite().height)) {
+            if (nextPosition.y > 0 && nextPosition.y < (Global.Game.canvas.height - this.components.sprite.height)) {
               this.components.transform.add(0, delta.y);
               if (this.hasComponent('EventEmitter')) {
                 this.emit('move', { position: this.components.transform.position, speed: this.components.locomotor.speed });
@@ -81,13 +81,13 @@ export default class Locomotor extends DrawableComponent {
      * @param {Boolean} loop
      */
     AddClassMethod(this.clazz, 'bindPath', function (path, loop = true) {
-      this.unBindPath();
+      this.unbindPath();
       this.components.locomotor.path = path;
       this.components.locomotor.$pathLoop = loop;
       this.components.transform.position = path.startPoint.clone();
     });
 
-    AddClassMethod(this.clazz, 'unBindPath', function () {
+    AddClassMethod(this.clazz, 'unbindPath', function () {
       this.components.locomotor.path = null;
       this.components.locomotor.$pathLoop = true;
       this.components.locomotor.$pathPercent = 0.0;
@@ -202,7 +202,7 @@ export default class Locomotor extends DrawableComponent {
         }
       }
       if (this.trackedEntity) {
-        this.inst.bindPath(ComplexePath.fromSvgString(`M ${this.inst.components.transform.position.x} ${this.inst.components.transform.position.y} L ${this.trackedEntity.components.transform.position.x + (this.trackedEntity.getSprite().width / 2) - (this.inst.getSprite().width / 2)} ${this.trackedEntity.components.transform.position.y + (this.trackedEntity.getSprite().height / 2) - (this.inst.getSprite().height / 2)}`), false);
+        this.inst.bindPath(ComplexePath.fromSvgString(`M ${this.inst.components.transform.position.x} ${this.inst.components.transform.position.y} L ${this.trackedEntity.components.transform.position.x + (this.trackedEntity.components.sprite.width / 2) - (this.inst.components.sprite.width / 2)} ${this.trackedEntity.components.transform.position.y + (this.trackedEntity.components.sprite.height / 2) - (this.inst.components.sprite.height / 2)}`), false);
       }
       if (this.path) {
         this.inst.move();

@@ -22,8 +22,8 @@ export default class DnaBeam extends Projectile {
 
     // Transform
     this.setTransform(
-      this.shooter.components.transform.position.x + (this.side === Module.SIDE_FRONT ? this.shooter.getSprite().width : -120),
-      this.shooter.getSprite().centerOrigin.y - 28,
+      this.shooter.components.transform.position.x + (this.side === Module.SIDE_FRONT ? this.shooter.components.sprite.width : -120),
+      this.shooter.components.sprite.centerOrigin.y - 28,
     );
 
     // Locomotor
@@ -41,7 +41,7 @@ export default class DnaBeam extends Projectile {
     this.components.transform.calcPositionFn = () => { // Positionning when module is on back side
       if (this.side === Module.SIDE_BACK) {
         return new Point(
-          this.components.transform.position.x - this.getSprite().frame.width + this.getSprite().getMaxFrameWidth(),
+          this.components.transform.position.x - this.components.sprite.frame.width + this.components.sprite.getMaxFrameWidth(),
           this.components.transform.position.y,
         );
       }
@@ -56,17 +56,17 @@ export default class DnaBeam extends Projectile {
     this.components.physics.initHitboxFn = (hitbox) => {
       if (this.$offset > 0) {
         hitbox.bounds = {
-          x: this.components.transform.position.x - (this.side === Module.SIDE_BACK ? this.getSprite().width + this.getSprite().getMaxFrameWidth() - 208 : 0) + this.getSprite().frame.data.hitboxOffsetX,
+          x: this.components.transform.position.x - (this.side === Module.SIDE_BACK ? this.components.sprite.width + this.components.sprite.getMaxFrameWidth() - 208 : 0) + this.components.sprite.frame.data.hitboxOffsetX,
           y: this.components.transform.position.y,
-          width: this.getSprite().width - this.getSprite().frame.data.hitboxOffsetX,
-          height: this.getSprite().height,
+          width: this.components.sprite.width - this.components.sprite.frame.data.hitboxOffsetX,
+          height: this.components.sprite.height,
         };
       } else {
         hitbox.bounds = {
-          x: this.components.transform.position.x - (this.side === Module.SIDE_BACK ? this.getSprite().width + this.getSprite().getMaxFrameWidth() - 240 : 0),
+          x: this.components.transform.position.x - (this.side === Module.SIDE_BACK ? this.components.sprite.width + this.components.sprite.getMaxFrameWidth() - 240 : 0),
           y: this.components.transform.position.y,
-          width: this.getSprite().width,
-          height: this.getSprite().height,
+          width: this.components.sprite.width,
+          height: this.components.sprite.height,
         };
       }
     };
@@ -87,8 +87,8 @@ export default class DnaBeam extends Projectile {
     // Locomotor
     if (this.hasTag('attached')) {
       this.setTransform(
-        this.shooter.components.transform.position.x + (sign > 0 ? this.shooter.getSprite().width : -120) + sign * (this.$offset === 0 ? 64 : ((this.$offset + 1) * 64)),
-        this.shooter.getSprite().centerOrigin.y - 16,
+        this.shooter.components.transform.position.x + (sign > 0 ? this.shooter.components.sprite.width : -120) + sign * (this.$offset === 0 ? 64 : ((this.$offset + 1) * 64)),
+        this.shooter.components.sprite.centerOrigin.y - 16,
       );
     } else {
       this.components.transform.position.add(sign * 64, 0);

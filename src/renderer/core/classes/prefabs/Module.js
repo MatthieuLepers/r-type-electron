@@ -93,7 +93,7 @@ export default class Module extends PhysicEntityScript {
     return {
       x: this.components.transform.position.x,
       y: this.components.transform.position.y + ((this.tier === 0 && 8) || (this.tier === 1 && 5) || 2),
-      width: this.getSprite().width,
+      width: this.components.sprite.width,
       height: 16 + this.tier * 6,
     };
   }
@@ -130,9 +130,9 @@ export default class Module extends PhysicEntityScript {
       this.owner = ship;
       this.owner.releasedModule = null;
       this.owner.attachEntity(this, 'module');
-      this.side = (this.getSprite().centerOrigin.x > this.owner.getSprite().centerOrigin.x ? Module.SIDE_FRONT : Module.SIDE_BACK);
+      this.side = (this.components.sprite.centerOrigin.x > this.owner.components.sprite.centerOrigin.x ? Module.SIDE_FRONT : Module.SIDE_BACK);
       this.playSound('fx/module/module_attach');
-      this.unBindPath();
+      this.unbindPath();
       this.update();
       this.components.physics.collideFn = null;
       this.addCollisionTag('enemy', '!piercing');
@@ -151,7 +151,7 @@ export default class Module extends PhysicEntityScript {
       this.owner = null;
       this.playSound('fx/module/module_release');
       if (this.side === Module.SIDE_FRONT) {
-        this.bindPath(ComplexePath.fromSvgString(`M ${this.components.transform.position.x + 5} ${this.components.transform.position.y} L ${Global.Game.canvas.width - this.getSprite().width} ${this.components.transform.position.y}`), false);
+        this.bindPath(ComplexePath.fromSvgString(`M ${this.components.transform.position.x + 5} ${this.components.transform.position.y} L ${Global.Game.canvas.width - this.components.sprite.width} ${this.components.transform.position.y}`), false);
       } else {
         this.bindPath(ComplexePath.fromSvgString(`M ${this.components.transform.position.x - 5} ${this.components.transform.position.y} L 0 ${this.components.transform.position.y}`), false);
       }
@@ -196,8 +196,8 @@ export default class Module extends PhysicEntityScript {
     if (this.hasTag('attached')) {
       const owner = this.owner || this.target;
       this.setTransform(
-        owner.components.transform.position.x + (this.side === Module.SIDE_FRONT ? owner.getSprite().width : -this.getSprite().width),
-        owner.getSprite().centerOrigin.y - (this.getSprite().height / 2),
+        owner.components.transform.position.x + (this.side === Module.SIDE_FRONT ? owner.components.sprite.width : -this.components.sprite.width),
+        owner.components.sprite.centerOrigin.y - (this.components.sprite.height / 2),
       );
     }
   }

@@ -62,10 +62,10 @@ export default class QuadTree {
   getIndex(entity) {
     let index = -1;
     const midPoint = new Point(this.bounds.x + (this.bounds.width / 2), this.bounds.y + (this.bounds.height / 2));
-    const topQuadrant = (entity.components.transform.position.y < midPoint.y && entity.components.transform.position.y + entity.getSprite().height < midPoint.y);
+    const topQuadrant = (entity.components.transform.position.y < midPoint.y && entity.components.transform.position.y + entity.components.sprite.height < midPoint.y);
     const bottomQuadrant = (entity.components.transform.position.y > midPoint.y);
 
-    if (entity.components.transform.position.x < midPoint.x && entity.components.transform.position.x + entity.getSprite().width < midPoint.x) {
+    if (entity.components.transform.position.x < midPoint.x && entity.components.transform.position.x + entity.components.sprite.width < midPoint.x) {
       if (topQuadrant) {
         index = 1;
       } else if (bottomQuadrant) {

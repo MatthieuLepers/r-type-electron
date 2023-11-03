@@ -35,8 +35,8 @@ export default class Explosion extends EntityScript {
 
     // Transform
     explosion.setTransform(
-      entity.getSprite().centerOrigin.x - 16,
-      entity.getSprite().centerOrigin.y - 16,
+      entity.components.sprite.centerOrigin.x - 16,
+      entity.components.sprite.centerOrigin.y - 16,
     );
 
     // Sprite
@@ -55,8 +55,8 @@ export default class Explosion extends EntityScript {
 
     // Transform
     explosion.setTransform(
-      entity.getSprite().centerOrigin.x - 16,
-      entity.getSprite().centerOrigin.y - 14,
+      entity.components.sprite.centerOrigin.x - 16,
+      entity.components.sprite.centerOrigin.y - 14,
     );
 
     // Sprite
@@ -75,8 +75,8 @@ export default class Explosion extends EntityScript {
 
     // Transform
     explosion.setTransform(
-      entity.getSprite().centerOrigin.x - 32,
-      entity.getSprite().centerOrigin.y - 32,
+      entity.components.sprite.centerOrigin.x - 32,
+      entity.components.sprite.centerOrigin.y - 32,
     );
 
     // Sprite
@@ -95,8 +95,8 @@ export default class Explosion extends EntityScript {
 
     // Transform
     explosion.setTransform(
-      entity.getSprite().centerOrigin.x - 7.5,
-      entity.getSprite().centerOrigin.y - 7,
+      entity.components.sprite.centerOrigin.x - 7.5,
+      entity.components.sprite.centerOrigin.y - 7,
     );
 
     // Sprite
@@ -115,8 +115,8 @@ export default class Explosion extends EntityScript {
 
     // Transform
     explosion.setTransform(
-      entity.getSprite().centerOrigin.x - 16,
-      entity.getSprite().centerOrigin.y - 16,
+      entity.components.sprite.centerOrigin.x - 16,
+      entity.components.sprite.centerOrigin.y - 16,
     );
 
     // Sprite
@@ -135,8 +135,8 @@ export default class Explosion extends EntityScript {
 
     // Transform
     explosion.setTransform(
-      entity.getSprite().centerOrigin.x - 8,
-      entity.getSprite().centerOrigin.y - 7,
+      entity.components.sprite.centerOrigin.x - 8,
+      entity.components.sprite.centerOrigin.y - 7,
     );
 
     // Sprite
@@ -155,8 +155,8 @@ export default class Explosion extends EntityScript {
 
     // Transform
     explosion.setTransform(
-      entity.getSprite().centerOrigin.x - 8,
-      entity.getSprite().centerOrigin.y - 8,
+      entity.components.sprite.centerOrigin.x - 8,
+      entity.components.sprite.centerOrigin.y - 8,
     );
 
     // Sprite
@@ -172,8 +172,8 @@ export default class Explosion extends EntityScript {
 
     // Transform
     explosion.setTransform(
-      entity.getSprite().centerOrigin.x - 16,
-      entity.getSprite().centerOrigin.y - 16,
+      entity.components.sprite.centerOrigin.x - 16,
+      entity.components.sprite.centerOrigin.y - 16,
     );
 
     // Sprite

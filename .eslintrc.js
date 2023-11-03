@@ -73,5 +73,6 @@ module.exports = {
     'vue/no-multiple-template-root': 'off',
     'vue/require-default-prop': 'off',
     'new-cap': 'off',
+    'arrow-body-style': 'off',
   },
 };

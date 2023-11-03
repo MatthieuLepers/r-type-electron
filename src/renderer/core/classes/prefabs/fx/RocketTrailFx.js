@@ -17,7 +17,7 @@ export default class RocketTrailFx extends Fx {
     // Transform
     this.setTransform(
       this.parent.components.transform.position.x - 7,
-      this.parent.getSprite().centerOrigin.y - 6,
+      this.parent.components.sprite.centerOrigin.y - 6,
     );
 
     // Locomotor
@@ -33,11 +33,11 @@ export default class RocketTrailFx extends Fx {
     });
 
     this.parent.on('move', () => {
-      this.getSprite().options.rotation = this.parent.getSprite().options.rotation;
+      this.components.sprite.options.rotation = this.parent.components.sprite.options.rotation;
       const newPos = new Point(
         this.parent.components.transform.position.x - 7,
-        this.parent.getSprite().centerOrigin.y - 6,
-      ).rotate(this.parent.getSprite().options.rotation, this.parent.getSprite().centerOrigin);
+        this.parent.components.sprite.centerOrigin.y - 6,
+      ).rotate(this.parent.components.sprite.options.rotation, this.parent.components.sprite.centerOrigin);
       this.setTransform(newPos.x, newPos.y);
     });
   }

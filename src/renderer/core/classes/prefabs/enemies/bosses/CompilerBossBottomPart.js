@@ -68,8 +68,8 @@ export default class CompilerBottomPart extends Enemy {
       new RectangleHitbox({
         x: this.components.transform.position.x,
         y: this.components.transform.position.y + 32,
-        width: this.getSprite().width,
-        height: this.getSprite().height - 32,
+        width: this.components.sprite.width,
+        height: this.components.sprite.height - 32,
       }, { hull: true }),
       new RectangleHitbox({
         x: this.components.transform.position.x + 54,

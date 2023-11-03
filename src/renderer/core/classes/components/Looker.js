@@ -36,8 +36,8 @@ export default class Looker extends Component {
 
   task() {
     if (this.target && this.inst.hasComponent('Sprite') && this.inst.hasComponent('Transform') && this.target.hasComponent('Transform')) {
-      const signX = this.inst.getSprite().centerOrigin.x - this.target.getSprite().centerOrigin.x >= 0 ? -1 : 1;
-      const signY = this.inst.getSprite().centerOrigin.y - this.target.getSprite().centerOrigin.y >= 0 ? -1 : 1;
+      const signX = this.inst.components.sprite.centerOrigin.x - this.target.components.sprite.centerOrigin.x >= 0 ? -1 : 1;
+      const signY = this.inst.components.sprite.centerOrigin.y - this.target.components.sprite.centerOrigin.y >= 0 ? -1 : 1;
 
       const angle = this.inst.getAngleTo(this.target);
       const minNormalizedAngle = 0;

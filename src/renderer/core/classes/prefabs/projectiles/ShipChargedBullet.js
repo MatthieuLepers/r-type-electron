@@ -21,8 +21,8 @@ export default class ShipChargedBullet extends Projectile {
     // Locomotor
     this.components.locomotor.speedX = this.data.speed;
     this.bindPath(ComplexePath.fromSvgString('M 300 300 L 500 300').moveTo(new Point(
-      this.shooter.components.transform.position.x + this.shooter.getSprite().width + 5,
-      this.shooter.getSprite().centerOrigin.y - (this.asset.height / 2),
+      this.shooter.components.transform.position.x + this.shooter.components.sprite.width + 5,
+      this.shooter.components.sprite.centerOrigin.y - (this.asset.height / 2),
     )));
     this.components.locomotor.canMove = true;
 

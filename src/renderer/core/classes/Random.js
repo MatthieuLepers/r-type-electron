@@ -1,4 +1,3 @@
-import Global from '@renderer/core/stores/AppStore';
 import Class from '@renderer/core/classes/Class';
 
 /**
@@ -13,8 +12,6 @@ export default class Random extends Class {
   constructor(baseSeed = 6) {
     super();
     this.seed = baseSeed;
-
-    Global.Random = this;
   }
 
   /**
