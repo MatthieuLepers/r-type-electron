@@ -109,7 +109,8 @@ export default class PlayerShip extends PhysicEntityScript {
         },
       })
     ;
-    this.components.controller.setType(Controller.TYPE_KEYBOARD).bind();
+    this.components.controller.setType(Controller.TYPE_KEYBOARD);
+    this.components.controller.bind();
     // this.components.controller.setType(Controller.TYPE_GAMEPAD).bind();
 
     // AttachedEntities

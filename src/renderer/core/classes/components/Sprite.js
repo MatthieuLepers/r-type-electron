@@ -30,14 +30,7 @@ export default class Sprite extends DrawableComponent {
      * @return {String}
      */
     AddClassMethod(this.clazz, 'getId', function () {
-      return this.getSprite().id;
-    });
-
-    /**
-     * @return {Sprite}
-     */
-    AddClassMethod(this.clazz, 'getSprite', function () {
-      return this.components.sprite;
+      return this.components.sprite.id;
     });
 
     /**
@@ -58,9 +51,9 @@ export default class Sprite extends DrawableComponent {
      * @return {Boolean}
      */
     AddClassMethod(this.clazz, 'isVisible', function () {
-      return this.components.transform.position.x > -this.getSprite().width
+      return this.components.transform.position.x > -this.components.sprite.width
         && this.components.transform.position.x < Global.Game.canvas.width
-        && this.components.transform.position.y > -this.getSprite().height
+        && this.components.transform.position.y > -this.components.sprite.height
         && this.components.transform.position.y < Global.Game.canvas.height
       ;
     });

@@ -16,8 +16,8 @@ export default class ForceFieldFx extends Fx {
 
     // Transform
     this.setTransform(
-      this.parent.getSprite().centerOrigin.x - 32,
-      this.parent.getSprite().centerOrigin.y - 32,
+      this.parent.components.sprite.centerOrigin.x - 32,
+      this.parent.components.sprite.centerOrigin.y - 32,
     );
 
     // Locomotor

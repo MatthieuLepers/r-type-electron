@@ -2,6 +2,7 @@ import Engine from '@renderer/core/classes/Engine';
 import AssetStore from '@renderer/core/stores/AssetStore';
 import SoundStore from '@renderer/core/stores/SoundStore';
 import Settings from '@renderer/core/Settings';
+import Random from '@renderer/core/classes/Random';
 
 /**
  * @author Matthieu LEPERS
@@ -20,6 +21,7 @@ class AppStore {
     this.Settings = Settings;
     this.ModKnowledge = null;
     this.Game = null;
+    this.Random = new Random();
     this.devToolsOpen = false;
   }
 }

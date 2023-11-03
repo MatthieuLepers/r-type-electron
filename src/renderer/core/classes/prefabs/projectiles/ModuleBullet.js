@@ -19,8 +19,8 @@ export default class ModuleBullet extends Projectile {
     // Locomotor
     this.components.locomotor.speedX = 650;
     this.bindPath(ComplexePath.fromSvgString('M 0 0 L 200 0').rotate(this.angle, new Point(0, 0)).moveTo(new Point(
-      this.shooter.getSprite().centerOrigin.x - 8,
-      this.shooter.getSprite().centerOrigin.y - 1,
+      this.shooter.components.sprite.centerOrigin.x - 8,
+      this.shooter.components.sprite.centerOrigin.y - 1,
     )));
     this.components.locomotor.canMove = true;
 

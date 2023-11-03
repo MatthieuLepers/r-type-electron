@@ -14,8 +14,8 @@ export default class ShipBulletChargeFx extends Fx {
 
     // Transform
     this.setTransform(
-      this.parent.components.transform.position.x + this.parent.getSprite().width + this.getAttachedModuleOffset(),
-      this.parent.getSprite().centerOrigin.y - 16,
+      this.parent.components.transform.position.x + this.parent.components.sprite.width + this.getAttachedModuleOffset(),
+      this.parent.components.sprite.centerOrigin.y - 16,
     );
 
     // Locomotor
@@ -36,7 +36,7 @@ export default class ShipBulletChargeFx extends Fx {
    */
   getAttachedModuleOffset() {
     if (this.parent.isEntityAttached('module') && this.parent.getAttachedEntity('module').side === 'front') {
-      return this.parent.getAttachedEntity('module').getSprite().width;
+      return this.parent.getAttachedEntity('module').components.sprite.width;
     }
     return 0;
   }
@@ -44,8 +44,8 @@ export default class ShipBulletChargeFx extends Fx {
   update() {
     super.update();
     this.setTransform(
-      this.parent.components.transform.position.x + this.parent.getSprite().width + this.getAttachedModuleOffset(),
-      this.parent.getSprite().centerOrigin.y - 16,
+      this.parent.components.transform.position.x + this.parent.components.sprite.width + this.getAttachedModuleOffset(),
+      this.parent.components.sprite.centerOrigin.y - 16,
     );
   }
 }

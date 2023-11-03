@@ -11,8 +11,8 @@ export default class ModuleEjectFx extends Fx {
 
     // Transform
     this.setTransform(
-      this.parent.getSprite().centerOrigin.x - (this.parent.side === 'back' ? 8 : 19),
-      this.parent.getSprite().centerOrigin.y - 8,
+      this.parent.components.sprite.centerOrigin.x - (this.parent.side === 'back' ? 8 : 19),
+      this.parent.components.sprite.centerOrigin.y - 8,
     );
 
     // Locomotor
@@ -30,8 +30,8 @@ export default class ModuleEjectFx extends Fx {
   update() {
     super.update();
     this.setTransform(
-      this.parent.getSprite().centerOrigin.x - (this.parent.side === 'back' ? 8 : 19),
-      this.parent.getSprite().centerOrigin.y - 8,
+      this.parent.components.sprite.centerOrigin.x - (this.parent.side === 'back' ? 8 : 19),
+      this.parent.components.sprite.centerOrigin.y - 8,
     );
     this.playAnimation(this.parent.side ?? 'front');
   }

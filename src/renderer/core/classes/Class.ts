@@ -1,71 +1,47 @@
 import AbstractClassError from '@renderer/core/classes/errors/AbstractClassError';
+import { Components } from '@renderer/core/classes/components';
+import type Component from '@renderer/core/classes/components/Component';
+import type { Constructor } from '@renderer/core/@types';
 
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
-export default class Class {
-  /**
-   * @constructor
-   */
+export default abstract class Class {
+  public components: Partial<Components> = {};
+
   constructor() {
     if (this.constructor.name === 'Class') {
       throw new AbstractClassError(this);
     }
-    this.components = {};
   }
 
-  /**
-   * @param {String} component
-   * @param {String} clazz
-   */
-  addComponent(component, clazz) {
+  addComponent(component: Constructor<Component<any>>, clazz: Function) {
     this.addComponentAt(component.name, component, clazz ?? this.constructor);
   }
 
-  /**
-   * @param {String} key
-   * @param {String} component
-   * @param {String} clazz
-   */
-  addComponentAt(key, component, clazz) {
+  addComponentAt(key: string, component: Constructor<Component<any>>, clazz: Function) {
     this.components[key.toLowerCase()] = new component(this, clazz);
   }
 
-  /**
-   * @param {String} component
-   */
-  removeComponent(component) {
+  removeComponent(component: string) {
     delete this.components[component.toLowerCase()];
   }
 
-  /**
-   * @param {String} component
-   * @return {Boolean}
-   */
-  hasComponent(component) {
+  hasComponent(component: string): boolean {
     return !!this.components[component.toLowerCase()];
   }
 
-  /**
-   * @return {Function}
-   */
-  getClass() {
+  getClass(): string {
     return this.constructor.name;
   }
 
-  /**
-   * @return {Function}
-   */
-  getParentClass() {
+  getParentClass(): string {
     return Object.getPrototypeOf(this.constructor).name;
   }
 
-  /**
-   * @return {String[]}
-   */
-  getAllParentClass() {
-    const allParent = [];
+  getAllParentClass(): Array<string> {
+    const allParent: Array<string> = [];
     let baseClass = this.constructor;
 
     while (baseClass) {
@@ -81,11 +57,7 @@ export default class Class {
     return allParent;
   }
 
-  /**
-   * @param {String} clazz
-   * @return {Boolean}
-   */
-  isExtending(clazz) {
+  isExtending(clazz: string | Function): boolean {
     return this.getAllParentClass().indexOf(typeof clazz !== 'function' ? clazz : clazz.prototype.constructor.name) >= 0;
   }
 }

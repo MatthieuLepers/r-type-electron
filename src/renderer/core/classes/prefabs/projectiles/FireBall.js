@@ -55,12 +55,12 @@ export default class FireBall extends Projectile {
     let { x } = this.shooter.components.transform.position;
 
     if (module) {
-      x += (module.side === 'back' ? -16 : this.shooter.getSprite().width + 2);
+      x += (module.side === 'back' ? -16 : this.shooter.components.sprite.width + 2);
     }
 
     if (this.direction === Direction.UP) {
-      return ComplexePath.fromSvgString('M 0 900 L 0 0').moveTo(new Point(x, this.shooter.getSprite().centerOrigin.y - 8));
+      return ComplexePath.fromSvgString('M 0 900 L 0 0').moveTo(new Point(x, this.shooter.components.sprite.centerOrigin.y - 8));
     }
-    return ComplexePath.fromSvgString('M 0 0 L 0 900').moveTo(new Point(x, this.shooter.getSprite().centerOrigin.y - 8));
+    return ComplexePath.fromSvgString('M 0 0 L 0 900').moveTo(new Point(x, this.shooter.components.sprite.centerOrigin.y - 8));
   }
 }

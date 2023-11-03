@@ -16,7 +16,7 @@ export default class ShipBoosterFx extends Fx {
     // Transform
     this.setTransform(
       this.parent.components.transform.position.x - 32,
-      this.parent.getSprite().centerOrigin.y - 16,
+      this.parent.components.sprite.centerOrigin.y - 16,
     );
 
     // Locomotor

@@ -74,8 +74,8 @@ export default class BlueLaser extends Projectile {
     const pathLY = (this.angle > 0 ? '200' : '0');
 
     return ComplexePath.fromSvgString(`M ${pathMX} ${pathMY} L ${pathLX} ${pathLY}`).moveTo(new Point(
-      this.shooter.components.transform.position.x + (this.getModuleSide() === Module.SIDE_FRONT ? this.shooter.getSprite().width : -this.shooter.getAttachedEntity('module').getSprite().width),
-      this.shooter.getSprite().centerOrigin.y - 1.5,
+      this.shooter.components.transform.position.x + (this.getModuleSide() === Module.SIDE_FRONT ? this.shooter.components.sprite.width : -this.shooter.getAttachedEntity('module').components.sprite.width),
+      this.shooter.components.sprite.centerOrigin.y - 1.5,
     ));
   }
 }

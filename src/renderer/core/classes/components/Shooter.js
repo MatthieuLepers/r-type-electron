@@ -48,7 +48,7 @@ export default class Shooter extends Component {
 
         const projectile = this.components.shooter.projectile.new(this.components.shooter.shooter ?? this, this.components.shooter.target ?? null);
         if (this.components.shooter.useSpread) {
-          projectile.getSprite().options.rotation = this.components.shooter.spread.currentAngle;
+          projectile.components.sprite.options.rotation = this.components.shooter.spread.currentAngle;
           projectile.components.locomotor.path.rotate(this.components.shooter.spread.currentAngle, projectile.components.locomotor.path.startPoint);
           this.components.shooter.updateSpread();
         }

@@ -21,7 +21,7 @@ export default class PlasmaBall extends Projectile {
 
     // Locomotor
     this.components.locomotor.speedX = 300;
-    this.bindPath(ComplexePath.fromSvgString(`M ${this.shooter.components.transform.position.x + 7} ${this.shooter.components.transform.position.y + (this.shooter.getSprite().height / 2) - 3} L ${this.target.getSprite().centerOrigin.x} ${this.target.getSprite().centerOrigin.y}`));
+    this.bindPath(ComplexePath.fromSvgString(`M ${this.shooter.components.transform.position.x + 7} ${this.shooter.components.transform.position.y + (this.shooter.components.sprite.height / 2) - 3} L ${this.target.components.sprite.centerOrigin.x} ${this.target.components.sprite.centerOrigin.y}`));
     this.components.locomotor.canMove = true;
 
     // Sprite

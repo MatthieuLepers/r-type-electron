@@ -25,7 +25,7 @@ export default class Upgrade extends Item {
 
     // Locomotor
     this.components.locomotor.speedX = 75;
-    this.bindPath(ComplexePath.fromSvgString('M 100 0 L 0 0').moveTo(new Point(this.dropper.getSprite().centerOrigin.x - 10, this.dropper.getSprite().centerOrigin.y - 9)));
+    this.bindPath(ComplexePath.fromSvgString('M 100 0 L 0 0').moveTo(new Point(this.dropper.components.sprite.centerOrigin.x - 10, this.dropper.components.sprite.centerOrigin.y - 9)));
     this.components.locomotor.canMove = true;
 
     this.on('picked', (e) => {
