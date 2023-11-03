@@ -30,9 +30,9 @@ export default class PhysicEntityScript extends EntityScript {
     return {
       x: this.components.transform.position.x,
       y: this.components.transform.position.y,
-      width: this.getSprite().width,
-      height: this.getSprite().height,
-      rotation: this.getSprite().options.rotation,
+      width: this.components.sprite.width,
+      height: this.components.sprite.height,
+      rotation: this.components.sprite.options.rotation,
     };
   }
 

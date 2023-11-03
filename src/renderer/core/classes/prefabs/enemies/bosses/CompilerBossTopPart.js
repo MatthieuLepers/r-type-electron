@@ -76,7 +76,7 @@ export default class CompilerTopPart extends Enemy {
       new RectangleHitbox({
         x: this.components.transform.position.x,
         y: this.components.transform.position.y,
-        width: this.getSprite().width,
+        width: this.components.sprite.width,
         height: 53,
       }, { hull: true }),
       new RectangleHitbox({
@@ -107,7 +107,7 @@ export default class CompilerTopPart extends Enemy {
     const playerIsOnRight = target.components.transform.position.x - this.components.transform.position.x >= 0;
     if (playerIsOnRight) {
       const projectile = RedLaser.new(this, target);
-      projectile.bindPath(ComplexePath.fromSvgString('M 0 0 L 100 0').moveTo(new Point(this.components.transform.position.x + this.getSprite().width - 48, this.components.transform.position.y + 17 + Global.Random.rnd(25))));
+      projectile.bindPath(ComplexePath.fromSvgString('M 0 0 L 100 0').moveTo(new Point(this.components.transform.position.x + this.components.sprite.width - 48, this.components.transform.position.y + 17 + Global.Random.rnd(25))));
       projectile.spawn();
       this.emit('shoot', { projectile });
     }

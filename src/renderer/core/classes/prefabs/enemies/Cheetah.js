@@ -65,11 +65,11 @@ export default class Cheetah extends Enemy {
       new RectangleHitbox({
         x: this.components.transform.position.x,
         y: this.components.transform.position.y,
-        width: this.getSprite().width - 9,
-        height: this.getSprite().height,
+        width: this.components.sprite.width - 9,
+        height: this.components.sprite.height,
       }),
       new RectangleHitbox({
-        x: this.components.transform.position.x + this.getSprite().width - 9,
+        x: this.components.transform.position.x + this.components.sprite.width - 9,
         y: this.components.transform.position.y + 17,
         width: 9,
         height: 16,

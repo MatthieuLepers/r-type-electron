@@ -60,7 +60,7 @@ export default class Rocket extends Projectile {
     if (!this.target) {
       [this.target] = Object
         .values(Global.Game.entities)
-        .filter((ent) => ent.hasTag('enemy', '!projectile', '!isDead') && ((this.slot === 'top' && ent.components.transform.position.y + ent.getSprite().height <= this.components.transform.position.y) || (this.slot === 'bottom' && ent.components.transform.position.y >= this.components.transform.position.y + this.getSprite().height)))
+        .filter((ent) => ent.hasTag('enemy', '!projectile', '!isDead') && ((this.slot === 'top' && ent.components.transform.position.y + ent.components.sprite.height <= this.components.transform.position.y) || (this.slot === 'bottom' && ent.components.transform.position.y >= this.components.transform.position.y + this.components.sprite.height)))
       ;
       this.components.locomotor.track(this.target);
     }

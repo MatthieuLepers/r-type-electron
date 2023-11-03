@@ -20,7 +20,7 @@ export default class RedLaser extends Projectile {
 
     // Locomotor
     this.components.locomotor.speedX = 600;
-    this.bindPath(ComplexePath.fromSvgString('M 700 300 L 550 300').moveTo(new Point(this.shooter.components.transform.position.x, this.shooter.getSprite().centerOrigin.y - 2)));
+    this.bindPath(ComplexePath.fromSvgString('M 700 300 L 550 300').moveTo(new Point(this.shooter.components.transform.position.x, this.shooter.components.sprite.centerOrigin.y - 2)));
     this.components.locomotor.canMove = true;
 
     // Sprite
