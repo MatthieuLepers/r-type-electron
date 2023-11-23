@@ -1,6 +1,6 @@
 import { AddClassMethod } from '@renderer/core/utils';
 import Global from '@renderer/core/stores/AppStore';
-import Component from '@renderer/core/classes/components/Component';
+import Component, { ComponentPriorityEnum } from '@renderer/core/classes/components/Component';
 import Point from '@renderer/core/classes/geometry/Point';
 
 /**
@@ -12,7 +12,7 @@ export default class Transform extends Component {
    * @inheritdoc
    */
   constructor(inst, clazz) {
-    super(inst, clazz, Component.PRIORITY_LOW);
+    super(inst, clazz, ComponentPriorityEnum.LOW);
     this.$position = new Point(0, 0);
     this.calcPositionFn = null;
 

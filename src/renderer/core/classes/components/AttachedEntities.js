@@ -14,7 +14,7 @@ export default class AttachedEntities extends Component {
     this.entities = {};
 
     /**
-     * @return {EntityScript{}}
+     * @return {Object.<string, EntityScript>}}
      */
     AddClassMethod(this.clazz, 'getAttachedEntities', function () {
       return this.components.attachedentities.entities;
@@ -31,7 +31,6 @@ export default class AttachedEntities extends Component {
     /**
      * @param {EntityScript} entity
      * @param {String|null} entityId
-     * @return {this}
      */
     AddClassMethod(this.clazz, 'attachEntity', function (entity, entityId = null) {
       this.components.attachedentities.entities[entityId ?? entity.getId()] = entity;
@@ -43,13 +42,11 @@ export default class AttachedEntities extends Component {
       if (entity.hasComponent('EventEmitter')) {
         entity.emit('attached', { parent: this });
       }
-      return this;
     });
 
     /**
      * @param {EntityScript} entity
      * @param {String|null} entiyId
-     * @return {this}
      */
     AddClassMethod(this.clazz, 'detachEntity', function (entity, entityId = null) {
       if (this.components.attachedentities.entities[entityId ?? entity.getId()]) {
@@ -63,7 +60,6 @@ export default class AttachedEntities extends Component {
           entity.emit('detached', { parent: this });
         }
       }
-      return this;
     });
 
     /**
