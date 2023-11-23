@@ -1,8 +1,8 @@
 import Global from '@renderer/core/stores/AppStore';
 import { AddClassMethod } from '@renderer/core/utils';
-import Component from '@renderer/core/classes/components/Component';
+import { ComponentPriorityEnum } from '@renderer/core/classes/components/Component';
 import DrawableComponent from '@renderer/core/classes/components/DrawableComponent';
-import Direction from '@renderer/core/classes/enums/Direction';
+import { Direction } from '@renderer/core/classes/enums/Direction';
 import Vector from '@renderer/core/classes/geometry/Vector';
 import Point from '@renderer/core/classes/geometry/Point';
 import ComplexePath from '@renderer/core/classes/paths/ComplexePath';
@@ -16,7 +16,7 @@ export default class Locomotor extends DrawableComponent {
    * @inheritdoc
    */
   constructor(inst, clazz) {
-    super(inst, clazz, Component.PRIORITY_LOW);
+    super(inst, clazz, ComponentPriorityEnum.LOW);
     this.canMove = false;
     this.$currentDirection = [];
 
@@ -103,9 +103,9 @@ export default class Locomotor extends DrawableComponent {
       this.$currentDirection.push(Direction.LEFT);
     }
     if (this.speed.y > 0) {
-      this.$currentDirection.push(Direction.BOTTOM);
+      this.$currentDirection.push(Direction.DOWN);
     } else if (this.speed.y < 0) {
-      this.$currentDirection.push(Direction.TOP);
+      this.$currentDirection.push(Direction.UP);
     }
   }
 
@@ -129,6 +129,7 @@ export default class Locomotor extends DrawableComponent {
       this.$nextPathPercent = 1 - ((((pathLength - (this.speed.x / 60)) * 100) / this.path.getTotalLength()) / 100);
       return this.path.getPointAtPercent(this.$nextPathPercent);
     }
+
     return new Point(
       this.inst.components.transform.position.x + (this.speed.x / 60) * (this.speed.y !== 0 ? 0.5 : 1),
       this.inst.components.transform.position.y + (this.speed.y / 60) * (this.speed.x !== 0 ? 0.5 : 1),
