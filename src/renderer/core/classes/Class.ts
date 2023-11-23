@@ -1,5 +1,5 @@
 import AbstractClassError from '@renderer/core/classes/errors/AbstractClassError';
-import { Components } from '@renderer/core/classes/components';
+import { Components, ComponentsValues } from '@renderer/core/classes/components';
 import type Component from '@renderer/core/classes/components/Component';
 import type { Constructor } from '@renderer/core/@types';
 
@@ -16,11 +16,11 @@ export default abstract class Class {
     }
   }
 
-  addComponent(component: Constructor<Component<any>>, clazz: Function) {
+  addComponent(component: Constructor<Component>, clazz: Function) {
     this.addComponentAt(component.name, component, clazz ?? this.constructor);
   }
 
-  addComponentAt(key: string, component: Constructor<Component<any>>, clazz: Function) {
+  addComponentAt(key: string, component: Constructor<Component>, clazz: Function) {
     this.components[key.toLowerCase()] = new component(this, clazz);
   }
 
@@ -55,6 +55,10 @@ export default abstract class Class {
     }
 
     return allParent;
+  }
+
+  getComponentByPriority(): Array<ComponentsValues> {
+    return Object.values(this.components).sort((a, b) => a.priority - b.priority);
   }
 
   isExtending(clazz: string | Function): boolean {

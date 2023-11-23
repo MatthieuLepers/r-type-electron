@@ -1,5 +1,5 @@
 import PhysicEntityScript from '@renderer/core/classes/prefabs/PhysicEntityScript';
-import Component from '@renderer/core/classes/components/Component';
+import { ComponentPriorityEnum } from '@renderer/core/classes/components/Component';
 import AttachedEntities from '@renderer/core/classes/components/AttachedEntities';
 import Health from '@renderer/core/classes/components/Health';
 import AbstractClassError from '@renderer/core/classes/errors/AbstractClassError';
@@ -27,7 +27,7 @@ export default class Projectile extends PhysicEntityScript {
     this.addComponent(Health, Projectile);
 
     // Sprite
-    this.components.sprite.priority = Component.PRIORITY_HIGH;
+    this.components.sprite.priority = ComponentPriorityEnum.HIGH;
 
     this.on('collide', (e) => {
       this.getAttacked(e.details.collider);

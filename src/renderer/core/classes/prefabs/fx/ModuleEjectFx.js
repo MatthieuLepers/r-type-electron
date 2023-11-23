@@ -1,6 +1,6 @@
 import Global from '@renderer/core/stores/AppStore';
 import Fx from '@renderer/core/classes/prefabs/fx/Fx';
-import Component from '@renderer/core/classes/components/Component';
+import { ComponentPriorityEnum } from '@renderer/core/classes/components/Component';
 
 export default class ModuleEjectFx extends Fx {
   /**
@@ -19,7 +19,7 @@ export default class ModuleEjectFx extends Fx {
     this.components.locomotor.canMove = true;
 
     // Sprite
-    this.components.sprite.priority = Component.PRIORITY_HIGH;
+    this.components.sprite.priority = ComponentPriorityEnum.HIGH;
     this.components.sprite.init({
       id: `${this.parent.getId()}_eject`,
       asset: Global.Assets.get('particles/fx/module_eject'),

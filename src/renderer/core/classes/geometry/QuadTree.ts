@@ -1,49 +1,31 @@
 import Point from '@renderer/core/classes/geometry/Point';
 import Rectangle from '@renderer/core/classes/geometry/Rectangle';
+import type EntityScript from '@renderer/core/classes/prefabs/EntityScript';
 
-/**
- * @author Matthieu LEPERS
- * @version 1.0.0
- */
 export default class QuadTree {
-  /**
-   * @constructor
-   * @param {Number} level
-   * @param {Rectangle} bounds
-   */
-  constructor(level, bounds) {
-    this.level = level;
-    this.bounds = bounds;
-    this.objectList = [];
-    this.nodes = [];
-  }
+  public objectList: Array<EntityScript> = [];
 
-  /**
-   * @return {Number}
-   */
-  get MAX_OBJECTS() {
+  public nodes: Array<QuadTree> = [];
+
+  constructor(
+    public level: number,
+    public bounds: Rectangle,
+  ) {}
+
+  get MAX_OBJECTS(): number {
     return 10;
   }
 
-  /**
-   * @return {Number}
-   */
-  get MAX_LEVELS() {
+  get MAX_LEVELS(): number {
     return 5;
   }
 
-  /**
-   * Clear quadtree recursively
-   */
   clear() {
     this.objectList = [];
     this.nodes.forEach((node) => { node.clear(); });
     this.nodes = [];
   }
 
-  /**
-   * Splits the node into 4 subnodes
-   */
   split() {
     const subWidth = this.bounds.width / 2;
     const subHeight = this.bounds.height / 2;
@@ -55,23 +37,19 @@ export default class QuadTree {
     this.nodes[3] = new QuadTree(this.level + 1, new Rectangle(x + subWidth, y + subHeight, subWidth, subHeight));
   }
 
-  /**
-   * @param {EntityScript} entity
-   * @return {Number}
-   */
-  getIndex(entity) {
+  getIndex(entity: EntityScript): number {
     let index = -1;
     const midPoint = new Point(this.bounds.x + (this.bounds.width / 2), this.bounds.y + (this.bounds.height / 2));
-    const topQuadrant = (entity.components.transform.position.y < midPoint.y && entity.components.transform.position.y + entity.components.sprite.height < midPoint.y);
-    const bottomQuadrant = (entity.components.transform.position.y > midPoint.y);
+    const topQuadrant = (entity.components.transform!.position.y < midPoint.y && entity.components.transform!.position.y + entity.components.sprite!.height < midPoint.y);
+    const bottomQuadrant = (entity.components.transform!.position.y > midPoint.y);
 
-    if (entity.components.transform.position.x < midPoint.x && entity.components.transform.position.x + entity.components.sprite.width < midPoint.x) {
+    if (entity.components.transform!.position.x < midPoint.x && entity.components.transform!.position.x + entity.components.sprite!.width < midPoint.x) {
       if (topQuadrant) {
         index = 1;
       } else if (bottomQuadrant) {
         index = 2;
       }
-    } else if (entity.components.transform.position.x > midPoint.x) {
+    } else if (entity.components.transform!.position.x > midPoint.x) {
       if (topQuadrant) {
         index = 0;
       } else if (bottomQuadrant) {
@@ -82,10 +60,7 @@ export default class QuadTree {
     return index;
   }
 
-  /**
-   * @param {EntityScript} entity
-   */
-  insert(entity) {
+  insert(entity: EntityScript) {
     if (this.nodes[0]) {
       const index = this.getIndex(entity);
 
@@ -117,32 +92,22 @@ export default class QuadTree {
     }
   }
 
-  /**
-   * @param {EntityScript[]} entityList
-   */
-  insertAll(entityList = []) {
+  insertAll(entityList: Array<EntityScript>) {
     entityList.forEach((entity) => { this.insert(entity); });
   }
 
-  /**
-   * @param {EntityScript} entityToCheckCollision
-   * @return {EntityScript[]}
-   */
-  retrieve(entityToCheckCollision) {
-    let returnObjects = [];
+  retrieve(entityToCheckCollision: EntityScript): Array<EntityScript> {
+    let returnObjects: Array<EntityScript> = [];
     const index = this.getIndex(entityToCheckCollision);
 
-    if (index >= 0 && this.nodes[0]) {
+    if (index >= 0 && this.nodes[index]) {
       returnObjects = returnObjects.concat(this.nodes[index].retrieve(entityToCheckCollision));
     }
 
     return returnObjects.concat(this.objectList);
   }
 
-  /**
-   * @param {CanvasRenderingContext2D} ctx
-   */
-  render(ctx) {
+  render(ctx: CanvasRenderingContext2D) {
     this.bounds.render(ctx);
     this.nodes.forEach((node) => { node.render(ctx); });
   }

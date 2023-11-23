@@ -55,6 +55,12 @@ export default class Controller extends Component {
     return this;
   }
 
+  bindControls(controlsMap = {}) {
+    Object.entries(controlsMap).forEach(([controlName, callbacks]) => {
+      this.bindControl(controlName, callbacks);
+    });
+  }
+
   /**
    * @return {this}
    */

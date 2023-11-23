@@ -4,17 +4,22 @@ import Physics from '@renderer/core/classes/components/Physics';
 import Sprite from '@renderer/core/classes/components/Sprite';
 import Transform from '@renderer/core/classes/components/Transform';
 import RectangleHitbox from '@renderer/core/classes/hitboxes/RectangleHitbox';
+import Rectangle from '@renderer/core/classes/geometry/Rectangle';
+import type Hitbox from '@renderer/core/classes/hitboxes/Hitbox';
 
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
 export default class PhysicEntityScript extends EntityScript {
-  /**
-   * @constructor
-   * @param {Function} initCallback
-   */
-  constructor(initCallback = null) {
+  declare components: {
+    locomotor: Locomotor,
+    physics: Physics,
+    sprite: Sprite,
+    transform: Transform,
+  };
+
+  constructor(initCallback: Function | null) {
     super(initCallback);
 
     this.addComponent(Locomotor, PhysicEntityScript);
@@ -23,23 +28,17 @@ export default class PhysicEntityScript extends EntityScript {
     this.addComponent(Transform, PhysicEntityScript);
   }
 
-  /**
-   * @return {Object}
-   */
-  getHitboxBounds() {
-    return {
-      x: this.components.transform.position.x,
-      y: this.components.transform.position.y,
-      width: this.components.sprite.width,
-      height: this.components.sprite.height,
-      rotation: this.components.sprite.options.rotation,
-    };
+  getHitboxBounds(): Rectangle {
+    return new Rectangle(
+      this.components.transform.position.x,
+      this.components.transform.position.y,
+      this.components.sprite.width,
+      this.components.sprite.height,
+      this.components.sprite.options.rotation,
+    );
   }
 
-  /**
-   * @return {Hitbox[]}
-   */
-  getHitbox() {
+  getHitbox(): Array<Hitbox> {
     return [new RectangleHitbox(this.getHitboxBounds())];
   }
 }

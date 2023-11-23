@@ -1,6 +1,6 @@
 import Global from '@renderer/core/stores/AppStore';
 import Fx from '@renderer/core/classes/prefabs/fx/Fx';
-import Component from '@renderer/core/classes/components/Component';
+import { ComponentPriorityEnum } from '@renderer/core/classes/components/Component';
 
 /**
  * @author Matthieu LEPERS
@@ -23,7 +23,7 @@ export default class ShipBoosterFx extends Fx {
     this.components.locomotor.canMove = true;
 
     // Sprite
-    this.components.sprite.priority = Component.PRIORITY_HIGH;
+    this.components.sprite.priority = ComponentPriorityEnum.HIGH;
     this.components.sprite.init({
       id: `${this.parent.getId()}_booster`,
       asset: Global.Assets.get('particles/fx/booster'),

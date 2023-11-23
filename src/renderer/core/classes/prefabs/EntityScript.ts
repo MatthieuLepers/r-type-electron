@@ -1,72 +1,57 @@
 import Global from '@renderer/core/stores/AppStore';
 import Class from '@renderer/core/classes/Class';
+import type Component from '@renderer/core/classes/components/Component';
 import EventEmitter from '@renderer/core/classes/components/EventEmitter';
 import SoundEmitter from '@renderer/core/classes/components/SoundEmitter';
 import AbstractClassError from '@renderer/core/classes/errors/AbstractClassError';
 import Runnable from '@renderer/core/classes/runnable/Runnable';
+import type { Constructor } from '@renderer/core/@types';
 
-/**
- * @author Matthieu LEPERS
- * @version 1.0.0
- */
-export default class EntityScript extends Class {
-  /**
-   * @constructor
-   * @param {Function} initCallback
-   */
-  constructor(initCallback = null) {
+export default abstract class EntityScript extends Class {
+  declare getId: () => number;
+
+  declare getAttachedEntities: () => Record<string, EntityScript>;
+
+  declare emit: (eventName: string, details?: Record<string, any>) => void;
+
+  public initCallback: Function | null = null;
+
+  public tags: Array<string> = [];
+
+  public runnable: Runnable | null = null;
+
+  constructor(initCallback: Function | null) {
     super();
     if (this.constructor.name === 'EntityScript') {
       throw new AbstractClassError(this);
     }
-    this.tags = [];
     this.initCallback = initCallback;
-    this.runnable = null;
 
     this.addComponent(EventEmitter, EntityScript);
     this.addComponent(SoundEmitter, EntityScript);
 
-    if (typeof initCallback === 'function') {
+    if (typeof this.initCallback === 'function') {
       this.initCallback.call(this);
     }
   }
 
-  /**
-   * @param {String} key
-   * @param {String} component
-   * @param {String} clazz
-   */
-  addComponentAt(key, component, clazz) {
+  addComponentAt(key: string, component: Constructor<Component>, clazz: Function) {
     this.components[key.toLowerCase()] = Global.ModKnowledge.applyComponentBundle(component.name, new component(this, clazz));
   }
 
-  /**
-   * @param {String[]} tags
-   * @return {this}
-   */
-  addTag(...tags) {
+  addTag(...tags: Array<string>) {
     tags.forEach((tag) => {
       if (!this.tags.includes(tag)) {
         this.tags.push(tag);
       }
     });
-    return this;
   }
 
-  /**
-   * @param {String[]} tags
-   * @return {this}
-   */
-  removeTag(...tags) {
+  removeTag(...tags: Array<string>) {
     this.tags = this.tags.filter((tag) => !tags.includes(tag));
-    return this;
   }
 
-  /**
-   * @param {String[]} tags
-   * @return {Boolean}
-   */
-  hasTag(...tags) {
+  hasTag(...tags: Array<string>): boolean {
     return tags.reduce((acc, tag) => acc && (tag.startsWith('!') ? !this.tags.includes(tag.substring(1)) : this.tags.includes(tag)), true);
   }
 
@@ -90,8 +75,12 @@ export default class EntityScript extends Class {
       .filter((c) => typeof c.task === 'function')
     ;
     if (componentWithTaskList.length) {
-      this.runnable = new Runnable(`runnable${this.getId()}`, (frame) => {
-        componentWithTaskList.forEach((c) => { c.task(frame); });
+      this.runnable = new Runnable(`runnable${this.getId()}`, (frame: number) => {
+        componentWithTaskList.forEach((c) => {
+          if (c.task) {
+            c.task(frame);
+          }
+        });
       });
 
       Global.Engine.addRunnable(this.runnable);
@@ -117,11 +106,8 @@ export default class EntityScript extends Class {
     this.emit('despawn');
   }
 
-  /**
-   * @param  {...any} args
-   * @return {EntityScript}
-   */
-  static new(...args) {
+  static new(...args: any[]): EntityScript {
+    // @ts-ignore
     return Global.ModKnowledge.applyPrefabBundle(this.name, new this(...args));
   }
 
