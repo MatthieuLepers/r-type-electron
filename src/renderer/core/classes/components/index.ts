@@ -14,6 +14,7 @@ import ScoreBoard from '@renderer/core/classes/components/ScoreBoard';
 import Shooter from '@renderer/core/classes/components/Shooter';
 import SoundEmitter from '@renderer/core/classes/components/SoundEmitter';
 import Sprite from '@renderer/core/classes/components/Sprite';
+import Synchronizer from '@renderer/core/classes/components/Synchronizer';
 import Transform from '@renderer/core/classes/components/Transform';
 import WaveGenerator from '@renderer/core/classes/components/WaveGenerator';
 
@@ -34,6 +35,7 @@ export type Components = {
   shooter: Shooter,
   soundemitter: SoundEmitter,
   sprite: Sprite,
+  synchronizer: Synchronizer,
   transform: Transform,
   wavegenerator: WaveGenerator,
 };

@@ -14,13 +14,13 @@ export default abstract class EntityScript extends Class {
 
   declare emit: (eventName: string, details?: Record<string, any>) => void;
 
-  public initCallback: Function | null = null;
+  public initCallback: Function | undefined = undefined;
 
   public tags: Array<string> = [];
 
   public runnable: Runnable | null = null;
 
-  constructor(initCallback: Function | null) {
+  constructor(initCallback?: Function) {
     super();
     if (this.constructor.name === 'EntityScript') {
       throw new AbstractClassError(this);
@@ -59,7 +59,6 @@ export default abstract class EntityScript extends Class {
    * @return {this}
    */
   spawn() {
-    this.addTag('staySpawned');
     if (this.hasComponent('Sprite')) {
       Global.Game.entities[this.getId()] = this;
     }
@@ -85,7 +84,6 @@ export default abstract class EntityScript extends Class {
 
       Global.Engine.addRunnable(this.runnable);
     }
-    window.setTimeout(() => this.removeTag('staySpawned'), 1000);
     this.emit('spawn', { entity: this });
     return this;
   }

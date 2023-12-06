@@ -72,6 +72,20 @@ export default class Canvas {
   }
 
   /**
+   * @return {Number}
+   */
+  get width() {
+    return this.options.width;
+  }
+
+  /**
+   * @return {Number}
+   */
+  get height() {
+    return this.options.height;
+  }
+
+  /**
    * @return {Rectangle}
    */
   getBounds() {
