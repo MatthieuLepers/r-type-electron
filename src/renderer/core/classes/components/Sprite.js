@@ -52,9 +52,9 @@ export default class Sprite extends DrawableComponent {
      */
     AddClassMethod(this.clazz, 'isVisible', function () {
       return this.components.transform.position.x > -this.components.sprite.width
-        && this.components.transform.position.x < Global.Game.canvas.width
+        && this.components.transform.position.x < Global.Game.canvas.width + this.components.sprite.width
         && this.components.transform.position.y > -this.components.sprite.height
-        && this.components.transform.position.y < Global.Game.canvas.height
+        && this.components.transform.position.y < Global.Game.canvas.height + this.components.sprite.height
       ;
     });
 

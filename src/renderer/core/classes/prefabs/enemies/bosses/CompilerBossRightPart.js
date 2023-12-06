@@ -24,7 +24,7 @@ export default class CompilerBossRightPart extends Enemy {
     this.addComponent(Shooter, CompilerBossRightPart);
 
     // Locomotor
-    this.components.locomotor.speedX = this.owner.components.locomotor.speedX;
+    this.components.locomotor.speedX = this.owner.components.locomotor.speed.x;
     this.components.locomotor.canMove = this.owner.components.locomotor.canMove;
 
     // Transform
@@ -97,8 +97,9 @@ export default class CompilerBossRightPart extends Enemy {
    * @param {EntityScript} target
    */
   shootFn(target) {
-    const playerIsOnRight = target.components.transform.position.x - this.components.transform.position.x >= 0;
-    if (playerIsOnRight) {
+    const playerIsOnX = target.components.transform.position.x - this.components.transform.position.x >= 0;
+    const playerIsOnY = target.components.transform.position.y + target.components.sprite.height >= this.components.transform.position.y && target.components.transform.position.y <= this.components.transform.position.y + this.components.sprite.height;
+    if (playerIsOnX && playerIsOnY) {
       const projectile = RedLaser.new(this, target);
       projectile.bindPath(ComplexePath.fromSvgString('M 0 0 L 100 0').moveTo(new Point(this.components.transform.position.x + this.components.sprite.width - 48, this.components.transform.position.y + 18 + Global.Random.rnd(40))));
       projectile.spawn();
