@@ -4,6 +4,7 @@ import Explosion from '@renderer/core/classes/prefabs/Explosion';
 import Point from '@renderer/core/classes/geometry/Point';
 import RectangleHitbox from '@renderer/core/classes/hitboxes/RectangleHitbox';
 import CompilerBossTurret from '@renderer/core/classes/prefabs/enemies/bosses/CompilerBossTurret';
+import ComplexePath from '@renderer/core/classes/paths/ComplexePath';
 
 /**
  * @author Matthieu LEPERS
@@ -21,7 +22,7 @@ export default class CompilerBottomPart extends Enemy {
     this.addTag('boss', 'alwaysVisible', 'staySpawned');
 
     // Locomotor
-    this.components.locomotor.speedX = this.owner.components.locomotor.speedX;
+    this.components.locomotor.speedX = this.owner.components.locomotor.speed.x;
     this.components.locomotor.canMove = this.owner.components.locomotor.canMove;
 
     // Transform
@@ -52,6 +53,9 @@ export default class CompilerBottomPart extends Enemy {
       Explosion.EXPLOSION_BIG(this).spawn();
     });
     this.on('damaged', () => this.playSound('fx/entity/hull_hit'));
+    this.on('detached', () => {
+      this.splitVerticallySequence();
+    }, { once: true });
   }
 
   /**
@@ -78,5 +82,24 @@ export default class CompilerBottomPart extends Enemy {
         height: 16,
       }),
     ];
+  }
+
+  splitVerticallySequence() {
+    this.unbindPath();
+    this.bindPath(ComplexePath.fromSvgString(`M${this.components.transform.position.x},${this.components.transform.position.y}L${this.components.transform.position.x},${this.components.transform.position.y + Global.Game.canvasObj.height - this.components.sprite.height - 68}`), false);
+    this.on('pathEnd', () => {
+      this.owner.components.synchronizer.syncEntity(this, { event: 'splitVerticallySequence' });
+    }, { once: true });
+  }
+
+  /**
+   * @param {Number} direction
+   */
+  splitedVerticallyVerticalScroll(direction = 1) {
+    this.unbindPath();
+    this.bindPath(ComplexePath.fromSvgString(`M${direction * this.components.transform.position.x},${this.components.transform.position.y}L${direction * (this.components.transform.position.x - Global.Game.canvasObj.width + 240)},${this.components.transform.position.y}`), false);
+    this.on('pathEnd', () => {
+      this.owner.components.synchronizer.syncEntity(this, { event: 'splitedVerticallyVerticalScroll' });
+    }, { once: true });
   }
 }
