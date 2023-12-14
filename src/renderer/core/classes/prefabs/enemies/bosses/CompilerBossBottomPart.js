@@ -85,7 +85,6 @@ export default class CompilerBottomPart extends Enemy {
   }
 
   splitVerticallySequence() {
-    this.unbindPath();
     this.bindPath(ComplexePath.fromSvgString(`M${this.components.transform.position.x},${this.components.transform.position.y}L${this.components.transform.position.x},${this.components.transform.position.y + Global.Game.canvasObj.height - this.components.sprite.height - 68}`), false);
     this.on('pathEnd', () => {
       this.owner.components.synchronizer.syncEntity(this, { event: 'splitVerticallySequence' });
@@ -96,7 +95,6 @@ export default class CompilerBottomPart extends Enemy {
    * @param {Number} direction
    */
   splitedVerticallyVerticalScroll(direction = 1) {
-    this.unbindPath();
     this.bindPath(ComplexePath.fromSvgString(`M${direction * this.components.transform.position.x},${this.components.transform.position.y}L${direction * (this.components.transform.position.x - Global.Game.canvasObj.width + 240)},${this.components.transform.position.y}`), false);
     this.on('pathEnd', () => {
       this.owner.components.synchronizer.syncEntity(this, { event: 'splitedVerticallyVerticalScroll' });

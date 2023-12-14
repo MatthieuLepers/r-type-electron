@@ -132,7 +132,7 @@ export default class Module extends PhysicEntityScript {
       this.owner.attachEntity(this, 'module');
       this.side = (this.components.sprite.centerOrigin.x > this.owner.components.sprite.centerOrigin.x ? Module.SIDE_FRONT : Module.SIDE_BACK);
       this.playSound('fx/module/module_attach');
-      this.unbindPath();
+      this.unBindPath();
       this.update();
       this.components.physics.collideFn = null;
       this.addCollisionTag('enemy', '!piercing');

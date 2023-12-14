@@ -1,5 +1,5 @@
 import EntityScript from '@renderer/core/classes/prefabs/EntityScript';
-import Locomotor from '@renderer/core/classes/components/Locomotor';
+import Locomotor from '@/renderer/core/classes/components/Locomotor';
 import Physics from '@renderer/core/classes/components/Physics';
 import Sprite from '@renderer/core/classes/components/Sprite';
 import Transform from '@renderer/core/classes/components/Transform';
@@ -19,7 +19,7 @@ export default class PhysicEntityScript extends EntityScript {
     transform: Transform,
   };
 
-  constructor(initCallback: Function | null) {
+  constructor(initCallback: Function | undefined) {
     super(initCallback);
 
     this.addComponent(Locomotor, PhysicEntityScript);
