@@ -74,5 +74,10 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'new-cap': 'off',
     'arrow-body-style': 'off',
+    'max-classes-per-file': ['error', {
+      ignoreExpressions: true,
+      max: 2,
+    },
+  ]
   },
 };

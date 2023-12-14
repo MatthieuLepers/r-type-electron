@@ -2,7 +2,7 @@ import Global from '@renderer/core/stores/AppStore';
 import EntityScript from '@renderer/core/classes/prefabs/EntityScript';
 import PlasmaBall from '@renderer/core/classes/prefabs/projectiles/PlasmaBall';
 import Point from '@renderer/core/classes/geometry/Point';
-import Locomotor from '@renderer/core/classes/components/Locomotor';
+import Locomotor from '@/renderer/core/classes/components/Locomotor';
 import Looker from '@renderer/core/classes/components/Looker';
 import Shooter from '@renderer/core/classes/components/Shooter';
 import Sprite from '@renderer/core/classes/components/Sprite';

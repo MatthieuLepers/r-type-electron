@@ -81,13 +81,13 @@ export default class Locomotor extends DrawableComponent {
      * @param {Boolean} loop
      */
     AddClassMethod(this.clazz, 'bindPath', function (path, loop = true) {
-      this.unbindPath();
+      this.unBindPath();
       this.components.locomotor.path = path;
       this.components.locomotor.$pathLoop = loop;
       this.components.transform.position = path.startPoint.clone();
     });
 
-    AddClassMethod(this.clazz, 'unbindPath', function () {
+    AddClassMethod(this.clazz, 'unBindPath', function () {
       this.components.locomotor.path = null;
       this.components.locomotor.$pathLoop = true;
       this.components.locomotor.$pathPercent = 0.0;

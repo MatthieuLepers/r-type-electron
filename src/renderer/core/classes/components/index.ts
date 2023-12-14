@@ -5,7 +5,7 @@ import Cooldown from '@renderer/core/classes/components/Cooldown';
 import Debug from '@renderer/core/classes/components/Debug';
 import EventEmitter from '@renderer/core/classes/components/EventEmitter';
 import Health from '@renderer/core/classes/components/Health';
-import Locomotor from '@renderer/core/classes/components/Locomotor';
+import Locomotor from '@/renderer/core/classes/components/Locomotor';
 import Looker from '@renderer/core/classes/components/Looker';
 import LootDropper from '@renderer/core/classes/components/LootDropper';
 import Physics from '@renderer/core/classes/components/Physics';

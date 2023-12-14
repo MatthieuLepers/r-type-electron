@@ -1,5 +1,5 @@
 import EntityScript from '@renderer/core/classes/prefabs/EntityScript';
-import Locomotor from '@renderer/core/classes/components/Locomotor';
+import Locomotor from '@/renderer/core/classes/components/Locomotor';
 import Sprite from '@renderer/core/classes/components/Sprite';
 import Transform from '@renderer/core/classes/components/Transform';
 

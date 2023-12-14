@@ -12,9 +12,7 @@ export interface Mixed<T extends Ctor> {
 }
 
 export class MixinBuilder<T extends Ctor> {
-  constructor(public superclass: T) {
-    console.log(superclass);
-  }
+  constructor(public superclass: T) {}
 
   with<K extends Ctor>(mixin: MixIn<T, K>): Mixed<ReturnType<MixIn<T, K>>> & ReturnType<MixIn<T, K>> {
     const mixed = mixin(this.superclass);
