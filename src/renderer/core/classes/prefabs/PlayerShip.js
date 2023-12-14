@@ -240,7 +240,7 @@ export default class PlayerShip extends PhysicEntityScript {
     this.getAttachedEntity(`${this.getId()}_charging`).playAnimation('idle');
     this.getAttachedEntity(`${this.getId()}_chargeshoot`).update();
     this.getAttachedEntity(`${this.getId()}_chargeshoot`).playAnimation('shoot');
-    this.stopCurrentSound('player/charge');
+    this.stopCurrentSound('fx/player/charge');
     this.playSound('fx/player/shoot_charged');
   }
 

@@ -4,7 +4,7 @@ import CompilerBossRightPart from '@renderer/core/classes/prefabs/enemies/bosses
 import CompilerBossBottomPart from '@renderer/core/classes/prefabs/enemies/bosses/CompilerBossBottomPart';
 import EntityScript from '@renderer/core/classes/prefabs/EntityScript';
 import AttachedEntities from '@renderer/core/classes/components/AttachedEntities';
-import Locomotor from '@renderer/core/classes/components/Locomotor';
+import Locomotor from '@/renderer/core/classes/components/Locomotor';
 import Transform from '@renderer/core/classes/components/Transform';
 import Synchronizer from '@renderer/core/classes/components/Synchronizer';
 import ComplexePath from '@renderer/core/classes/paths/ComplexePath';
@@ -66,7 +66,6 @@ export default class CompilerBoss extends EntityScript {
 
   splitVerticallySequence() {
     this.detachEntity(this.compilerBossBottomPart, 'bottom_part');
-    this.unbindPath();
     this.bindPath(ComplexePath.fromSvgString(`M${this.components.transform.position.x},${this.components.transform.position.y}L${this.components.transform.position.x},48`), false);
     this.on('pathEnd', () => {
       this.components.synchronizer.syncEntity(this.compilerBossTopPart, { event: 'splitVerticallySequence' });
@@ -79,7 +78,6 @@ export default class CompilerBoss extends EntityScript {
    */
   splitedVerticallyVerticalScroll(direction = 1) {
     this.compilerBossBottomPart.splitedVerticallyVerticalScroll();
-    this.unbindPath();
     this.bindPath(ComplexePath.fromSvgString(`M${direction * this.components.transform.position.x},${this.components.transform.position.y}L${direction * (this.components.transform.position.x - Global.Game.canvasObj.width + 240)},${this.components.transform.position.y}`), false);
     this.on('pathEnd', () => {
       this.components.synchronizer.syncEntity(this.compilerBossTopPart, { event: 'splitedVerticallyVerticalScroll' });

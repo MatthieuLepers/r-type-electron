@@ -5,10 +5,6 @@ import AbstractClassError from '@renderer/core/classes/errors/AbstractClassError
 
 import Global from '@renderer/core/stores/AppStore';
 
-/**
- * @author Matthieu LEPERS
- * @version 1.0.0
- */
 export default abstract class DrawableComponent extends Component {
   constructor(
     inst: Class,
