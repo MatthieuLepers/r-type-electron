@@ -102,7 +102,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 2px;
-  
+
         &--clickable {
           @include make-accessibility-background;
         }
@@ -133,7 +133,7 @@
     &.m-form-input {
       @include make-accessibility-shadow {
         height: 32px;
-        width: calc(50% + 1px);
+        width: calc(80% - 8px);
         right: 0;
         left: auto;
         top: 0px;
@@ -204,7 +204,7 @@
       color: color(grey000);
       padding: 0 rem(8px);
       outline: none;
-      flex: 1;
+      flex: 4;
 
       @include placeholder {
         color: color(grey000);
@@ -219,7 +219,6 @@
         flex: 1;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
       }
 
       &__adornment {
