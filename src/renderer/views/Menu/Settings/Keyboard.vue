@@ -92,3 +92,6 @@ const actions = {
   },
 };
 </script>
+
+<style lang="scss" src="./Keyboard.scss">
+</style>
