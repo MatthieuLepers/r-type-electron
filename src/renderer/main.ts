@@ -8,7 +8,7 @@ import DateFormat from '@renderer/plugins/DateFormat';
 import Global from '@renderer/core/stores/AppStore';
 
 router.beforeEach((to, _from, next) => {
-  if (to.name !== 'Menu' && !Global.loaded) {
+  if (to.name !== 'DevTools' && to.name !== 'Menu' && !Global.loaded) {
     next({ name: 'Menu' });
   } else {
     next();

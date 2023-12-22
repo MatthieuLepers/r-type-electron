@@ -1,23 +1,46 @@
 <template>
   <div class="menu-settings-keyboard-screen">
-    <MaterialFormFieldLine
-      v-for="([label, control], i) in Object.entries(state.controls)"
-      :key="i"
+    <MaterialTabs
+      v-model="state.currentTab"
+      :tabs="State.tabs"
+      class="menu-settings-keyboard-screen__tabs"
     >
-      <MaterialFormInput
-        type="text"
-        v-model="control.key"
-        :label="label"
-        variant="inline"
-        @keypress.prevent.stop="actions.handleKeyPress($event, control)"
-      />
-    </MaterialFormFieldLine>
+      <template v-slot:game>
+        <MaterialFormFieldLine
+          v-for="([label, control], i) in Object.entries(state.gameControls)"
+          :key="i"
+        >
+          <MaterialFormInput
+            type="text"
+            v-model="control.key"
+            :label="label"
+            variant="inline"
+            @keyup="actions.handleKeyPress($event, control)"
+          />
+        </MaterialFormFieldLine>
+      </template>
+      <template v-slot:debug>
+        <MaterialFormFieldLine
+          v-for="([label, control], i) in Object.entries(state.debugControls)"
+          :key="i"
+        >
+          <MaterialFormInput
+            type="text"
+            v-model="control.key"
+            :label="label"
+            variant="inline"
+            @keyup="actions.handleKeyPress($event, control)"
+          />
+        </MaterialFormFieldLine>
+      </template>
+    </MaterialTabs>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 
+import MaterialTabs from '@renderer/components/Materials/Tabs/index.vue';
 import MaterialFormFieldLine from '@renderer/components/Materials/Form/FieldLine.vue';
 import MaterialFormInput from '@renderer/components/Materials/Form/Input.vue';
 
@@ -31,16 +54,37 @@ const EDITABLE_CONTROLS = [
   'DOWN',
   'RIGHT',
   'SHOOT',
+  'CHARGE',
   'MODULE',
   'PAUSE',
 ];
 
+const DEBUG_CONTROLS = [
+  'DEV_TOOLS',
+  'DEBUG_TOGGLE_DRAW_HITBOXES',
+  'DEBUG_TOGGLE_DRAW_QUADTREE',
+  'DEBUG_TOGGLE_DRAW_PATHLINES',
+  'DEBUG_TOGGLE_DRAW_HEALTH_BARS',
+];
+
 const state = reactive({
-  controls: EDITABLE_CONTROLS.reduce((acc, key) => ({
+  gameControls: EDITABLE_CONTROLS.reduce((acc, key) => ({
     ...acc,
     [key]: Global.Settings.controls[key],
   }), {}),
+  debugControls: DEBUG_CONTROLS.reduce((acc, key) => ({
+    ...acc,
+    [key]: Global.Settings.controls[key],
+  }), {}),
+  currentTab: 'game',
 });
+
+const State = computed(() => ({
+  tabs: {
+    game: { label: 'Game' },
+    debug: { label: 'Debug' },
+  },
+}));
 
 const actions = {
   handleKeyPress(e, control) {
@@ -48,6 +92,3 @@ const actions = {
   },
 };
 </script>
-
-<style lang="scss" src="./Keyboard.scss">
-</style>

@@ -6,6 +6,7 @@ import SoundEmitter from '@renderer/core/classes/components/SoundEmitter';
 import AbstractClassError from '@renderer/core/classes/errors/AbstractClassError';
 import Runnable from '@renderer/core/classes/runnable/Runnable';
 import type { Constructor } from '@renderer/core/@types';
+import type { EventListenerOptions } from '@renderer/core/classes/EventListener';
 
 export default abstract class EntityScript extends Class {
   declare getId: () => number;
@@ -13,6 +14,8 @@ export default abstract class EntityScript extends Class {
   declare getAttachedEntities: () => Record<string, EntityScript>;
 
   declare emit: (eventName: string, details?: Record<string, any>) => void;
+
+  declare on: (eventName: string, callback: Function, options?: EventListenerOptions) => void;
 
   public initCallback: Function | undefined = undefined;
 
@@ -33,6 +36,9 @@ export default abstract class EntityScript extends Class {
     if (typeof this.initCallback === 'function') {
       this.initCallback.call(this);
     }
+
+    // this.on('spawn', sendDataToDebugWindow, { once: true });
+    // this.on('despawn', sendDataToRemoveToDebugWindow, { once: true });
   }
 
   addComponentAt(key: string, component: Constructor<Component>, clazz: Function) {
