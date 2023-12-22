@@ -113,6 +113,7 @@ watch(() => state.ambientVolume, (newVal) => {
 });
 
 onMounted(() => {
+  api.sendSync('openDevTools');
   state.game = new Game(canvas.value);
   state.game.start();
 
