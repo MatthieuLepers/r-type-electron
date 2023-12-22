@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-settings-screen">
+  <MainLayout class="menu-settings-screen">
     <Screen title="Settings">
       <template v-slot:content>
         <nav
@@ -29,10 +29,11 @@
         </ScreenMenuButton>
       </template>
     </Screen>
-  </div>
+  </MainLayout>
 </template>
 
 <script setup>
+import MainLayout from '@renderer/views/MainLayout.vue';
 import Screen from '@renderer/components/Screen/index.vue';
 import ScreenMenuButton from '@renderer/components/Screen/MenuButton.vue';
 

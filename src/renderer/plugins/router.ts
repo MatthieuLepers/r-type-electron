@@ -24,6 +24,7 @@ const routes = [
   },
   { path: '/mods', name: 'MenuMods', component: MenuModsScreen },
   { path: '/tools', name: 'MenuTools', component: MenuToolsScreen },
+  { path: '/devTools', name: 'DevTools', component: MenuToolsScreen },
 ];
 
 const router = createRouter({

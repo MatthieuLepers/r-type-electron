@@ -20,10 +20,10 @@ import Module from '@renderer/core/classes/prefabs/Module';
 // import Mid from '@renderer/core/classes/prefabs/enemies/Mid';
 // import Cheetah from '@renderer/core/classes/prefabs/enemies/Cheetah';
 // import Cytron from '@renderer/core/classes/prefabs/enemies/Cytron';
-// import PowerArmor from '@renderer/core/classes/prefabs/enemies/PowerArmor';
+import PowerArmor from '@renderer/core/classes/prefabs/enemies/PowerArmor';
 
 import WaveGenerator from '@renderer/core/classes/components/WaveGenerator';
-import CompilerBoss from '@renderer/core/classes/prefabs/enemies/bosses/CompilerBoss';
+// import CompilerBoss from '@renderer/core/classes/prefabs/enemies/bosses/CompilerBoss';
 
 /**
  * @author Matthieu LEPERS
@@ -123,7 +123,10 @@ export default class Game extends EntityScript {
     PlayerShip.new('player1').spawn();
     Module.new().spawn();
 
-    // setTimeout(() => this.components.wavegenerator.generateNextWave(), 2000);
+    setTimeout(() => {
+      this.components.wavegenerator.generateNextWave();
+      PowerArmor.new().spawn();
+    }, 2000);
     // PataPata.new().spawn();
     // BugSpawner.new().spawn();
     // Mid.new().spawn();
@@ -133,7 +136,7 @@ export default class Game extends EntityScript {
     // setInterval(() => {
     //   if (!Global.Engine.paused && !Global.devToolsOpen) PowerArmor.new().spawn();
     // }, 2000);
-    CompilerBoss.new().spawn();
+    // CompilerBoss.new().spawn();
   }
 
   reset() {
