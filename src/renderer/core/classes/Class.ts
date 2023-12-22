@@ -3,10 +3,6 @@ import { Components, ComponentsValues } from '@renderer/core/classes/components'
 import type Component from '@renderer/core/classes/components/Component';
 import type { Constructor } from '@renderer/core/@types';
 
-/**
- * @author Matthieu LEPERS
- * @version 1.0.0
- */
 export default abstract class Class {
   public components: Partial<Components> = {};
 

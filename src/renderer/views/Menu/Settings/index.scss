@@ -14,7 +14,7 @@
       .screen-menu-button {
         @include font-family('Open Sans', 700);
         width: calc(100% - 10px);
-        background-color: color(grey000);
+        background-color: color(grey100);
         text-align: auto;
         color: color(grey999);
         text-transform: uppercase;
@@ -22,6 +22,8 @@
         border-radius: 25px;
         transition: opacity .1s ease-in-out;
         opacity: .75;
+        animation: none;
+        border: none;
 
         &--active {
           width: 100%;
@@ -38,8 +40,7 @@
 
     .menu-settings-screen__view {
       width: 75%;
-      padding-left: rem(16px);
-      background-color: color(grey000);
+      background-color: color(grey100);
     }
   }
 }

@@ -1,10 +1,13 @@
 // import { autoUpdater } from 'electron-updater';
 import fs from 'fs';
+import { join } from 'path';
+import { is } from '@electron-toolkit/utils';
 
 import { IpcHandle, IpcOn, GlobalShortcut } from '@/main/decorators';
 import { Setting } from '@/main/database/models';
 import WindowStore from '@/main/stores/WindowStore';
 import WinstonInstance from '@/main/utils/WinstonInstance';
+import ElectronWindow from '@/main/classes/ElectronWindow';
 
 class AppModule {
   @IpcHandle
@@ -52,6 +55,36 @@ class AppModule {
       }
       return true;
     });
+  }
+
+  @IpcOn
+  static openDevTools() {
+    if (!WindowStore.has('devTools')) {
+      const mainWindow = WindowStore.get('main');
+
+      if (mainWindow) {
+        const { x, y, width } = mainWindow.getBounds();
+
+        const devToolsWindow = new ElectronWindow('devTools', {
+          width: 300,
+          height: 560,
+          x: x + width + 8,
+          y,
+          resizable: false,
+          frame: false,
+          webPreferences: {
+            preload: join(__dirname, '../preload/index.js'),
+            allowRunningInsecureContent: false,
+            nodeIntegration: false,
+            contextIsolation: true,
+            sandbox: false,
+            devTools: is.dev,
+          },
+        });
+        devToolsWindow.setTemplate('devTools');
+        devToolsWindow.init();
+      }
+    }
   }
 
   @GlobalShortcut('Alt+F4')
