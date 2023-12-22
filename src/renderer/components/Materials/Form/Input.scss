@@ -102,7 +102,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 2px;
-  
+
         &--clickable {
           @include make-accessibility-background;
         }
@@ -219,7 +219,6 @@
         flex: 0 0 33.333%;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
       }
 
       &__adornment {
