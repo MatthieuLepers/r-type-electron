@@ -14,6 +14,7 @@ export default class Fx extends EntityScript {
   constructor(parent) {
     super();
     this.parent = parent;
+    this.addTag('fx');
 
     this.addComponent(Transform, Fx);
     this.addComponent(Sprite, Fx);

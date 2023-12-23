@@ -1,76 +1,102 @@
 <template>
   <div class="devtools-entities">
-    <ul class="devtools-entities__list">
-      <li
-        v-for="(entity, i) in State.entities"
-        :key="i"
-      >
-        <component
-          :is="actions.hasAttachedEntities(entity) ? 'button' : 'span'"
-          :class="{
-            'devtools-entities__button': actions.hasAttachedEntities(entity),
-            'devtools-entities__button--open': actions.hasAttachedEntities(entity) && state.open.includes(entity.getId()),
+    <MaterialFormFieldLine>
+      <MaterialFormToggle
+        v-model="state.debugPause"
+        label="Debug Pause"
+      />
+    </MaterialFormFieldLine>
+    <MaterialFormFieldLine>
+      <MaterialFormInput
+        v-model="state.search"
+        type="search"
+        placeholder="Search entity by id or tag"
+      />
+    </MaterialFormFieldLine>
+
+    <MaterialDataTable
+      :columns="State.columns"
+      :data="State.entities"
+      :allowMoveFn="() => false"
+    >
+      <template v-slot:id="{ obj }">
+        <span :title="obj.id">
+          {{ obj.id }}
+        </span>
+      </template>
+      <template v-slot:attachedTo="{ obj }">
+        <MaterialDataTableButton
+          :icon="state.show.includes(obj.id) ? 'icon-eye-slash' : 'icon-eye'"
+          :modifiers="{
+            round: true,
+            secondary: !state.show.includes(obj.id),
+            danger: state.show.includes(obj.id),
           }"
-          @click="actions.toggleOpen(entity)"
-        >
-          <DevToolsEntity :entity="entity" />
-        </component>
-        <DevToolsAttachedEntities
-          v-if="actions.hasAttachedEntities(entity)"
-          :entity="entity"
-          :open="state.open.includes(entity.getId())"
-          class="devtools-entities__sub"
+          @click="actions.handleToggleShowDebugDraw(obj)"
         />
-      </li>
-    </ul>
+      </template>
+    </MaterialDataTable>
   </div>
 </template>
 
 <script setup>
-import {
-  reactive,
-  computed,
-  watch,
-  onBeforeMount,
-} from 'vue';
+import { reactive, computed, watch } from 'vue';
 
-import DevToolsEntity from '@renderer/components/DevTools/Entity.vue';
-import DevToolsAttachedEntities from '@renderer/components/DevTools/EntityAttachedEntities.vue';
-
-import Global from '@renderer/core/stores/AppStore';
+import MaterialDataTable from '@renderer/components/Materials/DataTable/index.vue';
+import MaterialDataTableButton from '@renderer/components/Materials/DataTable/Button.vue';
+import MaterialFormFieldLine from '@renderer/components/Materials/Form/FieldLine.vue';
+import MaterialFormInput from '@renderer/components/Materials/Form/Input.vue';
+import MaterialFormToggle from '@renderer/components/Materials/Form/Toggle.vue';
 
 defineOptions({ name: 'DevToolsEntities' });
 
+const props = defineProps({
+  entities: { type: Object, default: () => ({}) },
+});
+
 const state = reactive({
-  open: [],
-  entities: Object.values(Global?.Game?.entities ?? {}),
+  entities: props.entities,
+  search: '',
+  debugPause: false,
+  show: [],
 });
 
 const State = computed(() => ({
-  entities: state.entities.filter((entity) => !entity.attachedTo),
+  entities: Object
+    .values(state.entities)
+    .filter((entity) => entity.id.includes(state.search) || entity.tags.some((tag) => tag.includes(state.search))),
+  columns: {
+    id: { label: 'Identifiant', className: 'id' },
+    attachedTo: { className: 'show' },
+  },
 }));
 
 const actions = {
-  hasAttachedEntities(entity) {
-    return entity.hasComponent('AttachedEntities') && Object.values(entity.getAttachedEntities()).length;
-  },
-  toggleOpen(entity) {
-    if (state.open.includes(entity.getId())) {
-      state.open = state.open.filter((entityId) => entityId !== entity.getId());
+  handleToggleShowDebugDraw(entity) {
+    if (state.show.includes(entity.id)) {
+      state.show = state.show.filter((id) => id !== entity.id);
+      api.invoke('sendDataToWindow', 'main', 'entityRemoveDebugComponent', entity.id);
     } else {
-      state.open.push(entity.getId());
+      state.show.push(entity.id);
+      api.invoke('sendDataToWindow', 'main', 'entityAddDebugComponent', entity.id);
     }
   },
 };
 
-watch(() => Global, (newGlobal) => {
-  state.entities = Object.values(newGlobal?.Game?.entities ?? {});
-}, { deep: true });
+watch(() => props.entities, (newVal) => {
+  state.entities = newVal;
+});
 
-onBeforeMount(() => {
-  api.on('updateEntities', (entities) => {
-    console.log(entities);
-  });
+watch(() => state.show.length, async (newVal) => {
+  if (newVal === 0 && !state.debugPause) {
+    await api.invoke('sendDataToWindow', 'main', 'toggleDebugPause', false);
+  } else {
+    await api.invoke('sendDataToWindow', 'main', 'toggleDebugPause', true);
+  }
+});
+
+watch(() => state.debugPause, (newVal) => {
+  api.invoke('sendDataToWindow', 'main', 'toggleDebugPause', newVal);
 });
 </script>
 

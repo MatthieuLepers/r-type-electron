@@ -17,6 +17,8 @@ export default abstract class EntityScript extends Class {
 
   declare on: (eventName: string, callback: Function, options?: EventListenerOptions) => void;
 
+  declare attachedTo: EntityScript;
+
   public initCallback: Function | undefined = undefined;
 
   public tags: Array<string> = [];
@@ -37,8 +39,12 @@ export default abstract class EntityScript extends Class {
       this.initCallback.call(this);
     }
 
-    // this.on('spawn', sendDataToDebugWindow, { once: true });
-    // this.on('despawn', sendDataToRemoveToDebugWindow, { once: true });
+    this.on('spawn', () => {
+      api.invoke('sendDataToWindow', 'devTools', 'onEntitySpawn', this.toJson());
+    }, { once: true });
+    this.on('despawn', () => {
+      api.invoke('sendDataToWindow', 'devTools', 'onEntityDespawn', this.getId());
+    }, { once: true });
   }
 
   addComponentAt(key: string, component: Constructor<Component>, clazz: Function) {
@@ -61,10 +67,7 @@ export default abstract class EntityScript extends Class {
     return tags.reduce((acc, tag) => acc && (tag.startsWith('!') ? !this.tags.includes(tag.substring(1)) : this.tags.includes(tag)), true);
   }
 
-  /**
-   * @return {this}
-   */
-  spawn() {
+  spawn(): EntityScript {
     if (this.hasComponent('Sprite')) {
       Global.Game.entities[this.getId()] = this;
     }
@@ -108,6 +111,30 @@ export default abstract class EntityScript extends Class {
       Global.Game.canvasObj.removeDrawables(this);
     }
     this.emit('despawn');
+  }
+
+  toJson(): string {
+    const jsonifyEntity = (entity: EntityScript) => {
+      const toReturn: Record<string, any> = {
+        components: {},
+        attachedTo: !!entity.attachedTo,
+        tags: entity.tags,
+      };
+
+      if (entity.hasComponent('Sprite')) {
+        toReturn.id = entity.getId();
+      }
+      if (entity.hasComponent('AttachedEntities')) {
+        toReturn.components.attachedentities = Object
+          .entries(entity.getAttachedEntities())
+          .reduce((acc, [id, ent]) => ({ ...acc, [id]: jsonifyEntity(ent) }), {})
+        ;
+      }
+
+      return toReturn;
+    };
+
+    return JSON.stringify(jsonifyEntity(this));
   }
 
   static new(...args: any[]): EntityScript {

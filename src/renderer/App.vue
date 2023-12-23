@@ -96,6 +96,7 @@ const debounceLoadRessources = debounce(async () => {
 
 onBeforeMount(() => {
   api.on('database-ready', async () => {
+    api.sendSync('openDevTools');
     await settingsStore.actions.load();
 
     await api.invoke('localeChange', settingsStore.actions.getString('locale', 'en-EN'));

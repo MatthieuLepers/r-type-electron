@@ -52,6 +52,7 @@ import MaterialFormInput from '@renderer/components/Materials/Form/Input.vue';
 
 import Global from '@renderer/core/stores/AppStore';
 import Game from '@renderer/core/Game';
+import Debug from '@/renderer/core/classes/components/Debug';
 
 defineOptions({ name: 'PlayScreen' });
 
@@ -86,7 +87,6 @@ watch(() => state.ambientVolume, (newVal) => {
 });
 
 onMounted(() => {
-  api.sendSync('openDevTools');
   state.game = new Game(canvas.value);
   state.game.start();
 
@@ -102,6 +102,22 @@ onMounted(() => {
     state.devToolsOpen = e.details.enabled;
     Global.devToolsOpen = state.devToolsOpen;
     Global.Engine.debug = state.devToolsOpen;
+  });
+
+  api.on('entityAddDebugComponent', (entityId) => {
+    if (Global.Game.entities[entityId]) {
+      Global.Game.entities[entityId].addComponent(Debug);
+      Global.Game.entities[entityId].addTag('debug');
+    }
+  });
+  api.on('entityRemoveDebugComponent', (entityId) => {
+    if (Global.Game.entities[entityId]) {
+      Global.Game.entities[entityId].removeTag('debug');
+    }
+  });
+  api.on('toggleDebugPause', (paused) => {
+    console.log(paused);
+    Global.Engine.debug = paused;
   });
 });
 </script>

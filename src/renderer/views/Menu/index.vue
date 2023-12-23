@@ -65,6 +65,7 @@ watch(() => State.value.isLoaded, (newVal) => {
 });
 
 onMounted(() => {
+  api.invoke('sendDataToWindow', 'devTools', 'reset');
   RessourceLoader.on('ressourceLoad', (e) => {
     state.currentRessource = e.details.ressource;
     state.percent = e.details.percent;

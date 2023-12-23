@@ -210,7 +210,7 @@ export default class PlayerShip extends PhysicEntityScript {
     if (this.components.chargedshooter.isCharging) {
       this.components.chargedshooter.isCharging = false;
       this.getAttachedEntity(`${this.getId()}_charging`).playAnimation('idle');
-      this.stopCurrentSound('player/charge');
+      this.stopCurrentSound('fx/player/charge');
     }
 
     // Play explosion & respawn
