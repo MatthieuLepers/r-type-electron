@@ -3,39 +3,17 @@
 .devtools-entities {
   height: 100%;
 
-  &__button {
-    position: relative;
-    width: 100%;
-
-    &::before {
-      @include set-font-scale('m');
-      content: '';
-      position: absolute;
-      top: 6px;
-      right: calc(100% + 6px);
-      border-left: 8px solid color(grey000);
-      border-top: 4px solid transparent;
-      border-bottom: 4px solid transparent;
+  .m-datatable-column {
+    &.id span {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+      max-width: calc(100vw - 130px);
     }
 
-    &--open::before {
-      top: 8px;
-      border-top: 8px solid color(grey000);
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-bottom: none;
-    }
-  }
-
-  &__list {
-    margin: 0;
-    padding: 0 0 0 rem(16px);
-    list-style: none;
-
-    &--open {
-      .devtools-entities__sub {
-        display: block;
-      }
+    &.show {
+      max-width: 48px;
     }
   }
 }

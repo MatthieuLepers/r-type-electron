@@ -1,0 +1,7 @@
+@import '~styles/utilities.scss';
+
+.devtoolView {
+  padding: rem(8px);
+  max-height: calc(100vh - 30px);
+  overflow: auto;
+}
