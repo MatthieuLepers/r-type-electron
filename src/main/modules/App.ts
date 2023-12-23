@@ -66,7 +66,7 @@ class AppModule {
         const { x, y, width } = mainWindow.getBounds();
 
         const devToolsWindow = new ElectronWindow('devTools', {
-          width: 300,
+          width: 360,
           height: 560,
           x: x + width + 8,
           y,
