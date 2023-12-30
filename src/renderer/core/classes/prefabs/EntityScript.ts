@@ -3,6 +3,7 @@ import Class from '@renderer/core/classes/Class';
 import type Component from '@renderer/core/classes/components/Component';
 import EventEmitter from '@renderer/core/classes/components/EventEmitter';
 import SoundEmitter from '@renderer/core/classes/components/SoundEmitter';
+import Debug from '@renderer/core/classes/components/Debug';
 import AbstractClassError from '@renderer/core/classes/errors/AbstractClassError';
 import Runnable from '@renderer/core/classes/runnable/Runnable';
 import type { Constructor } from '@renderer/core/@types';
@@ -34,17 +35,11 @@ export default abstract class EntityScript extends Class {
 
     this.addComponent(EventEmitter, EntityScript);
     this.addComponent(SoundEmitter, EntityScript);
+    this.addComponent(Debug, EntityScript);
 
     if (typeof this.initCallback === 'function') {
       this.initCallback.call(this);
     }
-
-    this.on('spawn', () => {
-      api.invoke('sendDataToWindow', 'devTools', 'onEntitySpawn', this.toJson());
-    }, { once: true });
-    this.on('despawn', () => {
-      api.invoke('sendDataToWindow', 'devTools', 'onEntityDespawn', this.getId());
-    }, { once: true });
   }
 
   addComponentAt(key: string, component: Constructor<Component>, clazz: Function) {
@@ -129,6 +124,12 @@ export default abstract class EntityScript extends Class {
           .entries(entity.getAttachedEntities())
           .reduce((acc, [id, ent]) => ({ ...acc, [id]: jsonifyEntity(ent) }), {})
         ;
+      }
+      if (entity.hasComponent('Locomotor')) {
+        toReturn.components.locomotor = {
+          path: entity.components.locomotor!.path?.toSvgPath() ?? '',
+          percent: entity.components.locomotor!.$pathPercent ?? 0,
+        };
       }
 
       return toReturn;

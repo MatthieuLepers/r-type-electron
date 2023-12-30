@@ -1,0 +1,77 @@
+@import '~styles/utilities.scss';
+
+.control-range {
+  flex: 1;
+
+  &__label {
+    display: block;
+    margin-bottom: rem(8px);
+    text-transform: uppercase;
+    font-size: rem(9.6px);
+    font-weight: 700;
+    color: darken(color(grey100), 11.37%);
+  }
+
+  &__container {
+		display: flex;
+		align-items: center;
+	}
+
+	&__input {
+		width: 100%;
+		height: 14px;
+		appearance: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		border-radius: 30px;
+		background-color: lighten(color(grey900), 10%);
+
+		&:focus {
+			outline: 0;
+			background-color: lighten(color(grey900), 20%);
+		}
+
+		&::-webkit-slider-thumb {
+			appearance: none;
+			-moz-appearance: none;
+			-webkit-appearance: none;
+			width: 18px;
+			height: 18px;
+			border: 4px solid color(grey000);
+			background-color: lighten(color(grey900), 10%);
+			border-radius: 50%;
+			cursor: pointer;
+			transition: border-color .2s;
+		}
+
+		&::-moz-range-thumb {
+			appearance: none;
+			-moz-appearance: none;
+			-webkit-appearance: none;
+			width: 18px;
+			height: 18px;
+			border: 4px solid color(grey000);
+			background-color: lighten(color(grey900), 10%);
+			border-radius: 50%;
+			cursor: pointer;
+			transition: border-color .2s;
+		}
+
+		&:hover,
+		&:focus {
+			&::-webkit-slider-thumb {
+				border-color: color(secondary200);
+			}
+
+			&::-moz-range-thumb {
+				border-color: color(secondary200);
+			}
+		}
+	}
+
+	&__control-input {
+		display: flex;
+		align-items: center;
+		margin-left: rem(8px);
+	}
+}

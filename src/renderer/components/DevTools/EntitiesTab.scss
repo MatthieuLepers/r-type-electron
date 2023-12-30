@@ -2,18 +2,10 @@
 
 .devtools-entities {
   height: 100%;
+  overflow-x: hidden;
 
-  .m-datatable-column {
-    &.id span {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      display: block;
-      max-width: calc(100vw - 130px);
-    }
-
-    &.show {
-      max-width: 48px;
-    }
+  &__card-list {
+    list-style: none;
+    padding: 0;
   }
 }

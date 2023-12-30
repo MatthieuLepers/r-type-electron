@@ -7,7 +7,8 @@ import MenuSettingsGameplayScreen from '@renderer/views/Menu/Settings/Gameplay.v
 import MenuSettingsKeyboardScreen from '@renderer/views/Menu/Settings/Keyboard.vue';
 import MenuSettingsAudioScreen from '@renderer/views/Menu/Settings/Audio.vue';
 import MenuModsScreen from '@renderer/views/Menu/Mods.vue';
-import MenuToolsScreen from '@renderer/views/Menu/Tools.vue';
+import MenuToolsScreen from '@renderer/views/Menu/Tools/index.vue';
+import MenuPathEditorToolScreen from '@renderer/views/Menu/Tools/PathEditor.vue';
 import DevToolsScreen from '@renderer/views/DevTools/index.vue';
 
 const routes = [
@@ -25,6 +26,7 @@ const routes = [
   },
   { path: '/mods', name: 'MenuMods', component: MenuModsScreen },
   { path: '/tools', name: 'MenuTools', component: MenuToolsScreen },
+  { path: '/tools/path-editor', name: 'MenuPathEditorTool', component: MenuPathEditorToolScreen },
   { path: '/devTools', name: 'DevTools', component: DevToolsScreen },
 ];
 

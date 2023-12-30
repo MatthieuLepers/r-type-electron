@@ -1,0 +1,29 @@
+@import '~styles/utilities.scss';
+
+.control-input {
+  flex: 1;
+
+  label {
+    display: block;
+    margin-bottom: rem(8px);
+    text-transform: uppercase;
+    font-size: ren(9.6px);
+    font-weight: 700;
+    color: darken(color(grey100), 11.37);
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 18px;
+    width: 32px;
+    background-color: lighten(color(grey900), 10.20);
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    font-size: rem(9.6px);
+    color: color(grey000);
+  }
+}

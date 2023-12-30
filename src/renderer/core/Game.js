@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 import Global from '@renderer/core/stores/AppStore';
 import Canvas from '@renderer/core/Canvas';
 import ScoreBoard from '@renderer/core/ScoreBoard';
-import EntityScript from '@renderer/core/classes/prefabs/EntityScript';
+import Class from '@renderer/core/classes/Class';
 
 import Random from '@renderer/core/classes/Random';
 
@@ -21,15 +21,17 @@ import Module from '@renderer/core/classes/prefabs/Module';
 // import Cheetah from '@renderer/core/classes/prefabs/enemies/Cheetah';
 // import Cytron from '@renderer/core/classes/prefabs/enemies/Cytron';
 import PowerArmor from '@renderer/core/classes/prefabs/enemies/PowerArmor';
-
-import WaveGenerator from '@renderer/core/classes/components/WaveGenerator';
 // import CompilerBoss from '@renderer/core/classes/prefabs/enemies/bosses/CompilerBoss';
+
+import EventEmitter from '@renderer/core/classes/components/EventEmitter';
+import SoundEmitter from '@renderer/core/classes/components/SoundEmitter';
+import WaveGenerator from '@renderer/core/classes/components/WaveGenerator';
 
 /**
  * @author Matthieu LEPERS
  * @version 1.0.0
  */
-export default class Game extends EntityScript {
+export default class Game extends Class {
   /**
    * @constructor
    * @param {HTMLCanvasElement} canvas
@@ -43,6 +45,8 @@ export default class Game extends EntityScript {
     this.quadTree = new QuadTree(0, this.canvasObj.getBounds());
     this.quadTree.clear();
 
+    this.addComponent(EventEmitter, Game);
+    this.addComponent(SoundEmitter, Game);
     this.addComponent(WaveGenerator, Game);
 
     this.canvasObj.init();

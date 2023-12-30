@@ -66,11 +66,11 @@ class AppModule {
         const { x, y, width } = mainWindow.getBounds();
 
         const devToolsWindow = new ElectronWindow('devTools', {
-          width: 360,
-          height: 560,
+          width: 460,
+          height: 420,
           x: x + width + 8,
           y,
-          resizable: false,
+          resizable: true,
           frame: false,
           webPreferences: {
             preload: join(__dirname, '../preload/index.js'),
