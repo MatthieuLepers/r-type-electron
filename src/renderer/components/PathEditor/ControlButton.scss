@@ -1,0 +1,30 @@
+@import '~styles/utilities.scss';
+
+.control-button {
+  @include transition(background-color .2s);
+  border: none;
+  padding: rem(12.8px) rem(22.4px);
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: 'Open Sans',sans-serif;
+  font-weight: 700;
+  font-size: rem(9.6px);
+  letter-spacing: rem(1.28px);
+  color: color(grey000);
+  background-color: color(grey800);
+
+  &:hover,
+  &:focus {
+    background-color: lighten(saturate(color(grey800), 0.21), 10.00);
+  }
+
+  &.danger {
+    background-color: color(danger300);
+
+    &:hover,
+    &:focus {
+      background-color: lighten(saturate(color(danger300), 0.21), 10.00);
+    }
+  }
+}

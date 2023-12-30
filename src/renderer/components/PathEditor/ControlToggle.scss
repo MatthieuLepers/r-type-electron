@@ -1,0 +1,47 @@
+@import '~styles/utilities.scss';
+
+.control-toggle {
+  flex: 1;
+
+  &__label {
+    display: block;
+    margin-bottom: rem(8px);
+    text-transform: uppercase;
+    font-size: rem(9.6px);
+    font-weight: 700;
+    color: darken(color(grey100), 11.37);
+  }
+
+  &__input {
+    display: none;
+
+    &:checked + .control-toggle__input-fake:after {
+      left: calc(100% - 18px);
+      border-color: color(secondary200);
+    }
+
+    &-fake {
+      position: relative;
+      height: 14px;
+      width: 32px;
+      background-color: lighten(color(grey900), 10%);
+      border-radius: 30px;
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -2px;
+        left: 0;
+        height: 18px;
+        width: 18px;
+        cursor: pointer;
+        border: 4px solid color(grey000);
+        background-color: lighten(color(grey900), 10%);
+        border-radius: 50%;
+        transition: border-color .2s, left .4s;
+        box-sizing: border-box;
+      }
+    }
+  }
+}

@@ -29,8 +29,8 @@ export default class ComplexePath extends Path {
 
   toSvgPath(): string {
     const strTab = [super.toSvgPath()];
-    this.pathCollection.forEach((path) => {
-      strTab.push(...path.toSvgPath().split(' ').slice(-1));
+    this.pathCollection.forEach((path, i) => {
+      strTab.push(path.toSvgPath().replace(strTab[i], ''));
     });
     return strTab.join(' ');
   }

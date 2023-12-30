@@ -1,0 +1,197 @@
+@import '~styles/utilities.scss';
+
+.path-editor {
+  display: flex;
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+	
+	::-webkit-scrollbar-track {
+    background: none;
+  }
+	
+	::-webkit-scrollbar-thumb {
+		background: none;
+		border-radius: 3px;
+		background: lighten(color(grey900), 10%);
+	}
+
+  &__render-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100vw - 400px);
+    height: 100vh;
+
+    svg {
+      display: block;
+      background: color(grey000);
+      box-shadow: 0 0 10px rgba(color(grey999),.4);
+
+      &.moving {cursor: pointer;}
+
+      .grid {
+        fill: none;
+        stroke: color(grey100);
+        stroke-width: 1px;
+      }
+
+      circle {
+        cursor: pointer;
+        fill: color(f);
+        stroke: color(grey700);
+        stroke-width: 5px;
+        transition: fill .2s;
+      }
+
+      .pointGroup {
+        &.first>circle {
+          stroke: color(secondary200);
+        }
+
+        &.active>circle {
+          fill: color(secondary200);
+        }
+      }
+
+      .anchor {
+        line {
+          stroke: color(grey500);
+          stroke-width: 1px;
+          stroke-dasharray: 5 5;
+        }
+
+        circle {
+          stroke: color(grey500);
+          transition: none;
+        }
+      }
+
+      path {
+        stroke-width: 4px;
+        stroke-linecap: round;
+      }
+    }
+  }
+
+  &__panel {
+    width: 400px;
+    max-height: 100vh;
+    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: color(grey900);
+    color: color(grey000);
+
+    .btn-delete {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: none;
+      width: 24px;
+      height: 24px;
+
+      &:hover {
+        &:before,
+        &:after {
+          background-color: lighten(color(danger300), 10);
+        }
+      }
+
+      &:before,
+      &:after {
+        content: '';
+        width: 12px;
+        height: 2px;
+        position: absolute;
+        top: calc(50% - 1px);
+        left: calc(50% - 6px);
+        background-color: color(danger300);
+      }
+
+      &:before {
+        transform: rotate(-45deg);
+      }
+
+      &:after {
+        transform: rotate(45deg);
+      }
+    }
+
+    .group {
+      border: 1px solid rgba(color(grey700), 4);
+      padding: 5px;
+      position: relative;
+      margin-top: rem(8px);
+
+      &--active {
+        border: 1px solid rgba(color(secondary200), .4);
+      }
+
+      &:not(:last-of-type) {
+        margin-bottom: rem(4px);
+      }
+
+      &__result {
+        font-size: rem(9.6px);
+        font-weight: 700;
+      }
+
+      &__controls {
+        margin-bottom: rem(8px);
+      }
+
+      &__label {
+        font-size: rem(9.6px);
+        display: block;
+        margin-bottom: rem(8px);
+        text-transform: uppercase;
+        font-weight: 700;
+        color: color(grey200);
+        flex: 1;
+        padding-right: rem(16px);
+
+        span {
+          cursor: pointer;
+        }
+
+        input {
+          background: none;
+          color: color(grey000);
+          background-color: rgba(color(grey700), .15);
+          border: 1px solid rgba(color(grey700), .15);
+          width: 100%;
+          padding: rem(1px) rem(5px);
+        }
+      }
+
+      &__point {
+        font-size: rem(12px);
+        background-color: rgba(color(grey700), .15);
+        padding: rem(3px) rem(5px);
+        border: 1px solid rgba(color(grey700), .15);
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        cursor: pointer;
+        position: relative;
+        padding-right: 25px;
+        gap: 16px;
+
+        &--active {
+          border: 1px solid rgba(color(secondary200), .4);
+        }
+
+        &:not(:last-of-type) {
+          margin-bottom: 5px;
+        }
+
+        .btn-delete {
+          top: calc(50% - 12px);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+@import '~styles/utilities.scss';
+
+.entity-panel {
+  position: fixed;
+  top: 30px;
+  right: 0;
+  width: 100%;
+  height: calc(100vh - 30px);
+  background-color: rgba(color(grey900), .9);
+  z-index: 3;
+  padding: rem(16px);
+
+  &.appear-enter-active,
+  &.appear-leave-active {
+    transition: right .3s ease;
+  }
+
+  &.appear-enter-from,
+  &.appear-leave-to {
+    right: -100%;
+  }
+
+  &.appear-enter-to,
+  &.appear-leave-from {
+    right: 0;
+  }
+
+  &__close {
+    position: absolute; 
+    top: 16px;
+    right: 16px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: rem(8px);
+    margin-bottom: rem(16px);
+    background-color: rgba(color(grey800), .7);
+    padding: rem(8px);
+
+    &-title {
+      @include set-font-scale('m');
+      padding: 0;
+      margin: 0;
+    }
+
+    &-content {
+      @include set-font-scale('s');
+    }
+  }
+
+  &__tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: rem(4px);
+    flex-wrap: wrap;
+    margin: 0;
+  }
+
+  &__tag {
+    @include set-font-scale('xxs');
+    padding: rem(2px) rem(4px);
+    background-color: color(grey700);
+    border-radius: 50px;
+    min-width: 24px;
+    text-align: center;
+  }
+}
