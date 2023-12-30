@@ -1,6 +1,11 @@
 <template>
   <MainLayout class="menu-tools-screen">
     <Screen title="Tools">
+      <template v-slot:content>
+        <ScreenMenuButton :to="{ name: 'MenuPathEditorTool' }">
+          Path Editor
+        </ScreenMenuButton>
+      </template>
       <template v-slot:footer>
         <ScreenMenuButton
           :to="{ name: 'Menu' }"

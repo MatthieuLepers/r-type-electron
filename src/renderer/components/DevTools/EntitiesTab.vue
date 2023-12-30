@@ -1,12 +1,6 @@
 <template>
   <div class="devtools-entities">
     <MaterialFormFieldLine>
-      <MaterialFormToggle
-        v-model="state.debugPause"
-        label="Debug Pause"
-      />
-    </MaterialFormFieldLine>
-    <MaterialFormFieldLine>
       <MaterialFormInput
         v-model="state.search"
         type="search"
@@ -14,89 +8,53 @@
       />
     </MaterialFormFieldLine>
 
-    <MaterialDataTable
-      :columns="State.columns"
-      :data="State.entities"
-      :allowMoveFn="() => false"
-    >
-      <template v-slot:id="{ obj }">
-        <span :title="obj.id">
-          {{ obj.id }}
-        </span>
-      </template>
-      <template v-slot:attachedTo="{ obj }">
-        <MaterialDataTableButton
-          :icon="state.show.includes(obj.id) ? 'icon-eye-slash' : 'icon-eye'"
-          :modifiers="{
-            round: true,
-            secondary: !state.show.includes(obj.id),
-            danger: state.show.includes(obj.id),
-          }"
-          @click="actions.handleToggleShowDebugDraw(obj)"
-        />
-      </template>
-    </MaterialDataTable>
+    <ul class="devtools-entities__card-list">
+      <li
+        v-for="(entity, i) in State.entities"
+        :key="i"
+        class="devtools-entities__card-list-item"
+      >
+        <EntityCard :entity="entity" />
+      </li>
+    </ul>
+
+    <EntityPanel />
   </div>
 </template>
 
 <script setup>
-import { reactive, computed, watch } from 'vue';
+import { reactive, computed } from 'vue';
 
-import MaterialDataTable from '@renderer/components/Materials/DataTable/index.vue';
-import MaterialDataTableButton from '@renderer/components/Materials/DataTable/Button.vue';
 import MaterialFormFieldLine from '@renderer/components/Materials/Form/FieldLine.vue';
 import MaterialFormInput from '@renderer/components/Materials/Form/Input.vue';
-import MaterialFormToggle from '@renderer/components/Materials/Form/Toggle.vue';
+import EntityCard from '@renderer/components/DevTools/EntityCard.vue';
+import EntityPanel from '@renderer/components/DevTools/EntityPanel.vue';
+
+import DebugEntityScript from '@renderer/core/classes/DebugEntityScript';
+import { useDevToolStore } from '@renderer/core/stores/DevToolsStore';
 
 defineOptions({ name: 'DevToolsEntities' });
 
-const props = defineProps({
-  entities: { type: Object, default: () => ({}) },
-});
-
 const state = reactive({
-  entities: props.entities,
   search: '',
-  debugPause: false,
-  show: [],
 });
 
 const State = computed(() => ({
   entities: Object
-    .values(state.entities)
-    .filter((entity) => entity.id.includes(state.search) || entity.tags.some((tag) => tag.includes(state.search))),
-  columns: {
-    id: { label: 'Identifiant', className: 'id' },
-    attachedTo: { className: 'show' },
-  },
+    .values(useDevToolStore.state.entities)
+    .filter((entity) => !entity.attachedTo && (entity.id.includes(state.search) || entity.tags.some((tag) => tag.includes(state.search)))),
 }));
 
-const actions = {
-  handleToggleShowDebugDraw(entity) {
-    if (state.show.includes(entity.id)) {
-      state.show = state.show.filter((id) => id !== entity.id);
-      api.invoke('sendDataToWindow', 'main', 'entityRemoveDebugComponent', entity.id);
-    } else {
-      state.show.push(entity.id);
-      api.invoke('sendDataToWindow', 'main', 'entityAddDebugComponent', entity.id);
-    }
-  },
-};
-
-watch(() => props.entities, (newVal) => {
-  state.entities = newVal;
+api.on('reset', () => {
+  useDevToolStore.state.entities = {};
+  useDevToolStore.state.debugPause = false;
 });
-
-watch(() => state.show.length, async (newVal) => {
-  if (newVal === 0 && !state.debugPause) {
-    await api.invoke('sendDataToWindow', 'main', 'toggleDebugPause', false);
-  } else {
-    await api.invoke('sendDataToWindow', 'main', 'toggleDebugPause', true);
-  }
+api.on('onEntitySpawn', (e) => {
+  const entity = JSON.parse(e);
+  useDevToolStore.state.entities[entity.id] = new DebugEntityScript(entity);
 });
-
-watch(() => state.debugPause, (newVal) => {
-  api.invoke('sendDataToWindow', 'main', 'toggleDebugPause', newVal);
+api.on('onEntityDespawn', (entityId) => {
+  delete useDevToolStore.state.entities[entityId];
 });
 </script>
 

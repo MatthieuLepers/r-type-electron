@@ -1,0 +1,12 @@
+@import '~styles/utilities.scss';
+
+.control-title {
+  margin: rem(48px) 0 rem(24px);
+  font-size: rem(12.8px);
+  font-weight: 700;
+  color: color(grey000);
+}
+
+.m-tabs__container>.control-title:first-child {
+  margin-top: 0;
+}

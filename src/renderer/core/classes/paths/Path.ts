@@ -43,8 +43,8 @@ export default class Path {
     return this.path.getTotalLength();
   }
 
-  debugDraw(ctx: CanvasRenderingContext2D) {
-    ctx.strokeStyle = '#f00';
+  debugDraw(ctx: CanvasRenderingContext2D, color = '#f00') {
+    ctx.strokeStyle = color;
     ctx.stroke(new Path2D(this.toSvgPath()));
   }
 }

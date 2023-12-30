@@ -1,0 +1,71 @@
+@import '~styles/utilities.scss';
+
+.control-type-choice {
+  flex: 1;
+
+  &__label {
+    display: block;
+    margin-bottom: rem(8px);
+    text-transform: uppercase;
+    font-size: rem(9.6px);
+    font-weight: 700;
+    color: darken(color(grey100), 11.37);
+  }
+
+  &__choice-list {
+		display: flex;
+		width: 100%;
+	}
+
+	&__choice {
+		flex: 1;
+
+		&-input {
+			display: none;
+
+			&:checked + .control-type-choice__choice-input-fake {
+				border-color: color(secondary200);
+				background-color: lighten(color(secondary200), 10%);
+			}
+
+			&-fake {
+				padding: .6rem;
+				background-color: lighten(color(grey900), 10%);
+				border: 4px solid lighten(color(grey900), 10%);
+				box-sizing: border-box;
+				transition: border-color .2s;
+				cursor: pointer;
+				text-align: center;
+				text-transform: uppercase;
+				font-family: 'Open Sans', sans-serif;
+				font-size: .8rem;
+				font-weight: 700;
+				color: color(grey000);
+			}
+		}
+
+		&:first-child .control-type-choice__choice-input-fake {
+			border-radius: 4px 0 0 4px;
+		}
+
+		&:last-child .control-type-choice__choice-input-fake {
+			border-radius: 0 4px 4px 0;
+		}
+	}
+
+	&.small {
+		& > .control-type-choice__label {
+			display: none;
+		}
+
+		.control-type-choice__choice {
+			margin: 0;
+			width: auto;
+
+			.control-type-choice__choice-input-fake {
+				border-width: 1px;
+				padding: rem(1px);
+			}
+		}
+	}
+}
