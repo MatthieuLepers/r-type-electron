@@ -13,6 +13,11 @@
 	align-items: center;
 	z-index: 1;
   background-color: rgba(color(grey999), .7);
+  overflow: hidden;
+
+  &--fullscreen {
+    padding: 0;
+  }
 
   &__title {
     @include set-font-scale('m');
@@ -28,6 +33,7 @@
   &__content {
     width: 100%;
     height: 100%;
+    overflow: auto;
   }
 
   &__footer {
