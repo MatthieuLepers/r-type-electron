@@ -2,6 +2,7 @@
 
 .path-editor {
   display: flex;
+  height: 100%;
 
   ::-webkit-scrollbar {
     width: 6px;
@@ -22,7 +23,7 @@
     justify-content: center;
     align-items: center;
     width: calc(100vw - 400px);
-    height: 100vh;
+    height: 100%;
 
     svg {
       display: block;
