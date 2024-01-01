@@ -324,7 +324,7 @@ const state = reactive({
     hidePoints: false,
     grid: {
       width: 600,
-      height: 563,
+      height: 427,
       size: 25,
       snap: true,
       show: true,

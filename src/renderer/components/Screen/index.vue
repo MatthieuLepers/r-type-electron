@@ -1,5 +1,5 @@
 <template>
-  <div class="screen">
+  <div :class="GenerateModifiers('screen', props.modifiers)">
     <h1
       v-if="props.title"
       class="screen__title"
@@ -20,6 +20,11 @@ defineOptions({ name: 'Screen' });
 
 const props = defineProps({
   title: { type: String, default: null },
+  /**
+   * Valid modifiers
+   * fullscreen
+   */
+  modifiers: { type: Object, default: () => ({}) },
 });
 </script>
 
