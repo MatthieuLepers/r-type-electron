@@ -3,7 +3,7 @@
     class="m-datatable-bodyrow"
     :modifiers="{ selectable: props.showSelectionRow, selected: props.obj.selected }"
     @click="actions.handleRowClick"
-    @contextmenu="$event => emit('contextmenu', $event, props.obj)"
+    @contextmenu="emit('contextmenu', $event, props.obj)"
   >
     <div class="m-datatable-bodyrow__container">
       <DataTableRow
@@ -17,7 +17,7 @@
           />
         </DataTableColumn>
         <DataTableColumn :modifiers="{ inner: true }">
-          <slot name="actionColumnInner" :obj="props.obj" :close="() => { state.open = false; }" />
+          <slot name="actionColumnInner" :obj="props.obj" :close="state.open = false" />
         </DataTableColumn>
       </DataTableRow>
       <DataTableColumn

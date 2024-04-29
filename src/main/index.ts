@@ -22,7 +22,7 @@ function createWindow() {
       sandbox: false,
       devTools: is.dev,
     },
-    icon: join('public/icons/icon16x.png'),
+    icon: 'public/icons/icon16x.png',
   });
   mainWindow.init();
 }

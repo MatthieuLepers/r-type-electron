@@ -41,6 +41,7 @@
               :obj="element"
               :showActionRow="props.showActionRow"
               :showSelectionRow="props.showSelectionRow"
+              @selectLine="emit('selectLine', $event)"
             >
               <template v-slot:actionColumnInner="{ obj, close }">
                 <slot name="actionColumnInner" :obj="obj" :close="close" />
@@ -66,7 +67,7 @@
                 <slot name="secretArea" :obj="obj" />
               </template>
             </DataTableBodyRow>
-            <slot name="lastRow" />
+            <slot name="lastRow" :obj="element" />
           </div>
         </template>
       </Draggable>
@@ -92,7 +93,7 @@ import DataTableButton from '@renderer/components/Materials/DataTable/Button.vue
 
 defineOptions({ name: 'DataTable' });
 
-const emit = defineEmits(['orderChange']);
+const emit = defineEmits(['orderChange', 'selectLine']);
 
 const props = defineProps({
   columns: { type: Object, default: () => ({}) },

@@ -43,7 +43,7 @@
 <script setup>
 defineOptions({ name: 'TitleBar' });
 
-const emit = defineEmits(['help']);
+const emit = defineEmits(['help', 'minimize', 'maximize', 'close']);
 
 const props = defineProps({
   name: { type: String, required: true },
@@ -56,12 +56,15 @@ const props = defineProps({
 
 const actions = {
   minimize() {
+    emit('minimize');
     api.send(`minimize:${props.name}`);
   },
   maximize() {
+    emit('maximize');
     api.send(`maximize:${props.name}`);
   },
   close() {
+    emit('close');
     api.send(`close:${props.name}`);
   },
 };
