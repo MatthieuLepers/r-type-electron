@@ -29,11 +29,6 @@ export default class ElectronWindow extends BrowserWindow {
   }
 
   init() {
-    // const windowUrl = is.dev
-    //   ? `http://localhost:3000/${this.template.file}${this.template.routePath ? `/#/${this.template.routePath}` : '/#/'}`
-    //   : `file://${join(__dirname, '../../..')}/${this.template.file}${this.template.routePath ? `#${this.template.routePath}` : ''}`
-    // ;
-
     if (is.dev && process.env.ELECTRON_RENDERER_URL) {
       this.loadURL(`${process.env.ELECTRON_RENDERER_URL}/${this.template.file}${this.template.routePath ? `/#/${this.template.routePath}` : '/#/'}`);
     } else {
