@@ -137,7 +137,7 @@
               focused: i === state.fakeIndex,
               removable: state.selectedOptions.includes(option.value) && props.allowRemoveSelected && !props.disabled,
             })"
-            :aria-label="props.allowRemoveSelected && !props.disabled ? `Retirer l'option ${option.label}` : null"
+            :aria-label="props.allowRemoveSelected && !props.disabled ? t('Materials.Form.Select.removeOption', [option.label]) : null"
             type="button"
             @click="actions.handleSelectOption(option.value)"
           >
@@ -160,7 +160,7 @@
             :search="state.searchText"
             :reset="actions.handleClickReset"
           >
-            Aucun résultat pour « {{ state.searchText }} »
+          {{ t('App.Materials.Form.Select.emptyResult', [state.searchText]) }}
           </slot>
         </span>
       </div>
@@ -180,7 +180,7 @@
             focused: i === state.fakeIndex,
             removable: state.selectedOptions.includes(option.value) && props.allowRemoveSelected && !props.disabled,
           })"
-          :aria-label="props.allowRemoveSelected && !props.disabled ? `Retirer l'option ${option.label}` : null"
+          :aria-label="props.allowRemoveSelected && !props.disabled ? t('Materials.Form.Select.removeOption', [option.label]) : null"
           type="button"
           @click="actions.handleSelectOption(option.value)"
         >

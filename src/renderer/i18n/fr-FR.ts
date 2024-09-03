@@ -41,6 +41,7 @@ export default {
     },
     Form: {
       Select: {
+        removeOption: 'Retirer l\'option {0}',
         emptyResult: 'Aucun résultat pour « {0} »',
       },
     },
