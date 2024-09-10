@@ -30,21 +30,21 @@
       <MaterialFormFieldSet legend="Booleans">
         <MaterialFormFieldLine :size="3">
           <template v-slot:field0>
-            <MaterialFormToggle v-model="state.required" label="Required ?" />
+            <MaterialFormToggle v-model="state.required" label="Required?" />
           </template>
           <template v-slot:field1>
-            <MaterialFormToggle v-model="state.disabled" label="Disabled ?" />
+            <MaterialFormToggle v-model="state.disabled" label="Disabled?" />
           </template>
           <template v-slot:field2>
-            <MaterialFormToggle v-model="state.searchable" label="Searchable ?" />
+            <MaterialFormToggle v-model="state.searchable" label="Searchable?" />
           </template>
         </MaterialFormFieldLine>
         <MaterialFormFieldLine :size="3">
           <template v-slot:field0>
-            <MaterialFormToggle v-model="state.allowRemoveSelected" label="Removable selected ?" />
+            <MaterialFormToggle v-model="state.allowRemoveSelected" label="Removable selected?" />
           </template>
           <template v-slot:field1>
-            <MaterialFormToggle v-model="state.multiple" label="Multiple ?" />
+            <MaterialFormToggle v-model="state.multiple" label="Multiple?" />
           </template>
         </MaterialFormFieldLine>
       </MaterialFormFieldSet>

@@ -41,7 +41,12 @@ export default {
     },
     Form: {
       Select: {
+        removeOption: 'Remove option',
         emptyResult: 'No result for « {0} »',
+      },
+      ObjectList: {
+        addModel: 'Add model',
+        removeModel: 'Remove this model',
       },
     },
   },
