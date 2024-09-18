@@ -49,6 +49,10 @@ export default {
         removeOption: 'Retirer l\'option {0}',
         emptyResult: 'Aucun résultat pour « {0} »',
       },
+      ObjectList: {
+        addModel: 'Ajouter un model',
+        removeModel: 'Retirer ce model',
+      },
     },
   },
 };

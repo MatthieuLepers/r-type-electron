@@ -6,13 +6,13 @@
   >
     <template v-slot:menu="{ windowName }">
       <TitleBarMenu :menuList="State.menuList">
-        <template v-slot:fileMenu="{ visible, close }">
+        <template #fileMenu="{ visible, close }">
           <AppTitleBarFileMenu :visible="visible" :name="windowName" @close="close" />
         </template>
-        <template v-slot:langMenu="{ visible, close }">
+        <template #langMenu="{ visible, close }">
           <AppTitleBarLangMenu :visible="visible" @close="close" />
         </template>
-        <template v-slot:toolsMenu="{ visible, close }">
+        <template #toolsMenu="{ visible, close }">
           <AppTitleBarToolsMenu :visible="visible" @close="close" />
         </template>
       </TitleBarMenu>
