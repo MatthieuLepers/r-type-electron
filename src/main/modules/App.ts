@@ -1,3 +1,5 @@
+// import { autoUpdater } from 'electron-updater';
+
 import { IpcHandle, IpcOn, GlobalShortcut } from '@/main/decorators';
 import { Setting } from '@/main/database/models';
 import WindowStore from '@/main/stores/WindowStore';
@@ -39,6 +41,11 @@ class AppModule {
       });
     });
   }
+
+  // @IpcOn
+  // static quitAndInstallUpdate() {
+  //   autoUpdater.quitAndInstall();
+  // }
 
   @GlobalShortcut('Alt+F4')
   static closeAppNonDarwin() {

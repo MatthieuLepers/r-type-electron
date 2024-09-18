@@ -12,6 +12,11 @@ export default {
       },
     },
   },
+  Updater: {
+    downloadingUpdate: 'Téléchargement de la mise à jour...',
+    readyToInstall: 'Mise à jour prête à être installée !',
+    quitAndInstall: 'Mettre à jour',
+  },
   Electron: {
     dialogs: {
       filters: {

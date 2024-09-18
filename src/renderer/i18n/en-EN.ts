@@ -12,6 +12,11 @@ export default {
       },
     },
   },
+  Updater: {
+    downloadingUpdate: 'Downloading update...',
+    readyToInstall: 'Update ready to install!',
+    quitAndInstall: 'Install',
+  },
   Electron: {
     dialogs: {
       filters: {

@@ -25,9 +25,9 @@ import { computed } from 'vue';
 
 import TitleBar from '@renderer/components/Materials/TitleBar/index.vue';
 import TitleBarMenu from '@renderer/components/Materials/TitleBar/Menu.vue';
-import AppTitleBarFileMenu from '@renderer/components/AppTitleBar/FileMenu.vue';
-import AppTitleBarLangMenu from '@renderer/components/AppTitleBar/LangMenu.vue';
-import AppTitleBarToolsMenu from '@renderer/components/AppTitleBar/ToolsMenu.vue';
+import AppTitleBarFileMenu from '@renderer/components/App/TitleBar/FileMenu.vue';
+import AppTitleBarLangMenu from '@renderer/components/App/TitleBar/LangMenu.vue';
+import AppTitleBarToolsMenu from '@renderer/components/App/TitleBar/ToolsMenu.vue';
 
 defineOptions({ name: 'AppTitleBar' });
 

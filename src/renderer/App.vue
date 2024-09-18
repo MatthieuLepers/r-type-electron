@@ -4,7 +4,16 @@
     v-else
     class="app__loader"
   />
-  <MaterialNotificationList />
+  <MaterialNotificationList>
+    <template #downloadupdate="{ notification }">
+      {{ notification.text }}
+      <div class="MainProgressBar">
+        <span :style="{ width: `calc(${state.percent}% - 4px)` }">
+          {{ Math.round(state.percent * 10) / 10 }}%
+        </span>
+      </div>
+    </template>
+  </MaterialNotificationList>
 </template>
 
 <script setup>
@@ -14,10 +23,11 @@ import { useI18n } from 'vue-i18n';
 import MaterialLoaderIcon from '@renderer/components/Materials/Loader/Icon.vue';
 import MaterialNotificationList from '@renderer/components/Materials/Notification/List.vue';
 
+import { notificationStore } from '@renderer/components/Materials/Notification/Store';
 import { settingsStore } from '@renderer/core/entities/setting/store';
 import Shortcut from '@renderer/core/Shortcut';
 
-const { locale } = useI18n();
+const { t, locale } = useI18n();
 
 const state = reactive({
   loading: true,
@@ -31,6 +41,44 @@ api.on('runShortcut', (shortcut) => {
   if (shortcut in Shortcut) {
     Shortcut[shortcut]();
   }
+});
+
+const updateAvailableNotification = {
+  id: 'downloadupdate',
+  type: 'info',
+  text: t('App.Updater.downloadingUpdate'),
+  delay: 0,
+  action: {
+    callback() {
+      notificationStore.actions.removeNotification(updateAvailableNotification);
+    },
+    icon: 'icon-close',
+  },
+};
+
+api.on('update-available', () => {
+  notificationStore.actions.pushRawNotification(updateAvailableNotification);
+});
+
+api.on('download-progress', (percent) => {
+  state.percent = percent;
+});
+
+api.on('update-downloaded', () => {
+  const notification = {
+    type: 'success',
+    text: t('App.Updater.readyToInstall'),
+    delay: 0,
+    action: {
+      callback() {
+        api.sendSync('quitAndInstallUpdate');
+      },
+      label: t('App.Updater.quitAndInstall'),
+      icon: 'icon-export',
+    },
+  };
+  notificationStore.actions.removeNotification(updateAvailableNotification);
+  notificationStore.actions.pushRawNotification(notification);
 });
 
 onBeforeMount(() => {

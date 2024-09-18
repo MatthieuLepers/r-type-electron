@@ -79,12 +79,17 @@ app.on('before-quit', () => {
 
 /*
 import { autoUpdater } from 'electron-updater';
+import WindowStore from '@/main/stores/WindowStore';
+
+autoUpdater.on('update-available', () => {
+  WindowStore.broadcastData('update-available');
+});
+
+autoUpdater.on('download-progress', (progressObj) => {
+  WindowStore.broadcastData('download-progress', progressObj.percent);
+});
 
 autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall();
-})
-
-app.on('ready', () => {
-  if (!is.dev) autoUpdater.checkForUpdates();
-})
+  WindowStore.broadcastData('update-downloaded');
+});
 */

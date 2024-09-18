@@ -142,7 +142,7 @@
 <script setup>
 import { reactive, computed } from 'vue';
 
-import AppTitleBar from '@renderer/components/AppTitleBar/index.vue';
+import AppTitleBar from '@renderer/components/App/TitleBar/index.vue';
 import MaterialTabs from '@renderer/components/Materials/Tabs/index.vue';
 import NotificationList from '@renderer/components/Materials/Notification/List.vue';
 import MaterialButton from '@renderer/components/Materials/Button/index.vue';
