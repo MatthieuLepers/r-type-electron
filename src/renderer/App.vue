@@ -31,6 +31,7 @@ const { t, locale } = useI18n();
 
 const state = reactive({
   loading: true,
+  percent: 0,
 });
 
 api.on('localeChange', (iso) => {
