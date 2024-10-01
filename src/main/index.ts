@@ -4,7 +4,6 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 
 import { sequelize } from '@/main/database';
 import { Setting } from '@/main/database/models';
-import populateDb from '@/main/database/populate';
 import ElectronWindow from '@/main/classes/ElectronWindow';
 import { APP_PLATEFORM } from '@/main/utils/Constants';
 
@@ -27,6 +26,8 @@ function createWindow() {
   mainWindow.init();
 }
 
+app.commandLine.appendSwitch('disable-gpu');
+
 app
   .whenReady()
   .then(async () => {
@@ -39,7 +40,6 @@ app
 
     await sequelize.sync();
     await Setting.createDefault();
-    await populateDb();
 
     if (is.dev) {
       // eslint-disable-next-line import/no-extraneous-dependencies

@@ -76,7 +76,7 @@
       v-if="props.paginate && State.paginated.length > 1"
       class="m-datatable__footer"
     >
-      <!-- <DataTablePagination :data="paginated" :perPage="perPage" v-model="page" /> -->
+      <DataTablePagination :data="State.paginated" :perPage="perPage" v-model="page" />
     </div>
   </div>
 </template>
@@ -89,11 +89,13 @@ import DataTableRow from '@renderer/components/Materials/DataTable/Row.vue';
 import DataTableBodyRow from '@renderer/components/Materials/DataTable/BodyRow.vue';
 import DataTableColumn from '@renderer/components/Materials/DataTable/Column.vue';
 import DataTableButton from '@renderer/components/Materials/DataTable/Button.vue';
-// import DataTablePagination from '@renderer/components/Materials/DataTable/Pagination.vue';
+import DataTablePagination from '@renderer/components/Materials/DataTable/Pagination.vue';
 
 defineOptions({ name: 'DataTable' });
 
 const emit = defineEmits(['orderChange', 'selectLine']);
+
+const page = defineModel('page', { type: Number, default: 0 });
 
 /**
  * slots:
@@ -116,7 +118,6 @@ const props = defineProps({
 
 const state = reactive({
   perPage: props.perPage,
-  page: 1,
   sorting: {
     key: null,
     direction: '',
@@ -141,7 +142,7 @@ const State = computed(() => {
     return acc;
   }, []);
   const result = props.paginate
-    ? paginated[state.page - 1] || []
+    ? paginated[page.value - 1] || []
     : sorted
   ;
   const isGrabbable = result.every((obj) => obj.order !== undefined);

@@ -23,3 +23,16 @@ export function shuffleArray<T>(e: Array<T>): Array<T> {
   }
   return e;
 }
+
+export function generatePermutations<T>(input: Array<T>, length: number): Array<Array<T>> {
+  // Use reduce to iteratively build permutations while ensuring non-decreasing order.
+  return Array(length)
+    .fill(input)
+    .reduce((acc, curr) => acc.flatMap((perm: Array<T>) => curr
+      .filter((el: T) => el >= (perm[perm.length - 1] || el)) // Ensure non-decreasing order
+      .map((el: T) => [...perm, el])), [[]]);
+}
+
+export function image(path: string): string {
+  return api.isDev ? `/${path}` : path;
+}
