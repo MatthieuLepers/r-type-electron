@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import AppTitleBar from '@renderer/components/AppTitleBar/index.vue';
+import AppTitleBar from '@renderer/components/App/TitleBar/index.vue';
 
 defineOptions({ name: 'MainLayout' });
 </script>
