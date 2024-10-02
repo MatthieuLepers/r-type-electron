@@ -7,11 +7,10 @@
   <MaterialNotificationList>
     <template #downloadupdate="{ notification }">
       {{ notification.text }}
-      <div class="MainProgressBar">
-        <span :style="{ width: `calc(${state.percent}% - 4px)` }">
-          {{ Math.round(state.percent * 10) / 10 }}%
-        </span>
-      </div>
+      <MaterialProgressBar
+        class="app__progress-bar"
+        :percent="state.percent"
+      />
     </template>
   </MaterialNotificationList>
 </template>
@@ -21,6 +20,7 @@ import { reactive, onBeforeMount } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import MaterialLoaderIcon from '@renderer/components/Materials/Loader/Icon.vue';
+import MaterialProgressBar from '@renderer/components/Materials/ProgressBar/index.vue';
 import MaterialNotificationList from '@renderer/components/Materials/Notification/List.vue';
 
 import { notificationStore } from '@renderer/components/Materials/Notification/Store';

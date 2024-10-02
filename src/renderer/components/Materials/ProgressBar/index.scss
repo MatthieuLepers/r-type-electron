@@ -1,16 +1,31 @@
 @import '~styles/utilities.scss';
 
-.AppProgressBar {
+.m-progress-bar {
   width: 100%;
-  height: 24px;
-  border-radius: 12px;
-  background-color: color(grey000);
-  position: relative;
-  padding: 2px;
-  overflow: hidden;
-  margin: 0 rem(28px) 0 rem(16px);
 
-  &Track {
+  &--center {
+    .m-progress-bar__label {
+      text-align: center;
+    }
+  }
+
+  &__label {
+    @include set-font-scale('s');
+    display: block;
+    margin-bottom: rem(8px);
+  }
+
+  &__track {
+    width: 100%;
+    height: 24px;
+    border-radius: 12px;
+    background-color: color(grey000);
+    position: relative;
+    padding: 2px;
+    overflow: hidden;
+  }
+
+  &__progress {
     @include set-font-scale('s');
     @include transition(width .2s ease);
     position: absolute;
