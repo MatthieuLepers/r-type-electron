@@ -62,7 +62,7 @@ api.on('update-available', () => {
 });
 
 api.on('download-progress', (percent) => {
-  state.percent = percent;
+  state.percent = percent / 100;
 });
 
 api.on('update-downloaded', () => {
