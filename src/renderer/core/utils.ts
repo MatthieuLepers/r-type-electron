@@ -24,6 +24,14 @@ export function shuffleArray<T>(e: Array<T>): Array<T> {
   return e;
 }
 
+export function chunkArray<T>(arr: Array<T>, chunkSize: number): Array<Array<T>> {
+  return arr.reduce((acc, val, i) => {
+    const ch = Math.floor(i / chunkSize);
+    acc[ch] = ([] as Array<T>).concat((acc[ch] ?? []), val);
+    return acc;
+  }, [] as Array<Array<T>>);
+}
+
 export function generatePermutations<T>(input: Array<T>, length: number): Array<Array<T>> {
   // Use reduce to iteratively build permutations while ensuring non-decreasing order.
   return Array(length)
