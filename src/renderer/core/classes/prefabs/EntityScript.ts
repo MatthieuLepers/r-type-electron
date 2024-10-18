@@ -108,34 +108,17 @@ export default abstract class EntityScript extends Class {
     this.emit('despawn');
   }
 
-  toJson(): string {
-    const jsonifyEntity = (entity: EntityScript) => {
-      const toReturn: Record<string, any> = {
-        components: {},
-        attachedTo: !!entity.attachedTo,
-        tags: entity.tags,
-      };
-
-      if (entity.hasComponent('Sprite')) {
-        toReturn.id = entity.getId();
-      }
-      if (entity.hasComponent('AttachedEntities')) {
-        toReturn.components.attachedentities = Object
-          .entries(entity.getAttachedEntities())
-          .reduce((acc, [id, ent]) => ({ ...acc, [id]: jsonifyEntity(ent) }), {})
-        ;
-      }
-      if (entity.hasComponent('Locomotor')) {
-        toReturn.components.locomotor = {
-          path: entity.components.locomotor!.path?.toSvgPath() ?? '',
-          percent: entity.components.locomotor!.$pathPercent ?? 0,
-        };
-      }
-
-      return toReturn;
+  toDebugObject(): Object {
+    return {
+      components: Object
+        .entries(this.components)
+        .filter(([, component]) => typeof component.toDebugObject === 'function')
+        .reduce((acc, [componentName, component]) => ({
+          ...acc,
+          [componentName]: component.toDebugObject(),
+        }), {}),
+      tags: this.tags,
     };
-
-    return JSON.stringify(jsonifyEntity(this));
   }
 
   static new(...args: any[]): EntityScript {

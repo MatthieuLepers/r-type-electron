@@ -25,6 +25,8 @@ export default abstract class Component extends Class {
 
   task?(frame: number): void;
 
+  toDebugObject?();
+
   /**
    * @param {ModManager} ModKnowledge
    */

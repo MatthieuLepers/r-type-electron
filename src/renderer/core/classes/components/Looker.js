@@ -34,6 +34,15 @@ export default class Looker extends Component {
     });
   }
 
+  toDebugObject() {
+    return {
+      target: this.target?.toDebugObject() ?? null,
+      minAngle: this.minAngle,
+      maxAngle: this.maxAngle,
+      sweepCheck: this.sweepCheck,
+    };
+  }
+
   task() {
     if (this.target && this.inst.hasComponent('Sprite') && this.inst.hasComponent('Transform') && this.target.hasComponent('Transform')) {
       const signX = this.inst.components.sprite.centerOrigin.x - this.target.components.sprite.centerOrigin.x >= 0 ? -1 : 1;
