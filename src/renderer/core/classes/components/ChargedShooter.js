@@ -97,6 +97,19 @@ export default class ChargedShooter extends Component {
     this.chargeTime = chargeTime;
   }
 
+  toDebugObject() {
+    return {
+      projectile: this.projectile?.name ?? null,
+      shootProbability: this.shootProbability,
+      automatic: this.automatic,
+      target: this.$target?.toDebugObject() ?? null,
+      requireTarget: this.requireTarget,
+      chargeTime: this.chargeTime,
+      isCharging: this.isCharging,
+      startTime: this.startTime,
+    };
+  }
+
   task() {
     if (!this.inst.hasTag('isDead') && this.isCharging && this.inst.hasComponent('EventEmitter') && !Global.Engine.paused) {
       const percent = Math.min(100, ((Date.now() - this.startTime) * 100) / this.chargeTime);

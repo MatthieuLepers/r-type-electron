@@ -194,6 +194,21 @@ export default class Locomotor extends DrawableComponent {
     this.inst.addTag('tracking');
   }
 
+  toDebugObject() {
+    return {
+      canMove: this.canMove,
+      currentDirection: this.$currentDirection,
+      path: this.path?.toSvgPath() ?? '',
+      pathLoop: this.$pathLoop,
+      pathPercent: this.$pathPercent,
+      nextPathPercent: this.$nextPathPercent,
+      loopCount: this.$loopCount,
+      followSlope: this.followSlope,
+      trackedEntity: this.trackedEntity?.toDebugObject() ?? null,
+      speed: this.speed,
+    };
+  }
+
   task() {
     if (!this.inst.hasTag('attached')) {
       if (this.trackedEntity?.hasTag('isDead') || (this.inst.hasTag('tracking') && !this.trackedEntity)) {

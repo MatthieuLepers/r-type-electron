@@ -70,4 +70,15 @@ export default class AttachedEntities extends Component {
       return !!this.getAttachedEntity(entityId);
     });
   }
+
+  toDebugObject() {
+    return {
+      entities: Object
+        .entries(this.entities)
+        .reduce((acc, [entityId, entity]) => ({
+          ...acc,
+          [entityId]: entity.toDebugObject(),
+        }), {}),
+    };
+  }
 }

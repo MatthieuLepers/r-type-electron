@@ -30,7 +30,6 @@ import MaterialFormInput from '@renderer/components/Materials/Form/Input.vue';
 import EntityCard from '@renderer/components/DevTools/EntityCard.vue';
 import EntityPanel from '@renderer/components/DevTools/EntityPanel.vue';
 
-import DebugEntityScript from '@renderer/core/classes/DebugEntityScript';
 import { useDevToolStore } from '@renderer/core/stores/DevToolsStore';
 
 defineOptions({ name: 'DevToolsEntities' });
@@ -40,21 +39,24 @@ const state = reactive({
 });
 
 const State = computed(() => ({
-  entities: Object
-    .values(useDevToolStore.state.entities)
-    .filter((entity) => !entity.attachedTo && (entity.id.includes(state.search) || entity.tags.some((tag) => tag.includes(state.search)))),
+  entities: useDevToolStore.state.entities
+    .filter((entity) => !entity.tags.includes('attached')
+      && (entity.components?.sprite?.id?.includes(state.search)
+        || entity.tags.some((tag) => tag.includes(state.search)))),
 }));
 
 api.on('reset', () => {
-  useDevToolStore.state.entities = {};
+  useDevToolStore.state.entities = [];
   useDevToolStore.state.debugPause = false;
 });
 api.on('onEntitySpawn', (e) => {
   const entity = JSON.parse(e);
-  useDevToolStore.state.entities[entity.id] = new DebugEntityScript(entity);
+  useDevToolStore.state.entities.push(entity);
 });
 api.on('onEntityDespawn', (entityId) => {
-  delete useDevToolStore.state.entities[entityId];
+  useDevToolStore.state.entities = useDevToolStore.state.entities
+    .filter((entity) => entity.components?.sprite?.id !== entityId)
+  ;
 });
 </script>
 

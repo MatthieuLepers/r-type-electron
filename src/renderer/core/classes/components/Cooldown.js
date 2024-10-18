@@ -52,4 +52,11 @@ export default class Cooldown extends Component {
       this.$timer = null;
     }
   }
+
+  toDebugObject() {
+    return {
+      active: this.active,
+      time: this.time,
+    };
+  }
 }

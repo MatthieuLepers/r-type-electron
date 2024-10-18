@@ -115,6 +115,16 @@ export default class Health extends DrawableComponent {
     return '#f00';
   }
 
+  toDebugObject() {
+    return {
+      maxHealth: this.$maxHealth,
+      health: this.$health,
+      absorbtion: this.$absorbtion,
+      invincible: this.$invincible,
+      barColor: this.getHealthBarColor(),
+    };
+  }
+
   render() {
     if (Global.Settings.debug.drawHealthBars && this.healthBarVisible && this.inst.hasComponent('Sprite')) {
       const { width } = this.inst.components.sprite;
