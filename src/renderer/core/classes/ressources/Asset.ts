@@ -24,10 +24,7 @@ export default class Asset extends AbstractRessource<IAssetData> {
     this.loadAnimations();
   }
 
-  /**
-   * @return {Number}
-   */
-  get frames() {
+  get frames(): number {
     return this.data?.animationData?.totalFrames ?? 1;
   }
 

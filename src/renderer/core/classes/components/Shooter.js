@@ -117,6 +117,25 @@ export default class Shooter extends Component {
     this.$target = target;
   }
 
+  toDebugObject() {
+    return {
+      components: Object
+        .entries(this.components)
+        .reduce((acc, [componentName, component]) => ({
+          ...acc,
+          [componentName]: component.toDebugObject(),
+        }), {}),
+      projectile: this.projectile?.name ?? null,
+      shootProbability: this.shootProbalility,
+      automatic: this.automatic,
+      shooter: this.shooter?.toDebugObject() ?? null,
+      target: this.$target?.toDebugObject() ?? null,
+      requireTarget: this.requireTarget,
+      useSpread: this.useSpread,
+      spread: this.spread,
+    };
+  }
+
   task() {
     if (this.automatic && Math.random() <= this.shootProbalility && ((this.requireTarget && this.target && !this.target.hasTag('isDead')) || !this.requireTarget) && (!this.inst.hasComponent('ChargedShooter') || (this.inst.hasComponent('ChargedShooter') && !this.inst.components.chargedshooter.isCharging))) {
       this.inst.shoot();

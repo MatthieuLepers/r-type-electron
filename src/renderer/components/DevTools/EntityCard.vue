@@ -6,7 +6,7 @@
       @click="actions.handleShowAttachedEntities"
     >
       <h3 class="entity-card__title">
-        {{ props.entity.id }}
+        {{ props.entity.components?.sprite?.id }}
         <div v-if="State.attached.length" class="entity-card__title__attached">
           (with {{ State.attached.length }} attached entit{{ State.attached.length > 1 ? 'ies' : 'y' }})
         </div>
@@ -47,7 +47,7 @@ const state = reactive({
 });
 
 const State = computed(() => ({
-  attached: props.entity.getAttachedEntities(),
+  attached: Object.values(props.entity.components?.attachedentities?.entities ?? {}),
 }));
 
 const actions = {

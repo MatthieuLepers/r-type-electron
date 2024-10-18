@@ -116,4 +116,10 @@ export default class Transform extends Component {
       : this.position
     ;
   }
+
+  toDebugObject() {
+    return {
+      position: this.getPosition(),
+    };
+  }
 }

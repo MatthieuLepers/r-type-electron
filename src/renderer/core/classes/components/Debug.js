@@ -6,7 +6,7 @@ export default class Debug extends DrawableComponent {
     super(inst, clazz);
 
     this.inst.on('spawn', () => {
-      api.invoke('sendDataToWindow', 'devTools', 'onEntitySpawn', this.inst.toJson());
+      api.invoke('sendDataToWindow', 'devTools', 'onEntitySpawn', JSON.stringify(this.inst.toDebugObject()));
 
       if (this.inst.hasComponent('Sprite')) {
         api.on(this.inst.getId(), (actions) => {

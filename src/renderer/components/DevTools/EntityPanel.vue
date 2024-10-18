@@ -6,7 +6,7 @@
           ID
         </h1>
         <div class="entity-panel__container-content">
-          {{ State.entity.id }}
+          {{ State.entity.components?.sprite?.id }}
         </div>
       </div>
 

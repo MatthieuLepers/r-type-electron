@@ -194,6 +194,20 @@ export default class Sprite extends DrawableComponent {
     Global.Game.canvas.deleteDrawable(this.id);
   }
 
+  toDebugObject() {
+    return {
+      id: this.options.id,
+      animation: this.options.animation,
+      loop: this.options.loop,
+      rotation: this.options.rotation,
+      origin: this.options.origin,
+      animationDelay: this.options.animationDelay,
+      currentFrameIndex: this.$currentFrameIndex,
+      currentTick: this.$currentTick,
+      visible: this.visible,
+    };
+  }
+
   render() {
     if (this.visible) {
       this.update();

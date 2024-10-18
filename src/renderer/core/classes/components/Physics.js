@@ -98,4 +98,12 @@ export default class Physics extends Component {
       }
     }
   }
+
+  toDebugObject() {
+    return {
+      gravity: this.gravity,
+      collideTags: this.collideTags,
+      collideTagsExcluded: this.collideTagsExcluded,
+    };
+  }
 }
