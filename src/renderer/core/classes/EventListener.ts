@@ -1,6 +1,6 @@
 import type Event from '@renderer/core/classes/Event';
 import type EntityScript from '@renderer/core/classes/prefabs/EntityScript';
-import type { IEventEmitter } from '@/renderer/core/classes/components/typescript/EventEmitter/mixin';
+import type { IEventEmitter } from '@renderer/core/classes/components/typescript/EventEmitter/i';
 
 export interface EventListenerOptions {
   once: boolean;
