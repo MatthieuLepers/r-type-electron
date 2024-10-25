@@ -228,7 +228,7 @@ import { useI18n } from 'vue-i18n';
 
 import MaterialFormMessageList from '@renderer/components/Materials/Form/MessageList.vue';
 
-import { debounce } from '@renderer/core/utils';
+import { debounce } from '@/renderer/core/utils';
 
 defineOptions({ name: 'FormAutocomplete' });
 

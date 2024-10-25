@@ -27,8 +27,6 @@ import { notificationStore } from '@renderer/components/Materials/Notification/S
 import { settingsStore } from '@renderer/core/entities/setting/store';
 import Shortcut from '@renderer/core/Shortcut';
 import App from '@renderer/core/App';
-import ModManager from '@renderer/core/classes/ModManager';
-import Global from '@renderer/core/stores/AppStore';
 import { debounce } from '@renderer/core/utils';
 
 const { t, locale } = useI18n();
@@ -88,8 +86,6 @@ api.on('update-downloaded', () => {
 });
 
 const debounceLoadRessources = debounce(async () => {
-  const modManager = new ModManager();
-  Global.ModKnowledge = await modManager.loadMods();
   await app.loadRessources();
 }, 1000);
 

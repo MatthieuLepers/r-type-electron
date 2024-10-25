@@ -1,19 +1,7 @@
-import AbstractClassError from '@renderer/core/classes/errors/AbstractClassError';
-
 type Tree<T> = T | { [k: string]: Tree<T> };
 
-/**
- * @author Matthieu LEPERS
- * @version 1.0.0
- */
 export default abstract class AbstractRessourceStore<T> {
   public banks: Tree<T> = {};
-
-  constructor() {
-    if (this.constructor.name === 'AbstractRessourceStore') {
-      throw new AbstractClassError(this);
-    }
-  }
 
   get(ressourcePath: string): T | null {
     const bankPath = ressourcePath.split('/');

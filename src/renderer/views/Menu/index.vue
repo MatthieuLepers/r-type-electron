@@ -20,9 +20,6 @@
           <ScreenMenuButton :to="{ name: 'MenuSettingsGameplay' }">
             {{ $t('Views.Menu.settings') }}
           </ScreenMenuButton>
-          <ScreenMenuButton :to="{ name: 'MenuMods' }">
-            {{ $t('Views.Menu.mods') }}
-          </ScreenMenuButton>
           <ScreenMenuButton :to="{ name: 'MenuTools' }">
             {{ $t('Views.Menu.tools') }}
           </ScreenMenuButton>

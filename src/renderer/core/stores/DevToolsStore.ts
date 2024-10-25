@@ -8,7 +8,7 @@ interface IState {
   selectedEntity: Object | null;
 }
 
-const devToolStore = function () {
+const useDevToolStore = function () {
   const state = reactive<IState>({
     entities: [],
     shown: [],
@@ -52,4 +52,4 @@ const devToolStore = function () {
   };
 };
 
-export const useDevToolStore = devToolStore();
+export const devToolStore = useDevToolStore();

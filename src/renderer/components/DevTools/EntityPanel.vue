@@ -34,12 +34,12 @@
         </div>
         <div class="entity-pannel__container-actions">
           <MaterialButton
-            :icon="useDevToolStore.actions.isPathShown(State.entity) ? 'icon-eye-slash' : 'icon-eye'"
+            :icon="devToolStore.actions.isPathShown(State.entity) ? 'icon-eye-slash' : 'icon-eye'"
             :modifiers="{
-              secondary: !useDevToolStore.actions.isPathShown(State.entity),
-              danger: useDevToolStore.actions.isPathShown(State.entity),
+              secondary: !devToolStore.actions.isPathShown(State.entity),
+              danger: devToolStore.actions.isPathShown(State.entity),
             }"
-            @click="useDevToolStore.actions.toggleShowPath(State.entity)"
+            @click="devToolStore.actions.toggleShowPath(State.entity)"
           />
         </div>
       </div>
@@ -49,7 +49,7 @@
         icon="icon-close"
         :modifiers="{ danger: true }"
         title="Close"
-        @click="useDevToolStore.actions.toggleShow(State.entity)"
+        @click="devToolStore.actions.toggleShow(State.entity)"
       />
     </aside>
   </Transition>
@@ -60,10 +60,10 @@ import { computed } from 'vue';
 
 import MaterialButton from '@renderer/components/Materials/Button/index.vue';
 
-import { useDevToolStore } from '@renderer/core/stores/DevToolsStore';
+import { devToolStore } from '@renderer/core/stores/DevToolsStore';
 
 const State = computed(() => ({
-  entity: useDevToolStore.state.selectedEntity,
+  entity: devToolStore.state.selectedEntity,
 }));
 </script>
 
