@@ -1,5 +1,6 @@
-import Class from '@renderer/core/classes/Class';
 import Controls from '@renderer/core/datas/Controls';
+
+import Class from '@renderer/core/@typescript/Class';
 
 export interface IDebugSettings {
   drawPath: boolean;

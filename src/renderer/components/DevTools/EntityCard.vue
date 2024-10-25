@@ -14,12 +14,12 @@
       <div class="entity-card__actions">
         <MaterialButton
           title="Show on canvas"
-          :icon="useDevToolStore.actions.isShown(props.entity) ? 'icon-eye-slash' : 'icon-eye'"
+          :icon="devToolStore.actions.isShown(props.entity) ? 'icon-eye-slash' : 'icon-eye'"
           :modifiers="{
-            secondary: !useDevToolStore.actions.isShown(props.entity),
-            danger: useDevToolStore.actions.isShown(props.entity),
+            secondary: !devToolStore.actions.isShown(props.entity),
+            danger: devToolStore.actions.isShown(props.entity),
           }"
-          @click.stop="useDevToolStore.actions.toggleShow(props.entity)"
+          @click.stop="devToolStore.actions.toggleShow(props.entity)"
         />
       </div>
     </component>
@@ -36,7 +36,7 @@ import { reactive, computed } from 'vue';
 
 import MaterialButton from '@renderer/components/Materials/Button/index.vue';
 
-import { useDevToolStore } from '@renderer/core/stores/DevToolsStore';
+import { devToolStore } from '@renderer/core/stores/DevToolsStore';
 
 const props = defineProps({
   entity: { type: Object, required: true },

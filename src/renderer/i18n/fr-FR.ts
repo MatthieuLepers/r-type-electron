@@ -59,7 +59,6 @@ export default {
     Menu: {
       play: 'Play',
       settings: 'Paramètres',
-      mods: 'Mods',
       tools: 'Outils',
     },
   },
