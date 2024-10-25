@@ -24,12 +24,12 @@ import MaterialTitleBar from '@renderer/components/Materials/TitleBar/index.vue'
 import MaterialFormFieldLine from '@renderer/components/Materials/Form/FieldLine.vue';
 import MaterialFormToggle from '@renderer/components/Materials/Form/Toggle.vue';
 
-import { useDevToolStore } from '@renderer/core/stores/DevToolsStore';
+import { devToolStore } from '@renderer/core/stores/DevToolsStore';
 
 defineOptions({ name: 'DevToolsLayout' });
 
 const state = reactive({
-  debugPause: useDevToolStore.state.debugPause,
+  debugPause: devToolStore.state.debugPause,
 });
 
 watch(() => state.debugPause, (newVal) => {

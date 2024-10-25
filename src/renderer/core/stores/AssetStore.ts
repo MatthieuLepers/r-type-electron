@@ -1,10 +1,7 @@
 import AbstractRessourceStore from '@renderer/core/stores/AbstractRessourceStore';
-import type Asset from '@renderer/core/classes/ressources/Asset';
 
-/**
- * @author Matthieu LEPERS
- * @version 1.0.0
- */
+import type Asset from '@renderer/core/@typescript/ressources/Asset';
+
 class AssetStore extends AbstractRessourceStore<Asset> {
 }
 
