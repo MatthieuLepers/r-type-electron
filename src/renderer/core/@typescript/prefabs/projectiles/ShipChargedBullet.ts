@@ -1,6 +1,7 @@
 import Global from '@renderer/core/stores/AppStore';
 
 import PhysicEntityScript from '@renderer/core/@typescript/prefabs/PhysicEntityScript';
+import type PlayerShip from '@renderer/core/@typescript/prefabs/PlayerShip';
 import Projectile from '@renderer/core/@typescript/prefabs/projectiles/Projectile';
 import Point from '@renderer/core/@typescript/geometry/Point';
 import ComplexePath from '@renderer/core/@typescript/paths/ComplexePath';
@@ -17,8 +18,10 @@ export default class ShipChargedBullet extends Projectile {
 
   public asset: Asset;
 
+  declare shooter: PlayerShip;
+
   constructor(
-    shooter: PhysicEntityScript,
+    shooter: PlayerShip,
     target: PhysicEntityScript,
     percent: number,
   ) {
@@ -51,6 +54,12 @@ export default class ShipChargedBullet extends Projectile {
     this.addCollisionTag('enemy', '!projectile');
 
     this.on('dead', () => this.despawn());
+    this.on('spawn', () => {
+      this.shooter.incrementStat('shot', this);
+    });
+    this.on('collide', () => {
+      this.shooter.incrementStat('hit', this);
+    });
   }
 
   static parsePercent(percent: number): number {

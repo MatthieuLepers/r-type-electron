@@ -38,6 +38,8 @@ export default class PlayerShip extends mix(PhysicEntityScript)
 
   public releasedModule?: Module & IShooter = null;
 
+  public lives: number = 2;
+
   constructor(id: string) {
     super();
     this.damages = 1;
@@ -111,8 +113,8 @@ export default class PlayerShip extends mix(PhysicEntityScript)
       })
     ;
     this.components.controller.setType(Controller.TYPE_KEYBOARD);
+    // this.components.controller.setType(Controller.TYPE_GAMEPAD);
     this.components.controller.bind();
-    // this.components.controller.setType(Controller.TYPE_GAMEPAD).bind();
 
     // AttachedEntities
     this.attachEntity(new ShipBoosterFx(this));
@@ -126,6 +128,9 @@ export default class PlayerShip extends mix(PhysicEntityScript)
 
     // Physics
     this.addCollisionTag('enemy', '!isDead');
+
+    // RocketLauncher
+    this.components.rocketlauncher.enabled = true;
 
     // Shooter
     this.components.shooter.shootFn = this.shootFn.bind(this);
@@ -152,6 +157,7 @@ export default class PlayerShip extends mix(PhysicEntityScript)
 
   respawn() {
     const player = new PlayerShip(this.getId()).spawn() as PlayerShip;
+    player.lives = this.lives;
     player.playAnimation('invincible', true);
     player.addTag('invincible');
     this.emit('respawn', { player });
@@ -173,9 +179,8 @@ export default class PlayerShip extends mix(PhysicEntityScript)
     }
   }
 
-  onDead(e: IEvent) {
+  onDead() {
     this.setSoundCooldown(0);
-    console.log(`Killed by ${e.details.killer.getId()}`);
     // Release module
     this.module?.release();
 
@@ -198,8 +203,14 @@ export default class PlayerShip extends mix(PhysicEntityScript)
 
     // Play explosion & respawn
     this.playSound('fx/entity/explosion_player');
+    this.lives -= 1;
+    if (this.lives < 0) {
+      Global.Game.emit('gameOver');
+    }
     Explosion.EXPLOSION_PLAYER(this).spawn().on('animOver', () => {
-      this.respawn();
+      if (this.lives >= 0) {
+        this.respawn();
+      }
     });
   }
 

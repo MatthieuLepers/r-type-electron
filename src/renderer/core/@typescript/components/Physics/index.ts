@@ -41,12 +41,8 @@ export default class Physics extends Component<PhysicEntityScript> {
     const instHitbox = new HitboxCollection(...this.inst.getHitbox());
     const entityHitbox = new HitboxCollection(...entity.getHitbox());
     if (entity.getId() !== this.inst.getId() && instHitbox.isColliding(entityHitbox)) {
-      if (entity.hasComponent('EventEmitter')) {
-        entity.emit('collide', { collider: this.inst, collisionData: entityHitbox });
-      }
-      if (this.inst.hasComponent('EventEmitter')) {
-        this.inst.emit('collide', { collider: entity, collisionData: instHitbox });
-      }
+      entity.emit('collide', { collider: this.inst, collisionData: entityHitbox });
+      this.inst.emit('collide', { collider: entity, collisionData: instHitbox });
     }
   }
 

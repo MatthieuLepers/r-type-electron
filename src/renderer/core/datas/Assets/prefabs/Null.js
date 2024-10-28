@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/null',
-  spritesheetPath: '/assets/img/spritesheets/particles/null.png',
+  spritesheetPath: '/public/img/spritesheets/particles/null.png',
   animationData: {
     totalFrames: 1,
     animations: [

@@ -11,6 +11,7 @@ export default class PlasmaBall extends Projectile {
     super(shooter, target);
     this.addTag('enemy', 'absorbable');
     this.damages = 1;
+    this.score = 10;
 
     // Locomotor
     this.components.locomotor.speedX = 300;

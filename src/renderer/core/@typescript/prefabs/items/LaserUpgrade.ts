@@ -27,7 +27,7 @@ export default class LaserUpgrade extends Upgrade {
       newModule = new Module();
       newModule.spawn();
     }
-    const module: Module = picker.getAttachedEntity<Module>('module') ?? picker.releasedModule ?? Global.Game.findFirstEntityByTags('module', '!bitModule', '!linked', '!attached');
+    const module: Module = picker.getAttachedEntity<Module>('module') ?? picker.releasedModule ?? Global.Game.findFirstEntityByTags('module', '!bitModule', '!linked', '!attached') as Module;
     if (module && module !== newModule) {
       module.increaseTier();
       module.weapon = new LaserWeapon();

@@ -6,6 +6,7 @@ export default class CellularWall extends Enemy {
   constructor(id: string) {
     super();
     this.damages = 1;
+    this.score = 10;
 
     this.addTag('wall', 'immobile');
 

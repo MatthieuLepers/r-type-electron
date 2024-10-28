@@ -10,6 +10,7 @@ export default class Cytron extends Enemy {
   constructor() {
     super();
     this.damages = 1;
+    this.score = 100;
 
     // Locomotor
     this.components.locomotor.speedX = 120;

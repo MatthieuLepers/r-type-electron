@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/fx/booster',
-  spritesheetPath: '/assets/img/spritesheets/particles/booster.png',
+  spritesheetPath: '/public/img/spritesheets/particles/booster.png',
   animationData: {
     totalFrames: 5,
     animations: [

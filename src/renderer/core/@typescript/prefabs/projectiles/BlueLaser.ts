@@ -1,7 +1,7 @@
 import Global from '@renderer/core/stores/AppStore';
 
-import type { IAttachedEntities } from '@renderer/core/@typescript/components/AttachedEntities/i';
 import type PhysicEntityScript from '@renderer/core/@typescript/prefabs/PhysicEntityScript';
+import type PlayerShip from '@renderer/core/@typescript/prefabs/PlayerShip';
 import Module, { Side } from '@renderer/core/@typescript/prefabs/Module';
 import Explosion from '@renderer/core/@typescript/prefabs/Explosion';
 import Projectile from '@renderer/core/@typescript/prefabs/projectiles/Projectile';
@@ -9,15 +9,15 @@ import Point from '@renderer/core/@typescript/geometry/Point';
 import ComplexePath from '@renderer/core/@typescript/paths/ComplexePath';
 
 export default class BlueLaser extends Projectile {
-  declare shooter: PhysicEntityScript & IAttachedEntities;
+  declare shooter: PlayerShip;
 
   constructor(
-    shooter: PhysicEntityScript & IAttachedEntities,
+    shooter: PlayerShip,
     target: PhysicEntityScript,
     public angle: number = 0,
   ) {
     super(shooter, target);
-    this.addTag('player', 'laser', 'staySpawned');
+    this.addTag('player', 'laser');
     this.angle = angle;
     this.damages = 2;
 

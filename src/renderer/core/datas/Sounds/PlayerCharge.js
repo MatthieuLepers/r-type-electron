@@ -1,4 +1,4 @@
 export default {
   bank: 'fx/player/charge',
-  soundPath: '/assets/sounds/sound_player_charge.ogg',
+  soundPath: '/public/sounds/sound_player_charge.ogg',
 };

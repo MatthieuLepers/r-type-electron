@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/enemies/cytron',
-  spritesheetPath: '/assets/img/spritesheets/enemies/cytron.png',
+  spritesheetPath: '/public/img/spritesheets/enemies/cytron.png',
   animationData: {
     totalFrames: 1,
     animations: [

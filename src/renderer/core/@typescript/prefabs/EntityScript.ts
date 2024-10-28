@@ -22,6 +22,8 @@ export default class EntityScript extends mix(Class)
 
   public attachedTo?: EntityScript = null;
 
+  public score?: number;
+
   constructor(initCallback?: Function) {
     super();
     if (this.constructor.name === 'EntityScript') {

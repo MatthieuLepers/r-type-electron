@@ -2,6 +2,19 @@
   <MainLayout class="play-screen">
     <canvas ref="canvas" />
     <Screen
+      title="Game Over!"
+      v-show="state.gameOver"
+    >
+      <template v-slot:content>
+        <button
+          :class="GenerateModifiers('screen-menu-button', { xxl: true })"
+          @click="actions.handleClickExitToMenu"
+        >
+          Exit to menu
+        </button>
+      </template>
+    </Screen>
+    <Screen
       title="Paused!"
       v-show="state.paused"
     >
@@ -18,20 +31,33 @@
         >
           Exit to menu
         </button>
-        <MaterialFormInput
-          v-model="state.fxVolume"
-          type="range"
-          :label="`Fx volume ${state.fxVolume}%`"
-        />
-        <MaterialFormInput
-          v-model="state.ambientVolume"
-          type="range"
-          :label="`Ambient volume ${state.ambientVolume}%`"
-        />
+
+        <div class="menu-sliders flexy flexy--gutter">
+          <div class="flexy flexy__col flexy__col--1of2 menu-slider">
+            <span class="menu-slider__label">
+              Fx volume {{ state.fxVolume }}%
+            </span>
+            <VueSlider
+              v-model="state.fxVolume"
+              tooltip="none"
+              class="flexy__col flexy__col--full"
+            />
+          </div>
+
+          <div class="flexy flexy__col flexy__col--1of2 menu-slider">
+            <span class="menu-slider__label">
+              Ambient volume {{ state.ambientVolume }}%
+            </span>
+            <VueSlider
+              v-model="state.ambientVolume"
+              tooltip="none"
+              class="flexy__col flexy__col--full"
+            />
+          </div>
+        </div>
       </template>
     </Screen>
     <GameHUD v-if="state.game" />
-    <DevTools v-show="state.devToolsOpen" />
   </MainLayout>
 </template>
 
@@ -43,12 +69,11 @@ import {
   onMounted,
 } from 'vue';
 import { useRouter } from 'vue-router';
+import VueSlider from 'vue-3-slider-component';
 
 import MainLayout from '@renderer/views/MainLayout.vue';
 import Screen from '@renderer/components/Screen/index.vue';
 import GameHUD from '@renderer/components/GameHUD/index.vue';
-import DevTools from '@renderer/components/DevTools/index.vue';
-import MaterialFormInput from '@renderer/components/Materials/Form/Input.vue';
 
 import Global from '@renderer/core/stores/AppStore';
 import Game from '@renderer/core/Game';
@@ -61,7 +86,7 @@ const router = useRouter();
 
 const state = reactive({
   game: null,
-  devToolsOpen: false,
+  gameOver: false,
   paused: false,
   ambientVolume: Global.Settings.audio.ambientVolume,
   fxVolume: Global.Settings.audio.fxVolume,
@@ -90,17 +115,17 @@ onMounted(() => {
   state.game.start();
 
   Global.Engine.on('paused', () => {
-    if (!state.devToolsOpen) {
-      state.paused = true;
-    }
+    state.paused = true;
   });
   Global.Engine.on('resumed', () => {
     state.paused = false;
   });
   Global.Game.on('devTools', (e) => {
-    state.devToolsOpen = e.details.enabled;
-    Global.devToolsOpen = state.devToolsOpen;
-    Global.Engine.debug = state.devToolsOpen;
+    Global.devToolsOpen = e.details.enabled;
+    Global.Engine.debug = e.details.enabled;
+  });
+  Global.Game.on('gameOver', () => {
+    state.gameOver = true;
   });
 
   api.on('toggleDebugPause', (paused) => {
