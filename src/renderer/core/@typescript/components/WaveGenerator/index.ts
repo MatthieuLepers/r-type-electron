@@ -16,6 +16,8 @@ export default class WaveGenerator extends mix(Component<Game>).with(EventEmitte
 
   public wave: GameWave | null = null;
 
+  public enabled: boolean = true;
+
   constructor(inst: Game, clazz: Function) {
     super(inst, clazz);
 
@@ -29,7 +31,7 @@ export default class WaveGenerator extends mix(Component<Game>).with(EventEmitte
   }
 
   generateNextWave() {
-    if (!this.inst.over && this.waveList[this.currentWave]) {
+    if (this.enabled && this.waveList[this.currentWave]) {
       this.wave = this.waveList[this.currentWave];
       this.wave.spawn();
       this.wave.on('waveEnd', (wave: GameWave) => {

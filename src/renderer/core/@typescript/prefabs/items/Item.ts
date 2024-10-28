@@ -8,6 +8,7 @@ export default abstract class Item extends PhysicEntityScript {
 
     // Physics
     this.addCollisionTag('!isDead');
+    this.removeCollisionTag('!invincible');
 
     this.on('picked', () => {
       this.playSound('fx/player/pick_upgrade');

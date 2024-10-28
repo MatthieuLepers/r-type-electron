@@ -11,7 +11,7 @@ export default class Fx<T> extends mix(EntityScript)
   .with(LocomotorMixin) {
   constructor(public parent: T) {
     super();
-    this.addTag('fx');
+    this.addTag('fx', 'staySpawned');
   }
 
   update() {
