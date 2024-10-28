@@ -43,7 +43,7 @@ export default class PlayerShip extends mix(PhysicEntityScript)
   constructor(id: string) {
     super();
     this.damages = 1;
-    this.addTag('player', 'alwaysVisible');
+    this.addTag('player', 'alwaysVisible', 'staySpawned');
 
     // Transform
     this.setTransform(100, (Global.Game.canvas.height / 2) - 7.5);

@@ -6,6 +6,7 @@
       v-show="state.gameOver"
     >
       <template v-slot:content>
+        <span>Score: {{ state.score }}</span>
         <button
           :class="GenerateModifiers('screen-menu-button', { xxl: true })"
           @click="actions.handleClickExitToMenu"
@@ -90,6 +91,7 @@ const state = reactive({
   paused: false,
   ambientVolume: Global.Settings.audio.ambientVolume,
   fxVolume: Global.Settings.audio.fxVolume,
+  score: 0,
 });
 
 const actions = {
@@ -126,6 +128,9 @@ onMounted(() => {
   });
   Global.Game.on('gameOver', () => {
     state.gameOver = true;
+  });
+  Global.Game.on('scoreUpdate', (e) => {
+    state.score = e.details.board.score;
   });
 
   api.on('toggleDebugPause', (paused) => {

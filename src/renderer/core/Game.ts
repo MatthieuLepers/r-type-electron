@@ -12,13 +12,7 @@ import PhysicRunnable from '@renderer/core/@typescript/runnable/PhysicRunnable';
 import type EntityScript from '@renderer/core/@typescript/prefabs/EntityScript';
 import PlayerShip from '@renderer/core/@typescript/prefabs/PlayerShip';
 import Module from '@renderer/core/@typescript/prefabs/Module';
-// import PataPata from '@renderer/core/@typescript/prefabs/enemies/PataPata';
-// import BugSpawner from '@renderer/core/@typescript/prefabs/enemies/BugSpawner';
-// import Mid from '@renderer/core/@typescript/prefabs/enemies/Mid';
-// import Cheetah from '@renderer/core/@typescript/prefabs/enemies/Cheetah';
-// import Cytron from '@renderer/core/@typescript/prefabs/enemies/Cytron';
 import PowerArmor from '@renderer/core/@typescript/prefabs/enemies/PowerArmor';
-// import CompilerBoss from '@renderer/core/@typescript/prefabs/enemies/bosses/CompilerBoss';
 import type Point from '@renderer/core/@typescript/geometry/Point';
 import QuadTree from '@renderer/core/@typescript/geometry/QuadTree';
 
@@ -34,8 +28,6 @@ export default class Game extends mix(Class)
 
   public quadTree: QuadTree;
 
-  public over: boolean = false;
-
   constructor(canvas: HTMLCanvasElement) {
     super();
     this.canvasObj = new Canvas(canvas);
@@ -47,7 +39,7 @@ export default class Game extends mix(Class)
 
     this.on('gameOver', () => {
       this.playSound('ambient/gameover');
-      this.over = true;
+      this.components.wavegenerator.enabled = false;
     });
   }
 
@@ -106,25 +98,15 @@ export default class Game extends mix(Class)
       this.components.wavegenerator.generateNextWave();
       new PowerArmor().spawn();
     }, 2000);
-    // new PataPata().spawn();
-    // new BugSpawner().spawn();
-    // new Mid().spawn();
-    // new Cheetah().spawn();
-    // new Cytron().spawn();
-    // new PowerArmor().spawn();
-    // setInterval(() => {
-    //   if (!Global.Engine.paused && !Global.devToolsOpen) new PowerArmor().spawn();
-    // }, 2000);
-    // new CompilerBoss().spawn();
   }
 
   reset() {
-    this.over = false;
     Object.values(this.entities).forEach((entity) => { entity.despawn(); });
     Global.Engine.removeRunnableByName('rendering');
     Global.Engine.removeRunnableByName('fps');
     Global.Engine.removeRunnableByName('debug');
     Global.Engine.physicRunnable = null;
     Global.Game = null;
+    this.components.wavegenerator.enabled = true;
   }
 }

@@ -126,7 +126,6 @@ export default class Module extends mix(PhysicEntityScript)
       this.emit('absorbsionProgress', { percent: this.absorbsionProgress });
       if (this.absorbsionProgress >= 100) {
         this.emit('absorbsionComplete');
-        this.absorbsionProgress = 0;
       }
     }
   }

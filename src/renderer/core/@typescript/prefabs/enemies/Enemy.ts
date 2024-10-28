@@ -22,8 +22,6 @@ export default class Enemy extends mix(PhysicEntityScript)
       }
     });
     this.on('dead', (e: IEvent) => {
-      console.log(`Killed by ${e.details.killer.getId()}, owner : ${e.details.killer.owner?.getId() ?? e.details.killer.shooter?.getId()}`);
-
       // If is a projectile (player/module/bitmodule)
       // TODO : set owner correctly when player shoot projectile using bitmodule or module
       if (e.details.killer.hasTag('player', 'projectile') && e.details.killer.shooter.hasComponent('ScoreBoard')) {
