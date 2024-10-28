@@ -1,4 +1,4 @@
 export default {
   bank: 'fx/player/shoot',
-  soundPath: '/assets/sounds/sound_player_shoot.ogg',
+  soundPath: '/public/sounds/sound_player_shoot.ogg',
 };

@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/explosion_dna_bullet',
-  spritesheetPath: '/assets/img/spritesheets/particles/explosion_dna_bullet.png',
+  spritesheetPath: '/public/img/spritesheets/particles/explosion_dna_bullet.png',
   animationData: {
     totalFrames: 9,
     animations: [

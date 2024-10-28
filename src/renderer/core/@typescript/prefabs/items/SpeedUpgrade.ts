@@ -21,9 +21,6 @@ export default class SpeedUpgrade extends Upgrade {
     });
   }
 
-  /**
-   * @param {EntityScript} picker
-   */
   onPicked(picker: PlayerShip & IAttachedEntities) {
     picker.speed = Math.min(picker.maxSpeed, picker.speed * this.speedMult);
     picker.getAttachedEntity<ShipBoosterFx>(`${picker.getId()}_booster`).accelerate();

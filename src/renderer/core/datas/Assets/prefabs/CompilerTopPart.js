@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/enemies/bosses/compiler_top_part',
-  spritesheetPath: '/assets/img/spritesheets/enemies/bosses/compiler_top_part.png',
+  spritesheetPath: '/public/img/spritesheets/enemies/bosses/compiler_top_part.png',
   animationData: {
     totalFrames: 4,
     animations: [

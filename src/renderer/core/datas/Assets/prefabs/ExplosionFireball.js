@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/explosion_fireball',
-  spritesheetPath: '/assets/img/spritesheets/particles/explosion_fireball.png',
+  spritesheetPath: '/public/img/spritesheets/particles/explosion_fireball.png',
   animationData: {
     totalFrames: 5,
     animations: [

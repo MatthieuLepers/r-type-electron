@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/enemies/bug',
-  spritesheetPath: '/assets/img/spritesheets/enemies/bug.png',
+  spritesheetPath: '/public/img/spritesheets/enemies/bug.png',
   animationData: {
     totalFrames: 1,
     animations: [

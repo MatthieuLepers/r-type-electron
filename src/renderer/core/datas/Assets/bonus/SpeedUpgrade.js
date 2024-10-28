@@ -1,6 +1,6 @@
 export default {
   bank: 'upgrades/speed',
-  spritesheetPath: '/assets/img/spritesheets/bonus/speed.png',
+  spritesheetPath: '/public/img/spritesheets/bonus/speed.png',
   animationData: {
     totalFrames: 3,
     animations: [

@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/projectiles/fireball',
-  spritesheetPath: '/assets/img/spritesheets/projectiles/fireball.png',
+  spritesheetPath: '/public/img/spritesheets/projectiles/fireball.png',
   animationData: {
     totalFrames: 4,
     animations: [

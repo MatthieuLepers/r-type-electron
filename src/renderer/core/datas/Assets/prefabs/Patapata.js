@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/enemies/patapata',
-  spritesheetPath: '/assets/img/spritesheets/enemies/patapata.png',
+  spritesheetPath: '/public/img/spritesheets/enemies/patapata.png',
   animationData: {
     totalFrames: 8,
     animations: [

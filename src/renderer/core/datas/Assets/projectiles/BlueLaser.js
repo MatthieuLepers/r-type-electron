@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/projectiles/blue_laser',
-  spritesheetPath: '/assets/img/spritesheets/projectiles/blue_laser.png',
+  spritesheetPath: '/public/img/spritesheets/projectiles/blue_laser.png',
   animationData: {
     totalFrames: 1,
     animations: [

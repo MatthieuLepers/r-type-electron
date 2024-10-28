@@ -18,6 +18,6 @@ export default class RocketUpgrade extends Upgrade {
   }
 
   onPicked(picker: PlayerShip) {
-    console.log(`[WIP] Picked rocket upgrade by ${picker.getId()}`);
+    picker.components.rocketlauncher.enabled = true;
   }
 }

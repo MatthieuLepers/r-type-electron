@@ -1,7 +1,7 @@
 import Global from '@renderer/core/stores/AppStore';
 
-import type { IAttachedEntities } from '@renderer/core/@typescript/components/AttachedEntities/i';
 import type PhysicEntityScript from '@renderer/core/@typescript/prefabs/PhysicEntityScript';
+import type PlayerShip from '@renderer/core/@typescript/prefabs/PlayerShip';
 import Explosion from '@renderer/core/@typescript/prefabs/Explosion';
 import Projectile from '@renderer/core/@typescript/prefabs/projectiles/Projectile';
 import RocketTrailFx from '@renderer/core/@typescript/prefabs/fx/RocketTrailFx';
@@ -9,8 +9,10 @@ import Point from '@renderer/core/@typescript/geometry/Point';
 import ComplexePath from '@renderer/core/@typescript/paths/ComplexePath';
 
 export default class Rocket extends Projectile {
+  declare shooter: PlayerShip;
+
   constructor(
-    shooter: PhysicEntityScript & IAttachedEntities,
+    shooter: PlayerShip,
     public slot: 'top' | 'bottom',
   ) {
     super(shooter);
@@ -46,7 +48,11 @@ export default class Rocket extends Projectile {
     this.on('move', this.findTarget.bind(this));
     this.on('dead', () => {
       Explosion.EXPLOSION_ROCKET(this).spawn();
+      this.shooter.incrementStat('hit', this);
       this.despawn();
+    });
+    this.on('spawn', () => {
+      this.shooter.incrementStat('shot', this);
     });
   }
 

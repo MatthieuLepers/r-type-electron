@@ -14,6 +14,7 @@ import ComplexePath from '@renderer/core/@typescript/paths/ComplexePath';
 export default class CompilerBossRightPart extends mix(Enemy).with(ShooterMixin) {
   constructor(public owner: CompilerBoss) {
     super();
+    this.score = 5000;
 
     this.addTag('boss', 'alwaysVisible', 'staySpawned');
 

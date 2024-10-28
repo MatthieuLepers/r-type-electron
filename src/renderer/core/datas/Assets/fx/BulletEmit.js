@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/fx/bullet_emit',
-  spritesheetPath: '/assets/img/spritesheets/particles/bullet_emit.png',
+  spritesheetPath: '/public/img/spritesheets/particles/bullet_emit.png',
   animationData: {
     totalFrames: 3,
     animations: [

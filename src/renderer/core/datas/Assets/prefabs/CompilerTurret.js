@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/enemies/bosses/compiler_turret',
-  spritesheetPath: '/assets/img/spritesheets/enemies/bosses/compiler_turret.png',
+  spritesheetPath: '/public/img/spritesheets/enemies/bosses/compiler_turret.png',
   animationData: {
     totalFrames: 1,
     animations: [

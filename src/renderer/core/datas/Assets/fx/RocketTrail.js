@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/fx/rocket_trail',
-  spritesheetPath: '/assets/img/spritesheets/particles/rocket_trail.png',
+  spritesheetPath: '/public/img/spritesheets/particles/rocket_trail.png',
   animationData: {
     totalFrames: 4,
     animations: [

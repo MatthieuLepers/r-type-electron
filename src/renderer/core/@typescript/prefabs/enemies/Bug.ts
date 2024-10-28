@@ -10,6 +10,7 @@ export default class Bug extends mix(Enemy).with(ShooterMixin) {
   constructor() {
     super();
     this.damages = 1;
+    this.score = 100;
 
     // Locomotor
     this.components.locomotor.speedX = 150;
@@ -32,7 +33,7 @@ export default class Bug extends mix(Enemy).with(ShooterMixin) {
 
     // Shooter
     this.components.shooter.setProjectile(PlasmaBall);
-    this.components.shooter.shootProbalility = 0.002;
+    this.components.shooter.shootProbability = 0.002;
     this.components.shooter.requireTarget = true;
     this.components.shooter.target = this.getNearestPlayer();
     this.components.shooter.retargetFn = () => this.getNearestPlayer();

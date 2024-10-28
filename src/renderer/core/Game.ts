@@ -34,6 +34,8 @@ export default class Game extends mix(Class)
 
   public quadTree: QuadTree;
 
+  public over: boolean = false;
+
   constructor(canvas: HTMLCanvasElement) {
     super();
     this.canvasObj = new Canvas(canvas);
@@ -42,6 +44,11 @@ export default class Game extends mix(Class)
 
     Global.Engine.physicRunnable = new PhysicRunnable();
     Global.Game = this;
+
+    this.on('gameOver', () => {
+      this.playSound('ambient/gameover');
+      this.over = true;
+    });
   }
 
   get canvas(): HTMLCanvasElement {
@@ -112,6 +119,7 @@ export default class Game extends mix(Class)
   }
 
   reset() {
+    this.over = false;
     Object.values(this.entities).forEach((entity) => { entity.despawn(); });
     Global.Engine.removeRunnableByName('rendering');
     Global.Engine.removeRunnableByName('fps');

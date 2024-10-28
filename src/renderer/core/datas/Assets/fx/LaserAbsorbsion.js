@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/fx/laser_absorbsion',
-  spritesheetPath: '/assets/img/spritesheets/particles/laser_absorbsion.png',
+  spritesheetPath: '/public/img/spritesheets/particles/laser_absorbsion.png',
   animationData: {
     totalFrames: 5,
     animations: [

@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/projectiles/plasma_ball',
-  spritesheetPath: '/assets/img/spritesheets/projectiles/plasma_ball.png',
+  spritesheetPath: '/public/img/spritesheets/projectiles/plasma_ball.png',
   animationData: {
     totalFrames: 4,
     animations: [

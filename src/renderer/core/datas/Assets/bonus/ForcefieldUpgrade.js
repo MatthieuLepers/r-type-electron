@@ -1,6 +1,6 @@
 export default {
   bank: 'upgrades/forcefield',
-  spritesheetPath: '/assets/img/spritesheets/bonus/forcefield.png',
+  spritesheetPath: '/public/img/spritesheets/bonus/forcefield.png',
   animationData: {
     totalFrames: 4,
     animations: [

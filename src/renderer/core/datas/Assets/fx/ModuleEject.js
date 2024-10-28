@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/fx/module_eject',
-  spritesheetPath: '/assets/img/spritesheets/particles/module_eject.png',
+  spritesheetPath: '/public/img/spritesheets/particles/module_eject.png',
   animationData: {
     totalFrames: 9,
     animations: [

@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/explosion_tiny',
-  spritesheetPath: '/assets/img/spritesheets/particles/explosion_tiny.png',
+  spritesheetPath: '/public/img/spritesheets/particles/explosion_tiny.png',
   animationData: {
     totalFrames: 5,
     animations: [
