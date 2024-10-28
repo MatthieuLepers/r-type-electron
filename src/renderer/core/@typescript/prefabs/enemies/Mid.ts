@@ -12,6 +12,7 @@ export default class Mid extends mix(Enemy).with(ShooterMixin) {
   constructor() {
     super();
     this.damages = 1;
+    this.score = 150;
 
     // Locomotor
     this.components.locomotor.speedX = 110;

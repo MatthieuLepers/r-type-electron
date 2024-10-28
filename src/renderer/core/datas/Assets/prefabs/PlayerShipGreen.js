@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/player/green',
-  spritesheetPath: '/assets/img/spritesheets/player/green.png',
+  spritesheetPath: '/public/img/spritesheets/player/green.png',
   animationData: {
     totalFrames: 6,
     animations: [

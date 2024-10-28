@@ -1,0 +1,51 @@
+
+@import '~styles/utilities.scss';
+
+.player-beam {
+  position: absolute;
+  top: calc(50% - 5px);
+  left: calc(50% - 150px);
+  width: 300px;
+  height: 10px;
+  border: 1px solid color(grey200);
+  background-color: color(grey999);
+
+  &__thumb {
+    background-color: color(secondary300);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1;
+  }
+
+  &__absorbsion-thumb {
+    background-color: color(warning100);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    z-index: 1;
+  }
+
+  &::before {
+    @include set-font-scale('m', 'xs');
+    content: 'BEAM -';
+    color: color(secondary100);
+    display: block;
+    position: absolute;
+    right: calc(100% + 10px);
+    top: calc(50% - 9px);
+    white-space: nowrap;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: calc(50% - 3px);
+    width: calc(100% + 8px);
+    height: 6px;
+    background: linear-gradient(90deg, color(grey200) 0%, color(grey200) 4px, color(grey999) 4px, color(grey999) calc(100% - 4px), color(grey200) calc(100% - 4px), color(grey200) 100%);
+  }
+}

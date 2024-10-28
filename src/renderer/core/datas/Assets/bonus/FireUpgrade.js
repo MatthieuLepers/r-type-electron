@@ -1,6 +1,6 @@
 export default {
   bank: 'upgrades/fire',
-  spritesheetPath: '/assets/img/spritesheets/bonus/fire.png',
+  spritesheetPath: '/public/img/spritesheets/bonus/fire.png',
   animationData: {
     totalFrames: 3,
     animations: [

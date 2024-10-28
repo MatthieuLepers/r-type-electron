@@ -13,6 +13,7 @@ export default class Cheetah extends mix(Enemy).with(ShooterMixin) {
   constructor() {
     super();
     this.damages = 1;
+    this.score = 200;
 
     // Locomotor
     this.components.locomotor.speedX = 90;

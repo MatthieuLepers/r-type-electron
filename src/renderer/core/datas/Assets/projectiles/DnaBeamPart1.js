@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/projectiles/dna_beam_part1',
-  spritesheetPath: '/assets/img/spritesheets/projectiles/dna_beam_part1.png',
+  spritesheetPath: '/public/img/spritesheets/projectiles/dna_beam_part1.png',
   animationData: {
     totalFrames: 13,
     animations: [

@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/fx/forcefield',
-  spritesheetPath: '/assets/img/spritesheets/particles/forcefield_particle.png',
+  spritesheetPath: '/public/img/spritesheets/particles/forcefield_particle.png',
   animationData: {
     totalFrames: 15,
     animations: [

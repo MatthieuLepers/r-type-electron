@@ -19,7 +19,7 @@ export default class ChargedShooter extends Component<EntityScript & IChargedSho
 
   public retargetFn: (() => EntityScript | null) | null = null;
 
-  public chargeTime: number = 1500;
+  public chargeTime: number = 1000;
 
   public isCharging: boolean = false;
 

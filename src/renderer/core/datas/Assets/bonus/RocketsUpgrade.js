@@ -1,6 +1,6 @@
 export default {
   bank: 'upgrades/rockets',
-  spritesheetPath: '/assets/img/spritesheets/bonus/rockets.png',
+  spritesheetPath: '/public/img/spritesheets/bonus/rockets.png',
   animationData: {
     totalFrames: 3,
     animations: [

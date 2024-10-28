@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/enemies/cheetah',
-  spritesheetPath: '/assets/img/spritesheets/enemies/cheetah.png',
+  spritesheetPath: '/public/img/spritesheets/enemies/cheetah.png',
   animationData: {
     totalFrames: 4,
     animations: [

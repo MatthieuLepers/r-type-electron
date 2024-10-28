@@ -1,4 +1,4 @@
 export default {
   bank: 'ambient/gameover',
-  soundPath: '/assets/sounds/sound_gameover.ogg',
+  soundPath: '/public/sounds/sound_gameover.ogg',
 };

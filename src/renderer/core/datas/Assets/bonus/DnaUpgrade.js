@@ -1,6 +1,6 @@
 export default {
   bank: 'upgrades/dna',
-  spritesheetPath: '/assets/img/spritesheets/bonus/dna.png',
+  spritesheetPath: '/public/img/spritesheets/bonus/dna.png',
   animationData: {
     totalFrames: 3,
     animations: [

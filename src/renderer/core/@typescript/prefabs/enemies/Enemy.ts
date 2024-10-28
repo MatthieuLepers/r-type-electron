@@ -27,7 +27,8 @@ export default class Enemy extends mix(PhysicEntityScript)
       // If is a projectile (player/module/bitmodule)
       // TODO : set owner correctly when player shoot projectile using bitmodule or module
       if (e.details.killer.hasTag('player', 'projectile') && e.details.killer.shooter.hasComponent('ScoreBoard')) {
-        e.details.killer.shooter.addScore(this);
+        e.details.killer.shooter.incrementScore(this);
+        e.details.killer.shooter.incrementStat('killed', this);
       }
       // If is module hull (detached)
       // if (e.details.killer.hasTag('module', '!bitModule', '!attached')) {}

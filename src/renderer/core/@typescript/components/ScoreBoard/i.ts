@@ -1,7 +1,7 @@
 import type EntityScript from '@renderer/core/@typescript/prefabs/EntityScript';
 
 export interface IScoreBoard {
-  score: number;
+  incrementScore(entity: EntityScript): void;
 
-  addScore(entity: EntityScript & IScoreBoard): void
+  incrementStat(statName: string, entity: EntityScript): void;
 }

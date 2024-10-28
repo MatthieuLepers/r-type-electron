@@ -8,6 +8,7 @@ import ComplexePath from '@renderer/core/@typescript/paths/ComplexePath';
 export default abstract class Upgrade extends Item {
   constructor(dropper: PhysicEntityScript) {
     super(dropper);
+    this.score = 100;
 
     // Physics
     this.addCollisionTag('player', '!module', '!projectile');
@@ -20,6 +21,11 @@ export default abstract class Upgrade extends Item {
 
     this.on('picked', (e: IEvent) => {
       this.onPicked(e.details.picker);
+
+      if (e.details.picker.hasTag('player') && e.details.picker.hasComponent('ScoreBoard')) {
+        e.details.picker.incrementScore(this);
+        e.details.picker.incrementStat('picked', this);
+      }
     });
   }
 

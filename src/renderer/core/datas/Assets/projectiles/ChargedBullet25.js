@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/projectiles/chargedbullet_25',
-  spritesheetPath: '/assets/img/spritesheets/projectiles/chargedbullet_25.png',
+  spritesheetPath: '/public/img/spritesheets/projectiles/chargedbullet_25.png',
   animationData: {
     totalFrames: 2,
     animations: [

@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/projectiles/dna_bullet',
-  spritesheetPath: '/assets/img/spritesheets/projectiles/dna_bullet.png',
+  spritesheetPath: '/public/img/spritesheets/projectiles/dna_bullet.png',
   animationData: {
     totalFrames: 8,
     animations: [

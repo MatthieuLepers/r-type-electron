@@ -3,15 +3,8 @@ export interface IWeightedObject {
 }
 
 export default class Random {
-  public seed: number;
-
-  constructor(baseSeed: number = 6) {
-    this.seed = baseSeed;
-  }
-
   rnd(max = 1, min = 0): number {
-    this.seed = ((this.seed * 9301) + 49297) % 233280;
-    return min + ((this.seed / 233280) * (max - min));
+    return (Math.random() * (max - min)) + min;
   }
 
   weighted(weightedObjList: Array<IWeightedObject> = []): IWeightedObject {

@@ -12,6 +12,7 @@ export default class PataPata extends mix(Enemy).with(ShooterMixin) {
   constructor() {
     super();
     this.damages = 1;
+    this.score = 100;
 
     // Locomotor
     this.components.locomotor.speedX = 100;

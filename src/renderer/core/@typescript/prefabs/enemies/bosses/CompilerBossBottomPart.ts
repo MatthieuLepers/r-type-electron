@@ -11,6 +11,7 @@ import ComplexePath from '@renderer/core/@typescript/paths/ComplexePath';
 export default class CompilerBottomPart extends Enemy {
   constructor(public owner: CompilerBoss) {
     super();
+    this.score = 5000;
 
     this.addTag('boss', 'alwaysVisible', 'staySpawned');
 
@@ -51,9 +52,6 @@ export default class CompilerBottomPart extends Enemy {
     }, { once: true });
   }
 
-  /**
-   * @inheritdoc
-   */
   getHitbox() {
     return [
       new RectangleHitbox({
@@ -84,10 +82,7 @@ export default class CompilerBottomPart extends Enemy {
     }, { once: true });
   }
 
-  /**
-   * @param {Number} direction
-   */
-  splitedVerticallyVerticalScroll(direction = 1) {
+  splitedVerticallyVerticalScroll(direction: number = 1) {
     this.bindPath(ComplexePath.fromSvgString(`M${direction * this.components.transform.position.x},${this.components.transform.position.y}L${direction * (this.components.transform.position.x - Global.Game.canvasObj.width + 240)},${this.components.transform.position.y}`), false);
     this.on('pathEnd', () => {
       this.owner.components.synchronizer.syncEntity(this, { event: 'splitedVerticallyVerticalScroll' });

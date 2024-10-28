@@ -1,12 +1,14 @@
 import Global from '@renderer/core/stores/AppStore';
 
-import type PhysicEntityScript from '@renderer/core/@typescript/prefabs/PhysicEntityScript';
+import type PlayerShip from '@renderer/core/@typescript/prefabs/PlayerShip';
 import Projectile from '@renderer/core/@typescript/prefabs/projectiles/Projectile';
 import Point from '@renderer/core/@typescript/geometry/Point';
 import ComplexePath from '@renderer/core/@typescript/paths/ComplexePath';
 
 export default class ShipBullet extends Projectile {
-  constructor(shooter: PhysicEntityScript) {
+  declare shooter: PlayerShip;
+
+  constructor(shooter: PlayerShip) {
     super(shooter);
     this.addTag('player');
     this.damages = 1;
@@ -33,5 +35,11 @@ export default class ShipBullet extends Projectile {
     this.addCollisionTag('enemy', '!projectile');
 
     this.on('dead', () => this.despawn());
+    this.on('spawn', () => {
+      this.shooter.incrementStat('shot', this);
+    });
+    this.on('collide', () => {
+      this.shooter.incrementStat('hit', this);
+    });
   }
 }

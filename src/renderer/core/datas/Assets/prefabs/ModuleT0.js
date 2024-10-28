@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/module/module_t0',
-  spritesheetPath: '/assets/img/spritesheets/module/module_t0.png',
+  spritesheetPath: '/public/img/spritesheets/module/module_t0.png',
   animationData: {
     totalFrames: 6,
     animations: [

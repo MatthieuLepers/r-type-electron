@@ -16,4 +16,18 @@
       justify-content: center;
     }
   }
+
+  .menu-slider {
+    width: 100%;
+    padding: 0 rem(8px);
+    margin-top: rem(16px);
+
+    &__label {
+      @include set-font-scale('xs');
+    }
+
+    &s {
+      width: 100%;
+    }
+  }
 }

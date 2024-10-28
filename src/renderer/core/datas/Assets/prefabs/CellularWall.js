@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/enemies/cellular_wall',
-  spritesheetPath: '/assets/img/spritesheets/enemies/cellular_wall.png',
+  spritesheetPath: '/public/img/spritesheets/enemies/cellular_wall.png',
   animationData: {
     totalFrames: 1,
     animations: [

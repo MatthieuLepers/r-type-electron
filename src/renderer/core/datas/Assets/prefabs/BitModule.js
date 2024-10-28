@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/module/bit_module',
-  spritesheetPath: '/assets/img/spritesheets/module/bit_module.png',
+  spritesheetPath: '/public/img/spritesheets/module/bit_module.png',
   animationData: {
     totalFrames: 12,
     animations: [

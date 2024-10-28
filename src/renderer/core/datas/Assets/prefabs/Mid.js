@@ -1,6 +1,6 @@
 export default {
   bank: 'entities/enemies/mid',
-  spritesheetPath: '/assets/img/spritesheets/enemies/mid.png',
+  spritesheetPath: '/public/img/spritesheets/enemies/mid.png',
   animationData: {
     totalFrames: 8,
     animations: [

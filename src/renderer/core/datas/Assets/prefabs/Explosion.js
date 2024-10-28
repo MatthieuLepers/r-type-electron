@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/explosion',
-  spritesheetPath: '/assets/img/spritesheets/particles/explosion.png',
+  spritesheetPath: '/public/img/spritesheets/particles/explosion.png',
   animationData: {
     totalFrames: 7,
     animations: [

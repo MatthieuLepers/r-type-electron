@@ -1,6 +1,6 @@
 export default {
   bank: 'particles/fx/charge_shoot',
-  spritesheetPath: '/assets/img/spritesheets/particles/charge_shoot.png',
+  spritesheetPath: '/public/img/spritesheets/particles/charge_shoot.png',
   animationData: {
     totalFrames: 4,
     animations: [

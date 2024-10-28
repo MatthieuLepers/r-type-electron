@@ -32,6 +32,10 @@ export default class Module extends mix(PhysicEntityScript)
 
   public side: `${Side}`;
 
+  public absorbsionProgress: number = 0;
+
+  declare attachedTo?: PlayerShip;
+
   constructor() {
     super();
     this.addTag('module', 'player', 'weapon', 'alwaysVisible', 'staySpawned');
@@ -69,6 +73,12 @@ export default class Module extends mix(PhysicEntityScript)
     this.on('trackerAquireNewTarget', (e: IEvent) => {
       this.target = e.details.target;
     });
+    this.on('absorb', (e: IEvent) => {
+      if (this.attachedTo) {
+        this.attachedTo.incrementScore(e.details.entity);
+        this.attachedTo.incrementStat('absorbed', e.details.entity);
+      }
+    });
   }
 
   getHitboxBounds(): IRectangle {
@@ -103,8 +113,20 @@ export default class Module extends mix(PhysicEntityScript)
       this.attach(ent);
     } else if (ent.hasTag('absorbable')) {
       this.emit('absorb', { entity: ent });
+      this.onAbsorb();
       if (ent.hasComponent('EventEmitter')) {
         ent.emit('absorbed', { absorber: this });
+      }
+    }
+  }
+
+  onAbsorb() {
+    if (this.hasTag('attached')) {
+      this.absorbsionProgress = Math.min(100, this.absorbsionProgress + 2);
+      this.emit('absorbsionProgress', { percent: this.absorbsionProgress });
+      if (this.absorbsionProgress >= 100) {
+        this.emit('absorbsionComplete');
+        this.absorbsionProgress = 0;
       }
     }
   }
