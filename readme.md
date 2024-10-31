@@ -1,70 +1,30 @@
-# electron-app
+# R-Type-Electron
 
-![electron version](https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/electron)
-![electron vite version](https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/electron-vite)
-![electron builder version](https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/electron-builder)
-![vite version](https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/vite)
-![vue version](https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/vue)
-![typescript version](https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/typescript)
+[![GitHub release](https://img.shields.io/badge/Version-1.0.0-blue)](https://github.com/MatthieuLepers/my-genshin-impact-characters/releases/latest)
+[![GitHub release](https://img.shields.io/badge/Platform-Windows-orange)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![GitHub release](https://img.shields.io/badge/Node-16.20.2-green)](https://nodejs.org/download/release/v16.20.2/)
+[![GitHub release](https://img.shields.io/badge/License-GNU%20GPLv3-blue)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![GitHub release](https://img.shields.io/badge/Virustotal%20analysis-undetected-green)](https://www.virustotal.com/gui/file/ee8f7479f96bcab106d1fdb7ebdf1a8e14e94320f1cfc8f1e722f258d74f5549?nocache=1)
 
-> An Electron application with Vue3 and TypesSript
+## Contributing
+**⚠️ You should definitely read this part before making a contribution**
 
-## Features
+### Installation
+Just clone the repository, run `npm install` to install all node dependencies, then run `npm run dev` to start the application.
 
-- 💡 Optimize asset handling
-- 🚀 Fast HMR for renderer processes
-- 🔥 Hot reloading for main process and preload scripts
-- 🔌 Easy to debug
-- 🔒 Compile to v8 bytecode to protect source code
+### Pull requests
+Please apply the naming convention when you create a branch:
+- Create your branch from `develop`
+- For new feature, name your branch as `feature/{your-feature-name}`
+- For bug fix, name your branch as `fix/issue-{issue-number}` or `fix/{whatever-you-fixed}`
+- I'm using [gitmoji](https://gitmoji.dev/) for all my commits, so please make sure to use it when you commit anything
 
-## Getting Started
+Use `develop` branch as target branch for your pull requests. To contribute properly, try to have as few commits as possible, you can use `git rebase` to help you group your commits.
 
-Read [documentation](https://electron-vite.org/) for more detail.
+**⚠️ Any pull request that not respects contribution rules will be closed**
 
-- [Configuring](https://electron-vite.org/config/)
-- [Development](https://electron-vite.org/guide/dev.html)
-- [Asset Handling](https://electron-vite.org/guide/assets.html)
-- [HMR](https://electron-vite.org/guide/hmr.html) & [Hot Reloading](https://electron-vite.org/guide/hot-reloading.html)
-- [Debugging](https://electron-vite.org/guide/debugging.html)
-- [Source code protection](https://electron-vite.org/guide/source-code-protection.html)
-- [Distribution](https://electron-vite.org/guide/distribution.html)
-- [Troubleshooting](https://electron-vite.org/guide/troubleshooting.html)
+### Bug report
+To report any bug, make an issue using the "Bug issue template" and follow the template instructions.
 
-You can also use the [create-electron](https://github.com/alex8088/quick-start/tree/master/packages/create-electron) tool to scaffold your project for other frameworks (e.g. `React`, `Svelte` or `Solid`).
-
-## Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
-
-## Project Setup
-
-### Install
-
-```bash
-$ npm install
-```
-
-### Development
-
-```bash
-$ npm run dev
-```
-
-### Build
-
-```bash
-# For windows
-$ npm run build:win
-
-# For macOS
-$ npm run build:mac
-
-# For Linux
-$ npm run build:linux
-```
-
-## Examples
-
-- [electron-vite-bytecode-example](https://github.com/alex8088/electron-vite-bytecode-example), source code protection
-- [electron-vite-decorator-example](https://github.com/alex8088/electron-vite-decorator-example), typescipt decorator
-- [electron-vite-worker-example](https://github.com/alex8088/electron-vite-worker-example), worker and fork
+### Features
+To make a feature or a request, make an issue using the "Feature issue template" and follow the template instructions.
