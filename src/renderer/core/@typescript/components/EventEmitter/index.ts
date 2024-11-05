@@ -6,7 +6,8 @@ export default class EventEmitter<T> extends Component<T> {
 
   toDebugObject() {
     return {
-      listeners: this.listeners.keys(),
+      listeners: [...this.listeners.keys()]
+        .reduce((acc, key) => ({ ...acc, [key]: this.listeners.get(key).size }), {}),
     };
   }
 }
