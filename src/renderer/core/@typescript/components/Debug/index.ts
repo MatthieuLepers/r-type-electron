@@ -47,7 +47,11 @@ export default class Debug extends DrawableComponent<EntityScript & ISprite> {
         Global.Game.ctx.rotate((sprite.options.rotation * Math.PI) / 180);
       }
       Global.Game.ctx.strokeStyle = '#f00';
-      Global.Game.ctx.strokeRect(0, 0, sprite.width, sprite.height);
+      if (sprite.options.rotation !== 0) {
+        Global.Game.ctx.strokeRect(0, 0, sprite.width, sprite.height);
+      } else {
+        Global.Game.ctx.strokeRect(transform.getPosition().x, transform.getPosition().y, sprite.width, sprite.height);
+      }
       if (sprite.options.rotation !== 0) {
         Global.Game.ctx.restore();
       }

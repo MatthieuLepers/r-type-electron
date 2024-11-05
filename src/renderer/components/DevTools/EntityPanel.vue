@@ -32,7 +32,7 @@
         <div class="entity-panel__container-content">
           {{ State.entity.components.locomotor.path }}
         </div>
-        <div class="entity-pannel__container-actions">
+        <div class="entity-panel__container-actions">
           <MaterialButton
             :icon="devToolStore.actions.isPathShown(State.entity) ? 'icon-eye-slash' : 'icon-eye'"
             :modifiers="{
@@ -43,6 +43,12 @@
           />
         </div>
       </div>
+
+      <DynamicComponent
+        v-for="component in Object.keys(State.entity.components).sort()"
+        :key="component"
+        :component="component"
+      />
 
       <MaterialButton
         class="entity-panel__close"
@@ -59,6 +65,7 @@
 import { computed } from 'vue';
 
 import MaterialButton from '@renderer/components/Materials/Button/index.vue';
+import DynamicComponent from '@renderer/components/DevTools/Components/index.vue';
 
 import { devToolStore } from '@renderer/core/stores/DevToolsStore';
 
