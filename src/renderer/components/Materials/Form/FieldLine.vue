@@ -3,7 +3,7 @@
     <FormFieldContainer
       v-for="i in State.slots"
       :key="i"
-      :modifiers="props.modifiers?.[`field${i}`] ?? {}"
+      :modifiers="props.size > 1 ? props.modifiers?.[`field${i}`] ?? {} : props.modifiers"
     >
       <slot v-if="props.size > 1" :name="`field${i}`" />
       <slot v-else />
