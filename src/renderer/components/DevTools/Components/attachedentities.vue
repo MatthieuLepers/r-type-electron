@@ -23,15 +23,11 @@ import { computed } from 'vue';
 import MaterialFormFieldLine from '@renderer/components/Materials/Form/FieldLine.vue';
 import EntityCard from '@renderer/components/DevTools/EntityCard.vue';
 
-import { devToolStore } from '@renderer/core/stores/DevToolsStore';
-
-const State = computed(() => {
-  const entity = devToolStore.state.selectedEntity;
-  const component = entity.components.attachedentities;
-
-  return {
-    entity,
-    component,
-  };
+const props = defineProps({
+  entity: { type: Object, required: true },
 });
+
+const State = computed(() => ({
+  component: props.entity.components.attachedentities,
+}));
 </script>

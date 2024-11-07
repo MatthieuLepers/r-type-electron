@@ -1,11 +1,11 @@
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 
 interface IState {
   entities: Array<Object>;
   shown: Array<string>;
   pathShown: Array<string>;
   debugPause: boolean;
-  selectedEntity: Object | null;
+  selectedEntity: Array<Object>;
 }
 
 const useDevToolStore = function () {
@@ -14,17 +14,19 @@ const useDevToolStore = function () {
     shown: [],
     pathShown: [],
     debugPause: false,
-    selectedEntity: null,
+    selectedEntity: [],
   });
+
+  const selectedEntity = computed(() => state.selectedEntity[state.selectedEntity.length - 1]);
 
   const actions = {
     toggleShow(entity) {
       if (state.shown.includes(entity.components?.sprite?.id)) {
-        state.selectedEntity = null;
+        state.selectedEntity = state.selectedEntity.filter((e) => entity !== e);
         state.shown = state.shown.filter((id) => id !== entity.components?.sprite?.id);
         api.invoke('sendDataToWindow', 'main', entity.components?.sprite?.id, [{ callback: 'removeTag', args: ['debug'] }]);
       } else {
-        state.selectedEntity = entity;
+        state.selectedEntity.push(entity);
         state.shown.push(entity.components?.sprite?.id);
         api.invoke('sendDataToWindow', 'main', entity.components?.sprite?.id, [{ callback: 'addTag', args: ['debug'] }]);
       }
@@ -48,6 +50,7 @@ const useDevToolStore = function () {
 
   return {
     state,
+    selectedEntity,
     actions,
   };
 };

@@ -1,5 +1,9 @@
 <template>
-  <component :is="actions.getComponent()" :component="props.component" />
+  <component
+    :is="actions.getComponent()"
+    :component="props.component"
+    :entity="props.entity"
+  />
 </template>
 
 <script setup lang="ts">
@@ -7,6 +11,7 @@ import { defineAsyncComponent } from 'vue';
 
 const props = defineProps({
   component: { type: String, required: true },
+  entity: { type: Object, required: true },
 });
 
 const actions = {

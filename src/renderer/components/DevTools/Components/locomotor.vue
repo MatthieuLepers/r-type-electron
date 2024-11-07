@@ -1,57 +1,50 @@
 <template>
   <div class="entity-panel__container">
     <h2 class="entity-panel__container-title">
-      (Component) Charged Shooter
+      (Component) Locomotor
     </h2>
     <div class="entity-panel__container-content">
       <MaterialFormFieldLine :modifiers="{ row: true, end: true }">
         <MaterialFormToggle
-          v-model="State.component.automatic"
-          label="Automatic ?"
+          v-model="State.component.canMove"
+          label="Can move ?"
           direction="right"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine>
-        <MaterialFormInput
-          v-model="State.component.chargeTime"
-          label="Charge time"
-          type="number"
-          variant="inline"
-          :min="1"
-          :step="1"
-          :iconData="{ text: 'ms' }"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine>
-        <MaterialFormInput
-          label="Projectile class"
-          variant="inline"
-          :modelValue="State.component.projectile"
-          :readonly="true"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine>
-        <MaterialFormInput
-          v-model="State.component.shootProbability"
-          label="Shoot probability"
-          type="number"
-          variant="inline"
-          :min="0"
-          :max="1"
-          :step="0.01"
         />
       </MaterialFormFieldLine>
       <MaterialFormFieldLine :modifiers="{ row: true, end: true }">
         <MaterialFormToggle
-          v-model="State.component.requireTarget"
-          label="Require target ?"
+          v-model="State.component.followSlope"
+          label="Follow slope ?"
           direction="right"
         />
       </MaterialFormFieldLine>
       <MaterialFormFieldLine>
-        <EntityCard
-          v-if="State.component.target"
-          :entity="State.component.target"
+        <MaterialFormInput
+          v-model="State.component.speed.x"
+          label="Speed X"
+          type="number"
+          variant="inline"
+          :min="0"
+          :step="1"
+        />
+      </MaterialFormFieldLine>
+      <MaterialFormFieldLine>
+        <MaterialFormInput
+          v-model="State.component.speed.y"
+          label="Speed Y"
+          type="number"
+          variant="inline"
+          :min="0"
+          :step="1"
+        />
+      </MaterialFormFieldLine>
+      <MaterialFormFieldLine>
+        <MaterialFormInput
+          v-model.lazy="State.component.path"
+          label="Path"
+          variant="inline"
+          :min="0"
+          :step="1"
         />
       </MaterialFormFieldLine>
     </div>
@@ -64,13 +57,12 @@ import { computed } from 'vue';
 import MaterialFormFieldLine from '@renderer/components/Materials/Form/FieldLine.vue';
 import MaterialFormToggle from '@renderer/components/Materials/Form/Toggle.vue';
 import MaterialFormInput from '@renderer/components/Materials/Form/Input.vue';
-import EntityCard from '@renderer/components/DevTools/EntityCard.vue';
 
 const props = defineProps({
   entity: { type: Object, required: true },
 });
 
 const State = computed(() => ({
-  component: props.entity.components.chargedshooter,
+  component: props.entity.components.locomotor,
 }));
 </script>

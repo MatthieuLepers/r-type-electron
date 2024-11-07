@@ -28,15 +28,11 @@
 <script setup>
 import { computed } from 'vue';
 
-import { devToolStore } from '@renderer/core/stores/DevToolsStore';
-
-const State = computed(() => {
-  const entity = devToolStore.state.selectedEntity;
-  const component = entity.components.eventemitter;
-
-  return {
-    entity,
-    component,
-  };
+const props = defineProps({
+  entity: { type: Object, required: true },
 });
+
+const State = computed(() => ({
+  component: props.entity.components.eventemitter,
+}));
 </script>
