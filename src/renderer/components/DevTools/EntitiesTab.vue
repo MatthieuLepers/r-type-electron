@@ -18,7 +18,13 @@
       </li>
     </ul>
 
-    <EntityPanel />
+    <TransitionGroup name="appear">
+      <EntityPanel
+        v-for="(entity, i) in devToolStore.state.selectedEntity"
+        :key="i"
+        :entity="entity"
+      />
+    </TransitionGroup>
   </div>
 </template>
 
