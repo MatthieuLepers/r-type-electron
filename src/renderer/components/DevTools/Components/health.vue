@@ -4,54 +4,10 @@
       (Component) Health
     </h2>
     <div class="entity-panel__container-content">
-      <MaterialFormFieldLine :modifiers="{ row: true, end: true }">
-        <MaterialFormToggle
-          v-model="State.component.invincible"
-          label="Invincible ?"
-          direction="right"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine>
-        <MaterialFormInput
-          v-model="State.component.maxHealth"
-          label="Max health"
-          type="number"
-          variant="inline"
-          :min="1"
-          :step="1"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine>
-        <MaterialFormInput
-          v-model="State.component.health"
-          label="Health"
-          type="number"
-          variant="inline"
-          :min="1"
-          :max="State.component.maxHealth"
-          :step="1"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine>
-        <MaterialFormInput
-          v-model="State.component.absorbsion"
-          label="Absorbsion"
-          type="number"
-          variant="inline"
-          :min="0"
-          :step="1"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine>
-        <MaterialFormInput
-          v-model="State.component.damages"
-          label="Hull damages"
-          type="number"
-          variant="inline"
-          :min="0"
-          :step="1"
-        />
-      </MaterialFormFieldLine>
+      <GenericForm
+        :formData="form"
+        :component="State.component"
+      />
     </div>
   </div>
 </template>
@@ -59,9 +15,7 @@
 <script setup>
 import { computed } from 'vue';
 
-import MaterialFormFieldLine from '@renderer/components/Materials/Form/FieldLine.vue';
-import MaterialFormToggle from '@renderer/components/Materials/Form/Toggle.vue';
-import MaterialFormInput from '@renderer/components/Materials/Form/Input.vue';
+import GenericForm from '@renderer/components/DevTools/Components/GenericForm.vue';
 
 const props = defineProps({
   entity: { type: Object, required: true },
@@ -70,4 +24,41 @@ const props = defineProps({
 const State = computed(() => ({
   component: props.entity.components.health,
 }));
+
+const form = {
+  invincible: {
+    props: {
+      label: 'Invincible ?',
+    },
+  },
+  maxHealth: {
+    props: {
+      label: 'Max health',
+      type: 'number',
+      min: 1,
+    },
+  },
+  health: {
+    props: {
+      label: 'Health',
+      type: 'number',
+      min: 1,
+      max: State.value.component.maxHealth,
+    },
+  },
+  absorbsion: {
+    props: {
+      label: 'Absorbsion',
+      type: 'number',
+      min: 0,
+    },
+  },
+  damages: {
+    props: {
+      label: 'Hull damages',
+      type: 'number',
+      min: 0,
+    },
+  },
+};
 </script>

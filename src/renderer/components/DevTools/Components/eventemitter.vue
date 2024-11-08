@@ -10,12 +10,7 @@
           v-for="(listenerCount, event) in State.component.listeners"
           :key="event"
         >
-          on <span :style="{
-            display: 'inline-block',
-            backgroundColor: '#555',
-            borderRadius: '4px',
-            padding: '0 2px',
-          }">{{ event }}</span> event ({{ listenerCount }})
+          on <span class="entity-panel__tag">{{ event }}</span> event ({{ listenerCount }})
         </li>
       </ul>
       <em v-if="Object.keys(State.component.listeners).length <= 0">
