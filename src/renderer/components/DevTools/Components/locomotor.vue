@@ -4,49 +4,10 @@
       (Component) Locomotor
     </h2>
     <div class="entity-panel__container-content">
-      <MaterialFormFieldLine :modifiers="{ row: true, end: true }">
-        <MaterialFormToggle
-          v-model="State.component.canMove"
-          label="Can move ?"
-          direction="right"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine :modifiers="{ row: true, end: true }">
-        <MaterialFormToggle
-          v-model="State.component.followSlope"
-          label="Follow slope ?"
-          direction="right"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine>
-        <MaterialFormInput
-          v-model="State.component.speed.x"
-          label="Speed X"
-          type="number"
-          variant="inline"
-          :min="0"
-          :step="1"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine>
-        <MaterialFormInput
-          v-model="State.component.speed.y"
-          label="Speed Y"
-          type="number"
-          variant="inline"
-          :min="0"
-          :step="1"
-        />
-      </MaterialFormFieldLine>
-      <MaterialFormFieldLine>
-        <MaterialFormInput
-          v-model.lazy="State.component.path"
-          label="Path"
-          variant="inline"
-          :min="0"
-          :step="1"
-        />
-      </MaterialFormFieldLine>
+      <GenericForm
+        :formData="form"
+        :component="State.component"
+      />
     </div>
   </div>
 </template>
@@ -54,9 +15,7 @@
 <script setup>
 import { computed } from 'vue';
 
-import MaterialFormFieldLine from '@renderer/components/Materials/Form/FieldLine.vue';
-import MaterialFormToggle from '@renderer/components/Materials/Form/Toggle.vue';
-import MaterialFormInput from '@renderer/components/Materials/Form/Input.vue';
+import GenericForm from '@renderer/components/DevTools/Components/GenericForm.vue';
 
 const props = defineProps({
   entity: { type: Object, required: true },
@@ -65,4 +24,36 @@ const props = defineProps({
 const State = computed(() => ({
   component: props.entity.components.locomotor,
 }));
+
+const form = {
+  canMove: {
+    props: {
+      label: 'Can move ?',
+    },
+  },
+  followSlope: {
+    props: {
+      label: 'Follow slope ?',
+    },
+  },
+  speed: {
+    x: {
+      props: {
+        label: 'Speed X',
+      },
+    },
+    y: {
+      props: {
+        label: 'Speed Y',
+      },
+    },
+  },
+  path: {
+    type: 'String',
+    props: {
+      label: 'SVG Path',
+      placeholder: 'M0,100L0,200',
+    },
+  },
+};
 </script>
