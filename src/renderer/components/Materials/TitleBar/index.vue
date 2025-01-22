@@ -40,18 +40,18 @@
   </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { IEmits, IProps } from '.';
+
 defineOptions({ name: 'TitleBar' });
 
-const emit = defineEmits(['help', 'minimize', 'maximize', 'close']);
+const emit = defineEmits<IEmits>();
 
-const props = defineProps({
-  name: { type: String, required: true },
-  minimizable: { type: Boolean, default: true },
-  maximizable: { type: Boolean, default: true },
-  closable: { type: Boolean, default: true },
-  showHelp: { type: Boolean, default: true },
-  appTitle: { type: String, default: null },
+const props = withDefaults(defineProps<IProps>(), {
+  minimizable: true,
+  maximizable: true,
+  closable: true,
+  showHelp: true,
 });
 
 const actions = {

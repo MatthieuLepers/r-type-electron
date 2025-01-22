@@ -4,7 +4,7 @@
     <main>
       <MaterialTabs
         v-model="state.currentTab"
-        :tabs="State.tabs"
+        v-model:tabs="state.tabs"
       >
         <template v-slot:select>
           <UiKitFormSelect />
@@ -175,14 +175,14 @@ const state = reactive({
   fruits: [],
   valid: true,
   required: false,
-});
-
-const State = computed(() => ({
   tabs: {
     select: { id: 1, label: 'Form select' },
     list: { id: 2, label: 'Object list' },
     apple: { id: 3, label: 'Pomme' },
   },
+});
+
+const State = computed(() => ({
   options: [
     { value: 'default', label: 'Défault' },
     { value: 'box', label: 'Boite' },

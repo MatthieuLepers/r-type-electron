@@ -11,21 +11,20 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 
 import FormFieldContainer from '@renderer/components/Materials/Form/FieldContainer.vue';
 
+import type { ISlots, IProps } from './FieldLine';
+
 defineOptions({ name: 'FormFieldLine' });
 
-/**
- * slots:
- * - default
- * - field[i] : Customize field at index [i]
- */
-const props = defineProps({
-  size: { type: Number, default: 1 },
-  modifiers: { type: Object, default: () => ({}) },
+defineSlots<ISlots>();
+
+const props = withDefaults(defineProps<IProps>(), {
+  size: 1,
+  modifiers: () => ({}),
 });
 
 const State = computed(() => ({
