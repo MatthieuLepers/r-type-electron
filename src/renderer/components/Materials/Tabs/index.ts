@@ -15,7 +15,7 @@ export interface ISlots {
 export interface IProps {
   allowAdd?: boolean;
   allowMoveFn?: () => boolean;
-  modifiers?: Record<string, boolean> | {};
+  modifiers?: Record<string, boolean>;
 }
 
 export interface IState {

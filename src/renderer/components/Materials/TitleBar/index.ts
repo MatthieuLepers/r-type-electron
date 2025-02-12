@@ -1,10 +1,3 @@
-export interface IEmits extends Record<string, any> {
-  help: [];
-  minimize: [];
-  maximize: [];
-  close: [];
-}
-
 export interface IProps {
   name: string;
   minimizable?: boolean;

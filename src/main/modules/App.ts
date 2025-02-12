@@ -3,7 +3,6 @@
 import { IpcHandle, IpcOn, GlobalShortcut } from '@/main/decorators';
 import { Setting } from '@/main/database/models';
 import WindowStore from '@/main/stores/WindowStore';
-import { getFaviconBase64 } from '@/main/utils/AppUtils';
 import WinstonInstance from '@/main/utils/WinstonInstance';
 
 class AppModule {
@@ -15,11 +14,6 @@ class AppModule {
     if (localeSetting) {
       await localeSetting.update({ value: iso });
     }
-  }
-
-  @IpcHandle
-  static async getFavicon(domain: string): Promise<string> {
-    return getFaviconBase64(domain);
   }
 
   @IpcHandle

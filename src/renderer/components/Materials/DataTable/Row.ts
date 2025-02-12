@@ -9,5 +9,5 @@ export type TypeModifiers = 'action' | 'selectable' | 'grabbable';
 export type IModifiers = StateModifiers | TypeModifiers;
 
 export interface IProps {
-  modifiers: Record<IModifiers, boolean> | {};
+  modifiers?: Partial<Record<IModifiers, boolean>>;
 }

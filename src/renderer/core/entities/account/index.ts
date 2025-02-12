@@ -1,6 +1,7 @@
 import AbstractEntity from '@renderer/core/entities/AbstractEntity';
 import { settingsStore } from '@renderer/core/entities/setting/store';
 import type { IAccount, IRemoteAccount } from '@renderer/core/entities/account/i';
+import { api } from '@renderer/core/api';
 
 export default class Account extends AbstractEntity<IAccount> {
   declare readonly id: number;

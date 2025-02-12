@@ -5,5 +5,5 @@ export interface ISlots {
 export type TypeModifiers = 'noActionRow' | 'action';
 
 export interface IProps {
-  modifiers?: Record<TypeModifiers, boolean> | {};
+  modifiers?: Partial<Record<TypeModifiers, boolean>>;
 }

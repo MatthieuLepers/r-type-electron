@@ -34,7 +34,7 @@ export interface IProps {
   refuseOnly?: boolean;
   acceptLabel?: string;
   refuseLabel?: string;
-  modifiers?: Record<Modifiers, boolean> | {};
+  modifiers?: Partial<Record<Modifiers, boolean>>;
 }
 
 export interface IState {

@@ -1,3 +1,6 @@
+import { api } from '@renderer/core/api';
+import { name } from '../../../package.json';
+
 export function toCamelCase(str: string): string {
   return str
     .normalize('NFD')
@@ -42,5 +45,22 @@ export function generatePermutations<T>(input: Array<T>, length: number): Array<
 }
 
 export function image(path: string): string {
-  return api.isDev ? `/${path}` : path;
+  if (api.isDev) return `/${path}`;
+  return process.env.NODE_ENV === 'production'
+    ? `/${name}/${path}`
+    : path
+  ;
+}
+
+export function download(fileName: string, fileContent: string) {
+  const element = document.createElement('a');
+  element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(fileContent)}`);
+  element.setAttribute('download', fileName);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
 }

@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import '~styles/utilities.scss';
 
 @mixin set-button-color($background, $text, $strokeText) {
@@ -7,12 +8,19 @@
   @include make-accessibility-shadow(color(secondary200));
 
   .m-button__icon {
-    color: $text;
+    color: $background;
+    background-color: color(grey000);
   }
 
   &:focus,
   &:hover {
     box-shadow: 0 0 10px $background;
+    background-color: color.adjust($background, $lightness: 10%);
+
+    .m-button__icon {
+      color: color.adjust($background, $lightness: 10%);
+      background-color: color(grey000);
+    }
   }
 
   &.m-button--stroke {
@@ -92,27 +100,27 @@
     }
   }
 
-  &--success:not(&--disabled) {
+  &--success {
     @include set-button-color(color(success300), color(grey000), color(grey000));
   }
 
-  &--primary:not(&--disabled) {
+  &--primary {
     @include set-button-color(color(grey900), color(grey000), color(grey000));
   }
 
-  &--secondary:not(&--disabled)  {
+  &--secondary  {
     @include set-button-color(color(secondary200), color(grey000), color(grey000));
   }
 
-  &--warning:not(&--disabled) {
+  &--warning {
     @include set-button-color(color(warning300), color(grey000), color(grey000));
   }
 
-  &--danger:not(&--disabled) {
+  &--danger {
     @include set-button-color(color(danger300), color(grey000), color(grey000));
   }
 
-  &--cancel:not(&--disabled) {
+  &--cancel {
     @include set-button-color(color(grey600), color(grey000), color(grey000));
   }
 

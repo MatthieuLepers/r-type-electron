@@ -5,5 +5,5 @@ export interface ISlots {
 
 export interface IProps {
   size?: number;
-  modifiers?: Record<string, boolean | Record<string, boolean>> | {};
+  modifiers?: Record<string, boolean>;
 }

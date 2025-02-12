@@ -14,7 +14,9 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "electron-vite preview",
     "dev": "cross-env NODE_ENV=development electron-vite dev",
+    "dev:web": "cross-env NODE_ENV=development vite dev",
     "build": "npm run typecheck && electron-vite build",
+    "build:web": "npm run typecheck:web && vite build",
     "build:win": "npm run build && electron-builder --win --config",
     "build:mac": "npm run build && electron-builder --mac --config",
     "build:linux": "npm run build && electron-builder --linux --config"

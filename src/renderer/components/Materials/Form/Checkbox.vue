@@ -20,11 +20,13 @@
 <script setup lang="ts">
 import { reactive, computed, getCurrentInstance } from 'vue';
 
-import type { TValue, IProps, IEmits, IState } from './Checkbox';
+import type { TValue, IProps, IClickEmitDetails, IState } from './Checkbox';
 
 defineOptions({ name: 'FormCheckbox' });
 
-const emit = defineEmits<IEmits>();
+const emit = defineEmits<{
+  click: [e: Event, details: IClickEmitDetails ];
+}>();
 const $uid = getCurrentInstance()?.uid;
 
 const modelValue = defineModel<Array<TValue> | TValue, string>();

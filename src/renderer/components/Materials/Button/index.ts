@@ -14,5 +14,5 @@ export interface IProps {
   disabled?: boolean;
   icon?: string | boolean;
   iconSide?: 'right' | 'left';
-  modifiers?: Record<Modifiers, boolean> | {};
+  modifiers?: Partial<Record<Modifiers, boolean>>;
 }

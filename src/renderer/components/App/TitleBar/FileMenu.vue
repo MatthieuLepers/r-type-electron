@@ -16,6 +16,8 @@ import ContextMenu from '@renderer/components/Materials/ContextMenu/index.vue';
 import ContextMenuItem from '@renderer/components/Materials/ContextMenu/Item.vue';
 import ContextMenuSeparator from '@renderer/components/Materials/ContextMenu/Separator.vue';
 
+import { api } from '@/renderer/core/api';
+
 defineOptions({ name: 'AppTitleBarFileMenu' });
 
 const { t } = useI18n();

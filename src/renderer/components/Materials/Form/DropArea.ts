@@ -3,7 +3,7 @@ export interface IEmits extends Record<string, any> {
 }
 
 export interface IProps {
-  modifiers: Record<string, boolean>;
+  modifiers?: Record<string, boolean>;
 }
 
 export interface IState {

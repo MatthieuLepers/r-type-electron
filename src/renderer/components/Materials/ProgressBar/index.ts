@@ -7,5 +7,5 @@ export interface IProps {
   label?: string;
   ariaLabel?: string;
   percent?: number;
-  modifiers?: Record<string, boolean> | {};
+  modifiers?: Record<string, boolean>;
 }

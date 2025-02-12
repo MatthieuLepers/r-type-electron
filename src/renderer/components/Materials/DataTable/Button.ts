@@ -15,5 +15,5 @@ export type Modifiers = ShapeModifiers | TypeModifiers | StateModifiers | ColorM
 export interface IProps {
   label?: string;
   icon?: string;
-  modifiers?: Record<Modifiers, boolean>;
+  modifiers?: Partial<Record<Modifiers, boolean>>;
 }

@@ -175,11 +175,11 @@ const state = reactive({
   fruits: [],
   valid: true,
   required: false,
-  tabs: {
-    select: { id: 1, label: 'Form select' },
-    list: { id: 2, label: 'Object list' },
-    apple: { id: 3, label: 'Pomme' },
-  },
+  tabs: [
+    { id: 'select', label: 'Form select' },
+    { id: 'list', label: 'Object list' },
+    { id: 'apple', label: 'Pomme' },
+  ],
 });
 
 const State = computed(() => ({

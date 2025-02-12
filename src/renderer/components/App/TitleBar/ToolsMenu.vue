@@ -18,6 +18,8 @@ import { useRouter } from 'vue-router';
 import ContextMenu from '@renderer/components/Materials/ContextMenu/index.vue';
 import ContextMenuItem from '@renderer/components/Materials/ContextMenu/Item.vue';
 
+import { api } from '@/renderer/core/api';
+
 defineOptions({ name: 'AppTitleBarToolsMenu' });
 
 const { t } = useI18n();

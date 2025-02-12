@@ -26,6 +26,7 @@ import MaterialNotificationList from '@renderer/components/Materials/Notificatio
 import { notificationStore } from '@renderer/components/Materials/Notification/Store';
 import { settingsStore } from '@renderer/core/entities/setting/store';
 import Shortcut from '@renderer/core/Shortcut';
+import { api } from '@renderer/core/api';
 
 const { t, locale } = useI18n();
 
@@ -86,11 +87,12 @@ onBeforeMount(() => {
   api.on('database-ready', async () => {
     await settingsStore.actions.load();
 
-    await api.invoke('localeChange', settingsStore.actions.getString('locale'));
-    locale.value = settingsStore.actions.getString('locale');
+    await api.invoke('localeChange', settingsStore.actions.getString('locale', 'en-EN'));
+    locale.value = settingsStore.actions.getString('locale', 'en-EN');
 
     state.loading = false;
   });
+  if (api.isWeb) api.send('database-ready');
 });
 </script>
 

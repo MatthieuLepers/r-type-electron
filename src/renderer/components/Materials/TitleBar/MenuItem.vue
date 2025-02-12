@@ -12,13 +12,15 @@
 </template>
 
 <script setup lang="ts">
-import type { IProps, ISlots, IEmits } from './MenuItem';
+import type { IProps, ISlots } from './MenuItem';
 
 defineOptions({ name: 'TitleBarMenuItem' });
 
 defineSlots<ISlots>();
 
-const emit = defineEmits<IEmits>();
+const emit = defineEmits<{
+  click: [e: MouseEvent, id: string];
+}>();
 
 const props = withDefaults(defineProps<IProps>(), {
   label: '',

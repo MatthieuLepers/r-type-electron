@@ -1,5 +1,11 @@
 /// <reference types="vite/client" />
 
+declare global {
+  interface Window {
+    api?: typeof import('@/main/api').default;
+  }
+}
+
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     GenerateModifiers: (baseClass: string, modifiers: Record<string, boolean>) => string;
