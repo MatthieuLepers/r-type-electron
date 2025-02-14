@@ -1,12 +1,12 @@
 import { api } from '@renderer/core/api';
-import { name } from '../../../package.json';
+import { name } from '../../../../package.json';
 
 export function toCamelCase(str: string): string {
   return str
     .normalize('NFD')
     .replace(/\p{Diacritic}/gu, '')
     .split(' ')
-    .map((part, i) => (i > 0 ? `${part.charAt(0).toUpperCase()}${part.substr(1).toLowerCase()}` : part.toLowerCase()))
+    .map((part, i) => (i > 0 ? `${part.charAt(0).toUpperCase()}${part.substring(1).toLowerCase()}` : part.toLowerCase()))
     .join('')
   ;
 }

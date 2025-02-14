@@ -1,9 +1,9 @@
 export default class Runnable {
-  public callback: (frame?: number) => void;
+  public callback: ((frame?: number) => void) | null;
 
   constructor(
     public name: string,
-    callback = null,
+    callback: ((frame?: number) => void) | null = null,
     public canRunInDebugMode = false,
   ) {
     this.callback = callback;

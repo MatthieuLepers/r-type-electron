@@ -24,7 +24,7 @@ export default class Canvas {
     Object.assign(this.options, options);
     this.canvas.width = this.options.width;
     this.canvas.height = this.options.height;
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this.canvas.getContext('2d')!;
     this.ctx.strokeStyle = '#f00';
 
     window.addEventListener('resize', () => {
