@@ -343,10 +343,10 @@ const State = computed(() => {
   return {
     gridX,
     gridY,
-    tabs: {
-      settings: { label: 'Settings' },
-      groups: { label: 'Groups' },
-    },
+    tabs: [
+      { id: 'settings', label: 'Settings' },
+      { id: 'groups', label: 'Groups' },
+    ],
   };
 });
 

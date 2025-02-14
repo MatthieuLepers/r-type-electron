@@ -1,8 +1,8 @@
 <template>
   <aside class="devtools">
     <MaterialTabs
-      :tabs="State.tabs"
       v-model="state.currentTab"
+      :tabs="State.tabs"
       class="devtools__tabs"
     >
       <template v-slot:console>
@@ -29,10 +29,10 @@ const state = reactive({
 });
 
 const State = computed(() => ({
-  tabs: {
-    console: { label: 'Console' },
-    entities: { label: 'Entities' },
-  },
+  tabs: [
+    { id: 'console', label: 'Console' },
+    { id: 'entities', label: 'Entities' },
+  ],
 }));
 </script>
 

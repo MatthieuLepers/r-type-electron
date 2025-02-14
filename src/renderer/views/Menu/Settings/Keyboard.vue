@@ -80,10 +80,10 @@ const state = reactive({
 });
 
 const State = computed(() => ({
-  tabs: {
-    game: { label: 'Game' },
-    debug: { label: 'Debug' },
-  },
+  tabs: [
+    { id: 'game', label: 'Game' },
+    { id: 'debug', label: 'Debug' },
+  ],
 }));
 
 const actions = {
