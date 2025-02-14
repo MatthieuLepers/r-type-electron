@@ -1,4 +1,5 @@
 import { reactive, computed } from 'vue';
+import { api } from '@renderer/core/api';
 
 interface IState {
   entities: Array<Object>;
