@@ -100,6 +100,8 @@ onBeforeMount(() => {
 
     debounceLoadRessources();
 
+    debounceLoadRessources();
+
     state.loading = false;
   });
   if (api.isWeb) api.send('database-ready');
